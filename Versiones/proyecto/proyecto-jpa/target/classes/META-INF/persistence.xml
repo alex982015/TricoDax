@@ -10,6 +10,8 @@
 		<class>files.Cliente</class>
 		<class>files.Empresa</class>
 		<class>files.Indiv</class>
+		<class>files.Trans</class>
+		<class>files.User_APK</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test"/>
 			<property name="javax.persistence.jdbc.user" value=""/>
