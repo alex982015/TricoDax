@@ -1,5 +1,22 @@
 Tutorías 
 
-31/03/2022:
+Tutoría(28/03/2022)
 
-- ¿Es necesario el uso de @Column?
+*Al final la tutoría se movió al día martes,28 de Marzo de 2022(estaba para el jueves 31):
+
+Preguntas sobre el proyecto:
+
+1-No falta poner los nombres en mayúsculas de las tablas
+
+2-Nos falta poner los nombres de las columnas(@Column), ¿Es necesario, verdad?
+2.1-¿Las fechas se modelan como String o tendría que utilizar java.util.date?
+2.2-¿La contraseña se guarda como un hash dentro de la base de datos?
+2.3-¿Se tendrían que hacer constructores de todas las entidades?.En el caso de tener tablas con parámetros opcionales y obligatorios, ¿Se harían dos constructores, uno que añada solo los obligatorios y otro que lo añada todo?
+
+3- No tiene sentido que si borro un cliente este siga en las tablas USER_APKy PRES_AUTO, ¿Dónde tendría que colocar el cascade en el @onetoone?
+
+4-La tabla individual de cliente, ¿La modelamos como herencia sólo, no?
+
+5-¿Cómo se modelaría las relaciones de TRANS y DIVISA? Me refiero a esa doble relación, ¿Se modela igual pero le cambió el nombre a la relación y ya?
+
+Próximas tutorías...
