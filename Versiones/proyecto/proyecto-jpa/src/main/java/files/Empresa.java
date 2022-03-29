@@ -8,26 +8,26 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="Empresa")
+@Table(name="EMPRESA")
 public class Empresa extends Cliente {
 
-	
-	private String Razon_Social;
+	@Column(name="RAZONSOCIAL")
+	private String razonSocial;
 	
 	public Empresa() {
 		super();
 	}
 
 	public String getRazon_Social() {
-		return Razon_Social;
+		return razonSocial;
 	}
 
 	public void setRazon_Social(String razon_Social) {
-		Razon_Social = razon_Social;
+		razonSocial = razon_Social;
 	}
 	
 	@Override
 	public String toString() {
-		return super.toString() + "Empresa [Razon_Social=" + Razon_Social + "]";
+		return super.toString() + "Empresa [Razon_Social=" + razonSocial + "]";
 	}
 }

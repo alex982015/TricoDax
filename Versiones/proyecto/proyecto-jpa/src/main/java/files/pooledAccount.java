@@ -1,6 +1,6 @@
 package files;
 
-import files.Cuenta_Fintech;
+import files.cuentaFintech;
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -9,10 +9,10 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="Pooled_Account")
-public class Pooled_Account extends Cuenta_Fintech {
+@Table(name="POOLEDACCOUNT")
+public class pooledAccount extends cuentaFintech {
 
-	public Pooled_Account() {
+	public pooledAccount() {
 		super();
 	}
    

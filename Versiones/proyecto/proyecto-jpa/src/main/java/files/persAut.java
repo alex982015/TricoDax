@@ -1,6 +1,7 @@
 package files;
 
 
+import java.util.Date;
 import java.util.Objects;
 
 import javax.persistence.*;
@@ -10,22 +11,30 @@ import javax.persistence.*;
  *
  */
 @Entity
+@Table(name="PERSAUT")
+public class persAut  {
 
-public class PersAut  {
-
-@Id
+	@Id @Column(name="ID")
 	private long Id;
+	@Column(name="IDENT")
 	private String ident;
+	@Column(name="NOMBRE")
 	private String nombre;
+	@Column(name="APELLIDOS")
 	private String apellidos;
+	@Column(name="DIRECCION")
 	private String direccion;
-	private String fecha_nac;
+	@Column(name="FECHANAC") @Temporal(TemporalType.DATE)
+	private Date fechaNac;
+	@Column(name="ESTADO")
 	private String estado;
-	private String fecha_inicio;
-	private String fecha_fin;
+	@Column(name="FECHAINICIO") @Temporal(TemporalType.DATE)
+	private Date fechaInicio;
+	@Column(name="FECHAFIN") @Temporal(TemporalType.DATE)
+	private Date fechaFin;
 	
 
-	public PersAut() {
+	public persAut() {
 		super();
 	}
 
@@ -80,13 +89,13 @@ public class PersAut  {
 	}
 
 
-	public String getFecha_nac() {
-		return fecha_nac;
+	public Date getFecha_nac() {
+		return fechaNac;
 	}
 
 
-	public void setFecha_nac(String fecha_nac) {
-		this.fecha_nac = fecha_nac;
+	public void setFecha_nac(Date fecha_nac) {
+		this.fechaNac = fecha_nac;
 	}
 
 
@@ -100,23 +109,23 @@ public class PersAut  {
 	}
 
 
-	public String getFecha_inicio() {
-		return fecha_inicio;
+	public Date getFecha_inicio() {
+		return fechaInicio;
 	}
 
 
-	public void setFecha_inicio(String fecha_inicio) {
-		this.fecha_inicio = fecha_inicio;
+	public void setFecha_inicio(Date fecha_inicio) {
+		this.fechaInicio = fecha_inicio;
 	}
 
 
-	public String getFecha_fin() {
-		return fecha_fin;
+	public Date getFecha_fin() {
+		return fechaFin;
 	}
 
 
-	public void setFecha_fin(String fecha_fin) {
-		this.fecha_fin = fecha_fin;
+	public void setFecha_fin(Date fecha_fin) {
+		this.fechaFin = fecha_fin;
 	}
 
 
@@ -134,7 +143,7 @@ public class PersAut  {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PersAut other = (PersAut) obj;
+		persAut other = (persAut) obj;
 		return Id == other.Id;
 	}
 
@@ -142,8 +151,8 @@ public class PersAut  {
 	@Override
 	public String toString() {
 		return "Pers_Aut [Id=" + Id + ", ident=" + ident + ", nombre=" + nombre + ", apellidos=" + apellidos
-				+ ", direccion=" + direccion + ", fecha_nac=" + fecha_nac + ", estado=" + estado + ", fecha_inicio="
-				+ fecha_inicio + ", fecha_fin=" + fecha_fin + "]";
+				+ ", direccion=" + direccion + ", fecha_nac=" + fechaNac + ", estado=" + estado + ", fecha_inicio="
+				+ fechaInicio + ", fecha_fin=" + fechaFin + "]";
 	}
    
 	

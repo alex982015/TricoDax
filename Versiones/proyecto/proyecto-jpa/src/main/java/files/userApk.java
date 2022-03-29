@@ -9,29 +9,33 @@ import javax.persistence.*;
  * Entity implementation class for Entity: User_APK
  *
  */
-@Entity
-@Table(name="User_APK")
-public class User_APK implements Serializable {
 
-	@Id
-	private String usuario;
-	private String contraseña;
+//CONSTRUCTORES FALTAN
+
+@Entity
+@Table(name="USERAPK")
+public class userApk implements Serializable {
+
+	@Id @Column(name="USUARIO")
+	private String user;
+	@Column(name="PASSWORD")
+	private String password;
 	
 	public String getUsuario() {
-		return usuario;
+		return user;
 	}
 	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+		this.user = usuario;
 	}
 	public String getContraseña() {
-		return contraseña;
+		return password;
 	}
 	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+		this.password = contraseña;
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(contraseña, usuario);
+		return Objects.hash(user);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -41,12 +45,12 @@ public class User_APK implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User_APK other = (User_APK) obj;
-		return Objects.equals(contraseña, other.contraseña) && Objects.equals(usuario, other.usuario);
+		userApk other = (userApk) obj;
+		return Objects.equals(user, other.user);
 	}
 	@Override
 	public String toString() {
-		return "userAPK [usuario=" + usuario + ", contraseña=" + contraseña + "]";
+		return "userAPK [usuario=" + user + ", contraseña=" + password + "]";
 	}
 	
 	

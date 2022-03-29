@@ -2,6 +2,8 @@ package files;
 
 import files.Cuenta;
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.*;
 
 /**
@@ -9,18 +11,23 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="Cuenta_Ref")
-public class Cuenta_Ref extends Cuenta {
+@Table(name="CUENTAREF")
+public class cuentaRef extends Cuenta {
 
-	
+	@Column(name="NOMBREBANCO")
 	private String NombreBanco;
+	@Column(name="SUCURSAL")
 	private int Sucursal;
+	@Column(name="PAIS")
 	private String Pais;
+	@Column(name="SALDO")
 	private double Saldo;
-	private String fecha_Apertura;
+	@Column(name="FECHAAPERTURA") @Temporal(TemporalType.DATE)
+	private Date fecha_Apertura;
+	@Column(name="ESTADO")
 	private String estado;
 
-	public Cuenta_Ref() {
+	public cuentaRef() {
 		super();
 	}
 
@@ -56,11 +63,11 @@ public class Cuenta_Ref extends Cuenta {
 		Saldo = saldo;
 	}
 
-	public String getFecha_Apertura() {
+	public Date getFecha_Apertura() {
 		return fecha_Apertura;
 	}
 
-	public void setFecha_Apertura(String fecha_Apertura) {
+	public void setFecha_Apertura(Date fecha_Apertura) {
 		this.fecha_Apertura = fecha_Apertura;
 	}
 

@@ -1,6 +1,7 @@
 package files;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 
 import javax.persistence.*;
@@ -10,20 +11,29 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="Cliente")
+@Table(name="CLIENTE")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Cliente {
 
-	@Id
+	@Id @Column(name="ID") 
 	private long ID;
+	@Column(name="IDENT") 
 	private long Ident;
+	@Column(name="TIPOCLIENTE") 
 	private String tipo_cliente;
+	@Column(name="ESTADO") 
 	private boolean estado;
-	private String Fecha_Alta;
-	private String Fecha_Baja;
+	@Column(name="FECHAALTA") @Temporal(TemporalType.DATE)
+	private Date Fecha_Alta;
+	@Column(name="FECHABAJA") @Temporal(TemporalType.DATE)
+	private Date Fecha_Baja;
+	@Column(name="DIRECCION") 
 	private String Direccion;
+	@Column(name="CIUDAD") 
 	private String Ciudad;
+	@Column(name="CODPOSTAL") 
 	private int CodPostal;
+	@Column(name="PAIS") 
 	private String Pais;
 
 	public Cliente() {
@@ -74,19 +84,19 @@ public class Cliente {
 		this.estado = estado;
 	}
 
-	public String getFecha_Alta() {
+	public Date getFecha_Alta() {
 		return Fecha_Alta;
 	}
 
-	public void setFecha_Alta(String fecha_Alta) {
+	public void setFecha_Alta(Date fecha_Alta) {
 		Fecha_Alta = fecha_Alta;
 	}
 
-	public String getFecha_Baja() {
+	public Date getFecha_Baja() {
 		return Fecha_Baja;
 	}
 
-	public void setFecha_Baja(String fecha_Baja) {
+	public void setFecha_Baja(Date fecha_Baja) {
 		Fecha_Baja = fecha_Baja;
 	}
 

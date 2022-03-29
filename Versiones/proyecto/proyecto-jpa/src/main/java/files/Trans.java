@@ -1,7 +1,7 @@
 package files;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Objects;
 
 import javax.persistence.*;
@@ -11,23 +11,33 @@ import javax.persistence.*;
  * Entity implementation class for Entity: Trans
  *
  */
+
+//CONSTRUCTORES FALTAN
+
 @Entity
-@Table(name="Trans")
+@Table(name="TRANS")
 public class Trans {
 	
-	@Id
-	private long ID_Unico;
+	@Id @Column(name="ID")
+	private long ID;
+	@Column(name="CANTIDAD")
 	private int cantidad;
+	@Column(name="TIPO")
 	private String tipo;
+	@Column(name="COMISION")
 	private String comision;
+	@Column(name="INTERNACIONAL")
 	private String international;
-	private String fechaEjecucion;
-	private String fechaInstruccion;
+	@Column(name="FECHAEJECUCION") @Temporal(TemporalType.DATE)
+	private Date fechaEjecucion;
+	@Column(name="FECHAINSTRUCCION") @Temporal(TemporalType.DATE)
+	private Date fechaInstruccion;
+	
 	public long getID_Unico() {
-		return ID_Unico;
+		return ID;
 	}
 	public void setID_Unico(long iD_Unico) {
-		ID_Unico = iD_Unico;
+		ID = iD_Unico;
 	}
 	public int getCantidad() {
 		return cantidad;
@@ -53,21 +63,21 @@ public class Trans {
 	public void setInternational(String international) {
 		this.international = international;
 	}
-	public String getFechaEjecucion() {
+	public Date getFechaEjecucion() {
 		return fechaEjecucion;
 	}
-	public void setFechaEjecucion(String fechaEjecucion) {
+	public void setFechaEjecucion(Date fechaEjecucion) {
 		this.fechaEjecucion = fechaEjecucion;
 	}
-	public String getFechaInstruccion() {
+	public Date getFechaInstruccion() {
 		return fechaInstruccion;
 	}
-	public void setFechaInstruccion(String fechaInstruccion) {
+	public void setFechaInstruccion(Date fechaInstruccion) {
 		this.fechaInstruccion = fechaInstruccion;
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(ID_Unico);
+		return Objects.hash(ID);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -78,11 +88,11 @@ public class Trans {
 		if (getClass() != obj.getClass())
 			return false;
 		Trans other = (Trans) obj;
-		return ID_Unico == other.ID_Unico;
+		return ID == other.ID;
 	}
 	@Override
 	public String toString() {
-		return "Trans [ID_Unico=" + ID_Unico + ", cantidad=" + cantidad + ", tipo=" + tipo + ", comision=" + comision
+		return "Trans [ID_Unico=" + ID + ", cantidad=" + cantidad + ", tipo=" + tipo + ", comision=" + comision
 				+ ", international=" + international + ", fechaEjecucion=" + fechaEjecucion + ", fechaInstruccion="
 				+ fechaInstruccion + "]";
 	}

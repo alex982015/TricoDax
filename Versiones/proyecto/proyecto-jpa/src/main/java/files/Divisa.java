@@ -9,14 +9,16 @@ import javax.persistence.*;
  *
  */
 @Entity
-
+@Table(name="DIVISA")
 public class Divisa {
 
-	
-	@Id
+	@Id @Column(name="ABREVIATURA")
 	private String abreviatura;
+	@Column(name="NOMBRE")
 	private String nombre;
+	@Column(name="SIMBOLO")
 	private String simbolo;
+	@Column(name="CAMBIOEURO")
 	private Double cambioEuro;
 	
 	public Divisa() {

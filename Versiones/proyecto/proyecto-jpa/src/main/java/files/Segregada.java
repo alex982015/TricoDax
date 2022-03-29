@@ -1,6 +1,6 @@
 package files;
 
-import files.Cuenta_Fintech;
+import files.cuentaFintech;
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -9,10 +9,10 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="Segregada")
-public class Segregada extends Cuenta_Fintech {
+@Table(name="SEGREGADA")
+public class Segregada extends cuentaFintech {
 
-	
+	@Column(name="COMISION")
 	private double comision;
 
 	public Segregada() {

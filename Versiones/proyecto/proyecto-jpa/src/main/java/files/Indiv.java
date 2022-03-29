@@ -1,6 +1,9 @@
 package files;
 
 import files.Cliente;
+
+import java.util.Date;
+
 import javax.persistence.*;
 
 /**
@@ -8,12 +11,15 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="Indiv")
+@Table(name="INDIV")
 public class Indiv extends Cliente {
 
+	@Column(name="NOMBRE")
 	private String nombre;
+	@Column(name="APELLIDO")
 	private String apellido;
-	private String fecha_Nacimiento;
+	@Column(name="FECHANACIMIENTO") @Temporal(TemporalType.DATE)
+	private Date fecha_Nacimiento;
 	
 	public Indiv() {
 		super();
@@ -35,11 +41,11 @@ public class Indiv extends Cliente {
 		this.apellido = apellido;
 	}
 
-	public String getFecha_Nacimiento() {
+	public Date getFecha_Nacimiento() {
 		return fecha_Nacimiento;
 	}
 
-	public void setFecha_Nacimiento(String fecha_Nacimiento) {
+	public void setFecha_Nacimiento(Date fecha_Nacimiento) {
 		this.fecha_Nacimiento = fecha_Nacimiento;
 	}
 

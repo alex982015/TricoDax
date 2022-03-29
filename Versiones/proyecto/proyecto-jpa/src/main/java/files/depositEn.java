@@ -10,14 +10,15 @@ import javax.persistence.*;
  *
  */
 @Entity
+@Table(name="DEPOSITEN")
+public class depositEn {
 
-public class DepositEn {
-
-@Id	
+	@Id @Column(name="ID")	
 	private long Id;
+	@Column(name="SALDO")
 	private double saldo;
 
-	public DepositEn() {
+	public depositEn() {
 		super();
 	}
 
@@ -42,7 +43,7 @@ public class DepositEn {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		DepositEn other = (DepositEn) obj;
+		depositEn other = (depositEn) obj;
 		return Id == other.Id;
 	}
 

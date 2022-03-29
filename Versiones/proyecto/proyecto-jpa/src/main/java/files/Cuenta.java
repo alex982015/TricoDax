@@ -9,12 +9,13 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="Cuenta")
+@Table(name="CUENTA")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Cuenta  {
 
-	@Id
+	@Id @Column(name="IBAN")
 	private long IBAN;
+	@Column(name="SWIFT")
 	private String swift;
 
 

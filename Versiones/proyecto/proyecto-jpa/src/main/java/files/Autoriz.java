@@ -10,11 +10,11 @@ import javax.persistence.*;
  *
  */
 @Entity
-
+@Table(name="AUTORIZ")
 public class Autoriz {
-
-@Id	
+	@Id @Column(name="ID") 
 	private long ID;
+	@Column(name="TIPO") 
 	private String tipo;
 	
 	public Autoriz() {

@@ -3,18 +3,18 @@
 	<persistence-unit name="proyecto" transaction-type="RESOURCE_LOCAL">
 		<class>files.Divisa</class>
 		<class>files.Cuenta</class>
-		<class>files.Cuenta_Fintech</class>
-		<class>files.Cuenta_Ref</class>
-		<class>files.Pooled_Account</class>
+		<class>files.cuentaFintech</class>
+		<class>files.cuentaRef</class>
+		<class>files.pooledAccount</class>
 		<class>files.Segregada</class>
 		<class>files.Cliente</class>
 		<class>files.Empresa</class>
 		<class>files.Indiv</class>
 		<class>files.Trans</class>
-		<class>files.User_APK</class>
-		<class>files.DepositEn</class>
+		<class>files.userApk</class>
+		<class>files.depositEn</class>
 		<class>files.Autoriz</class>
-		<class>files.PersAut</class>
+		<class>files.persAut</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test"/>
 			<property name="javax.persistence.jdbc.user" value=""/>

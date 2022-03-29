@@ -2,6 +2,8 @@ package files;
 
 import files.Cuenta;
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.*;
 
 /**
@@ -9,16 +11,18 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="Cuenta_Fintech")
-public class Cuenta_Fintech extends Cuenta  {
-
-	
+@Table(name="CUENTAFINTECH")
+public class cuentaFintech extends Cuenta  {
+	@Column(name="ESTADO")
 	private String estado;
-	private String fecha_Apertura;
-	private String fecha_Cierre;
+	@Column(name="FECHAAPERTURA") @Temporal(TemporalType.DATE)
+	private Date fecha_Apertura;
+	@Column(name="FECHACIERRE") @Temporal(TemporalType.DATE)
+	private Date fecha_Cierre;
+	@Column(name="CLASIFICACION")
 	private boolean clasificacion;
 
-	public Cuenta_Fintech() {
+	public cuentaFintech() {
 		super();
 	}
 
@@ -30,19 +34,19 @@ public class Cuenta_Fintech extends Cuenta  {
 		this.estado = estado;
 	}
 
-	public String getFecha_Apertura() {
+	public Date getFecha_Apertura() {
 		return fecha_Apertura;
 	}
 
-	public void setFecha_Apertura(String fecha_Apertura) {
+	public void setFecha_Apertura(Date fecha_Apertura) {
 		this.fecha_Apertura = fecha_Apertura;
 	}
 
-	public String getFecha_Cierre() {
+	public Date getFecha_Cierre() {
 		return fecha_Cierre;
 	}
 
-	public void setFecha_Cierre(String fecha_Cierre) {
+	public void setFecha_Cierre(Date fecha_Cierre) {
 		this.fecha_Cierre = fecha_Cierre;
 	}
 
