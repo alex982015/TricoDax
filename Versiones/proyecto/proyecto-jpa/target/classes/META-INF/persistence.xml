@@ -12,6 +12,9 @@
 		<class>files.Indiv</class>
 		<class>files.Trans</class>
 		<class>files.User_APK</class>
+		<class>files.DepositEn</class>
+		<class>files.Autoriz</class>
+		<class>files.PersAut</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test"/>
 			<property name="javax.persistence.jdbc.user" value=""/>
