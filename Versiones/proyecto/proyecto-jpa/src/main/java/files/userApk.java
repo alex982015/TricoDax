@@ -20,6 +20,10 @@ public class userApk implements Serializable {
 	private String user;
 	@Column(name="PASSWORD")
 	private String password;
+	@OneToOne (mappedBy="usuarioApk")
+	private Indiv personaIndividual;
+	@OneToOne (mappedBy="usuarioAutApk")
+	private persAut personaAutorizada;
 	
 	public String getUsuario() {
 		return user;

@@ -2,6 +2,9 @@ package files;
 
 import files.cuentaFintech;
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.persistence.*;
 
 /**
@@ -11,7 +14,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="POOLEDACCOUNT")
 public class pooledAccount extends cuentaFintech {
-
+	
 	public pooledAccount() {
 		super();
 	}

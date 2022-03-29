@@ -2,6 +2,7 @@ package files;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.*;
 import java.util.Objects;
 
 import javax.persistence.*;
@@ -35,6 +36,8 @@ public class Cliente {
 	private int CodPostal;
 	@Column(name="PAIS") 
 	private String Pais;
+	@OneToMany(mappedBy = "cliente")
+	private List<Cuenta> cuentas;
 
 	public Cliente() {
 		super();

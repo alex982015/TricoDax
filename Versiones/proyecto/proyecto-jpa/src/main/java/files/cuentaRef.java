@@ -3,6 +3,8 @@ package files;
 import files.Cuenta;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.persistence.*;
 
@@ -26,6 +28,14 @@ public class cuentaRef extends Cuenta {
 	private Date fechaApertura;
 	@Column(name="ESTADO")
 	private String estado;
+	@ElementCollection
+    @CollectionTable(name="POOLEDACCOUNT")
+    @MapKeyColumn(name="SALDO")
+	@Column(name="SALDO")
+    private Map<Integer, Double> depositEn = new HashMap<>();
+	@ManyToOne
+	private Divisa moneda;
+	
 
 	public cuentaRef() {
 		super();

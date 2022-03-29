@@ -14,6 +14,8 @@ public class Segregada extends cuentaFintech {
 
 	@Column(name="COMISION")
 	private double comision;
+	@OneToOne
+	private cuentaRef referenciada;
 
 	public Segregada() {
 		super();

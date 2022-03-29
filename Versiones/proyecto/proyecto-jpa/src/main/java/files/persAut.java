@@ -2,6 +2,7 @@ package files;
 
 
 import java.util.Date;
+import java.util.*;
 import java.util.Objects;
 
 import javax.persistence.*;
@@ -32,6 +33,13 @@ public class persAut  {
 	private Date fechaInicio;
 	@Column(name="FECHAFIN") @Temporal(TemporalType.DATE)
 	private Date fechaFin;
+	@ElementCollection
+    @CollectionTable(name="EMPRESA")
+    @MapKeyColumn(name="TIPO")
+	@Column(name="TIPO")
+    private Map<Integer, String> autoriz = new HashMap<>();
+	@OneToOne
+	private userApk usuarioAutApk;
 	
 
 	public persAut() {

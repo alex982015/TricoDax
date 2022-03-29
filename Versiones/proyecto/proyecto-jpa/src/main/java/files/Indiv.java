@@ -20,6 +20,8 @@ public class Indiv extends Cliente {
 	private String apellido;
 	@Column(name="FECHANACIMIENTO") @Temporal(TemporalType.DATE)
 	private Date fechaNac;
+	@OneToOne
+	private userApk usuarioApk;
 	
 	public Indiv() {
 		super();

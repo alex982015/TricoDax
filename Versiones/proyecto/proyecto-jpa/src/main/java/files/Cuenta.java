@@ -1,5 +1,6 @@
 package files;
 
+import java.util.*;
 import java.util.Objects;
 
 import javax.persistence.*;
@@ -17,6 +18,12 @@ public class Cuenta  {
 	private long IBAN;
 	@Column(name="SWIFT")
 	private String swift;
+	@ManyToOne
+	private Cliente cliente;
+	@OneToMany(mappedBy = "cuenta")
+	private List<Trans> transacciones;
+	@OneToMany(mappedBy = "transaccion")
+	private List<Trans> cuenta;
 
 
 	public Cuenta() {

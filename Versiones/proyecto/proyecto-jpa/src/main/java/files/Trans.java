@@ -2,6 +2,7 @@ package files;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.*;
@@ -32,6 +33,12 @@ public class Trans {
 	private Date fechaEjecucion;
 	@Column(name="FECHAINSTRUCCION") @Temporal(TemporalType.DATE)
 	private Date fechaInstruccion;
+	@ManyToOne
+	private Divisa moneda;
+	@ManyToOne
+	private Cuenta cuenta;
+	@ManyToOne
+	private Cuenta transaccion;
 	
 	public long getID_Unico() {
 		return ID;
