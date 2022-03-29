@@ -19,7 +19,7 @@ public class Indiv extends Cliente {
 	@Column(name="APELLIDO")
 	private String apellido;
 	@Column(name="FECHANACIMIENTO") @Temporal(TemporalType.DATE)
-	private Date fecha_Nacimiento;
+	private Date fechaNac;
 	
 	public Indiv() {
 		super();
@@ -42,16 +42,16 @@ public class Indiv extends Cliente {
 	}
 
 	public Date getFecha_Nacimiento() {
-		return fecha_Nacimiento;
+		return fechaNac;
 	}
 
 	public void setFecha_Nacimiento(Date fecha_Nacimiento) {
-		this.fecha_Nacimiento = fecha_Nacimiento;
+		this.fechaNac = fecha_Nacimiento;
 	}
 
 	@Override
 	public String toString() {
-		return super.toString() + "Indiv [nombre=" + nombre + ", apellido=" + apellido + ", fecha_Nacimiento=" + fecha_Nacimiento + "]";
+		return super.toString() + "Indiv [nombre=" + nombre + ", apellido=" + apellido + ", fecha_Nacimiento=" + fechaNac + "]";
 	}
    
 }

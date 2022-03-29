@@ -16,9 +16,9 @@ public class cuentaFintech extends Cuenta  {
 	@Column(name="ESTADO")
 	private String estado;
 	@Column(name="FECHAAPERTURA") @Temporal(TemporalType.DATE)
-	private Date fecha_Apertura;
+	private Date fechaApertura;
 	@Column(name="FECHACIERRE") @Temporal(TemporalType.DATE)
-	private Date fecha_Cierre;
+	private Date fechaCierre;
 	@Column(name="CLASIFICACION")
 	private boolean clasificacion;
 
@@ -35,19 +35,19 @@ public class cuentaFintech extends Cuenta  {
 	}
 
 	public Date getFecha_Apertura() {
-		return fecha_Apertura;
+		return fechaApertura;
 	}
 
 	public void setFecha_Apertura(Date fecha_Apertura) {
-		this.fecha_Apertura = fecha_Apertura;
+		this.fechaApertura = fecha_Apertura;
 	}
 
 	public Date getFecha_Cierre() {
-		return fecha_Cierre;
+		return fechaCierre;
 	}
 
 	public void setFecha_Cierre(Date fecha_Cierre) {
-		this.fecha_Cierre = fecha_Cierre;
+		this.fechaCierre = fecha_Cierre;
 	}
 
 	public boolean isClasificacion() {
@@ -60,8 +60,8 @@ public class cuentaFintech extends Cuenta  {
 
 	@Override
 	public String toString() {
-		return super.toString() + "Cuenta_Fintech [estado=" + estado + ", fecha_Apertura=" + fecha_Apertura + ", fecha_Cierre="
-				+ fecha_Cierre + ", clasificacion=" + clasificacion + "]";
+		return super.toString() + "Cuenta_Fintech [estado=" + estado + ", fecha_Apertura=" + fechaApertura + ", fecha_Cierre="
+				+ fechaCierre + ", clasificacion=" + clasificacion + "]";
 	}
 	
 	

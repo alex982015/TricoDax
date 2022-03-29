@@ -23,7 +23,7 @@ public class cuentaRef extends Cuenta {
 	@Column(name="SALDO")
 	private double Saldo;
 	@Column(name="FECHAAPERTURA") @Temporal(TemporalType.DATE)
-	private Date fecha_Apertura;
+	private Date fechaApertura;
 	@Column(name="ESTADO")
 	private String estado;
 
@@ -64,11 +64,11 @@ public class cuentaRef extends Cuenta {
 	}
 
 	public Date getFecha_Apertura() {
-		return fecha_Apertura;
+		return fechaApertura;
 	}
 
 	public void setFecha_Apertura(Date fecha_Apertura) {
-		this.fecha_Apertura = fecha_Apertura;
+		this.fechaApertura = fecha_Apertura;
 	}
 
 	public String getEstado() {
@@ -82,7 +82,7 @@ public class cuentaRef extends Cuenta {
 	@Override
 	public String toString() {
 		return super.toString() + "Cuenta_Ref [NombreBanco=" + NombreBanco + ", Sucursal=" + Sucursal + ", Pais=" + Pais + ", Saldo="
-				+ Saldo + ", fecha_Apertura=" + fecha_Apertura + ", estado=" + estado + "]";
+				+ Saldo + ", fecha_Apertura=" + fechaApertura + ", estado=" + estado + "]";
 	}
 	
 	
