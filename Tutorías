@@ -37,7 +37,8 @@ Preguntas que han surgido después de hacer los cambios producidos por las pregu
 3-¿CASCADE es necesario para algunas relaciones?¿Cómo se haría?
 4-Enseñar el diagrama de nuevo
 4.1-Los valores de clave únicas que hacemos(posible clave compuesta persauto y cliente).
-
+5-¿Implements serializable es necesatio en todas las clases?
+6-¿Se debería usar Comparable para comparar los hash de las claves en userAPK?
 Respuestas de la tutoría:
 
 
