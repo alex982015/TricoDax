@@ -10,7 +10,6 @@ import javax.persistence.*;
  *
  */
 
-//CONSTRUCTORES FALTAN
 
 @Entity
 @Table(name="USERAPK")
@@ -25,6 +24,22 @@ public class userApk implements Serializable {
 	@OneToOne (mappedBy="usuarioAutApk")
 	private persAut personaAutorizada;
 	
+/****************CONSTRUCTORES*************************************/
+	
+	public userApk() {
+		super();
+	}
+	
+	public userApk(String user, String password, Indiv personaIndividual, persAut personaAutorizada) {
+		super();
+		this.user = user;
+		this.password = password;
+		this.personaIndividual = personaIndividual;
+		this.personaAutorizada = personaAutorizada;
+	}
+
+/***************GETTERS AND SETTERS*******************************/
+
 	public String getUsuario() {
 		return user;
 	}
@@ -37,6 +52,8 @@ public class userApk implements Serializable {
 	public void setContraseña(String contraseña) {
 		this.password = contraseña;
 	}
+
+/******************HASHCODE AND EQUALS***************************/
 	@Override
 	public int hashCode() {
 		return Objects.hash(user);
@@ -52,6 +69,7 @@ public class userApk implements Serializable {
 		userApk other = (userApk) obj;
 		return Objects.equals(user, other.user);
 	}
+/******************STRING****************************************/
 	@Override
 	public String toString() {
 		return "userAPK [usuario=" + user + ", contraseña=" + password + "]";

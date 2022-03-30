@@ -1,7 +1,6 @@
 package files;
 
 import java.util.*;
-import java.util.Objects;
 
 import javax.persistence.*;
 
@@ -9,6 +8,8 @@ import javax.persistence.*;
  * Entity implementation class for Entity: Cuenta
  *
  */
+
+
 @Entity
 @Table(name="CUENTA")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -25,11 +26,31 @@ public class Cuenta  {
 	@OneToMany(mappedBy = "transaccion")
 	private List<Trans> cuenta;
 
+/****************CONSTRUCTORES*************************************/
 
 	public Cuenta() {
 		super();
 	}
 	
+	public Cuenta(long iBAN, Cliente cliente, List<Trans> transacciones, List<Trans> cuenta) {
+		super();
+		IBAN = iBAN;
+		this.cliente = cliente;
+		this.transacciones = transacciones;
+		this.cuenta = cuenta;
+	}
+
+	public Cuenta(long iBAN, String swift, Cliente cliente, List<Trans> transacciones, List<Trans> cuenta) {
+		
+		this.IBAN = iBAN;
+		this.swift = swift;
+		this.cliente = cliente;
+		this.transacciones = transacciones;
+		this.cuenta = cuenta;
+	}
+
+/***************GETTERS AND SETTERS*******************************/
+
 	public long getIBAN() {
 		return IBAN;
 	}
@@ -46,6 +67,8 @@ public class Cuenta  {
 		this.swift = swift;
 	}
 	
+/******************HASHCODE AND EQUALS***************************/
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(IBAN);
@@ -62,6 +85,8 @@ public class Cuenta  {
 		Cuenta other = (Cuenta) obj;
 		return IBAN == other.IBAN;
 	}
+
+/******************STRING****************************************/
 
 	@Override
 	public String toString() {

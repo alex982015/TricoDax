@@ -12,6 +12,8 @@ import javax.persistence.*;
  * Entity implementation class for Entity: Cuenta_Ref
  *
  */
+
+
 @Entity
 @Table(name="CUENTAREF")
 public class cuentaRef extends Cuenta {
@@ -36,10 +38,33 @@ public class cuentaRef extends Cuenta {
 	@ManyToOne
 	private Divisa moneda;
 	
+/****************CONSTRUCTORES*************************************/
 
 	public cuentaRef() {
 		super();
 	}
+	
+
+	public cuentaRef(double saldo) {
+		super();
+		Saldo = saldo;
+	}
+
+
+	public cuentaRef(String nombreBanco, int sucursal, String pais, double saldo, Date fechaApertura, String estado,
+			Map<Integer, Double> depositEn, Divisa moneda) {
+		super();
+		NombreBanco = nombreBanco;
+		Sucursal = sucursal;
+		Pais = pais;
+		Saldo = saldo;
+		this.fechaApertura = fechaApertura;
+		this.estado = estado;
+		this.depositEn = depositEn;
+		this.moneda = moneda;
+	}
+
+/***************GETTERS AND SETTERS*******************************/
 
 	public String getNombreBanco() {
 		return NombreBanco;
@@ -88,7 +113,9 @@ public class cuentaRef extends Cuenta {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-
+	
+/******************STRING****************************************/
+	
 	@Override
 	public String toString() {
 		return super.toString() + "Cuenta_Ref [NombreBanco=" + NombreBanco + ", Sucursal=" + Sucursal + ", Pais=" + Pais + ", Saldo="

@@ -8,6 +8,8 @@ import javax.persistence.*;
  * Entity implementation class for Entity: Segregada
  *
  */
+
+
 @Entity
 @Table(name="SEGREGADA")
 public class Segregada extends cuentaFintech {
@@ -17,10 +19,20 @@ public class Segregada extends cuentaFintech {
 	@OneToOne
 	private cuentaRef referenciada;
 
+/****************CONSTRUCTORES*************************************/
+	
 	public Segregada() {
 		super();
 	}
+	
+	public Segregada(double comision, cuentaRef referenciada) {
+		super();
+		this.comision = comision;
+		this.referenciada = referenciada;
+	}
 
+/***************GETTERS AND SETTERS*******************************/
+	
 	public double getComision() {
 		return comision;
 	}
@@ -29,6 +41,7 @@ public class Segregada extends cuentaFintech {
 		this.comision = comision;
 	}
 
+/******************STRING****************************************/
 	@Override
 	public String toString() {
 		return super.toString() + "Segregada [comision=" + comision + "]";

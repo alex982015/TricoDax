@@ -1,6 +1,10 @@
 package files;
 
 import files.Cliente;
+
+import java.util.Date;
+import java.util.List;
+
 import javax.persistence.*;
 
 /**
@@ -13,11 +17,20 @@ public class Empresa extends Cliente {
 
 	@Column(name="RAZONSOCIAL")
 	private String razonSocial;
+
+/****************CONSTRUCTORES*************************************/
 	
 	public Empresa() {
 		super();
 	}
 
+	public Empresa(String razonSocial) {
+		super();
+		this.razonSocial = razonSocial;
+	}
+
+/***************GETTERS AND SETTERS*******************************/
+	
 	public String getRazon_Social() {
 		return razonSocial;
 	}
@@ -25,6 +38,8 @@ public class Empresa extends Cliente {
 	public void setRazon_Social(String razon_Social) {
 		razonSocial = razon_Social;
 	}
+	
+/******************STRING****************************************/
 	
 	@Override
 	public String toString() {

@@ -1,9 +1,7 @@
 package files;
 
 
-import java.util.Date;
 import java.util.*;
-import java.util.Objects;
 
 import javax.persistence.*;
 
@@ -11,6 +9,8 @@ import javax.persistence.*;
  * Entity implementation class for Entity: Pers_Aut
  *
  */
+
+
 @Entity
 @Table(name="PERSAUT")
 public class persAut  {
@@ -41,12 +41,42 @@ public class persAut  {
 	@OneToOne
 	private userApk usuarioAutApk;
 	
-
+/****************CONSTRUCTORES*************************************/
+	
 	public persAut() {
 		super();
 	}
 
+	public persAut(long id, String ident, String nombre, String apellidos, String direccion,
+			Map<Integer, String> autoriz, userApk usuarioAutApk) {
+		super();
+		Id = id;
+		this.ident = ident;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.direccion = direccion;
+		this.autoriz = autoriz;
+		this.usuarioAutApk = usuarioAutApk;
+	}
 
+	public persAut(long id, String ident, String nombre, String apellidos, String direccion, Date fechaNac,
+			String estado, Date fechaInicio, Date fechaFin, Map<Integer, String> autoriz, userApk usuarioAutApk) {
+		super();
+		Id = id;
+		this.ident = ident;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.direccion = direccion;
+		this.fechaNac = fechaNac;
+		this.estado = estado;
+		this.fechaInicio = fechaInicio;
+		this.fechaFin = fechaFin;
+		this.autoriz = autoriz;
+		this.usuarioAutApk = usuarioAutApk;
+	}
+
+/***************GETTERS AND SETTERS*******************************/
+	
 	public long getId() {
 		return Id;
 	}
@@ -136,7 +166,8 @@ public class persAut  {
 		this.fechaFin = fecha_fin;
 	}
 
-
+/******************HASHCODE AND EQUALS***************************/
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(Id);
@@ -155,7 +186,8 @@ public class persAut  {
 		return Id == other.Id;
 	}
 
-
+/******************STRING****************************************/
+	
 	@Override
 	public String toString() {
 		return "Pers_Aut [Id=" + Id + ", ident=" + ident + ", nombre=" + nombre + ", apellidos=" + apellidos

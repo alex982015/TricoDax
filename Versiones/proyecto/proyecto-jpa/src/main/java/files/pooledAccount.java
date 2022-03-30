@@ -11,10 +11,13 @@ import javax.persistence.*;
  * Entity implementation class for Entity: Pooled_Account
  *
  */
+
+
 @Entity
 @Table(name="POOLEDACCOUNT")
 public class pooledAccount extends cuentaFintech {
-	
+
+/****************CONSTRUCTORES*************************************/	
 	public pooledAccount() {
 		super();
 	}

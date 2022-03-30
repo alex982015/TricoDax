@@ -10,6 +10,7 @@ import javax.persistence.*;
  * Entity implementation class for Entity: Cuenta_Fintech
  *
  */
+
 @Entity
 @Table(name="CUENTAFINTECH")
 public class cuentaFintech extends Cuenta  {
@@ -22,9 +23,27 @@ public class cuentaFintech extends Cuenta  {
 	@Column(name="CLASIFICACION")
 	private boolean clasificacion;
 
+/****************CONSTRUCTORES*************************************/
+
 	public cuentaFintech() {
 		super();
 	}
+	
+	public cuentaFintech(String estado, Date fechaApertura) {
+		super();
+		this.estado = estado;
+		this.fechaApertura = fechaApertura;
+	}
+
+	public cuentaFintech(String estado, Date fechaApertura, Date fechaCierre, boolean clasificacion) {
+		super();
+		this.estado = estado;
+		this.fechaApertura = fechaApertura;
+		this.fechaCierre = fechaCierre;
+		this.clasificacion = clasificacion;
+	}
+
+/***************GETTERS AND SETTERS*******************************/
 
 	public String getEstado() {
 		return estado;
@@ -57,6 +76,8 @@ public class cuentaFintech extends Cuenta  {
 	public void setClasificacion(boolean clasificacion) {
 		this.clasificacion = clasificacion;
 	}
+
+/******************STRING****************************************/
 
 	@Override
 	public String toString() {

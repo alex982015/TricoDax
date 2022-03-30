@@ -1,9 +1,7 @@
 package files;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.*;
-import java.util.Objects;
 
 import javax.persistence.*;
 
@@ -11,11 +9,13 @@ import javax.persistence.*;
  * Entity implementation class for Entity: Cliente
  *
  */
+
+
 @Entity
 @Table(name="CLIENTE")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Cliente {
-
+	
 	@Id @Column(name="ID") 
 	private long ID;
 	@Column(name="IDENT") 
@@ -39,21 +39,43 @@ public class Cliente {
 	@OneToMany(mappedBy = "cliente")
 	private List<Cuenta> cuentas;
 
+/****************CONSTRUCTORES*************************************/
+
 	public Cliente() {
 		super();
 	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Cliente other = (Cliente) obj;
-		return ID == other.ID;
+	public Cliente(long iD, long ident, String tipo_cliente, boolean estado, Date fecha_Alta, String direccion,
+			String ciudad, int codPostal, String pais, List<Cuenta> cuentas) {
+
+		this.ID = iD;
+		this.Ident = ident;
+		this.tipo_cliente = tipo_cliente;
+		this.estado = estado;
+		this.Fecha_Alta = fecha_Alta;
+		this.Direccion = direccion;
+		this.Ciudad = ciudad;
+		this.CodPostal = codPostal;
+		this.Pais = pais;
+		this.cuentas = cuentas;
 	}
+	
+	public Cliente(long iD, long ident, String tipo_cliente, boolean estado, Date fecha_Alta, Date fecha_Baja, String direccion,
+			String ciudad, int codPostal, String pais, List<Cuenta> cuentas) {
+
+		this.ID = iD;
+		this.Ident = ident;
+		this.tipo_cliente = tipo_cliente;
+		this.estado = estado;
+		this.Fecha_Alta = fecha_Alta;
+		this.Fecha_Baja=fecha_Baja;
+		this.Direccion = direccion;
+		this.Ciudad = ciudad;
+		this.CodPostal = codPostal;
+		this.Pais = pais;
+		this.cuentas = cuentas;
+	}
+
+/***************GETTERS AND SETTERS*******************************/
 
 	public long getID() {
 		return ID;
@@ -134,11 +156,27 @@ public class Cliente {
 	public void setPais(String pais) {
 		Pais = pais;
 	}
-	
+
+/******************HASHCODE AND EQUALS***************************/
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(ID);
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cliente other = (Cliente) obj;
+		return ID == other.ID;
+	}
+
+/******************STRING****************************************/
 
 	@Override
 	public String toString() {

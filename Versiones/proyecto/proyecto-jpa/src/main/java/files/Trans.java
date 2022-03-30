@@ -13,11 +13,10 @@ import javax.persistence.*;
  *
  */
 
-//CONSTRUCTORES FALTAN
 
 @Entity
 @Table(name="TRANS")
-public class Trans {
+public class Trans implements Serializable{
 	
 	@Id @Column(name="ID")
 	private long ID;
@@ -39,6 +38,42 @@ public class Trans {
 	private Cuenta cuenta;
 	@ManyToOne
 	private Cuenta transaccion;
+
+/****************CONSTRUCTORES*************************************/
+	
+	public Trans() {
+		super();
+	}
+	
+	public Trans(long iD, int cantidad, String tipo, Date fechaInstruccion, Divisa moneda, Cuenta cuenta,
+			Cuenta transaccion) {
+		super();
+		ID = iD;
+		this.cantidad = cantidad;
+		this.tipo = tipo;
+		this.fechaInstruccion = fechaInstruccion;
+		this.moneda = moneda;
+		this.cuenta = cuenta;
+		this.transaccion = transaccion;
+	}
+	
+	
+	public Trans(long iD, int cantidad, String tipo, String comision, String international, Date fechaEjecucion,
+			Date fechaInstruccion, Divisa moneda, Cuenta cuenta, Cuenta transaccion) {
+		super();
+		ID = iD;
+		this.cantidad = cantidad;
+		this.tipo = tipo;
+		this.comision = comision;
+		this.international = international;
+		this.fechaEjecucion = fechaEjecucion;
+		this.fechaInstruccion = fechaInstruccion;
+		this.moneda = moneda;
+		this.cuenta = cuenta;
+		this.transaccion = transaccion;
+	}
+
+/***************GETTERS AND SETTERS*******************************/
 	
 	public long getID_Unico() {
 		return ID;
@@ -82,6 +117,9 @@ public class Trans {
 	public void setFechaInstruccion(Date fechaInstruccion) {
 		this.fechaInstruccion = fechaInstruccion;
 	}
+	
+/******************HASHCODE AND EQUALS***************************/
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(ID);
@@ -97,6 +135,8 @@ public class Trans {
 		Trans other = (Trans) obj;
 		return ID == other.ID;
 	}
+	
+/******************STRING****************************************/
 	@Override
 	public String toString() {
 		return "Trans [ID_Unico=" + ID + ", cantidad=" + cantidad + ", tipo=" + tipo + ", comision=" + comision

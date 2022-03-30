@@ -20,11 +20,30 @@ public class Divisa {
 	private String simbolo;
 	@Column(name="CAMBIOEURO")
 	private Double cambioEuro;
+
+/****************CONSTRUCTORES*************************************/
 	
 	public Divisa() {
 		super();
 	}
+	
+	public Divisa(String abreviatura, String nombre, Double cambioEuro) {
+		super();
+		this.abreviatura = abreviatura;
+		this.nombre = nombre;
+		this.cambioEuro = cambioEuro;
+	}
+	
+	public Divisa(String abreviatura, String nombre, String simbolo, Double cambioEuro) {
+		super();
+		this.abreviatura = abreviatura;
+		this.nombre = nombre;
+		this.simbolo = simbolo;
+		this.cambioEuro = cambioEuro;
+	}
 
+/***************GETTERS AND SETTERS*******************************/
+	
 	public String getAbreviatura() {
 		return abreviatura;
 	}
@@ -57,6 +76,8 @@ public class Divisa {
 		this.cambioEuro = cambioEuro;
 	}
 
+/******************HASHCODE AND EQUALS***************************/
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(abreviatura);
@@ -74,6 +95,8 @@ public class Divisa {
 		return Objects.equals(abreviatura, other.abreviatura);
 	}
 
+/******************STRING****************************************/
+	
 	@Override
 	public String toString() {
 		return "Divisa [abreviatura=" + abreviatura + ", nombre=" + nombre + ", simbolo=" + simbolo + ", cambioEuro=" + cambioEuro + "]";

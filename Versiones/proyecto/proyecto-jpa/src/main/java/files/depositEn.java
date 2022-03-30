@@ -18,9 +18,19 @@ public class depositEn {
 	@Column(name="SALDO")
 	private double saldo;
 
+/****************CONSTRUCTORES*************************************/
+
 	public depositEn() {
 		super();
 	}
+	
+	public depositEn(long id, double saldo) {
+		super();
+		Id = id;
+		this.saldo = saldo;
+	}
+
+/***************GETTERS AND SETTERS*******************************/
 
 	public double getSaldo() {
 		return saldo;
@@ -30,6 +40,8 @@ public class depositEn {
 		this.saldo = saldo;
 	}
 
+/******************HASHCODE AND EQUALS***************************/
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(Id);
@@ -47,6 +59,8 @@ public class depositEn {
 		return Id == other.Id;
 	}
 
+/******************STRING****************************************/
+	
 	@Override
 	public String toString() {
 		return "Deposit_En [Id=" + Id + ", saldo=" + saldo + "]";
