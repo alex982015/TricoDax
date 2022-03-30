@@ -39,6 +39,9 @@ Preguntas que han surgido después de hacer los cambios producidos por las pregu
 4.1-Los valores de clave únicas que hacemos(posible clave compuesta persauto y cliente).
 5-¿Implements serializable es necesatio en todas las clases?
 6-¿Se debería usar Comparable para comparar los hash de las claves en userAPK?
+7-¿Dentro de los constructores deberían estar los atributos que se utlizan para las relaciones?
+8-¿Debería haber getters and setters de los atributos de las relaciones?
+
 Respuestas de la tutoría:
 
 
