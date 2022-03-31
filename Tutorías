@@ -44,5 +44,36 @@ Preguntas que han surgido después de hacer los cambios producidos por las pregu
 
 Respuestas de la tutoría:
 
+1. Debe hacerse Map en ambos sentidos de la relación cambiando JoinColumn por MapKeyJoinColumn y la clave del Map
+
+Ejemplo:
+
+CuentaRef --> PooledAccount
+
+@ElementCollection
+    @CollectionTable(name="DEPOSITEN",joinColumns = {@JoinColumn(name="IBANPOOLEDACCOUNT")})
+	@MapKeyJoinColumn(name="IBANCUENTAREF")
+	@Column(name="SALDO")
+    private Map<PooledAccount, Double> depositEn = new HashMap<>();
+
+PooledAccount --> CuentaRef
+
+@ElementCollection
+    @CollectionTable(name="DEPOSITEN",joinColumns = {@JoinColumn(name="IBANCUENTAREF")})
+	@MapKeyJoinColumn(name="IBANPOOLEDACCOUNT")
+	@Column(name="SALDO")
+    private Map<CuentaRef, Double> depositEn = new HashMap<>();
+
+1.1. No es necesario.
+2. Porque al establecer el nombre de las tablas en los Map se debe hacer en mayúsculas si queremos que el ddl tenga todos los atributos en mayúsculas.
+3. No necesario en principio para la P1, posible pregunta en P2.
+4. Hay que añadir otra relación de Trans a Divisa, ya que había dos relaciones para indicar la moneda origen y la moneda de destino para efectuar 
+un posible cambio de divisa en la transferencia.
+4.1. Sólo usaremos las PK, no tendremos en cuenta las únicas.
+5. Si.
+6. Por ahora no, pero no se descarta para futuras prácticas.
+7. No es estrictamente necesario.
+8. Igual que en la pregunta anterior, no es estrictamente necesario.
+
 
 Próximas tutorías...
