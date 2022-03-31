@@ -2,6 +2,7 @@ package files;
 
 import files.Cliente;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.*;
@@ -10,10 +11,10 @@ import javax.persistence.*;
  * Entity implementation class for Entity: Indiv
  *
  */
+
 @Entity
 @Table(name="INDIV")
-public class Indiv extends Cliente {
-
+public class Indiv extends Cliente implements Serializable {
 	@Column(name="NOMBRE")
 	private String nombre;
 	@Column(name="APELLIDO")
@@ -21,7 +22,7 @@ public class Indiv extends Cliente {
 	@Column(name="FECHANACIMIENTO") @Temporal(TemporalType.DATE)
 	private Date fechaNac;
 	@OneToOne
-	private userApk usuarioApk;
+	private UserApk usuarioApk;
 	
 /****************CONSTRUCTORES*************************************/
 	
@@ -29,14 +30,14 @@ public class Indiv extends Cliente {
 		super();
 	}
 	
-	public Indiv(String nombre, String apellido, userApk usuarioApk) {
+	public Indiv(String nombre, String apellido, UserApk usuarioApk) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.usuarioApk = usuarioApk;
 	}
 	
-	public Indiv(String nombre, String apellido, Date fechaNac, userApk usuarioApk) {
+	public Indiv(String nombre, String apellido, Date fechaNac, UserApk usuarioApk) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -74,7 +75,9 @@ public class Indiv extends Cliente {
 	
 	@Override
 	public String toString() {
-		return super.toString() + "Indiv [nombre=" + nombre + ", apellido=" + apellido + ", fecha_Nacimiento=" + fechaNac + "]";
+		return "Indiv [ID=" + super.getID() + ", Ident=" + super.getIdent() + ", tipo_cliente=" + super.getTipo_cliente() + ", estado=" + super.isEstado()
+		+ ", Fecha_Alta=" + super.getFecha_Alta() + ", Fecha_Baja=" + super.getFecha_Baja() + ", Direccion=" + super.getDireccion() + ", Ciudad="
+		+ super.getCiudad() + ", CodPostal=" + super.getCodPostal() + ", Pais=" + super.getPais() +  ", nombre=" + nombre + ", apellido=" + apellido + ", fecha_Nacimiento=" + fechaNac + "]";
 	}
    
 }

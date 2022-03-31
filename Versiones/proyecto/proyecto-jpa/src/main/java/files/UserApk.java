@@ -10,27 +10,29 @@ import javax.persistence.*;
  *
  */
 
-
 @Entity
 @Table(name="USERAPK")
-public class userApk implements Serializable {
-
+public class UserApk implements Serializable {
 	@Id @Column(name="USUARIO")
 	private String user;
 	@Column(name="PASSWORD")
 	private String password;
+	
+	@Column(name="AUTORIZADO")
+	private boolean autorizado;
+	
 	@OneToOne (mappedBy="usuarioApk")
 	private Indiv personaIndividual;
 	@OneToOne (mappedBy="usuarioAutApk")
-	private persAut personaAutorizada;
+	private PersAut personaAutorizada;
 	
 /****************CONSTRUCTORES*************************************/
 	
-	public userApk() {
+	public UserApk() {
 		super();
 	}
 	
-	public userApk(String user, String password, Indiv personaIndividual, persAut personaAutorizada) {
+	public UserApk(String user, String password, Indiv personaIndividual, PersAut personaAutorizada) {
 		super();
 		this.user = user;
 		this.password = password;
@@ -52,6 +54,12 @@ public class userApk implements Serializable {
 	public void setContraseña(String contraseña) {
 		this.password = contraseña;
 	}
+	public boolean isAutorizado() {
+		return autorizado;
+	}
+	public void setAutorizado(boolean autorizado) {
+		this.autorizado = autorizado;
+	}
 
 /******************HASHCODE AND EQUALS***************************/
 	@Override
@@ -66,15 +74,13 @@ public class userApk implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		userApk other = (userApk) obj;
+		UserApk other = (UserApk) obj;
 		return Objects.equals(user, other.user);
 	}
 /******************STRING****************************************/
+
 	@Override
 	public String toString() {
-		return "userAPK [usuario=" + user + ", contraseña=" + password + "]";
+		return "UserApk [user=" + user + ", password=" + password + ", autorizado=" + autorizado + "]";
 	}
-	
-	
-   
 }

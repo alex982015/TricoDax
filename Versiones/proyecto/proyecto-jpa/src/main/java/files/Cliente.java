@@ -10,12 +10,10 @@ import javax.persistence.*;
  *
  */
 
-
 @Entity
 @Table(name="CLIENTE")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Cliente {
-	
+public class Cliente implements Serializable {
 	@Id @Column(name="ID") 
 	private long ID;
 	@Column(name="IDENT") 
@@ -44,6 +42,7 @@ public class Cliente {
 	public Cliente() {
 		super();
 	}
+	
 	public Cliente(long iD, long ident, String tipo_cliente, boolean estado, Date fecha_Alta, String direccion,
 			String ciudad, int codPostal, String pais, List<Cuenta> cuentas) {
 
@@ -184,4 +183,5 @@ public class Cliente {
 				+ ", Fecha_Alta=" + Fecha_Alta + ", Fecha_Baja=" + Fecha_Baja + ", Direccion=" + Direccion + ", Ciudad="
 				+ Ciudad + ", CodPostal=" + CodPostal + ", Pais=" + Pais + "]";
 	}
+	
 }

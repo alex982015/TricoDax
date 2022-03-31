@@ -1,6 +1,6 @@
 package files;
 
-import files.cuentaFintech;
+import files.CuentaFintech;
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -9,15 +9,13 @@ import javax.persistence.*;
  *
  */
 
-
 @Entity
 @Table(name="SEGREGADA")
-public class Segregada extends cuentaFintech {
-
+public class Segregada extends CuentaFintech implements Serializable {
 	@Column(name="COMISION")
 	private double comision;
 	@OneToOne
-	private cuentaRef referenciada;
+	private CuentaRef referenciada;
 
 /****************CONSTRUCTORES*************************************/
 	
@@ -25,7 +23,7 @@ public class Segregada extends cuentaFintech {
 		super();
 	}
 	
-	public Segregada(double comision, cuentaRef referenciada) {
+	public Segregada(double comision, CuentaRef referenciada) {
 		super();
 		this.comision = comision;
 		this.referenciada = referenciada;
@@ -44,8 +42,7 @@ public class Segregada extends cuentaFintech {
 /******************STRING****************************************/
 	@Override
 	public String toString() {
-		return super.toString() + "Segregada [comision=" + comision + "]";
+		return "Segregada [IBAN=" + super.getIBAN() + ", swift=" + super.getSwift() + ", comision=" + comision + "]";
 	}
 	
-   
 }

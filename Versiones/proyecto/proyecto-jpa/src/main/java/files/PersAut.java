@@ -1,6 +1,7 @@
 package files;
 
 
+import java.io.Serializable;
 import java.util.*;
 
 import javax.persistence.*;
@@ -10,11 +11,9 @@ import javax.persistence.*;
  *
  */
 
-
 @Entity
 @Table(name="PERSAUT")
-public class persAut  {
-
+public class PersAut implements Serializable {
 	@Id @Column(name="ID")
 	private long Id;
 	@Column(name="IDENT")
@@ -34,21 +33,21 @@ public class persAut  {
 	@Column(name="FECHAFIN") @Temporal(TemporalType.DATE)
 	private Date fechaFin;
 	@ElementCollection
-    @CollectionTable(name="EMPRESA")
-    @MapKeyColumn(name="TIPO")
+    @CollectionTable(name="AUTORIZ",joinColumns = {@JoinColumn(name="IDEMPRESA")})
+	@MapKeyJoinColumn(name="IDPERSAUT")
 	@Column(name="TIPO")
-    private Map<Integer, String> autoriz = new HashMap<>();
+    private Map<Empresa, String> autoriz = new HashMap<>();
 	@OneToOne
-	private userApk usuarioAutApk;
+	private UserApk usuarioAutApk;
 	
 /****************CONSTRUCTORES*************************************/
 	
-	public persAut() {
+	public PersAut() {
 		super();
 	}
 
-	public persAut(long id, String ident, String nombre, String apellidos, String direccion,
-			Map<Integer, String> autoriz, userApk usuarioAutApk) {
+	public PersAut(long id, String ident, String nombre, String apellidos, String direccion,
+			Map<Empresa, String> autoriz, UserApk usuarioAutApk) {
 		super();
 		Id = id;
 		this.ident = ident;
@@ -59,8 +58,8 @@ public class persAut  {
 		this.usuarioAutApk = usuarioAutApk;
 	}
 
-	public persAut(long id, String ident, String nombre, String apellidos, String direccion, Date fechaNac,
-			String estado, Date fechaInicio, Date fechaFin, Map<Integer, String> autoriz, userApk usuarioAutApk) {
+	public PersAut(long id, String ident, String nombre, String apellidos, String direccion, Date fechaNac,
+			String estado, Date fechaInicio, Date fechaFin, Map<Empresa, String> autoriz, UserApk usuarioAutApk) {
 		super();
 		Id = id;
 		this.ident = ident;
@@ -182,7 +181,7 @@ public class persAut  {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		persAut other = (persAut) obj;
+		PersAut other = (PersAut) obj;
 		return Id == other.Id;
 	}
 
@@ -193,8 +192,6 @@ public class persAut  {
 		return "Pers_Aut [Id=" + Id + ", ident=" + ident + ", nombre=" + nombre + ", apellidos=" + apellidos
 				+ ", direccion=" + direccion + ", fecha_nac=" + fechaNac + ", estado=" + estado + ", fecha_inicio="
 				+ fechaInicio + ", fecha_fin=" + fechaFin + "]";
-	}
-   
-	
+	}	
 	
 }

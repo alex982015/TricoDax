@@ -1,5 +1,6 @@
 package files;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.*;
@@ -8,10 +9,10 @@ import javax.persistence.*;
  * Entity implementation class for Entity: Divisa
  *
  */
+
 @Entity
 @Table(name="DIVISA")
-public class Divisa {
-
+public class Divisa implements Serializable {
 	@Id @Column(name="ABREVIATURA")
 	private String abreviatura;
 	@Column(name="NOMBRE")

@@ -13,7 +13,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="CUENTAFINTECH")
-public class cuentaFintech extends Cuenta  {
+public class CuentaFintech extends Cuenta implements Serializable {
 	@Column(name="ESTADO")
 	private String estado;
 	@Column(name="FECHAAPERTURA") @Temporal(TemporalType.DATE)
@@ -25,17 +25,17 @@ public class cuentaFintech extends Cuenta  {
 
 /****************CONSTRUCTORES*************************************/
 
-	public cuentaFintech() {
+	public CuentaFintech() {
 		super();
 	}
 	
-	public cuentaFintech(String estado, Date fechaApertura) {
+	public CuentaFintech(String estado, Date fechaApertura) {
 		super();
 		this.estado = estado;
 		this.fechaApertura = fechaApertura;
 	}
 
-	public cuentaFintech(String estado, Date fechaApertura, Date fechaCierre, boolean clasificacion) {
+	public CuentaFintech(String estado, Date fechaApertura, Date fechaCierre, boolean clasificacion) {
 		super();
 		this.estado = estado;
 		this.fechaApertura = fechaApertura;
@@ -81,10 +81,8 @@ public class cuentaFintech extends Cuenta  {
 
 	@Override
 	public String toString() {
-		return super.toString() + "Cuenta_Fintech [estado=" + estado + ", fecha_Apertura=" + fechaApertura + ", fecha_Cierre="
+		return "CuentaFintech [IBAN=" + super.getIBAN() + ", swift=" + super.getSwift() + ", estado=" + estado + ", fecha_Apertura=" + fechaApertura + ", fecha_Cierre="
 				+ fechaCierre + ", clasificacion=" + clasificacion + "]";
 	}
-	
-	
    
 }

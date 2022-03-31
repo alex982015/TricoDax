@@ -13,11 +13,9 @@ import javax.persistence.*;
  *
  */
 
-
 @Entity
 @Table(name="CUENTAREF")
-public class cuentaRef extends Cuenta {
-
+public class CuentaRef extends Cuenta implements Serializable {
 	@Column(name="NOMBREBANCO")
 	private String NombreBanco;
 	@Column(name="SUCURSAL")
@@ -30,29 +28,31 @@ public class cuentaRef extends Cuenta {
 	private Date fechaApertura;
 	@Column(name="ESTADO")
 	private String estado;
+
 	@ElementCollection
-    @CollectionTable(name="POOLEDACCOUNT")
-    @MapKeyColumn(name="SALDO")
+    @CollectionTable(name="DEPOSITEN",joinColumns = {@JoinColumn(name="IBANPOOLEDACCOUNT")})
+	@MapKeyJoinColumn(name="IBANCUENTAREF")
 	@Column(name="SALDO")
-    private Map<Integer, Double> depositEn = new HashMap<>();
+    private Map<PooledAccount, Double> depositEn = new HashMap<>();
+
 	@ManyToOne
 	private Divisa moneda;
 	
 /****************CONSTRUCTORES*************************************/
 
-	public cuentaRef() {
+	public CuentaRef() {
 		super();
 	}
 	
 
-	public cuentaRef(double saldo) {
+	public CuentaRef(double saldo) {
 		super();
 		Saldo = saldo;
 	}
 
 
-	public cuentaRef(String nombreBanco, int sucursal, String pais, double saldo, Date fechaApertura, String estado,
-			Map<Integer, Double> depositEn, Divisa moneda) {
+	public CuentaRef(String nombreBanco, int sucursal, String pais, double saldo, Date fechaApertura, String estado,
+			Map<PooledAccount, Double> depositEn, Divisa moneda) {
 		super();
 		NombreBanco = nombreBanco;
 		Sucursal = sucursal;
@@ -118,7 +118,7 @@ public class cuentaRef extends Cuenta {
 	
 	@Override
 	public String toString() {
-		return super.toString() + "Cuenta_Ref [NombreBanco=" + NombreBanco + ", Sucursal=" + Sucursal + ", Pais=" + Pais + ", Saldo="
+		return "CuentaRef [IBAN=" + super.getIBAN() + ", swift=" + super.getSwift() + ", NombreBanco=" + NombreBanco + ", Sucursal=" + Sucursal + ", Pais=" + Pais + ", Saldo="
 				+ Saldo + ", fecha_Apertura=" + fechaApertura + ", estado=" + estado + "]";
 	}
 	

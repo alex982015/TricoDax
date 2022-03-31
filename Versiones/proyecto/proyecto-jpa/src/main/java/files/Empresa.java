@@ -2,8 +2,11 @@ package files;
 
 import files.Cliente;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.*;
 
@@ -11,13 +14,20 @@ import javax.persistence.*;
  * Entity implementation class for Entity: Empresa
  *
  */
+
 @Entity
 @Table(name="EMPRESA")
-public class Empresa extends Cliente {
+public class Empresa extends Cliente implements Serializable {
 
 	@Column(name="RAZONSOCIAL")
 	private String razonSocial;
 
+	@ElementCollection
+    @CollectionTable(name="AUTORIZ",joinColumns = {@JoinColumn(name="IDPERSAUT")})
+	@MapKeyJoinColumn(name="IDEMPRESA")
+	@Column(name="TIPO")
+    private Map<PersAut, String> autoriz = new HashMap<>();
+	
 /****************CONSTRUCTORES*************************************/
 	
 	public Empresa() {
@@ -43,6 +53,9 @@ public class Empresa extends Cliente {
 	
 	@Override
 	public String toString() {
-		return super.toString() + "Empresa [Razon_Social=" + razonSocial + "]";
+		return "Empresa [ID=" + super.getID() + ", Ident=" + super.getIdent() + ", tipo_cliente=" + super.getTipo_cliente() + ", estado=" + super.isEstado()
+				+ ", Fecha_Alta=" + super.getFecha_Alta() + ", Fecha_Baja=" + super.getFecha_Baja() + ", Direccion=" + super.getDireccion() + ", Ciudad="
+				+ super.getCiudad() + ", CodPostal=" + super.getCodPostal() + ", Pais=" + super.getPais() + ", Razon_Social=" + razonSocial + "]";
 	}
+	
 }

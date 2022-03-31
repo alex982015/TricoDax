@@ -1,5 +1,6 @@
 package files;
 
+import java.io.Serializable;
 import java.util.*;
 
 import javax.persistence.*;
@@ -9,12 +10,10 @@ import javax.persistence.*;
  *
  */
 
-
 @Entity
 @Table(name="CUENTA")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Cuenta  {
-
+public class Cuenta implements Serializable {
 	@Id @Column(name="IBAN")
 	private long IBAN;
 	@Column(name="SWIFT")

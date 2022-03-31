@@ -13,11 +13,9 @@ import javax.persistence.*;
  *
  */
 
-
 @Entity
 @Table(name="TRANS")
-public class Trans implements Serializable{
-	
+public class Trans implements Serializable {
 	@Id @Column(name="ID")
 	private long ID;
 	@Column(name="CANTIDAD")
