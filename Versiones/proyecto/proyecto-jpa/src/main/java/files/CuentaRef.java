@@ -1,6 +1,5 @@
 package files;
 
-import files.Cuenta;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
@@ -16,6 +15,9 @@ import javax.persistence.*;
 @Entity
 @Table(name="CUENTAREF")
 public class CuentaRef extends Cuenta implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	@Column(name="NOMBREBANCO")
 	private String NombreBanco;
 	@Column(name="SUCURSAL")
@@ -51,8 +53,7 @@ public class CuentaRef extends Cuenta implements Serializable {
 	}
 
 
-	public CuentaRef(String nombreBanco, int sucursal, String pais, double saldo, Date fechaApertura, String estado,
-			Map<PooledAccount, Double> depositEn, Divisa moneda) {
+	public CuentaRef(String nombreBanco, int sucursal, String pais, double saldo, Date fechaApertura, String estado) {
 		super();
 		NombreBanco = nombreBanco;
 		Sucursal = sucursal;
@@ -60,8 +61,6 @@ public class CuentaRef extends Cuenta implements Serializable {
 		Saldo = saldo;
 		this.fechaApertura = fechaApertura;
 		this.estado = estado;
-		this.depositEn = depositEn;
-		this.moneda = moneda;
 	}
 
 /***************GETTERS AND SETTERS*******************************/
@@ -98,12 +97,12 @@ public class CuentaRef extends Cuenta implements Serializable {
 		Saldo = saldo;
 	}
 
-	public Date getFecha_Apertura() {
+	public Date getFechaApertura() {
 		return fechaApertura;
 	}
 
-	public void setFecha_Apertura(Date fecha_Apertura) {
-		this.fechaApertura = fecha_Apertura;
+	public void setFechaApertura(Date fechaApertura) {
+		this.fechaApertura = fechaApertura;
 	}
 
 	public String getEstado() {
@@ -114,14 +113,28 @@ public class CuentaRef extends Cuenta implements Serializable {
 		this.estado = estado;
 	}
 	
+	public Map<PooledAccount, Double> getDepositEn() {
+		return depositEn;
+	}
+
+	public void setDepositEn(Map<PooledAccount, Double> depositEn) {
+		this.depositEn = depositEn;
+	}
+
+	public Divisa getMoneda() {
+		return moneda;
+	}
+
+	public void setMoneda(Divisa moneda) {
+		this.moneda = moneda;
+	}
+
 /******************STRING****************************************/
 	
 	@Override
 	public String toString() {
-		return "CuentaRef [IBAN=" + super.getIBAN() + ", swift=" + super.getSwift() + ", NombreBanco=" + NombreBanco + ", Sucursal=" + Sucursal + ", Pais=" + Pais + ", Saldo="
-				+ Saldo + ", fecha_Apertura=" + fechaApertura + ", estado=" + estado + "]";
+		return "CuentaRef [IBAN=" + super.getIBAN() + ", swift=" + super.getSwift() +", NombreBanco=" + NombreBanco + ", Sucursal=" + Sucursal + ", Pais=" + Pais + ", Saldo=" + Saldo
+				+ ", fechaApertura=" + fechaApertura + ", estado=" + estado + ", depositEn=" + depositEn + ", moneda=" + moneda + "]";
 	}
 	
-	
-   
 }

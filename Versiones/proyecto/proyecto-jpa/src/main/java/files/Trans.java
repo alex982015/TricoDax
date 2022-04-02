@@ -2,7 +2,6 @@ package files;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.*;
@@ -16,6 +15,9 @@ import javax.persistence.*;
 @Entity
 @Table(name="TRANS")
 public class Trans implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	@Id @Column(name="ID")
 	private long ID;
 	@Column(name="CANTIDAD")
@@ -31,7 +33,9 @@ public class Trans implements Serializable {
 	@Column(name="FECHAINSTRUCCION") @Temporal(TemporalType.DATE)
 	private Date fechaInstruccion;
 	@ManyToOne
-	private Divisa moneda;
+	private Divisa monedaOrigen;
+	@ManyToOne
+	private Divisa monedaDestino;
 	@ManyToOne
 	private Cuenta cuenta;
 	@ManyToOne
@@ -43,21 +47,15 @@ public class Trans implements Serializable {
 		super();
 	}
 	
-	public Trans(long iD, int cantidad, String tipo, Date fechaInstruccion, Divisa moneda, Cuenta cuenta,
-			Cuenta transaccion) {
+	public Trans(long iD, int cantidad, String tipo, Date fechaInstruccion) {
 		super();
 		ID = iD;
 		this.cantidad = cantidad;
 		this.tipo = tipo;
 		this.fechaInstruccion = fechaInstruccion;
-		this.moneda = moneda;
-		this.cuenta = cuenta;
-		this.transaccion = transaccion;
 	}
-	
-	
-	public Trans(long iD, int cantidad, String tipo, String comision, String international, Date fechaEjecucion,
-			Date fechaInstruccion, Divisa moneda, Cuenta cuenta, Cuenta transaccion) {
+
+	public Trans(long iD, int cantidad, String tipo, String comision, String international, Date fechaEjecucion, Date fechaInstruccion) {
 		super();
 		ID = iD;
 		this.cantidad = cantidad;
@@ -66,10 +64,10 @@ public class Trans implements Serializable {
 		this.international = international;
 		this.fechaEjecucion = fechaEjecucion;
 		this.fechaInstruccion = fechaInstruccion;
-		this.moneda = moneda;
-		this.cuenta = cuenta;
-		this.transaccion = transaccion;
 	}
+	
+
+
 
 /***************GETTERS AND SETTERS*******************************/
 	
@@ -115,7 +113,31 @@ public class Trans implements Serializable {
 	public void setFechaInstruccion(Date fechaInstruccion) {
 		this.fechaInstruccion = fechaInstruccion;
 	}
-	
+	public Divisa getMonedaOrigen() {
+		return monedaOrigen;
+	}
+	public void setMonedaOrigen(Divisa monedaOrigen) {
+		this.monedaOrigen = monedaOrigen;
+	}
+	public Divisa getMonedaDestino() {
+		return monedaDestino;
+	}
+	public void setMonedaDestino(Divisa monedaDestino) {
+		this.monedaDestino = monedaDestino;
+	}
+	public Cuenta getCuenta() {
+		return cuenta;
+	}
+	public void setCuenta(Cuenta cuenta) {
+		this.cuenta = cuenta;
+	}
+	public Cuenta getTransaccion() {
+		return transaccion;
+	}
+	public void setTransaccion(Cuenta transaccion) {
+		this.transaccion = transaccion;
+	}
+
 /******************HASHCODE AND EQUALS***************************/
 	
 	@Override
@@ -133,13 +155,18 @@ public class Trans implements Serializable {
 		Trans other = (Trans) obj;
 		return ID == other.ID;
 	}
+
+	
 	
 /******************STRING****************************************/
+	
 	@Override
 	public String toString() {
-		return "Trans [ID_Unico=" + ID + ", cantidad=" + cantidad + ", tipo=" + tipo + ", comision=" + comision
+		return "Trans [ID=" + ID + ", cantidad=" + cantidad + ", tipo=" + tipo + ", comision=" + comision
 				+ ", international=" + international + ", fechaEjecucion=" + fechaEjecucion + ", fechaInstruccion="
-				+ fechaInstruccion + "]";
+				+ fechaInstruccion + ", monedaOrigen=" + monedaOrigen + ", monedaDestino=" + monedaDestino + ", cuenta="
+				+ cuenta + ", transaccion=" + transaccion + "]";
 	}
+	
 	
 }

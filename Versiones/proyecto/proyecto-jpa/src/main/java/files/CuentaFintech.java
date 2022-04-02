@@ -1,6 +1,5 @@
 package files;
 
-import files.Cuenta;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -14,6 +13,9 @@ import javax.persistence.*;
 @Entity
 @Table(name="CUENTAFINTECH")
 public class CuentaFintech extends Cuenta implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	@Column(name="ESTADO")
 	private String estado;
 	@Column(name="FECHAAPERTURA") @Temporal(TemporalType.DATE)

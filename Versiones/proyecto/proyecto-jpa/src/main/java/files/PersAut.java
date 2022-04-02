@@ -14,6 +14,9 @@ import javax.persistence.*;
 @Entity
 @Table(name="PERSAUT")
 public class PersAut implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	@Id @Column(name="ID")
 	private long Id;
 	@Column(name="IDENT")
@@ -43,24 +46,21 @@ public class PersAut implements Serializable {
 /****************CONSTRUCTORES*************************************/
 	
 	public PersAut() {
-		super();
+	
 	}
 
-	public PersAut(long id, String ident, String nombre, String apellidos, String direccion,
-			Map<Empresa, String> autoriz, UserApk usuarioAutApk) {
-		super();
+	public PersAut(long id, String ident, String nombre, String apellidos, String direccion) {
+		
 		Id = id;
 		this.ident = ident;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.direccion = direccion;
-		this.autoriz = autoriz;
-		this.usuarioAutApk = usuarioAutApk;
 	}
 
 	public PersAut(long id, String ident, String nombre, String apellidos, String direccion, Date fechaNac,
-			String estado, Date fechaInicio, Date fechaFin, Map<Empresa, String> autoriz, UserApk usuarioAutApk) {
-		super();
+			String estado, Date fechaInicio, Date fechaFin) {
+
 		Id = id;
 		this.ident = ident;
 		this.nombre = nombre;
@@ -70,8 +70,6 @@ public class PersAut implements Serializable {
 		this.estado = estado;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
-		this.autoriz = autoriz;
-		this.usuarioAutApk = usuarioAutApk;
 	}
 
 /***************GETTERS AND SETTERS*******************************/
@@ -90,79 +88,81 @@ public class PersAut implements Serializable {
 		return ident;
 	}
 
-
 	public void setIdent(String ident) {
 		this.ident = ident;
 	}
-
 
 	public String getNombre() {
 		return nombre;
 	}
 
-
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
 
 	public String getApellidos() {
 		return apellidos;
 	}
 
-
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
-
 
 	public String getDireccion() {
 		return direccion;
 	}
 
-
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
 
-
-	public Date getFecha_nac() {
+	public Date getFechaNac() {
 		return fechaNac;
 	}
 
-
-	public void setFecha_nac(Date fecha_nac) {
-		this.fechaNac = fecha_nac;
+	public void setFechaNac(Date fechaNac) {
+		this.fechaNac = fechaNac;
 	}
-
 
 	public String getEstado() {
 		return estado;
 	}
-
 
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
 
 
-	public Date getFecha_inicio() {
+	public Date getFechaInicio() {
 		return fechaInicio;
 	}
 
-
-	public void setFecha_inicio(Date fecha_inicio) {
-		this.fechaInicio = fecha_inicio;
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
 	}
 
-
-	public Date getFecha_fin() {
+	public Date getFechaFin() {
 		return fechaFin;
 	}
 
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
+	}
 
-	public void setFecha_fin(Date fecha_fin) {
-		this.fechaFin = fecha_fin;
+	public Map<Empresa, String> getAutoriz() {
+		return autoriz;
+	}
+
+	public void setAutoriz(Map<Empresa, String> autoriz) {
+		this.autoriz = autoriz;
+	}
+
+	public UserApk getUsuarioAutApk() {
+		return usuarioAutApk;
+	}
+
+	public void setUsuarioAutApk(UserApk usuarioAutApk) {
+		this.usuarioAutApk = usuarioAutApk;
 	}
 
 /******************HASHCODE AND EQUALS***************************/
@@ -185,13 +185,15 @@ public class PersAut implements Serializable {
 		return Id == other.Id;
 	}
 
+
 /******************STRING****************************************/
 	
 	@Override
 	public String toString() {
-		return "Pers_Aut [Id=" + Id + ", ident=" + ident + ", nombre=" + nombre + ", apellidos=" + apellidos
-				+ ", direccion=" + direccion + ", fecha_nac=" + fechaNac + ", estado=" + estado + ", fecha_inicio="
-				+ fechaInicio + ", fecha_fin=" + fechaFin + "]";
-	}	
+		return "PersAut [Id=" + Id + ", ident=" + ident + ", nombre=" + nombre + ", apellidos=" + apellidos
+				+ ", direccion=" + direccion + ", fechaNac=" + fechaNac + ", estado=" + estado + ", fechaInicio="
+				+ fechaInicio + ", fechaFin=" + fechaFin + ", autoriz=" + autoriz + ", usuarioAutApk=" + usuarioAutApk
+				+ "]";
+	}
 	
 }

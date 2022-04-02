@@ -13,6 +13,9 @@ import javax.persistence.*;
 @Entity
 @Table(name="DIVISA")
 public class Divisa implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	@Id @Column(name="ABREVIATURA")
 	private String abreviatura;
 	@Column(name="NOMBRE")

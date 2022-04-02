@@ -14,6 +14,9 @@ import javax.persistence.*;
 @Table(name="CUENTA")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Cuenta implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	@Id @Column(name="IBAN")
 	private long IBAN;
 	@Column(name="SWIFT")
@@ -28,24 +31,16 @@ public class Cuenta implements Serializable {
 /****************CONSTRUCTORES*************************************/
 
 	public Cuenta() {
-		super();
+		
 	}
 	
-	public Cuenta(long iBAN, Cliente cliente, List<Trans> transacciones, List<Trans> cuenta) {
-		super();
+	public Cuenta(long iBAN) {
 		IBAN = iBAN;
-		this.cliente = cliente;
-		this.transacciones = transacciones;
-		this.cuenta = cuenta;
 	}
 
-	public Cuenta(long iBAN, String swift, Cliente cliente, List<Trans> transacciones, List<Trans> cuenta) {
-		
+	public Cuenta(long iBAN, String swift) {
 		this.IBAN = iBAN;
 		this.swift = swift;
-		this.cliente = cliente;
-		this.transacciones = transacciones;
-		this.cuenta = cuenta;
 	}
 
 /***************GETTERS AND SETTERS*******************************/
@@ -66,6 +61,30 @@ public class Cuenta implements Serializable {
 		this.swift = swift;
 	}
 	
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public List<Trans> getTransacciones() {
+		return transacciones;
+	}
+
+	public void setTransacciones(List<Trans> transacciones) {
+		this.transacciones = transacciones;
+	}
+
+	public List<Trans> getCuenta() {
+		return cuenta;
+	}
+
+	public void setCuenta(List<Trans> cuenta) {
+		this.cuenta = cuenta;
+	}
+
 /******************HASHCODE AND EQUALS***************************/
 
 	@Override
@@ -85,11 +104,13 @@ public class Cuenta implements Serializable {
 		return IBAN == other.IBAN;
 	}
 
+	
 /******************STRING****************************************/
 
 	@Override
 	public String toString() {
-		return "Cuenta [IBAN=" + IBAN + ", swift=" + swift + "]";
+		return "Cuenta [IBAN=" + IBAN + ", swift=" + swift + ", cliente=" + cliente + ", transacciones=" + transacciones
+				+ ", cuenta=" + cuenta + "]";
 	}
-	
+
 }

@@ -14,6 +14,9 @@ import javax.persistence.*;
 @Table(name="CLIENTE")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Cliente implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	@Id @Column(name="ID") 
 	private long ID;
 	@Column(name="IDENT") 
@@ -40,11 +43,11 @@ public class Cliente implements Serializable {
 /****************CONSTRUCTORES*************************************/
 
 	public Cliente() {
-		super();
+		
 	}
 	
 	public Cliente(long iD, long ident, String tipo_cliente, boolean estado, Date fecha_Alta, String direccion,
-			String ciudad, int codPostal, String pais, List<Cuenta> cuentas) {
+			String ciudad, int codPostal, String pais) {
 
 		this.ID = iD;
 		this.Ident = ident;
@@ -55,11 +58,11 @@ public class Cliente implements Serializable {
 		this.Ciudad = ciudad;
 		this.CodPostal = codPostal;
 		this.Pais = pais;
-		this.cuentas = cuentas;
+		
 	}
 	
 	public Cliente(long iD, long ident, String tipo_cliente, boolean estado, Date fecha_Alta, Date fecha_Baja, String direccion,
-			String ciudad, int codPostal, String pais, List<Cuenta> cuentas) {
+			String ciudad, int codPostal, String pais) {
 
 		this.ID = iD;
 		this.Ident = ident;
@@ -71,7 +74,7 @@ public class Cliente implements Serializable {
 		this.Ciudad = ciudad;
 		this.CodPostal = codPostal;
 		this.Pais = pais;
-		this.cuentas = cuentas;
+		
 	}
 
 /***************GETTERS AND SETTERS*******************************/
@@ -155,6 +158,15 @@ public class Cliente implements Serializable {
 	public void setPais(String pais) {
 		Pais = pais;
 	}
+	
+
+	public List<Cuenta> getCuentas() {
+		return cuentas;
+	}
+
+	public void setCuentas(List<Cuenta> cuentas) {
+		this.cuentas = cuentas;
+	}
 
 /******************HASHCODE AND EQUALS***************************/
 
@@ -175,13 +187,15 @@ public class Cliente implements Serializable {
 		return ID == other.ID;
 	}
 
+	
+
 /******************STRING****************************************/
 
 	@Override
 	public String toString() {
 		return "Cliente [ID=" + ID + ", Ident=" + Ident + ", tipo_cliente=" + tipo_cliente + ", estado=" + estado
 				+ ", Fecha_Alta=" + Fecha_Alta + ", Fecha_Baja=" + Fecha_Baja + ", Direccion=" + Direccion + ", Ciudad="
-				+ Ciudad + ", CodPostal=" + CodPostal + ", Pais=" + Pais + "]";
+				+ Ciudad + ", CodPostal=" + CodPostal + ", Pais=" + Pais + ", cuentas=" + cuentas + "]";
 	}
 	
 }

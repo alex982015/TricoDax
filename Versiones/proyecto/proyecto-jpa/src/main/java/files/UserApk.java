@@ -13,6 +13,9 @@ import javax.persistence.*;
 @Entity
 @Table(name="USERAPK")
 public class UserApk implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
 	@Id @Column(name="USUARIO")
 	private String user;
 	@Column(name="PASSWORD")
@@ -29,15 +32,12 @@ public class UserApk implements Serializable {
 /****************CONSTRUCTORES*************************************/
 	
 	public UserApk() {
-		super();
 	}
 	
-	public UserApk(String user, String password, Indiv personaIndividual, PersAut personaAutorizada) {
-		super();
+	public UserApk(String user, String password, boolean autorizado) {
 		this.user = user;
 		this.password = password;
-		this.personaIndividual = personaIndividual;
-		this.personaAutorizada = personaAutorizada;
+		this.autorizado = autorizado;
 	}
 
 /***************GETTERS AND SETTERS*******************************/
