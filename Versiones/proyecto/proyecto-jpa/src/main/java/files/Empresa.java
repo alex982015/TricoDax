@@ -21,7 +21,7 @@ public class Empresa extends Cliente implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="RAZONSOCIAL")
+	@Column(name="RAZONSOCIAL", nullable = false)
 	private String razonSocial;
 
 	@ElementCollection

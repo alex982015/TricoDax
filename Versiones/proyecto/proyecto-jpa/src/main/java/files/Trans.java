@@ -20,9 +20,9 @@ public class Trans implements Serializable {
 	
 	@Id @GeneratedValue @Column(name="ID")
 	private long ID;
-	@Column(name="CANTIDAD")
+	@Column(name="CANTIDAD", nullable = false)
 	private int cantidad;
-	@Column(name="TIPO")
+	@Column(name="TIPO", nullable = false)
 	private String tipo;
 	@Column(name="COMISION")
 	private String comision;
@@ -30,7 +30,7 @@ public class Trans implements Serializable {
 	private String international;
 	@Column(name="FECHAEJECUCION") @Temporal(TemporalType.DATE)
 	private Date fechaEjecucion;
-	@Column(name="FECHAINSTRUCCION") @Temporal(TemporalType.DATE)
+	@Column(name="FECHAINSTRUCCION", nullable = false) @Temporal(TemporalType.DATE)
 	private Date fechaInstruccion;
 	
 	@ManyToOne

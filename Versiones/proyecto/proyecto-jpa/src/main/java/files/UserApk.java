@@ -18,10 +18,9 @@ public class UserApk implements Serializable {
 	
 	@Id @Column(name="USUARIO")
 	private String user;
-	@Column(name="PASSWORD")
+	@Column(name="PASSWORD", nullable = false)
 	private String password;
-	
-	@Column(name="AUTORIZADO")
+	@Column(name="AUTORIZADO", nullable = false)
 	private boolean autorizado;
 	
 	@OneToOne (mappedBy="usuarioApk")

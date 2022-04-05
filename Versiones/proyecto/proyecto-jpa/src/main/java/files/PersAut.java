@@ -19,13 +19,13 @@ public class PersAut implements Serializable {
 	
 	@Id @GeneratedValue @Column(name="ID")
 	private long Id;
-	@Column(name="IDENT")
+	@Column(name="IDENT", nullable = false)
 	private String ident;
-	@Column(name="NOMBRE")
+	@Column(name="NOMBRE", nullable = false)
 	private String nombre;
-	@Column(name="APELLIDOS")
+	@Column(name="APELLIDOS", nullable = false)
 	private String apellidos;
-	@Column(name="DIRECCION")
+	@Column(name="DIRECCION", nullable = false)
 	private String direccion;
 	@Column(name="FECHANAC") @Temporal(TemporalType.DATE)
 	private Date fechaNac;

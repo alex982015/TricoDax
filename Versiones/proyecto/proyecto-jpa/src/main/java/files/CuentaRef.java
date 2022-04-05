@@ -22,13 +22,13 @@ public class CuentaRef extends Cuenta implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	@Column(name="NOMBREBANCO")
+	@Column(name="NOMBREBANCO", nullable = false)
 	private String NombreBanco;
 	@Column(name="SUCURSAL")
 	private int Sucursal;
 	@Column(name="PAIS")
 	private String Pais;
-	@Column(name="SALDO")
+	@Column(name="SALDO", nullable = false)
 	private double Saldo;
 	@Column(name="FECHAAPERTURA") @Temporal(TemporalType.DATE)
 	private Date fechaApertura;

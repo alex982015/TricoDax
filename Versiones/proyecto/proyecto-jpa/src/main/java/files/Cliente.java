@@ -24,23 +24,23 @@ public class Cliente implements Serializable {
 	
 	@Id @GeneratedValue @Column(name="ID")
 	private long ID;
-	@Column(name="IDENT") 
+	@Column(name="IDENT", nullable = false) 
 	private long Ident;
-	@Column(name="TIPOCLIENTE") 
+	@Column(name="TIPOCLIENTE", nullable = false) 
 	private String tipo_cliente;
-	@Column(name="ESTADO") 
+	@Column(name="ESTADO", nullable = false)
 	private boolean estado;
-	@Column(name="FECHAALTA") @Temporal(TemporalType.DATE)
+	@Column(name="FECHAALTA", nullable = false) @Temporal(TemporalType.DATE)
 	private Date Fecha_Alta;
 	@Column(name="FECHABAJA") @Temporal(TemporalType.DATE)
 	private Date Fecha_Baja;
-	@Column(name="DIRECCION") 
+	@Column(name="DIRECCION", nullable = false) 
 	private String Direccion;
-	@Column(name="CIUDAD") 
+	@Column(name="CIUDAD", nullable = false) 
 	private String Ciudad;
-	@Column(name="CODPOSTAL") 
+	@Column(name="CODPOSTAL", nullable = false) 
 	private int CodPostal;
-	@Column(name="PAIS") 
+	@Column(name="PAIS", nullable = false) 
 	private String Pais;
 	@OneToMany(mappedBy = "cliente")
 	private List<Cuenta> cuentas;

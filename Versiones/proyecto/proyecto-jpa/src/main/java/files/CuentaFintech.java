@@ -20,9 +20,9 @@ public class CuentaFintech extends Cuenta implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	@Column(name="ESTADO")
+	@Column(name="ESTADO", nullable = false)
 	private String estado;
-	@Column(name="FECHAAPERTURA") @Temporal(TemporalType.DATE)
+	@Column(name="FECHAAPERTURA", nullable = false) @Temporal(TemporalType.DATE)
 	private Date fechaApertura;
 	@Column(name="FECHACIERRE") @Temporal(TemporalType.DATE)
 	private Date fechaCierre;

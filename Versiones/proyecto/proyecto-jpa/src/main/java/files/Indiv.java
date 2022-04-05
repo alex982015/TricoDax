@@ -20,12 +20,13 @@ public class Indiv extends Cliente implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	@Column(name="NOMBRE")
+	@Column(name="NOMBRE", nullable = false)
 	private String nombre;
-	@Column(name="APELLIDO")
+	@Column(name="APELLIDO", nullable = false)
 	private String apellido;
 	@Column(name="FECHANACIMIENTO") @Temporal(TemporalType.DATE)
 	private Date fechaNac;
+	
 	@OneToOne
 	private UserApk usuarioApk;
 	

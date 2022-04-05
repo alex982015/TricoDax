@@ -18,11 +18,11 @@ public class Divisa implements Serializable {
 	
 	@Id @Column(name="ABREVIATURA")
 	private String abreviatura;
-	@Column(name="NOMBRE")
+	@Column(name="NOMBRE", nullable = false)
 	private String nombre;
 	@Column(name="SIMBOLO")
 	private String simbolo;
-	@Column(name="CAMBIOEURO")
+	@Column(name="CAMBIOEURO", nullable = false)
 	private Double cambioEuro;
 
 /****************CONSTRUCTORES*************************************/
