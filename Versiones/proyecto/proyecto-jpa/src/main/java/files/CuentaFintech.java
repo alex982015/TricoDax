@@ -10,8 +10,12 @@ import javax.persistence.*;
  *
  */
 
+//@Entity
+//@Table(name="CUENTAFINTECH")
+
 @Entity
-@Table(name="CUENTAFINTECH")
+@DiscriminatorValue("CuentaFintech")
+
 public class CuentaFintech extends Cuenta implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

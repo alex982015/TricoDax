@@ -17,7 +17,7 @@ public class PersAut implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	@Id @Column(name="ID")
+	@Id @GeneratedValue @Column(name="ID")
 	private long Id;
 	@Column(name="IDENT")
 	private String ident;
@@ -35,11 +35,13 @@ public class PersAut implements Serializable {
 	private Date fechaInicio;
 	@Column(name="FECHAFIN") @Temporal(TemporalType.DATE)
 	private Date fechaFin;
+	
 	@ElementCollection
     @CollectionTable(name="AUTORIZ",joinColumns = {@JoinColumn(name="IDEMPRESA")})
 	@MapKeyJoinColumn(name="IDPERSAUT")
 	@Column(name="TIPO")
     private Map<Empresa, String> autoriz = new HashMap<>();
+	
 	@OneToOne
 	private UserApk usuarioAutApk;
 	
@@ -49,19 +51,17 @@ public class PersAut implements Serializable {
 	
 	}
 
-	public PersAut(long id, String ident, String nombre, String apellidos, String direccion) {
+	public PersAut(String ident, String nombre, String apellidos, String direccion) {
 		
-		Id = id;
 		this.ident = ident;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.direccion = direccion;
 	}
 
-	public PersAut(long id, String ident, String nombre, String apellidos, String direccion, Date fechaNac,
+	public PersAut(String ident, String nombre, String apellidos, String direccion, Date fechaNac,
 			String estado, Date fechaInicio, Date fechaFin) {
 
-		Id = id;
 		this.ident = ident;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
@@ -77,12 +77,6 @@ public class PersAut implements Serializable {
 	public long getId() {
 		return Id;
 	}
-
-
-	public void setId(long id) {
-		Id = id;
-	}
-
 
 	public String getIdent() {
 		return ident;

@@ -10,8 +10,12 @@ import javax.persistence.*;
  *
  */
 
+//@Entity
+//@Table(name="INDIV")
+
 @Entity
-@Table(name="INDIV")
+@DiscriminatorValue("Indiv")
+
 public class Indiv extends Cliente implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

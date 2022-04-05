@@ -11,11 +11,14 @@ import javax.persistence.*;
  *
  */
 
+//@Entity
+//@Table(name="EMPRESA")
+
 @Entity
-@Table(name="EMPRESA")
+@DiscriminatorValue("Empresa")
+
 public class Empresa extends Cliente implements Serializable {
 
-	
 	private static final long serialVersionUID = 1L;
 
 	@Column(name="RAZONSOCIAL")

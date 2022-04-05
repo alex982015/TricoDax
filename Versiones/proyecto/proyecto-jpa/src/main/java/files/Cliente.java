@@ -10,14 +10,19 @@ import javax.persistence.*;
  *
  */
 
+//@Entity
+//@Table(name="CLIENTE")
+//@Inheritance(strategy = InheritanceType.JOINED)
+
 @Entity
-@Table(name="CLIENTE")
-@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name="TIPO")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+
 public class Cliente implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	@Id @Column(name="ID") 
+	@Id @GeneratedValue @Column(name="ID")
 	private long ID;
 	@Column(name="IDENT") 
 	private long Ident;
@@ -46,10 +51,9 @@ public class Cliente implements Serializable {
 		
 	}
 	
-	public Cliente(long iD, long ident, String tipo_cliente, boolean estado, Date fecha_Alta, String direccion,
+	public Cliente(long ident, String tipo_cliente, boolean estado, Date fecha_Alta, String direccion,
 			String ciudad, int codPostal, String pais) {
 
-		this.ID = iD;
 		this.Ident = ident;
 		this.tipo_cliente = tipo_cliente;
 		this.estado = estado;
@@ -61,10 +65,9 @@ public class Cliente implements Serializable {
 		
 	}
 	
-	public Cliente(long iD, long ident, String tipo_cliente, boolean estado, Date fecha_Alta, Date fecha_Baja, String direccion,
+	public Cliente(long ident, String tipo_cliente, boolean estado, Date fecha_Alta, Date fecha_Baja, String direccion,
 			String ciudad, int codPostal, String pais) {
 
-		this.ID = iD;
 		this.Ident = ident;
 		this.tipo_cliente = tipo_cliente;
 		this.estado = estado;
@@ -81,10 +84,6 @@ public class Cliente implements Serializable {
 
 	public long getID() {
 		return ID;
-	}
-
-	public void setID(long iD) {
-		ID = iD;
 	}
 
 	public long getIdent() {

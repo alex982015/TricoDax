@@ -10,9 +10,14 @@ import javax.persistence.*;
  *
  */
 
+//@Entity
+//@Table(name="CUENTA")
+//@Inheritance(strategy = InheritanceType.JOINED)
+
 @Entity
-@Table(name="CUENTA")
-@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name="TIPO")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+
 public class Cuenta implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
