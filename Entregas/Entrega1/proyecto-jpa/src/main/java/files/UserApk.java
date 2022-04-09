@@ -22,6 +22,8 @@ public class UserApk implements Serializable {
 	private String password;
 	@Column(name="AUTORIZADO", nullable = false)
 	private boolean autorizado;
+	@Column(name="ADMINISTRATIVO", nullable = false)
+	private boolean administrativo;
 	
 	@OneToOne (mappedBy="usuarioApk")
 	private Indiv personaIndividual;
@@ -81,6 +83,14 @@ public class UserApk implements Serializable {
 		this.personaAutorizada = personaAutorizada;
 	}
 	
+	public boolean isAdministrativo() {
+		return administrativo;
+	}
+
+	public void setAdministrativo(boolean administrativo) {
+		this.administrativo = administrativo;
+	}
+
 /******************HASHCODE AND EQUALS***************************/
 	@Override
 	public int hashCode() {

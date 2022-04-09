@@ -58,7 +58,7 @@ public class Empresa extends Cliente implements Serializable {
 	public void setAutoriz(Map<PersAut, String> autoriz) {
 		this.autoriz = autoriz;
 	}
-
+	
 /******************STRING****************************************/
 	
 	@Override

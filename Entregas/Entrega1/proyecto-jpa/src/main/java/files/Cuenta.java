@@ -26,8 +26,6 @@ public class Cuenta implements Serializable {
 	private long IBAN;
 	@Column(name="SWIFT")
 	private String swift;
-	@ManyToOne
-	private Cliente cliente;
 	@OneToMany(mappedBy = "cuenta")
 	private List<Trans> transacciones;
 	@OneToMany(mappedBy = "transaccion")
@@ -64,14 +62,6 @@ public class Cuenta implements Serializable {
 
 	public void setSwift(String swift) {
 		this.swift = swift;
-	}
-	
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
 	}
 
 	public List<Trans> getTransacciones() {
@@ -114,7 +104,7 @@ public class Cuenta implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Cuenta [IBAN=" + IBAN + ", swift=" + swift + ", cliente=" + cliente + ", transacciones=" + transacciones
+		return "Cuenta [IBAN=" + IBAN + ", swift=" + swift + ", transacciones=" + transacciones
 				+ ", cuenta=" + cuenta + "]";
 	}
 

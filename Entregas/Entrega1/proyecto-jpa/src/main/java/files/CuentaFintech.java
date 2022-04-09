@@ -29,6 +29,9 @@ public class CuentaFintech extends Cuenta implements Serializable {
 	@Column(name="CLASIFICACION")
 	private boolean clasificacion;
 
+	@ManyToOne
+	private Cliente cliente;
+	
 /****************CONSTRUCTORES*************************************/
 
 	public CuentaFintech() {

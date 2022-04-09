@@ -43,7 +43,7 @@ public class Cliente implements Serializable {
 	@Column(name="PAIS", nullable = false) 
 	private String Pais;
 	@OneToMany(mappedBy = "cliente")
-	private List<Cuenta> cuentas;
+	private List<CuentaFintech> cuentas;
 
 /****************CONSTRUCTORES*************************************/
 
@@ -163,11 +163,11 @@ public class Cliente implements Serializable {
 	}
 	
 
-	public List<Cuenta> getCuentas() {
+	public List<CuentaFintech> getCuentas() {
 		return cuentas;
 	}
 
-	public void setCuentas(List<Cuenta> cuentas) {
+	public void setCuentas(List<CuentaFintech> cuentas) {
 		this.cuentas = cuentas;
 	}
 
