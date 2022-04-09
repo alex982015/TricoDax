@@ -41,30 +41,52 @@ public class UserApk implements Serializable {
 
 /***************GETTERS AND SETTERS*******************************/
 
-	public String getUsuario() {
+	public String getUser() {
 		return user;
 	}
-	public void setUsuario(String usuario) {
-		this.user = usuario;
+	
+	public void setUser(String user) {
+		this.user = user;
 	}
-	public String getContraseña() {
+	
+	public String getPassword() {
 		return password;
 	}
-	public void setContraseña(String contraseña) {
-		this.password = contraseña;
+	
+	public void setPassword(String password) {
+		this.password = password;
 	}
+	
 	public boolean isAutorizado() {
 		return autorizado;
 	}
+	
 	public void setAutorizado(boolean autorizado) {
 		this.autorizado = autorizado;
 	}
-
+	
+	public Indiv getPersonaIndividual() {
+		return personaIndividual;
+	}
+	
+	public void setPersonaIndividual(Indiv personaIndividual) {
+		this.personaIndividual = personaIndividual;
+	}
+	
+	public PersAut getPersonaAutorizada() {
+		return personaAutorizada;
+	}
+	
+	public void setPersonaAutorizada(PersAut personaAutorizada) {
+		this.personaAutorizada = personaAutorizada;
+	}
+	
 /******************HASHCODE AND EQUALS***************************/
 	@Override
 	public int hashCode() {
 		return Objects.hash(user);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -76,6 +98,7 @@ public class UserApk implements Serializable {
 		UserApk other = (UserApk) obj;
 		return Objects.equals(user, other.user);
 	}
+	
 /******************STRING****************************************/
 
 	@Override

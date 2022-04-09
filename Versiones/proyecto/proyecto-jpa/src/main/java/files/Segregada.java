@@ -56,8 +56,8 @@ public class Segregada extends CuentaFintech implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Segregada [IBAN=" + super.getIBAN() + ", swift=" + super.getSwift() + ", estado=" + super.getEstado() + ", fecha_Apertura=" + super.getFecha_Apertura()
-		+ ", fecha_Cierre=" + super.getFecha_Cierre() + ", clasificacion=" + super.isClasificacion()  + ", comision=" + comision + ", referenciada=" + referenciada + "]";
+		return "Segregada [IBAN=" + super.getIBAN() + ", swift=" + super.getSwift() + ", estado=" + super.getEstado() + ", fecha_Apertura=" + super.getFechaApertura()
+		+ ", fecha_Cierre=" + super.getFechaCierre() + ", clasificacion=" + super.isClasificacion()  + ", comision=" + comision + ", referenciada=" + referenciada + "]";
 	}
 
 }

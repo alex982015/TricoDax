@@ -59,20 +59,20 @@ public class CuentaFintech extends Cuenta implements Serializable {
 		this.estado = estado;
 	}
 
-	public Date getFecha_Apertura() {
+	public Date getFechaApertura() {
 		return fechaApertura;
 	}
 
-	public void setFecha_Apertura(Date fecha_Apertura) {
-		this.fechaApertura = fecha_Apertura;
+	public void setFechaApertura(Date fechaApertura) {
+		this.fechaApertura = fechaApertura;
 	}
 
-	public Date getFecha_Cierre() {
+	public Date getFechaCierre() {
 		return fechaCierre;
 	}
 
-	public void setFecha_Cierre(Date fecha_Cierre) {
-		this.fechaCierre = fecha_Cierre;
+	public void setFechaCierre(Date fechaCierre) {
+		this.fechaCierre = fechaCierre;
 	}
 
 	public boolean isClasificacion() {
@@ -83,8 +83,10 @@ public class CuentaFintech extends Cuenta implements Serializable {
 		this.clasificacion = clasificacion;
 	}
 
+	
+	
 /******************STRING****************************************/
-
+	
 	@Override
 	public String toString() {
 		return "CuentaFintech [IBAN=" + super.getIBAN() + ", swift=" + super.getSwift() + ", estado=" + estado + ", fecha_Apertura=" + fechaApertura + ", fecha_Cierre="

@@ -73,11 +73,15 @@ public class PersAut implements Serializable {
 	}
 
 /***************GETTERS AND SETTERS*******************************/
-	
+
 	public long getId() {
 		return Id;
 	}
 
+	public void setId(long id) {
+		Id = id;
+	}
+	
 	public String getIdent() {
 		return ident;
 	}

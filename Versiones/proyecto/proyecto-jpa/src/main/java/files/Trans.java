@@ -67,8 +67,12 @@ public class Trans implements Serializable {
 	
 /***************GETTERS AND SETTERS*******************************/
 	
-	public long getID_Unico() {
+	public long getID() {
 		return ID;
+	}
+
+	public void setID(long iD) {
+		ID = iD;
 	}
 	
 	public int getCantidad() {

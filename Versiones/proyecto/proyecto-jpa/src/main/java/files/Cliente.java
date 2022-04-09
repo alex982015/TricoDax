@@ -86,6 +86,10 @@ public class Cliente implements Serializable {
 		return ID;
 	}
 
+	public void setID(long iD) {
+		ID = iD;
+	}
+	
 	public long getIdent() {
 		return Ident;
 	}
