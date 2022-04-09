@@ -1,0 +1,1670 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite tests="1" failures="0" name="es.uma.informatica.sii.ejb.practica.SuiteTest" time="20.323" errors="1" skipped="0">
+  <properties>
+    <property name="jansi.mode" value="strip"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="java.vm.version" value="18+36-2087"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-18\bin"/>
+    <property name="maven.multiModuleProjectDirectory" value="C:\Users\Ismael Verdugo\Downloads\trazabilidad (1)"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="path.separator" value=";"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="user.script" value=""/>
+    <property name="user.country" value="ES"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="C:\Users\Ismael Verdugo\Downloads\trazabilidad (1)"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="java.runtime.version" value="18+36-2087"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.io.tmpdir" value="C:\Users\ISMAEL~1\AppData\Local\Temp\"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="classworlds.conf" value="C:\Users\Ismael Verdugo\eclipse-workspace\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf18060328354414854364.tmp"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-18\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\AutoFirma\AutoFirma;C:\Program Files\Git\cmd;C:\Users\Ismael Verdugo\AppData\Local\Microsoft\WindowsApps;;D:\Microsoft VS Code\bin;."/>
+    <property name="jdk.debug" value="release"/>
+    <property name="java.class.version" value="62.0"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="10.0"/>
+    <property name="user.home" value="C:\Users\Ismael Verdugo"/>
+    <property name="user.timezone" value="Europe/Madrid"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.specification.version" value="18"/>
+    <property name="user.name" value="Ismael Verdugo"/>
+    <property name="java.class.path" value="C:\Users\Ismael Verdugo\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_1.18.3.20220227-1319\jars\plexus-classworlds-2.6.0.jar"/>
+    <property name="java.vm.specification.version" value="18"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -B test"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-18"/>
+    <property name="user.language" value="es"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.version" value="18"/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="maven.home" value="C:\Users\Ismael Verdugo\Downloads\trazabilidad (1)\EMBEDDED"/>
+    <property name="file.separator" value="\"/>
+    <property name="java.version.date" value="2022-03-22"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+  </properties>
+  <testcase classname="es.uma.informatica.sii.ejb.practica.SuiteTest" name="es.uma.informatica.sii.ejb.practica.SuiteTest" time="20.323">
+    <error message="Failed to deploy EJB modules - see log for details" type="javax.ejb.EJBException">javax.ejb.EJBException: Failed to deploy EJB modules - see log for details
+	at org.glassfish.ejb.embedded.EJBContainerImpl.deploy(EJBContainerImpl.java:125)
+	at org.glassfish.ejb.embedded.EJBContainerProviderImpl.createEJBContainer(EJBContainerProviderImpl.java:110)
+	at javax.ejb.embeddable.EJBContainer.createEJBContainer(EJBContainer.java:103)
+	at es.uma.informatica.sii.ejb.practica.SuiteTest.setUpClass(SuiteTest.java:30)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.RunBefores.invokeMethod(RunBefores.java:33)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+</error>
+    <system-out>JdbcRuntimeExtension,  getAllSystemRAResourcesAndPools = [GlassFishConfigBean.org.glassfish.jdbc.config.JdbcResource, GlassFishConfigBean.org.glassfish.jdbc.config.JdbcResource, GlassFishConfigBean.org.glassfish.jdbc.config.JdbcResource, GlassFishConfigBean.org.glassfish.jdbc.config.JdbcConnectionPool, GlassFishConfigBean.org.glassfish.jdbc.config.JdbcConnectionPool, GlassFishConfigBean.org.glassfish.jdbc.config.JdbcConnectionPool]
+JdbcRuntimeExtension,  getAllSystemRAResourcesAndPools = [GlassFishConfigBean.org.glassfish.jdbc.config.JdbcResource, GlassFishConfigBean.org.glassfish.jdbc.config.JdbcResource, GlassFishConfigBean.org.glassfish.jdbc.config.JdbcResource, GlassFishConfigBean.org.glassfish.jdbc.config.JdbcConnectionPool, GlassFishConfigBean.org.glassfish.jdbc.config.JdbcConnectionPool, GlassFishConfigBean.org.glassfish.jdbc.config.JdbcConnectionPool]
+</system-out>
+    <system-err>abr 08, 2022 1:46:57 P. M. org.glassfish.ejb.embedded.EJBContainerProviderImpl getValidFile
+WARNING: EJB6008:Specified or calculated application server instance [C:\Users\Ismael Verdugo\.m2\repository\org\glassfish\main\extras\glassfish-embedded-all\domains\domain1] does not exist.
+abr 08, 2022 1:46:58 P. M. org.glassfish.ejb.embedded.EJBContainerProviderImpl createContainer
+INFO: [EJBContainerProviderImpl] Using config file location: file:/C:/Users/ISMAEL~1/AppData/Local/Temp/domain2326101291347740833xml
+abr 08, 2022 1:46:58 P. M. org.glassfish.ejb.embedded.EJBContainerProviderImpl createContainer
+INFO: [EJBContainerProviderImpl] Using runtime class: class com.sun.enterprise.glassfish.bootstrap.StaticGlassFishRuntime
+abr 08, 2022 1:46:59 P. M. com.sun.enterprise.v3.server.CommonClassLoaderServiceImpl findDerbyClient
+INFO: Cannot find javadb client jar file, derby jdbc driver will not be available by default.
+abr 08, 2022 1:46:59 P. M. org.hibernate.validator.internal.util.Version &lt;clinit&gt;
+INFO: HV000001: Hibernate Validator null
+abr 08, 2022 1:47:00 P. M. org.glassfish.security.services.impl.authorization.AuthorizationServiceImpl initialize
+INFO: Authorization Service has successfully initialized.
+abr 08, 2022 1:47:00 P. M. com.sun.enterprise.security.ssl.impl.SecuritySupportImpl checkCertificateDates
+SEVERE: The SSL certificate has expired: [
+[
+  Version: V3
+  Subject: CN=localhost, OU=GlassFish, O=Sun Microsystems, L=Santa Clara, ST=California, C=US
+  Signature Algorithm: SHA1withRSA, OID = 1.2.840.113549.1.1.5
+
+  Key:  Sun RSA public key, 1024 bits
+  params: null
+  modulus: 145607243452859689580129548866124791697266876389020072346169573106005067922351621693980274409566977123703120560397141987498630922827852965950283535196583826176478163336993643826795231487853960699742178569310586812871660687609669142799497192378661602695305819033929044820179434366507221428988785371476479913059
+  public exponent: 65537
+  Validity: [From: Tue Jul 07 10:27:35 CEST 2009,
+               To: Fri Jul 05 10:27:35 CEST 2019]
+  Issuer: CN=localhost, OU=GlassFish, O=Sun Microsystems, L=Santa Clara, ST=California, C=US
+  SerialNumber: [    4a5306f7]
+
+Certificate Extensions: 1
+[1]: ObjectId: 2.5.29.14 Criticality=false
+SubjectKeyIdentifier [
+KeyIdentifier [
+0000: 8F FB 7A 0A BF 38 54 A6   0D 9D CC 28 F8 7A B2 25  ..z..8T....(.z.%
+0010: F2 F8 A1 99                                        ....
+]
+]
+
+]
+  Algorithm: [SHA1withRSA]
+  Signature:
+0000: 7A 53 96 EE 26 C0 6C 06   A5 68 45 43 49 A8 21 B7  zS..&amp;.l..hECI.!.
+0010: 03 E3 3C 22 97 76 B0 EC   0C F1 11 C9 D7 67 20 CA  ..&lt;&quot;.v.......g .
+0020: E5 0E 29 F8 64 FA C5 5A   FA D9 34 76 39 61 C4 21  ..).d..Z..4v9a.!
+0030: 82 A1 C5 27 D8 B7 B3 1B   6C 95 3B 01 6C C3 15 0F  ...&apos;....l.;.l...
+0040: B4 4D 50 E3 8F E9 CC 96   CC FF 95 2B 61 7C 30 D4  .MP........+a.0.
+0050: B1 00 0F 9E 4C 1B F8 08   DC 4C 30 CC 0E CB FC 92  ....L....L0.....
+0060: B3 C5 D5 F5 01 84 33 40   CA 42 B1 A3 2C 88 89 B9  ......3@.B..,...
+0070: 04 90 F3 2C C5 FA E4 A2   DC 16 17 4A 02 A7 ED 94  ...,.......J....
+
+]
+abr 08, 2022 1:47:00 P. M. com.sun.enterprise.security.ssl.impl.SecuritySupportImpl checkCertificateDates
+SEVERE: The SSL certificate has expired: [
+[
+  Version: V3
+  Subject: CN=localhost, OU=GlassFish, O=Sun Microsystems, L=Santa Clara, ST=California, C=US
+  Signature Algorithm: SHA1withRSA, OID = 1.2.840.113549.1.1.5
+
+  Key:  Sun RSA public key, 1024 bits
+  params: null
+  modulus: 145607243452859689580129548866124791697266876389020072346169573106005067922351621693980274409566977123703120560397141987498630922827852965950283535196583826176478163336993643826795231487853960699742178569310586812871660687609669142799497192378661602695305819033929044820179434366507221428988785371476479913059
+  public exponent: 65537
+  Validity: [From: Tue Jul 07 10:27:35 CEST 2009,
+               To: Fri Jul 05 10:27:35 CEST 2019]
+  Issuer: CN=localhost, OU=GlassFish, O=Sun Microsystems, L=Santa Clara, ST=California, C=US
+  SerialNumber: [    4a5306f7]
+
+Certificate Extensions: 1
+[1]: ObjectId: 2.5.29.14 Criticality=false
+SubjectKeyIdentifier [
+KeyIdentifier [
+0000: 8F FB 7A 0A BF 38 54 A6   0D 9D CC 28 F8 7A B2 25  ..z..8T....(.z.%
+0010: F2 F8 A1 99                                        ....
+]
+]
+
+]
+  Algorithm: [SHA1withRSA]
+  Signature:
+0000: 7A 53 96 EE 26 C0 6C 06   A5 68 45 43 49 A8 21 B7  zS..&amp;.l..hECI.!.
+0010: 03 E3 3C 22 97 76 B0 EC   0C F1 11 C9 D7 67 20 CA  ..&lt;&quot;.v.......g .
+0020: E5 0E 29 F8 64 FA C5 5A   FA D9 34 76 39 61 C4 21  ..).d..Z..4v9a.!
+0030: 82 A1 C5 27 D8 B7 B3 1B   6C 95 3B 01 6C C3 15 0F  ...&apos;....l.;.l...
+0040: B4 4D 50 E3 8F E9 CC 96   CC FF 95 2B 61 7C 30 D4  .MP........+a.0.
+0050: B1 00 0F 9E 4C 1B F8 08   DC 4C 30 CC 0E CB FC 92  ....L....L0.....
+0060: B3 C5 D5 F5 01 84 33 40   CA 42 B1 A3 2C 88 89 B9  ......3@.B..,...
+0070: 04 90 F3 2C C5 FA E4 A2   DC 16 17 4A 02 A7 ED 94  ...,.......J....
+
+]
+abr 08, 2022 1:47:00 P. M. com.sun.enterprise.v3.server.AppServerStartup postStartupJob
+INFO: Undefined Product Name - define product and version info in config/branding  0.0.0  (0) startup time : Embedded (929ms), startup services(1.488ms), total(2.417ms)
+abr 08, 2022 1:47:00 P. M. com.sun.jts.CosTransactions.DefaultTransactionService setServerName
+INFO: JTS5014: Recoverable JTS instance, serverId = [100]
+abr 08, 2022 1:47:01 P. M. org.glassfish.admin.mbeanserver.JMXStartupService$JMXConnectorsStarterThread run
+INFO: JMXStartupService has disabled JMXConnector system
+abr 08, 2022 1:47:01 P. M. com.sun.enterprise.connectors.jms.util.JmsRaUtil getInstalledMqVersion
+WARNING: Check for a new version of MQ installation failed : C:\Users\ISMAEL~1\AppData\Local\Temp\gfembed7383600043111957316tmp\lib\install\applications\jmsra\..\imqjmsra.rar:C:\Users\ISMAEL~1\AppData\Local\Temp\gfembed7383600043111957316tmp\lib\install\applications\jmsra\imqjmsra.rar
+abr 08, 2022 1:47:01 P. M. org.glassfish.ejb.embedded.EJBContainerProviderImpl skipJar
+INFO: ... skipping entry with a Manifest file with a special attribute: glassfish-embedded-all-5.1.0.jar
+abr 08, 2022 1:47:01 P. M. org.glassfish.deployment.common.GenericAnnotationDetector scanArchive
+WARNING: NCLS-DEPLOYMENT-00009
+abr 08, 2022 1:47:01 P. M. org.glassfish.ejb.embedded.DeploymentElement getOrCreateApplication
+INFO: [DeploymentElement] adding EJB module to ScatteredArchive classes
+abr 08, 2022 1:47:01 P. M. org.glassfish.ejb.embedded.DeploymentElement getOrCreateApplication
+INFO: [DeploymentElement] adding library to ScatteredArchive hamcrest-core-1.3.jar
+abr 08, 2022 1:47:01 P. M. org.glassfish.ejb.embedded.DeploymentElement getOrCreateApplication
+INFO: [DeploymentElement] adding library to ScatteredArchive junit-4.13.jar
+abr 08, 2022 1:47:01 P. M. org.glassfish.ejb.embedded.DeploymentElement getOrCreateApplication
+INFO: [DeploymentElement] adding library to ScatteredArchive javaee-api-8.0.jar
+abr 08, 2022 1:47:01 P. M. org.glassfish.ejb.embedded.DeploymentElement getOrCreateApplication
+INFO: [DeploymentElement] adding library to ScatteredArchive activation-1.1.jar
+abr 08, 2022 1:47:01 P. M. org.glassfish.ejb.embedded.DeploymentElement getOrCreateApplication
+INFO: [DeploymentElement] adding library to ScatteredArchive javax.mail-1.6.0.jar
+abr 08, 2022 1:47:01 P. M. org.glassfish.ejb.embedded.DeploymentElement getOrCreateApplication
+INFO: [DeploymentElement] adding library to ScatteredArchive h2-1.4.200.jar
+abr 08, 2022 1:47:01 P. M. org.glassfish.ejb.embedded.DeploymentElement getOrCreateApplication
+INFO: [DeploymentElement] adding library to ScatteredArchive test-classes
+abr 08, 2022 1:47:01 P. M. org.glassfish.ejb.embedded.DeploymentElement getOrCreateApplication
+INFO: [DeploymentElement] adding library to ScatteredArchive classes
+abr 08, 2022 1:47:01 P. M. org.glassfish.ejb.embedded.EJBContainerImpl deploy
+INFO: [EJBContainerImpl] Deploying app: org.glassfish.embeddable.archive.ScatteredArchive@702096ef
+abr 08, 2022 1:47:01 P. M. org.glassfish.ejb.embedded.EJBContainerImpl deploy
+INFO: [EJBContainerImpl] GlassFish status: STARTED
+abr 08, 2022 1:47:01 P. M. org.glassfish.ejb.embedded.EJBContainerImpl deploy
+INFO: [EJBContainerImpl] Deploying as a ScatteredArchive
+abr 08, 2022 1:47:08 P. M. org.glassfish.hk2.classmodel.reflect.Parser$5 on
+SEVERE: Exception while visiting META-INF/versions/10/org/h2/util/NetUtils2.class of size 876
+java.lang.IllegalArgumentException
+	at org.glassfish.hk2.external.org.objectweb.asm.ClassReader.&lt;init&gt;(ClassReader.java:160)
+	at org.glassfish.hk2.external.org.objectweb.asm.ClassReader.&lt;init&gt;(ClassReader.java:143)
+	at org.glassfish.hk2.external.org.objectweb.asm.ClassReader.&lt;init&gt;(ClassReader.java:418)
+	at org.glassfish.hk2.classmodel.reflect.Parser$5.on(Parser.java:335)
+	at com.sun.enterprise.v3.server.ReadableArchiveScannerAdapter.handleEntry(ReadableArchiveScannerAdapter.java:141)
+	at com.sun.enterprise.v3.server.ReadableArchiveScannerAdapter.onSelectedEntries(ReadableArchiveScannerAdapter.java:103)
+	at org.glassfish.hk2.classmodel.reflect.Parser.doJob(Parser.java:321)
+	at org.glassfish.hk2.classmodel.reflect.Parser.access$300(Parser.java:44)
+	at org.glassfish.hk2.classmodel.reflect.Parser$3.call(Parser.java:280)
+	at org.glassfish.hk2.classmodel.reflect.Parser$3.call(Parser.java:269)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+
+abr 08, 2022 1:47:10 P. M. com.sun.enterprise.security.SecurityLifecycle &lt;init&gt;
+INFO: Java security manager is disabled.
+abr 08, 2022 1:47:10 P. M. com.sun.enterprise.security.SecurityLifecycle onInitialization
+INFO: Entering Security Startup Service.
+abr 08, 2022 1:47:10 P. M. com.sun.enterprise.security.PolicyLoader loadPolicy
+INFO: Loading policy provider com.sun.enterprise.security.jacc.provider.SimplePolicyProvider.
+abr 08, 2022 1:47:10 P. M. com.sun.enterprise.security.auth.realm.Realm doInstantiate
+INFO: Realm [admin-realm] of classtype [com.sun.enterprise.security.auth.realm.file.FileRealm] successfully created.
+abr 08, 2022 1:47:10 P. M. com.sun.enterprise.security.auth.realm.Realm doInstantiate
+INFO: Realm [file] of classtype [com.sun.enterprise.security.auth.realm.file.FileRealm] successfully created.
+abr 08, 2022 1:47:10 P. M. com.sun.enterprise.security.auth.realm.Realm doInstantiate
+INFO: Realm [certificate] of classtype [com.sun.enterprise.security.auth.realm.certificate.CertificateRealm] successfully created.
+abr 08, 2022 1:47:10 P. M. com.sun.enterprise.security.SecurityLifecycle onInitialization
+INFO: Security Service(s) started successfully.
+abr 08, 2022 1:47:13 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad.metadata
+SEVERE: The java.lang.Object class was compiled with an unsupported JDK. Report this error to the EclipseLink open source project.
+java.lang.IllegalArgumentException: Unsupported class file major version 62
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:184)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:166)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:152)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:273)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAsmFactory.buildClassMetadata(MetadataAsmFactory.java:106)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAsmFactory.getMetadataClass(MetadataAsmFactory.java:177)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAccessibleObject.getMetadataClass(MetadataAccessibleObject.java:73)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataClass.getSuperclass(MetadataClass.java:405)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.processParentClass(ClassAccessor.java:1695)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProject.addAccessor(MetadataProject.java:421)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProject.addEntityAccessor(MetadataProject.java:525)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProcessor.initPersistenceUnitClasses(MetadataProcessor.java:372)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProcessor.processEntityMappings(MetadataProcessor.java:563)
+	at org.eclipse.persistence.internal.jpa.deployment.PersistenceUnitProcessor.processORMetadata(PersistenceUnitProcessor.java:625)
+	at org.eclipse.persistence.internal.jpa.EntityManagerSetupImpl.predeploy(EntityManagerSetupImpl.java:2003)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createContainerEntityManagerFactoryImpl(PersistenceProvider.java:350)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createContainerEntityManagerFactory(PersistenceProvider.java:316)
+	at org.glassfish.persistence.jpa.PersistenceUnitLoader.loadPU(PersistenceUnitLoader.java:175)
+	at org.glassfish.persistence.jpa.PersistenceUnitLoader.&lt;init&gt;(PersistenceUnitLoader.java:83)
+	at org.glassfish.persistence.jpa.JPADeployer$1.visitPUD(JPADeployer.java:199)
+	at org.glassfish.persistence.jpa.JPADeployer$PersistenceUnitDescriptorIterator.iteratePUDs(JPADeployer.java:486)
+	at org.glassfish.persistence.jpa.JPADeployer.createEMFs(JPADeployer.java:206)
+	at org.glassfish.persistence.jpa.JPADeployer.prepare(JPADeployer.java:144)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.prepareModule(ApplicationLifecycle.java:901)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:410)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:195)
+	at org.glassfish.deployment.admin.DeployCommand.execute(DeployCommand.java:467)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:516)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:512)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2.execute(CommandRunnerImpl.java:511)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:542)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:534)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:533)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:1441)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.access$1300(CommandRunnerImpl.java:86)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1823)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1699)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:109)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:85)
+	at org.glassfish.ejb.embedded.EJBContainerImpl.deploy(EJBContainerImpl.java:114)
+	at org.glassfish.ejb.embedded.EJBContainerProviderImpl.createEJBContainer(EJBContainerProviderImpl.java:110)
+	at javax.ejb.embeddable.EJBContainer.createEJBContainer(EJBContainer.java:103)
+	at es.uma.informatica.sii.ejb.practica.SuiteTest.setUpClass(SuiteTest.java:30)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.RunBefores.invokeMethod(RunBefores.java:33)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+
+abr 08, 2022 1:47:13 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad.metadata
+SEVERE: The java.lang.Object class was compiled with an unsupported JDK. Report this error to the EclipseLink open source project.
+java.lang.ArrayIndexOutOfBoundsException: Index 8 out of bounds for length 0
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.readUnsignedShort(ClassReader.java:3353)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:188)
+	at org.eclipse.persistence.internal.libraries.asm.EclipseLinkClassReader.&lt;init&gt;(EclipseLinkClassReader.java:32)
+	at org.eclipse.persistence.internal.libraries.asm.EclipseLinkClassReader.&lt;init&gt;(EclipseLinkClassReader.java:28)
+	at org.eclipse.persistence.internal.libraries.asm.EclipseLinkClassReader.&lt;init&gt;(EclipseLinkClassReader.java:24)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAsmFactory.buildClassMetadata(MetadataAsmFactory.java:123)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAsmFactory.getMetadataClass(MetadataAsmFactory.java:177)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAccessibleObject.getMetadataClass(MetadataAccessibleObject.java:73)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataClass.getSuperclass(MetadataClass.java:405)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.processParentClass(ClassAccessor.java:1695)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProject.addAccessor(MetadataProject.java:421)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProject.addEntityAccessor(MetadataProject.java:525)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProcessor.initPersistenceUnitClasses(MetadataProcessor.java:372)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProcessor.processEntityMappings(MetadataProcessor.java:563)
+	at org.eclipse.persistence.internal.jpa.deployment.PersistenceUnitProcessor.processORMetadata(PersistenceUnitProcessor.java:625)
+	at org.eclipse.persistence.internal.jpa.EntityManagerSetupImpl.predeploy(EntityManagerSetupImpl.java:2003)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createContainerEntityManagerFactoryImpl(PersistenceProvider.java:350)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createContainerEntityManagerFactory(PersistenceProvider.java:316)
+	at org.glassfish.persistence.jpa.PersistenceUnitLoader.loadPU(PersistenceUnitLoader.java:175)
+	at org.glassfish.persistence.jpa.PersistenceUnitLoader.&lt;init&gt;(PersistenceUnitLoader.java:83)
+	at org.glassfish.persistence.jpa.JPADeployer$1.visitPUD(JPADeployer.java:199)
+	at org.glassfish.persistence.jpa.JPADeployer$PersistenceUnitDescriptorIterator.iteratePUDs(JPADeployer.java:486)
+	at org.glassfish.persistence.jpa.JPADeployer.createEMFs(JPADeployer.java:206)
+	at org.glassfish.persistence.jpa.JPADeployer.prepare(JPADeployer.java:144)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.prepareModule(ApplicationLifecycle.java:901)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:410)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:195)
+	at org.glassfish.deployment.admin.DeployCommand.execute(DeployCommand.java:467)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:516)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:512)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2.execute(CommandRunnerImpl.java:511)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:542)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:534)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:533)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:1441)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.access$1300(CommandRunnerImpl.java:86)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1823)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1699)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:109)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:85)
+	at org.glassfish.ejb.embedded.EJBContainerImpl.deploy(EJBContainerImpl.java:114)
+	at org.glassfish.ejb.embedded.EJBContainerProviderImpl.createEJBContainer(EJBContainerProviderImpl.java:110)
+	at javax.ejb.embeddable.EJBContainer.createEJBContainer(EJBContainer.java:103)
+	at es.uma.informatica.sii.ejb.practica.SuiteTest.setUpClass(SuiteTest.java:30)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.RunBefores.invokeMethod(RunBefores.java:33)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+
+abr 08, 2022 1:47:13 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad.metadata
+SEVERE: The javax.transaction.xa.XAException class was compiled with an unsupported JDK. Report this error to the EclipseLink open source project.
+java.lang.IllegalArgumentException: Unsupported class file major version 62
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:184)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:166)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:152)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:273)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAsmFactory.buildClassMetadata(MetadataAsmFactory.java:106)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAsmFactory.getMetadataClass(MetadataAsmFactory.java:177)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProcessor.initPersistenceUnitClasses(MetadataProcessor.java:367)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProcessor.processEntityMappings(MetadataProcessor.java:563)
+	at org.eclipse.persistence.internal.jpa.deployment.PersistenceUnitProcessor.processORMetadata(PersistenceUnitProcessor.java:625)
+	at org.eclipse.persistence.internal.jpa.EntityManagerSetupImpl.predeploy(EntityManagerSetupImpl.java:2003)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createContainerEntityManagerFactoryImpl(PersistenceProvider.java:350)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createContainerEntityManagerFactory(PersistenceProvider.java:316)
+	at org.glassfish.persistence.jpa.PersistenceUnitLoader.loadPU(PersistenceUnitLoader.java:175)
+	at org.glassfish.persistence.jpa.PersistenceUnitLoader.&lt;init&gt;(PersistenceUnitLoader.java:83)
+	at org.glassfish.persistence.jpa.JPADeployer$1.visitPUD(JPADeployer.java:199)
+	at org.glassfish.persistence.jpa.JPADeployer$PersistenceUnitDescriptorIterator.iteratePUDs(JPADeployer.java:486)
+	at org.glassfish.persistence.jpa.JPADeployer.createEMFs(JPADeployer.java:206)
+	at org.glassfish.persistence.jpa.JPADeployer.prepare(JPADeployer.java:144)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.prepareModule(ApplicationLifecycle.java:901)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:410)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:195)
+	at org.glassfish.deployment.admin.DeployCommand.execute(DeployCommand.java:467)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:516)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:512)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2.execute(CommandRunnerImpl.java:511)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:542)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:534)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:533)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:1441)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.access$1300(CommandRunnerImpl.java:86)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1823)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1699)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:109)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:85)
+	at org.glassfish.ejb.embedded.EJBContainerImpl.deploy(EJBContainerImpl.java:114)
+	at org.glassfish.ejb.embedded.EJBContainerProviderImpl.createEJBContainer(EJBContainerProviderImpl.java:110)
+	at javax.ejb.embeddable.EJBContainer.createEJBContainer(EJBContainer.java:103)
+	at es.uma.informatica.sii.ejb.practica.SuiteTest.setUpClass(SuiteTest.java:30)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.RunBefores.invokeMethod(RunBefores.java:33)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+
+abr 08, 2022 1:47:13 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad.metadata
+SEVERE: The javax.transaction.xa.XAException class was compiled with an unsupported JDK. Report this error to the EclipseLink open source project.
+java.lang.ArrayIndexOutOfBoundsException
+
+abr 08, 2022 1:47:13 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad.metadata
+SEVERE: The javax.transaction.xa.XAResource class was compiled with an unsupported JDK. Report this error to the EclipseLink open source project.
+java.lang.IllegalArgumentException: Unsupported class file major version 62
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:184)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:166)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:152)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:273)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAsmFactory.buildClassMetadata(MetadataAsmFactory.java:106)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAsmFactory.getMetadataClass(MetadataAsmFactory.java:177)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProcessor.initPersistenceUnitClasses(MetadataProcessor.java:367)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProcessor.processEntityMappings(MetadataProcessor.java:563)
+	at org.eclipse.persistence.internal.jpa.deployment.PersistenceUnitProcessor.processORMetadata(PersistenceUnitProcessor.java:625)
+	at org.eclipse.persistence.internal.jpa.EntityManagerSetupImpl.predeploy(EntityManagerSetupImpl.java:2003)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createContainerEntityManagerFactoryImpl(PersistenceProvider.java:350)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createContainerEntityManagerFactory(PersistenceProvider.java:316)
+	at org.glassfish.persistence.jpa.PersistenceUnitLoader.loadPU(PersistenceUnitLoader.java:175)
+	at org.glassfish.persistence.jpa.PersistenceUnitLoader.&lt;init&gt;(PersistenceUnitLoader.java:83)
+	at org.glassfish.persistence.jpa.JPADeployer$1.visitPUD(JPADeployer.java:199)
+	at org.glassfish.persistence.jpa.JPADeployer$PersistenceUnitDescriptorIterator.iteratePUDs(JPADeployer.java:486)
+	at org.glassfish.persistence.jpa.JPADeployer.createEMFs(JPADeployer.java:206)
+	at org.glassfish.persistence.jpa.JPADeployer.prepare(JPADeployer.java:144)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.prepareModule(ApplicationLifecycle.java:901)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:410)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:195)
+	at org.glassfish.deployment.admin.DeployCommand.execute(DeployCommand.java:467)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:516)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:512)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2.execute(CommandRunnerImpl.java:511)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:542)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:534)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:533)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:1441)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.access$1300(CommandRunnerImpl.java:86)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1823)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1699)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:109)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:85)
+	at org.glassfish.ejb.embedded.EJBContainerImpl.deploy(EJBContainerImpl.java:114)
+	at org.glassfish.ejb.embedded.EJBContainerProviderImpl.createEJBContainer(EJBContainerProviderImpl.java:110)
+	at javax.ejb.embeddable.EJBContainer.createEJBContainer(EJBContainer.java:103)
+	at es.uma.informatica.sii.ejb.practica.SuiteTest.setUpClass(SuiteTest.java:30)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.RunBefores.invokeMethod(RunBefores.java:33)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+
+abr 08, 2022 1:47:13 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad.metadata
+SEVERE: The javax.transaction.xa.XAResource class was compiled with an unsupported JDK. Report this error to the EclipseLink open source project.
+java.lang.ArrayIndexOutOfBoundsException
+
+abr 08, 2022 1:47:13 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad.metadata
+SEVERE: The javax.transaction.xa.Xid class was compiled with an unsupported JDK. Report this error to the EclipseLink open source project.
+java.lang.IllegalArgumentException: Unsupported class file major version 62
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:184)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:166)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:152)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:273)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAsmFactory.buildClassMetadata(MetadataAsmFactory.java:106)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAsmFactory.getMetadataClass(MetadataAsmFactory.java:177)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProcessor.initPersistenceUnitClasses(MetadataProcessor.java:367)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProcessor.processEntityMappings(MetadataProcessor.java:563)
+	at org.eclipse.persistence.internal.jpa.deployment.PersistenceUnitProcessor.processORMetadata(PersistenceUnitProcessor.java:625)
+	at org.eclipse.persistence.internal.jpa.EntityManagerSetupImpl.predeploy(EntityManagerSetupImpl.java:2003)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createContainerEntityManagerFactoryImpl(PersistenceProvider.java:350)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createContainerEntityManagerFactory(PersistenceProvider.java:316)
+	at org.glassfish.persistence.jpa.PersistenceUnitLoader.loadPU(PersistenceUnitLoader.java:175)
+	at org.glassfish.persistence.jpa.PersistenceUnitLoader.&lt;init&gt;(PersistenceUnitLoader.java:83)
+	at org.glassfish.persistence.jpa.JPADeployer$1.visitPUD(JPADeployer.java:199)
+	at org.glassfish.persistence.jpa.JPADeployer$PersistenceUnitDescriptorIterator.iteratePUDs(JPADeployer.java:486)
+	at org.glassfish.persistence.jpa.JPADeployer.createEMFs(JPADeployer.java:206)
+	at org.glassfish.persistence.jpa.JPADeployer.prepare(JPADeployer.java:144)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.prepareModule(ApplicationLifecycle.java:901)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:410)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:195)
+	at org.glassfish.deployment.admin.DeployCommand.execute(DeployCommand.java:467)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:516)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:512)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2.execute(CommandRunnerImpl.java:511)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:542)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:534)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:533)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:1441)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.access$1300(CommandRunnerImpl.java:86)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1823)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1699)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:109)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:85)
+	at org.glassfish.ejb.embedded.EJBContainerImpl.deploy(EJBContainerImpl.java:114)
+	at org.glassfish.ejb.embedded.EJBContainerProviderImpl.createEJBContainer(EJBContainerProviderImpl.java:110)
+	at javax.ejb.embeddable.EJBContainer.createEJBContainer(EJBContainer.java:103)
+	at es.uma.informatica.sii.ejb.practica.SuiteTest.setUpClass(SuiteTest.java:30)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.RunBefores.invokeMethod(RunBefores.java:33)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+
+abr 08, 2022 1:47:13 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad.metadata
+SEVERE: The javax.transaction.xa.Xid class was compiled with an unsupported JDK. Report this error to the EclipseLink open source project.
+java.lang.ArrayIndexOutOfBoundsException
+
+abr 08, 2022 1:47:14 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad.metadata
+SEVERE: The java.lang.String class was compiled with an unsupported JDK. Report this error to the EclipseLink open source project.
+java.lang.IllegalArgumentException: Unsupported class file major version 62
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:184)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:166)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:152)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:273)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAsmFactory.buildClassMetadata(MetadataAsmFactory.java:106)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAsmFactory.getMetadataClass(MetadataAsmFactory.java:177)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAccessibleObject.getMetadataClass(MetadataAccessibleObject.java:73)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAnnotatedElement.getRawClass(MetadataAnnotatedElement.java:367)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAnnotatedElement.isOneToOne(MetadataAnnotatedElement.java:712)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAnnotatedElement.isDerivedId(MetadataAnnotatedElement.java:603)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.buildAccessor(ClassAccessor.java:591)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.addAccessorFields(ClassAccessor.java:438)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.addAccessors(ClassAccessor.java:410)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.preProcess(ClassAccessor.java:1225)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.MappedSuperclassAccessor.preProcess(MappedSuperclassAccessor.java:751)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.EntityAccessor.preProcess(EntityAccessor.java:621)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProject.processStage1(MetadataProject.java:1826)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProcessor.processORMMetadata(MetadataProcessor.java:579)
+	at org.eclipse.persistence.internal.jpa.deployment.PersistenceUnitProcessor.processORMetadata(PersistenceUnitProcessor.java:629)
+	at org.eclipse.persistence.internal.jpa.EntityManagerSetupImpl.predeploy(EntityManagerSetupImpl.java:2003)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createContainerEntityManagerFactoryImpl(PersistenceProvider.java:350)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createContainerEntityManagerFactory(PersistenceProvider.java:316)
+	at org.glassfish.persistence.jpa.PersistenceUnitLoader.loadPU(PersistenceUnitLoader.java:175)
+	at org.glassfish.persistence.jpa.PersistenceUnitLoader.&lt;init&gt;(PersistenceUnitLoader.java:83)
+	at org.glassfish.persistence.jpa.JPADeployer$1.visitPUD(JPADeployer.java:199)
+	at org.glassfish.persistence.jpa.JPADeployer$PersistenceUnitDescriptorIterator.iteratePUDs(JPADeployer.java:486)
+	at org.glassfish.persistence.jpa.JPADeployer.createEMFs(JPADeployer.java:206)
+	at org.glassfish.persistence.jpa.JPADeployer.prepare(JPADeployer.java:144)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.prepareModule(ApplicationLifecycle.java:901)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:410)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:195)
+	at org.glassfish.deployment.admin.DeployCommand.execute(DeployCommand.java:467)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:516)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:512)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2.execute(CommandRunnerImpl.java:511)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:542)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:534)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:533)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:1441)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.access$1300(CommandRunnerImpl.java:86)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1823)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1699)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:109)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:85)
+	at org.glassfish.ejb.embedded.EJBContainerImpl.deploy(EJBContainerImpl.java:114)
+	at org.glassfish.ejb.embedded.EJBContainerProviderImpl.createEJBContainer(EJBContainerProviderImpl.java:110)
+	at javax.ejb.embeddable.EJBContainer.createEJBContainer(EJBContainer.java:103)
+	at es.uma.informatica.sii.ejb.practica.SuiteTest.setUpClass(SuiteTest.java:30)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.RunBefores.invokeMethod(RunBefores.java:33)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+
+abr 08, 2022 1:47:14 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad.metadata
+SEVERE: The java.lang.String class was compiled with an unsupported JDK. Report this error to the EclipseLink open source project.
+java.lang.ArrayIndexOutOfBoundsException
+
+abr 08, 2022 1:47:14 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad.metadata
+SEVERE: The java.util.Set class was compiled with an unsupported JDK. Report this error to the EclipseLink open source project.
+java.lang.IllegalArgumentException: Unsupported class file major version 62
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:184)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:166)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:152)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:273)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAsmFactory.buildClassMetadata(MetadataAsmFactory.java:106)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAsmFactory.getMetadataClass(MetadataAsmFactory.java:177)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAccessibleObject.getMetadataClass(MetadataAccessibleObject.java:73)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAnnotatedElement.getRawClass(MetadataAnnotatedElement.java:367)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAnnotatedElement.isEmbedded(MetadataAnnotatedElement.java:630)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.buildAccessor(ClassAccessor.java:599)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.addAccessorFields(ClassAccessor.java:438)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.addAccessors(ClassAccessor.java:410)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.preProcess(ClassAccessor.java:1225)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.MappedSuperclassAccessor.preProcess(MappedSuperclassAccessor.java:751)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.EntityAccessor.preProcess(EntityAccessor.java:621)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProject.processStage1(MetadataProject.java:1826)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProcessor.processORMMetadata(MetadataProcessor.java:579)
+	at org.eclipse.persistence.internal.jpa.deployment.PersistenceUnitProcessor.processORMetadata(PersistenceUnitProcessor.java:629)
+	at org.eclipse.persistence.internal.jpa.EntityManagerSetupImpl.predeploy(EntityManagerSetupImpl.java:2003)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createContainerEntityManagerFactoryImpl(PersistenceProvider.java:350)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createContainerEntityManagerFactory(PersistenceProvider.java:316)
+	at org.glassfish.persistence.jpa.PersistenceUnitLoader.loadPU(PersistenceUnitLoader.java:175)
+	at org.glassfish.persistence.jpa.PersistenceUnitLoader.&lt;init&gt;(PersistenceUnitLoader.java:83)
+	at org.glassfish.persistence.jpa.JPADeployer$1.visitPUD(JPADeployer.java:199)
+	at org.glassfish.persistence.jpa.JPADeployer$PersistenceUnitDescriptorIterator.iteratePUDs(JPADeployer.java:486)
+	at org.glassfish.persistence.jpa.JPADeployer.createEMFs(JPADeployer.java:206)
+	at org.glassfish.persistence.jpa.JPADeployer.prepare(JPADeployer.java:144)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.prepareModule(ApplicationLifecycle.java:901)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:410)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:195)
+	at org.glassfish.deployment.admin.DeployCommand.execute(DeployCommand.java:467)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:516)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:512)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2.execute(CommandRunnerImpl.java:511)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:542)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:534)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:533)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:1441)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.access$1300(CommandRunnerImpl.java:86)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1823)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1699)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:109)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:85)
+	at org.glassfish.ejb.embedded.EJBContainerImpl.deploy(EJBContainerImpl.java:114)
+	at org.glassfish.ejb.embedded.EJBContainerProviderImpl.createEJBContainer(EJBContainerProviderImpl.java:110)
+	at javax.ejb.embeddable.EJBContainer.createEJBContainer(EJBContainer.java:103)
+	at es.uma.informatica.sii.ejb.practica.SuiteTest.setUpClass(SuiteTest.java:30)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.RunBefores.invokeMethod(RunBefores.java:33)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+
+abr 08, 2022 1:47:14 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad.metadata
+SEVERE: The java.util.Set class was compiled with an unsupported JDK. Report this error to the EclipseLink open source project.
+java.lang.ArrayIndexOutOfBoundsException
+
+abr 08, 2022 1:47:14 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad.metadata
+SEVERE: The java.util.Collection class was compiled with an unsupported JDK. Report this error to the EclipseLink open source project.
+java.lang.IllegalArgumentException: Unsupported class file major version 62
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:184)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:166)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:152)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:273)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAsmFactory.buildClassMetadata(MetadataAsmFactory.java:106)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAsmFactory.getMetadataClass(MetadataAsmFactory.java:177)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAccessibleObject.getMetadataClass(MetadataAccessibleObject.java:73)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataClass.extendsInterface(MetadataClass.java:223)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataClass.extendsInterface(MetadataClass.java:202)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataClass.isMap(MetadataClass.java:514)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAnnotatedElement.isSupportedMapClass(MetadataAnnotatedElement.java:746)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.mappings.MappingAccessor.isMapAccessor(MappingAccessor.java:1312)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.mappings.MappingAccessor.isMappedKeyMapAccessor(MappingAccessor.java:1325)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.addAccessor(ClassAccessor.java:304)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.addAccessorFields(ClassAccessor.java:438)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.addAccessors(ClassAccessor.java:410)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.preProcess(ClassAccessor.java:1225)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.MappedSuperclassAccessor.preProcess(MappedSuperclassAccessor.java:751)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.EntityAccessor.preProcess(EntityAccessor.java:621)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProject.processStage1(MetadataProject.java:1826)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProcessor.processORMMetadata(MetadataProcessor.java:579)
+	at org.eclipse.persistence.internal.jpa.deployment.PersistenceUnitProcessor.processORMetadata(PersistenceUnitProcessor.java:629)
+	at org.eclipse.persistence.internal.jpa.EntityManagerSetupImpl.predeploy(EntityManagerSetupImpl.java:2003)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createContainerEntityManagerFactoryImpl(PersistenceProvider.java:350)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createContainerEntityManagerFactory(PersistenceProvider.java:316)
+	at org.glassfish.persistence.jpa.PersistenceUnitLoader.loadPU(PersistenceUnitLoader.java:175)
+	at org.glassfish.persistence.jpa.PersistenceUnitLoader.&lt;init&gt;(PersistenceUnitLoader.java:83)
+	at org.glassfish.persistence.jpa.JPADeployer$1.visitPUD(JPADeployer.java:199)
+	at org.glassfish.persistence.jpa.JPADeployer$PersistenceUnitDescriptorIterator.iteratePUDs(JPADeployer.java:486)
+	at org.glassfish.persistence.jpa.JPADeployer.createEMFs(JPADeployer.java:206)
+	at org.glassfish.persistence.jpa.JPADeployer.prepare(JPADeployer.java:144)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.prepareModule(ApplicationLifecycle.java:901)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:410)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:195)
+	at org.glassfish.deployment.admin.DeployCommand.execute(DeployCommand.java:467)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:516)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:512)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2.execute(CommandRunnerImpl.java:511)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:542)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:534)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:533)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:1441)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.access$1300(CommandRunnerImpl.java:86)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1823)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1699)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:109)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:85)
+	at org.glassfish.ejb.embedded.EJBContainerImpl.deploy(EJBContainerImpl.java:114)
+	at org.glassfish.ejb.embedded.EJBContainerProviderImpl.createEJBContainer(EJBContainerProviderImpl.java:110)
+	at javax.ejb.embeddable.EJBContainer.createEJBContainer(EJBContainer.java:103)
+	at es.uma.informatica.sii.ejb.practica.SuiteTest.setUpClass(SuiteTest.java:30)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.RunBefores.invokeMethod(RunBefores.java:33)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+
+abr 08, 2022 1:47:14 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad.metadata
+SEVERE: The java.util.Collection class was compiled with an unsupported JDK. Report this error to the EclipseLink open source project.
+java.lang.ArrayIndexOutOfBoundsException
+
+abr 08, 2022 1:47:14 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad.metadata
+SEVERE: The java.lang.Iterable class was compiled with an unsupported JDK. Report this error to the EclipseLink open source project.
+java.lang.IllegalArgumentException: Unsupported class file major version 62
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:184)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:166)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:152)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:273)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAsmFactory.buildClassMetadata(MetadataAsmFactory.java:106)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAsmFactory.getMetadataClass(MetadataAsmFactory.java:177)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAccessibleObject.getMetadataClass(MetadataAccessibleObject.java:73)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataClass.extendsInterface(MetadataClass.java:223)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataClass.extendsInterface(MetadataClass.java:223)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataClass.extendsInterface(MetadataClass.java:202)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataClass.isMap(MetadataClass.java:514)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAnnotatedElement.isSupportedMapClass(MetadataAnnotatedElement.java:746)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.mappings.MappingAccessor.isMapAccessor(MappingAccessor.java:1312)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.mappings.MappingAccessor.isMappedKeyMapAccessor(MappingAccessor.java:1325)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.addAccessor(ClassAccessor.java:304)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.addAccessorFields(ClassAccessor.java:438)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.addAccessors(ClassAccessor.java:410)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.preProcess(ClassAccessor.java:1225)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.MappedSuperclassAccessor.preProcess(MappedSuperclassAccessor.java:751)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.EntityAccessor.preProcess(EntityAccessor.java:621)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProject.processStage1(MetadataProject.java:1826)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProcessor.processORMMetadata(MetadataProcessor.java:579)
+	at org.eclipse.persistence.internal.jpa.deployment.PersistenceUnitProcessor.processORMetadata(PersistenceUnitProcessor.java:629)
+	at org.eclipse.persistence.internal.jpa.EntityManagerSetupImpl.predeploy(EntityManagerSetupImpl.java:2003)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createContainerEntityManagerFactoryImpl(PersistenceProvider.java:350)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createContainerEntityManagerFactory(PersistenceProvider.java:316)
+	at org.glassfish.persistence.jpa.PersistenceUnitLoader.loadPU(PersistenceUnitLoader.java:175)
+	at org.glassfish.persistence.jpa.PersistenceUnitLoader.&lt;init&gt;(PersistenceUnitLoader.java:83)
+	at org.glassfish.persistence.jpa.JPADeployer$1.visitPUD(JPADeployer.java:199)
+	at org.glassfish.persistence.jpa.JPADeployer$PersistenceUnitDescriptorIterator.iteratePUDs(JPADeployer.java:486)
+	at org.glassfish.persistence.jpa.JPADeployer.createEMFs(JPADeployer.java:206)
+	at org.glassfish.persistence.jpa.JPADeployer.prepare(JPADeployer.java:144)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.prepareModule(ApplicationLifecycle.java:901)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:410)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:195)
+	at org.glassfish.deployment.admin.DeployCommand.execute(DeployCommand.java:467)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:516)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:512)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2.execute(CommandRunnerImpl.java:511)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:542)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:534)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:533)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:1441)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.access$1300(CommandRunnerImpl.java:86)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1823)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1699)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:109)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:85)
+	at org.glassfish.ejb.embedded.EJBContainerImpl.deploy(EJBContainerImpl.java:114)
+	at org.glassfish.ejb.embedded.EJBContainerProviderImpl.createEJBContainer(EJBContainerProviderImpl.java:110)
+	at javax.ejb.embeddable.EJBContainer.createEJBContainer(EJBContainer.java:103)
+	at es.uma.informatica.sii.ejb.practica.SuiteTest.setUpClass(SuiteTest.java:30)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.RunBefores.invokeMethod(RunBefores.java:33)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+
+abr 08, 2022 1:47:14 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad.metadata
+SEVERE: The java.lang.Iterable class was compiled with an unsupported JDK. Report this error to the EclipseLink open source project.
+java.lang.ArrayIndexOutOfBoundsException
+
+abr 08, 2022 1:47:14 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad.metadata
+SEVERE: The java.sql.Date class was compiled with an unsupported JDK. Report this error to the EclipseLink open source project.
+java.lang.IllegalArgumentException: Unsupported class file major version 62
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:184)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:166)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:152)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:273)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAsmFactory.buildClassMetadata(MetadataAsmFactory.java:106)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAsmFactory.getMetadataClass(MetadataAsmFactory.java:177)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAccessibleObject.getMetadataClass(MetadataAccessibleObject.java:73)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAnnotatedElement.getRawClass(MetadataAnnotatedElement.java:367)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAnnotatedElement.isEmbedded(MetadataAnnotatedElement.java:630)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.buildAccessor(ClassAccessor.java:599)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.addAccessorFields(ClassAccessor.java:438)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.addAccessors(ClassAccessor.java:410)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.preProcess(ClassAccessor.java:1225)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.MappedSuperclassAccessor.preProcess(MappedSuperclassAccessor.java:751)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.EntityAccessor.preProcess(EntityAccessor.java:621)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProject.processStage1(MetadataProject.java:1826)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProcessor.processORMMetadata(MetadataProcessor.java:579)
+	at org.eclipse.persistence.internal.jpa.deployment.PersistenceUnitProcessor.processORMetadata(PersistenceUnitProcessor.java:629)
+	at org.eclipse.persistence.internal.jpa.EntityManagerSetupImpl.predeploy(EntityManagerSetupImpl.java:2003)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createContainerEntityManagerFactoryImpl(PersistenceProvider.java:350)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createContainerEntityManagerFactory(PersistenceProvider.java:316)
+	at org.glassfish.persistence.jpa.PersistenceUnitLoader.loadPU(PersistenceUnitLoader.java:175)
+	at org.glassfish.persistence.jpa.PersistenceUnitLoader.&lt;init&gt;(PersistenceUnitLoader.java:83)
+	at org.glassfish.persistence.jpa.JPADeployer$1.visitPUD(JPADeployer.java:199)
+	at org.glassfish.persistence.jpa.JPADeployer$PersistenceUnitDescriptorIterator.iteratePUDs(JPADeployer.java:486)
+	at org.glassfish.persistence.jpa.JPADeployer.createEMFs(JPADeployer.java:206)
+	at org.glassfish.persistence.jpa.JPADeployer.prepare(JPADeployer.java:144)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.prepareModule(ApplicationLifecycle.java:901)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:410)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:195)
+	at org.glassfish.deployment.admin.DeployCommand.execute(DeployCommand.java:467)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:516)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:512)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2.execute(CommandRunnerImpl.java:511)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:542)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:534)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:533)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:1441)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.access$1300(CommandRunnerImpl.java:86)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1823)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1699)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:109)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:85)
+	at org.glassfish.ejb.embedded.EJBContainerImpl.deploy(EJBContainerImpl.java:114)
+	at org.glassfish.ejb.embedded.EJBContainerProviderImpl.createEJBContainer(EJBContainerProviderImpl.java:110)
+	at javax.ejb.embeddable.EJBContainer.createEJBContainer(EJBContainer.java:103)
+	at es.uma.informatica.sii.ejb.practica.SuiteTest.setUpClass(SuiteTest.java:30)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.RunBefores.invokeMethod(RunBefores.java:33)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+
+abr 08, 2022 1:47:14 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad.metadata
+SEVERE: The java.sql.Date class was compiled with an unsupported JDK. Report this error to the EclipseLink open source project.
+java.lang.ArrayIndexOutOfBoundsException
+
+abr 08, 2022 1:47:14 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad.metadata
+SEVERE: The java.util.Map class was compiled with an unsupported JDK. Report this error to the EclipseLink open source project.
+java.lang.IllegalArgumentException: Unsupported class file major version 62
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:184)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:166)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:152)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:273)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAsmFactory.buildClassMetadata(MetadataAsmFactory.java:106)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAsmFactory.getMetadataClass(MetadataAsmFactory.java:177)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAccessibleObject.getMetadataClass(MetadataAccessibleObject.java:73)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAnnotatedElement.getReferenceClassFromGeneric(MetadataAnnotatedElement.java:425)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.mappings.MappingAccessor.getReferenceClassFromGeneric(MappingAccessor.java:1005)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.mappings.ElementCollectionAccessor.getReferenceClass(ElementCollectionAccessor.java:688)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.addAccessor(ClassAccessor.java:300)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.addAccessorFields(ClassAccessor.java:438)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.addAccessors(ClassAccessor.java:410)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.preProcess(ClassAccessor.java:1225)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.MappedSuperclassAccessor.preProcess(MappedSuperclassAccessor.java:751)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.EntityAccessor.preProcess(EntityAccessor.java:621)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProject.processStage1(MetadataProject.java:1826)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProcessor.processORMMetadata(MetadataProcessor.java:579)
+	at org.eclipse.persistence.internal.jpa.deployment.PersistenceUnitProcessor.processORMetadata(PersistenceUnitProcessor.java:629)
+	at org.eclipse.persistence.internal.jpa.EntityManagerSetupImpl.predeploy(EntityManagerSetupImpl.java:2003)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createContainerEntityManagerFactoryImpl(PersistenceProvider.java:350)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createContainerEntityManagerFactory(PersistenceProvider.java:316)
+	at org.glassfish.persistence.jpa.PersistenceUnitLoader.loadPU(PersistenceUnitLoader.java:175)
+	at org.glassfish.persistence.jpa.PersistenceUnitLoader.&lt;init&gt;(PersistenceUnitLoader.java:83)
+	at org.glassfish.persistence.jpa.JPADeployer$1.visitPUD(JPADeployer.java:199)
+	at org.glassfish.persistence.jpa.JPADeployer$PersistenceUnitDescriptorIterator.iteratePUDs(JPADeployer.java:486)
+	at org.glassfish.persistence.jpa.JPADeployer.createEMFs(JPADeployer.java:206)
+	at org.glassfish.persistence.jpa.JPADeployer.prepare(JPADeployer.java:144)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.prepareModule(ApplicationLifecycle.java:901)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:410)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:195)
+	at org.glassfish.deployment.admin.DeployCommand.execute(DeployCommand.java:467)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:516)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:512)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2.execute(CommandRunnerImpl.java:511)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:542)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:534)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:533)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:1441)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.access$1300(CommandRunnerImpl.java:86)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1823)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1699)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:109)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:85)
+	at org.glassfish.ejb.embedded.EJBContainerImpl.deploy(EJBContainerImpl.java:114)
+	at org.glassfish.ejb.embedded.EJBContainerProviderImpl.createEJBContainer(EJBContainerProviderImpl.java:110)
+	at javax.ejb.embeddable.EJBContainer.createEJBContainer(EJBContainer.java:103)
+	at es.uma.informatica.sii.ejb.practica.SuiteTest.setUpClass(SuiteTest.java:30)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.RunBefores.invokeMethod(RunBefores.java:33)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+
+abr 08, 2022 1:47:14 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad.metadata
+SEVERE: The java.util.Map class was compiled with an unsupported JDK. Report this error to the EclipseLink open source project.
+java.lang.ArrayIndexOutOfBoundsException
+
+abr 08, 2022 1:47:14 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad.metadata
+SEVERE: The java.math.BigDecimal class was compiled with an unsupported JDK. Report this error to the EclipseLink open source project.
+java.lang.IllegalArgumentException: Unsupported class file major version 62
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:184)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:166)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:152)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:273)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAsmFactory.buildClassMetadata(MetadataAsmFactory.java:106)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAsmFactory.getMetadataClass(MetadataAsmFactory.java:177)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAccessibleObject.getMetadataClass(MetadataAccessibleObject.java:73)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAnnotatedElement.getRawClass(MetadataAnnotatedElement.java:367)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAnnotatedElement.isEmbedded(MetadataAnnotatedElement.java:630)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.buildAccessor(ClassAccessor.java:599)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.addAccessorFields(ClassAccessor.java:438)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.addAccessors(ClassAccessor.java:410)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.preProcess(ClassAccessor.java:1225)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.MappedSuperclassAccessor.preProcess(MappedSuperclassAccessor.java:751)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.EntityAccessor.preProcess(EntityAccessor.java:621)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProject.processStage1(MetadataProject.java:1826)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProcessor.processORMMetadata(MetadataProcessor.java:579)
+	at org.eclipse.persistence.internal.jpa.deployment.PersistenceUnitProcessor.processORMetadata(PersistenceUnitProcessor.java:629)
+	at org.eclipse.persistence.internal.jpa.EntityManagerSetupImpl.predeploy(EntityManagerSetupImpl.java:2003)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createContainerEntityManagerFactoryImpl(PersistenceProvider.java:350)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createContainerEntityManagerFactory(PersistenceProvider.java:316)
+	at org.glassfish.persistence.jpa.PersistenceUnitLoader.loadPU(PersistenceUnitLoader.java:175)
+	at org.glassfish.persistence.jpa.PersistenceUnitLoader.&lt;init&gt;(PersistenceUnitLoader.java:83)
+	at org.glassfish.persistence.jpa.JPADeployer$1.visitPUD(JPADeployer.java:199)
+	at org.glassfish.persistence.jpa.JPADeployer$PersistenceUnitDescriptorIterator.iteratePUDs(JPADeployer.java:486)
+	at org.glassfish.persistence.jpa.JPADeployer.createEMFs(JPADeployer.java:206)
+	at org.glassfish.persistence.jpa.JPADeployer.prepare(JPADeployer.java:144)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.prepareModule(ApplicationLifecycle.java:901)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:410)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:195)
+	at org.glassfish.deployment.admin.DeployCommand.execute(DeployCommand.java:467)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:516)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:512)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2.execute(CommandRunnerImpl.java:511)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:542)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:534)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:533)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:1441)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.access$1300(CommandRunnerImpl.java:86)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1823)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1699)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:109)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:85)
+	at org.glassfish.ejb.embedded.EJBContainerImpl.deploy(EJBContainerImpl.java:114)
+	at org.glassfish.ejb.embedded.EJBContainerProviderImpl.createEJBContainer(EJBContainerProviderImpl.java:110)
+	at javax.ejb.embeddable.EJBContainer.createEJBContainer(EJBContainer.java:103)
+	at es.uma.informatica.sii.ejb.practica.SuiteTest.setUpClass(SuiteTest.java:30)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.RunBefores.invokeMethod(RunBefores.java:33)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+
+abr 08, 2022 1:47:14 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad.metadata
+SEVERE: The java.math.BigDecimal class was compiled with an unsupported JDK. Report this error to the EclipseLink open source project.
+java.lang.ArrayIndexOutOfBoundsException
+
+abr 08, 2022 1:47:14 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad.metadata
+SEVERE: The java.io.Serializable class was compiled with an unsupported JDK. Report this error to the EclipseLink open source project.
+java.lang.IllegalArgumentException: Unsupported class file major version 62
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:184)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:166)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:152)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:273)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAsmFactory.buildClassMetadata(MetadataAsmFactory.java:106)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAsmFactory.getMetadataClass(MetadataAsmFactory.java:177)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAccessibleObject.getMetadataClass(MetadataAccessibleObject.java:73)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataClass.extendsInterface(MetadataClass.java:223)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataClass.extendsInterface(MetadataClass.java:202)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.MappedSuperclassAccessor.processFetchGroups(MappedSuperclassAccessor.java:1180)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.MappedSuperclassAccessor.process(MappedSuperclassAccessor.java:761)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.EntityAccessor.process(EntityAccessor.java:697)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProject.processStage2(MetadataProject.java:1879)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProcessor.processORMMetadata(MetadataProcessor.java:580)
+	at org.eclipse.persistence.internal.jpa.deployment.PersistenceUnitProcessor.processORMetadata(PersistenceUnitProcessor.java:629)
+	at org.eclipse.persistence.internal.jpa.EntityManagerSetupImpl.predeploy(EntityManagerSetupImpl.java:2003)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createContainerEntityManagerFactoryImpl(PersistenceProvider.java:350)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createContainerEntityManagerFactory(PersistenceProvider.java:316)
+	at org.glassfish.persistence.jpa.PersistenceUnitLoader.loadPU(PersistenceUnitLoader.java:175)
+	at org.glassfish.persistence.jpa.PersistenceUnitLoader.&lt;init&gt;(PersistenceUnitLoader.java:83)
+	at org.glassfish.persistence.jpa.JPADeployer$1.visitPUD(JPADeployer.java:199)
+	at org.glassfish.persistence.jpa.JPADeployer$PersistenceUnitDescriptorIterator.iteratePUDs(JPADeployer.java:486)
+	at org.glassfish.persistence.jpa.JPADeployer.createEMFs(JPADeployer.java:206)
+	at org.glassfish.persistence.jpa.JPADeployer.prepare(JPADeployer.java:144)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.prepareModule(ApplicationLifecycle.java:901)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:410)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:195)
+	at org.glassfish.deployment.admin.DeployCommand.execute(DeployCommand.java:467)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:516)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:512)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2.execute(CommandRunnerImpl.java:511)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:542)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:534)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:533)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:1441)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.access$1300(CommandRunnerImpl.java:86)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1823)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1699)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:109)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:85)
+	at org.glassfish.ejb.embedded.EJBContainerImpl.deploy(EJBContainerImpl.java:114)
+	at org.glassfish.ejb.embedded.EJBContainerProviderImpl.createEJBContainer(EJBContainerProviderImpl.java:110)
+	at javax.ejb.embeddable.EJBContainer.createEJBContainer(EJBContainer.java:103)
+	at es.uma.informatica.sii.ejb.practica.SuiteTest.setUpClass(SuiteTest.java:30)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.RunBefores.invokeMethod(RunBefores.java:33)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+
+abr 08, 2022 1:47:14 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad.metadata
+SEVERE: The java.io.Serializable class was compiled with an unsupported JDK. Report this error to the EclipseLink open source project.
+java.lang.ArrayIndexOutOfBoundsException
+
+abr 08, 2022 1:47:14 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad.metadata
+SEVERE: The java.util.Date class was compiled with an unsupported JDK. Report this error to the EclipseLink open source project.
+java.lang.IllegalArgumentException: Unsupported class file major version 62
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:184)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:166)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:152)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:273)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAsmFactory.buildClassMetadata(MetadataAsmFactory.java:106)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAsmFactory.getMetadataClass(MetadataAsmFactory.java:177)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAccessibleObject.getMetadataClass(MetadataAccessibleObject.java:73)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataClass.getSuperclass(MetadataClass.java:405)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataClass.extendsClass(MetadataClass.java:194)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataClass.extendsClass(MetadataClass.java:170)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataClass.isEnum(MetadataClass.java:475)
+	at org.eclipse.persistence.internal.jpa.metadata.converters.EnumeratedMetadata.isValidEnumeratedType(EnumeratedMetadata.java:112)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.mappings.MappingAccessor.isEnumerated(MappingAccessor.java:1272)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.mappings.MappingAccessor.processMappingConverter(MappingAccessor.java:1847)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.mappings.MappingAccessor.processMappingValueConverter(MappingAccessor.java:1875)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.mappings.BasicAccessor.process(BasicAccessor.java:435)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataDescriptor.processMappingAccessors(MetadataDescriptor.java:1538)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.processMappingAccessors(ClassAccessor.java:1658)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.EntityAccessor.processMappingAccessors(EntityAccessor.java:1242)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.EntityAccessor.process(EntityAccessor.java:701)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProject.processStage2(MetadataProject.java:1879)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProcessor.processORMMetadata(MetadataProcessor.java:580)
+	at org.eclipse.persistence.internal.jpa.deployment.PersistenceUnitProcessor.processORMetadata(PersistenceUnitProcessor.java:629)
+	at org.eclipse.persistence.internal.jpa.EntityManagerSetupImpl.predeploy(EntityManagerSetupImpl.java:2003)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createContainerEntityManagerFactoryImpl(PersistenceProvider.java:350)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createContainerEntityManagerFactory(PersistenceProvider.java:316)
+	at org.glassfish.persistence.jpa.PersistenceUnitLoader.loadPU(PersistenceUnitLoader.java:175)
+	at org.glassfish.persistence.jpa.PersistenceUnitLoader.&lt;init&gt;(PersistenceUnitLoader.java:83)
+	at org.glassfish.persistence.jpa.JPADeployer$1.visitPUD(JPADeployer.java:199)
+	at org.glassfish.persistence.jpa.JPADeployer$PersistenceUnitDescriptorIterator.iteratePUDs(JPADeployer.java:486)
+	at org.glassfish.persistence.jpa.JPADeployer.createEMFs(JPADeployer.java:206)
+	at org.glassfish.persistence.jpa.JPADeployer.prepare(JPADeployer.java:144)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.prepareModule(ApplicationLifecycle.java:901)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:410)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:195)
+	at org.glassfish.deployment.admin.DeployCommand.execute(DeployCommand.java:467)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:516)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:512)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2.execute(CommandRunnerImpl.java:511)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:542)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:534)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:533)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:1441)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.access$1300(CommandRunnerImpl.java:86)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1823)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1699)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:109)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:85)
+	at org.glassfish.ejb.embedded.EJBContainerImpl.deploy(EJBContainerImpl.java:114)
+	at org.glassfish.ejb.embedded.EJBContainerProviderImpl.createEJBContainer(EJBContainerProviderImpl.java:110)
+	at javax.ejb.embeddable.EJBContainer.createEJBContainer(EJBContainer.java:103)
+	at es.uma.informatica.sii.ejb.practica.SuiteTest.setUpClass(SuiteTest.java:30)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.RunBefores.invokeMethod(RunBefores.java:33)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+
+abr 08, 2022 1:47:14 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad.metadata
+SEVERE: The java.util.Date class was compiled with an unsupported JDK. Report this error to the EclipseLink open source project.
+java.lang.ArrayIndexOutOfBoundsException
+
+abr 08, 2022 1:47:14 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad.metadata
+SEVERE: The java.lang.Number class was compiled with an unsupported JDK. Report this error to the EclipseLink open source project.
+java.lang.IllegalArgumentException: Unsupported class file major version 62
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:184)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:166)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:152)
+	at org.eclipse.persistence.internal.libraries.asm.ClassReader.&lt;init&gt;(ClassReader.java:273)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAsmFactory.buildClassMetadata(MetadataAsmFactory.java:106)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAsmFactory.getMetadataClass(MetadataAsmFactory.java:177)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataAccessibleObject.getMetadataClass(MetadataAccessibleObject.java:73)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataClass.getSuperclass(MetadataClass.java:405)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataClass.extendsClass(MetadataClass.java:194)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataClass.extendsClass(MetadataClass.java:170)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.objects.MetadataClass.isEnum(MetadataClass.java:475)
+	at org.eclipse.persistence.internal.jpa.metadata.converters.EnumeratedMetadata.isValidEnumeratedType(EnumeratedMetadata.java:112)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.mappings.MappingAccessor.isEnumerated(MappingAccessor.java:1272)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.mappings.MappingAccessor.processMappingConverter(MappingAccessor.java:1847)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.mappings.MappingAccessor.processMappingValueConverter(MappingAccessor.java:1875)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.mappings.BasicAccessor.process(BasicAccessor.java:435)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataDescriptor.processMappingAccessors(MetadataDescriptor.java:1538)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.ClassAccessor.processMappingAccessors(ClassAccessor.java:1658)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.EntityAccessor.processMappingAccessors(EntityAccessor.java:1242)
+	at org.eclipse.persistence.internal.jpa.metadata.accessors.classes.EntityAccessor.process(EntityAccessor.java:701)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProject.processStage2(MetadataProject.java:1879)
+	at org.eclipse.persistence.internal.jpa.metadata.MetadataProcessor.processORMMetadata(MetadataProcessor.java:580)
+	at org.eclipse.persistence.internal.jpa.deployment.PersistenceUnitProcessor.processORMetadata(PersistenceUnitProcessor.java:629)
+	at org.eclipse.persistence.internal.jpa.EntityManagerSetupImpl.predeploy(EntityManagerSetupImpl.java:2003)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createContainerEntityManagerFactoryImpl(PersistenceProvider.java:350)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createContainerEntityManagerFactory(PersistenceProvider.java:316)
+	at org.glassfish.persistence.jpa.PersistenceUnitLoader.loadPU(PersistenceUnitLoader.java:175)
+	at org.glassfish.persistence.jpa.PersistenceUnitLoader.&lt;init&gt;(PersistenceUnitLoader.java:83)
+	at org.glassfish.persistence.jpa.JPADeployer$1.visitPUD(JPADeployer.java:199)
+	at org.glassfish.persistence.jpa.JPADeployer$PersistenceUnitDescriptorIterator.iteratePUDs(JPADeployer.java:486)
+	at org.glassfish.persistence.jpa.JPADeployer.createEMFs(JPADeployer.java:206)
+	at org.glassfish.persistence.jpa.JPADeployer.prepare(JPADeployer.java:144)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.prepareModule(ApplicationLifecycle.java:901)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:410)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:195)
+	at org.glassfish.deployment.admin.DeployCommand.execute(DeployCommand.java:467)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:516)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:512)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2.execute(CommandRunnerImpl.java:511)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:542)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:534)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:533)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:1441)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.access$1300(CommandRunnerImpl.java:86)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1823)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1699)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:109)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:85)
+	at org.glassfish.ejb.embedded.EJBContainerImpl.deploy(EJBContainerImpl.java:114)
+	at org.glassfish.ejb.embedded.EJBContainerProviderImpl.createEJBContainer(EJBContainerProviderImpl.java:110)
+	at javax.ejb.embeddable.EJBContainer.createEJBContainer(EJBContainer.java:103)
+	at es.uma.informatica.sii.ejb.practica.SuiteTest.setUpClass(SuiteTest.java:30)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.RunBefores.invokeMethod(RunBefores.java:33)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+
+abr 08, 2022 1:47:14 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad.metadata
+SEVERE: The java.lang.Number class was compiled with an unsupported JDK. Report this error to the EclipseLink open source project.
+java.lang.ArrayIndexOutOfBoundsException
+
+abr 08, 2022 1:47:14 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad
+INFO: EclipseLink, version: Eclipse Persistence Services - 2.7.4.v20190115-ad5b7c6b2a
+abr 08, 2022 1:47:14 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad.connection
+INFO: /file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad login successful
+abr 08, 2022 1:47:14 P. M. com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB LotesEJB: [java:global/classes/LotesEJB!es.uma.informatica.sii.ejb.practica.ejb.GestionLotes, java:global/classes/LotesEJB]
+abr 08, 2022 1:47:14 P. M. com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB ProductosEJB: [java:global/classes/ProductosEJB!es.uma.informatica.sii.ejb.practica.ejb.GestionProductos, java:global/classes/ProductosEJB]
+abr 08, 2022 1:47:14 P. M. org.jboss.weld.bootstrap.WeldStartup &lt;clinit&gt;
+INFO: WELD-000900: 3.0.0 (Final)
+abr 08, 2022 1:47:16 P. M. org.jboss.weld.event.ExtensionObserverMethodImpl checkRequiredTypeAnnotations
+INFO: WELD-000411: Observer method [BackedAnnotatedMethod] public org.hibernate.validator.cdi.ValidationExtension.processAnnotatedType(@Observes ProcessAnnotatedType&lt;T&gt;) receives events for all annotated types. Consider restricting events using @WithAnnotations or a generic type with bounds.
+abr 08, 2022 1:47:16 P. M. org.jboss.weld.event.ExtensionObserverMethodImpl checkRequiredTypeAnnotations
+INFO: WELD-000411: Observer method [BackedAnnotatedMethod] private org.glassfish.jersey.ext.cdi1x.internal.CdiComponentProvider.processAnnotatedType(@Observes ProcessAnnotatedType) receives events for all annotated types. Consider restricting events using @WithAnnotations or a generic type with bounds.
+abr 08, 2022 1:47:16 P. M. org.jboss.weld.event.ExtensionObserverMethodImpl checkRequiredTypeAnnotations
+INFO: WELD-000411: Observer method [BackedAnnotatedMethod] public org.glassfish.jms.injection.JMSCDIExtension.processAnnotatedType(@Observes ProcessAnnotatedType&lt;T&gt;) receives events for all annotated types. Consider restricting events using @WithAnnotations or a generic type with bounds.
+abr 08, 2022 1:47:16 P. M. org.jboss.weld.event.ExtensionObserverMethodImpl checkRequiredTypeAnnotations
+INFO: WELD-000411: Observer method [BackedAnnotatedMethod] org.glassfish.sse.impl.ServerSentEventCdiExtension.processAnnotatedType(@Observes ProcessAnnotatedType&lt;T&gt;, BeanManager) receives events for all annotated types. Consider restricting events using @WithAnnotations or a generic type with bounds.
+abr 08, 2022 1:47:16 P. M. org.jboss.weld.bootstrap.events.BeforeBeanDiscoveryImpl addAnnotatedType
+WARN: WELD-000146: BeforeBeanDiscovery.addAnnotatedType(AnnotatedType&lt;?&gt;) used for class com.sun.faces.flow.FlowDiscoveryCDIHelper is deprecated from CDI 1.1!
+abr 08, 2022 1:47:16 P. M. org.jboss.weld.bootstrap.events.BeforeBeanDiscoveryImpl addAnnotatedType
+WARN: WELD-000146: BeforeBeanDiscovery.addAnnotatedType(AnnotatedType&lt;?&gt;) used for class org.glassfish.jersey.ext.cdi1x.transaction.internal.WebAppExceptionHolder is deprecated from CDI 1.1!
+abr 08, 2022 1:47:16 P. M. org.jboss.weld.bootstrap.events.BeforeBeanDiscoveryImpl addAnnotatedType
+WARN: WELD-000146: BeforeBeanDiscovery.addAnnotatedType(AnnotatedType&lt;?&gt;) used for class org.glassfish.jersey.ext.cdi1x.transaction.internal.WebAppExceptionInterceptor is deprecated from CDI 1.1!
+abr 08, 2022 1:47:16 P. M. org.jboss.weld.bootstrap.events.BeforeBeanDiscoveryImpl addAnnotatedType
+WARN: WELD-000146: BeforeBeanDiscovery.addAnnotatedType(AnnotatedType&lt;?&gt;) used for class org.glassfish.jersey.ext.cdi1x.transaction.internal.TransactionalExceptionMapper is deprecated from CDI 1.1!
+abr 08, 2022 1:47:16 P. M. org.jboss.weld.bootstrap.events.BeforeBeanDiscoveryImpl addAnnotatedType
+WARN: WELD-000146: BeforeBeanDiscovery.addAnnotatedType(AnnotatedType&lt;?&gt;) used for class org.glassfish.cdi.transaction.TransactionalInterceptorMandatory is deprecated from CDI 1.1!
+abr 08, 2022 1:47:16 P. M. org.jboss.weld.bootstrap.events.BeforeBeanDiscoveryImpl addAnnotatedType
+WARN: WELD-000146: BeforeBeanDiscovery.addAnnotatedType(AnnotatedType&lt;?&gt;) used for class org.glassfish.cdi.transaction.TransactionalInterceptorNever is deprecated from CDI 1.1!
+abr 08, 2022 1:47:16 P. M. org.jboss.weld.bootstrap.events.BeforeBeanDiscoveryImpl addAnnotatedType
+WARN: WELD-000146: BeforeBeanDiscovery.addAnnotatedType(AnnotatedType&lt;?&gt;) used for class org.glassfish.cdi.transaction.TransactionalInterceptorNotSupported is deprecated from CDI 1.1!
+abr 08, 2022 1:47:16 P. M. org.jboss.weld.bootstrap.events.BeforeBeanDiscoveryImpl addAnnotatedType
+WARN: WELD-000146: BeforeBeanDiscovery.addAnnotatedType(AnnotatedType&lt;?&gt;) used for class org.glassfish.cdi.transaction.TransactionalInterceptorRequired is deprecated from CDI 1.1!
+abr 08, 2022 1:47:16 P. M. org.jboss.weld.bootstrap.events.BeforeBeanDiscoveryImpl addAnnotatedType
+WARN: WELD-000146: BeforeBeanDiscovery.addAnnotatedType(AnnotatedType&lt;?&gt;) used for class org.glassfish.cdi.transaction.TransactionalInterceptorRequiresNew is deprecated from CDI 1.1!
+abr 08, 2022 1:47:16 P. M. org.jboss.weld.bootstrap.events.BeforeBeanDiscoveryImpl addAnnotatedType
+WARN: WELD-000146: BeforeBeanDiscovery.addAnnotatedType(AnnotatedType&lt;?&gt;) used for class org.glassfish.cdi.transaction.TransactionalInterceptorSupports is deprecated from CDI 1.1!
+abr 08, 2022 1:47:16 P. M. org.jboss.weld.bootstrap.events.BeforeBeanDiscoveryImpl addAnnotatedType
+WARN: WELD-000146: BeforeBeanDiscovery.addAnnotatedType(AnnotatedType&lt;?&gt;) used for class com.ibm.jbatch.container.cdi.BatchProducerBean is deprecated from CDI 1.1!
+abr 08, 2022 1:47:16 P. M. org.jboss.weld.bootstrap.events.BeforeBeanDiscoveryImpl addAnnotatedType
+WARN: WELD-000146: BeforeBeanDiscovery.addAnnotatedType(AnnotatedType&lt;?&gt;) used for class org.glassfish.jersey.ext.cdi1x.servlet.internal.CdiExternalRequestScope is deprecated from CDI 1.1!
+abr 08, 2022 1:47:16 P. M. org.jboss.weld.bootstrap.events.BeforeBeanDiscoveryImpl addAnnotatedType
+WARN: WELD-000146: BeforeBeanDiscovery.addAnnotatedType(AnnotatedType&lt;?&gt;) used for class org.glassfish.jersey.ext.cdi1x.internal.CdiComponentProvider$JaxRsParamProducer is deprecated from CDI 1.1!
+abr 08, 2022 1:47:16 P. M. com.sun.enterprise.v3.server.ApplicationLifecycle deploy
+SEVERE: Exception during lifecycle processing
+org.glassfish.deployment.common.DeploymentException: CDI deployment failure:WELD-001524: Unable to load proxy class for bean Built-in Bean [javax.transaction.UserTransaction] with qualifiers [@Default] with class interface javax.transaction.UserTransaction using classloader ASURLClassLoader : 
+urlSet = [URLEntry : file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/, URLEntry : file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/generated/ejb/classes]
+doneCalled = false 
+ Parent -&gt; org.glassfish.internal.api.DelegatingClassLoader@49825659
+
+	at org.glassfish.weld.WeldDeployer.event(WeldDeployer.java:215)
+	at org.glassfish.kernel.event.EventsImpl.send(EventsImpl.java:107)
+	at org.glassfish.internal.data.ApplicationInfo.load(ApplicationInfo.java:304)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:472)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:195)
+	at org.glassfish.deployment.admin.DeployCommand.execute(DeployCommand.java:467)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:516)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:512)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2.execute(CommandRunnerImpl.java:511)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:542)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:534)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:533)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:1441)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.access$1300(CommandRunnerImpl.java:86)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1823)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1699)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:109)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:85)
+	at org.glassfish.ejb.embedded.EJBContainerImpl.deploy(EJBContainerImpl.java:114)
+	at org.glassfish.ejb.embedded.EJBContainerProviderImpl.createEJBContainer(EJBContainerProviderImpl.java:110)
+	at javax.ejb.embeddable.EJBContainer.createEJBContainer(EJBContainer.java:103)
+	at es.uma.informatica.sii.ejb.practica.SuiteTest.setUpClass(SuiteTest.java:30)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.RunBefores.invokeMethod(RunBefores.java:33)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+Caused by: org.jboss.weld.exceptions.WeldException: WELD-001524: Unable to load proxy class for bean Built-in Bean [javax.transaction.UserTransaction] with qualifiers [@Default] with class interface javax.transaction.UserTransaction using classloader ASURLClassLoader : 
+urlSet = [URLEntry : file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/, URLEntry : file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/generated/ejb/classes]
+doneCalled = false 
+ Parent -&gt; org.glassfish.internal.api.DelegatingClassLoader@49825659
+
+	at org.jboss.weld.bean.proxy.ProxyFactory.getProxyClass(ProxyFactory.java:382)
+	at org.jboss.weld.bean.proxy.ProxyFactory.run(ProxyFactory.java:344)
+	at org.jboss.weld.bean.proxy.ProxyFactory.create(ProxyFactory.java:336)
+	at org.jboss.weld.bean.builtin.ee.AbstractEEBean.&lt;init&gt;(AbstractEEBean.java:36)
+	at org.jboss.weld.module.jta.UserTransactionBean.&lt;init&gt;(UserTransactionBean.java:52)
+	at org.jboss.weld.module.jta.WeldTransactionsModule.preBeanRegistration(WeldTransactionsModule.java:46)
+	at org.jboss.weld.module.WeldModules.preBeanRegistration(WeldModules.java:158)
+	at org.jboss.weld.bootstrap.BeanDeployment.createBeans(BeanDeployment.java:224)
+	at org.jboss.weld.bootstrap.WeldStartup.deployBeans(WeldStartup.java:423)
+	at org.jboss.weld.bootstrap.WeldBootstrap.deployBeans(WeldBootstrap.java:83)
+	at org.glassfish.weld.WeldDeployer.event(WeldDeployer.java:203)
+	... 45 more
+Caused by: java.lang.ExceptionInInitializerError
+	at java.base/jdk.internal.misc.Unsafe.ensureClassInitialized0(Native Method)
+	at java.base/jdk.internal.misc.Unsafe.ensureClassInitialized(Unsafe.java:1160)
+	at java.base/jdk.internal.reflect.MethodHandleAccessorFactory.ensureClassInitialized(MethodHandleAccessorFactory.java:300)
+	at java.base/jdk.internal.reflect.MethodHandleAccessorFactory.newConstructorAccessor(MethodHandleAccessorFactory.java:103)
+	at java.base/jdk.internal.reflect.ReflectionFactory.newConstructorAccessor(ReflectionFactory.java:236)
+	at java.base/java.lang.reflect.Constructor.acquireConstructorAccessor(Constructor.java:546)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:496)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+	at org.jboss.weld.bean.proxy.ProxyFactory.newClassFile(ProxyFactory.java:487)
+	at org.jboss.weld.bean.proxy.ProxyFactory.createProxyClass(ProxyFactory.java:446)
+	at org.jboss.weld.bean.proxy.ProxyFactory.getProxyClass(ProxyFactory.java:374)
+	... 55 more
+Caused by: java.lang.reflect.InaccessibleObjectException: Unable to make protected final java.lang.Class java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int) throws java.lang.ClassFormatError accessible: module java.base does not &quot;opens java.lang&quot; to unnamed module @4d591d15
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:354)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:297)
+	at java.base/java.lang.reflect.Method.checkCanSetAccessible(Method.java:200)
+	at java.base/java.lang.reflect.Method.setAccessible(Method.java:194)
+	at org.jboss.classfilewriter.ClassFile$1.run(ClassFile.java:256)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:569)
+	at org.jboss.classfilewriter.ClassFile.&lt;clinit&gt;(ClassFile.java:251)
+	... 66 more
+
+abr 08, 2022 1:47:16 P. M. org.glassfish.api.ActionReport failure
+SEVERE: Exception while loading the app
+abr 08, 2022 1:47:16 P. M. org.eclipse.persistence.session./file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad.connection
+INFO: /file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/_Trazabilidad logout successful
+abr 08, 2022 1:47:16 P. M. org.glassfish.deployment.admin.DeployCommand execute
+SEVERE: Exception while loading the app : CDI deployment failure:WELD-001524: Unable to load proxy class for bean Built-in Bean [javax.transaction.UserTransaction] with qualifiers [@Default] with class interface javax.transaction.UserTransaction using classloader ASURLClassLoader : 
+urlSet = [URLEntry : file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/, URLEntry : file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/generated/ejb/classes]
+doneCalled = false 
+ Parent -&gt; org.glassfish.internal.api.DelegatingClassLoader@49825659
+
+org.jboss.weld.exceptions.WeldException: WELD-001524: Unable to load proxy class for bean Built-in Bean [javax.transaction.UserTransaction] with qualifiers [@Default] with class interface javax.transaction.UserTransaction using classloader ASURLClassLoader : 
+urlSet = [URLEntry : file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/applications/classes/, URLEntry : file:/C:/Users/ISMAEL~1/AppData/Local/Temp/gfembed7383600043111957316tmp/generated/ejb/classes]
+doneCalled = false 
+ Parent -&gt; org.glassfish.internal.api.DelegatingClassLoader@49825659
+
+	at org.jboss.weld.bean.proxy.ProxyFactory.getProxyClass(ProxyFactory.java:382)
+	at org.jboss.weld.bean.proxy.ProxyFactory.run(ProxyFactory.java:344)
+	at org.jboss.weld.bean.proxy.ProxyFactory.create(ProxyFactory.java:336)
+	at org.jboss.weld.bean.builtin.ee.AbstractEEBean.&lt;init&gt;(AbstractEEBean.java:36)
+	at org.jboss.weld.module.jta.UserTransactionBean.&lt;init&gt;(UserTransactionBean.java:52)
+	at org.jboss.weld.module.jta.WeldTransactionsModule.preBeanRegistration(WeldTransactionsModule.java:46)
+	at org.jboss.weld.module.WeldModules.preBeanRegistration(WeldModules.java:158)
+	at org.jboss.weld.bootstrap.BeanDeployment.createBeans(BeanDeployment.java:224)
+	at org.jboss.weld.bootstrap.WeldStartup.deployBeans(WeldStartup.java:423)
+	at org.jboss.weld.bootstrap.WeldBootstrap.deployBeans(WeldBootstrap.java:83)
+	at org.glassfish.weld.WeldDeployer.event(WeldDeployer.java:203)
+	at org.glassfish.kernel.event.EventsImpl.send(EventsImpl.java:107)
+	at org.glassfish.internal.data.ApplicationInfo.load(ApplicationInfo.java:304)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:472)
+	at com.sun.enterprise.v3.server.ApplicationLifecycle.deploy(ApplicationLifecycle.java:195)
+	at org.glassfish.deployment.admin.DeployCommand.execute(DeployCommand.java:467)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:516)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2$1.run(CommandRunnerImpl.java:512)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$2.execute(CommandRunnerImpl.java:511)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:542)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$3.run(CommandRunnerImpl.java:534)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:493)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:533)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:1441)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl.access$1300(CommandRunnerImpl.java:86)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1823)
+	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1699)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:109)
+	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:85)
+	at org.glassfish.ejb.embedded.EJBContainerImpl.deploy(EJBContainerImpl.java:114)
+	at org.glassfish.ejb.embedded.EJBContainerProviderImpl.createEJBContainer(EJBContainerProviderImpl.java:110)
+	at javax.ejb.embeddable.EJBContainer.createEJBContainer(EJBContainer.java:103)
+	at es.uma.informatica.sii.ejb.practica.SuiteTest.setUpClass(SuiteTest.java:30)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.RunBefores.invokeMethod(RunBefores.java:33)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+Caused by: java.lang.ExceptionInInitializerError
+	at java.base/jdk.internal.misc.Unsafe.ensureClassInitialized0(Native Method)
+	at java.base/jdk.internal.misc.Unsafe.ensureClassInitialized(Unsafe.java:1160)
+	at java.base/jdk.internal.reflect.MethodHandleAccessorFactory.ensureClassInitialized(MethodHandleAccessorFactory.java:300)
+	at java.base/jdk.internal.reflect.MethodHandleAccessorFactory.newConstructorAccessor(MethodHandleAccessorFactory.java:103)
+	at java.base/jdk.internal.reflect.ReflectionFactory.newConstructorAccessor(ReflectionFactory.java:236)
+	at java.base/java.lang.reflect.Constructor.acquireConstructorAccessor(Constructor.java:546)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:496)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+	at org.jboss.weld.bean.proxy.ProxyFactory.newClassFile(ProxyFactory.java:487)
+	at org.jboss.weld.bean.proxy.ProxyFactory.createProxyClass(ProxyFactory.java:446)
+	at org.jboss.weld.bean.proxy.ProxyFactory.getProxyClass(ProxyFactory.java:374)
+	... 55 more
+Caused by: java.lang.reflect.InaccessibleObjectException: Unable to make protected final java.lang.Class java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int) throws java.lang.ClassFormatError accessible: module java.base does not &quot;opens java.lang&quot; to unnamed module @4d591d15
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:354)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:297)
+	at java.base/java.lang.reflect.Method.checkCanSetAccessible(Method.java:200)
+	at java.base/java.lang.reflect.Method.setAccessible(Method.java:194)
+	at org.jboss.classfilewriter.ClassFile$1.run(ClassFile.java:256)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:569)
+	at org.jboss.classfilewriter.ClassFile.&lt;clinit&gt;(ClassFile.java:251)
+	... 66 more
+
+abr 08, 2022 1:47:18 P. M. org.glassfish.ejb.embedded.EJBContainerProviderImpl createEJBContainer
+INFO: [EJBContainerProviderImpl] Cleaning up on failure ...
+abr 08, 2022 1:47:18 P. M. com.sun.enterprise.connectors.service.ResourceAdapterAdminServiceImpl sendStopToResourceAdapter
+INFO: RAR7094: __ds_jdbc_ra shutdown successful.
+abr 08, 2022 1:47:18 P. M. org.glassfish.admin.mbeanserver.JMXStartupService shutdown
+INFO: JMXStartupService and JMXConnectors have been shut down.
+abr 08, 2022 1:47:18 P. M. com.sun.enterprise.v3.server.AppServerStartup$MasterRunLevelListener onError
+WARNING: An error occured when the system was coming down
+MultiException stack 1 of 1
+java.lang.reflect.InaccessibleObjectException: Unable to make field private static javax.naming.spi.InitialContextFactoryBuilder javax.naming.spi.NamingManager.initctx_factory_builder accessible: module java.naming does not &quot;opens javax.naming.spi&quot; to unnamed module @4d591d15
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:354)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:297)
+	at java.base/java.lang.reflect.Field.checkCanSetAccessible(Field.java:180)
+	at java.base/java.lang.reflect.Field.setAccessible(Field.java:174)
+	at com.sun.enterprise.naming.GlassFishNamingBuilder.resetInitialContextFactoryBuilder(GlassFishNamingBuilder.java:205)
+	at com.sun.enterprise.naming.GlassFishNamingBuilder.preDestroy(GlassFishNamingBuilder.java:194)
+	at org.jvnet.hk2.internal.ClazzCreator.preDestroyMe(ClazzCreator.java:316)
+	at org.jvnet.hk2.internal.ClazzCreator.dispose(ClazzCreator.java:381)
+	at org.jvnet.hk2.internal.SystemDescriptor.dispose(SystemDescriptor.java:518)
+	at org.glassfish.hk2.runlevel.internal.AsyncRunLevelContext.destroyOne(AsyncRunLevelContext.java:403)
+	at org.glassfish.hk2.runlevel.RunLevelContext.destroyOne(RunLevelContext.java:81)
+	at org.jvnet.hk2.internal.ServiceHandleImpl.destroy(ServiceHandleImpl.java:165)
+	at org.glassfish.hk2.runlevel.internal.CurrentTaskFuture$DownQueueRunner.run(CurrentTaskFuture.java:1270)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+
+abr 08, 2022 1:47:18 P. M. com.sun.enterprise.v3.server.AppServerStartup stop
+INFO: Shutdown procedure finished
+</system-err>
+  </testcase>
+</testsuite>
