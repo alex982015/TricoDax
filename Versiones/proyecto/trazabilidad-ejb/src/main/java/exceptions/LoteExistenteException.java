@@ -1,5 +1,5 @@
 package exceptions;
 
-public class LoteExistenteException extends TrazabilidadException {
+public class LoteExistenteException extends ProyectoException {
 
 }

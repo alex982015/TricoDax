@@ -10,13 +10,13 @@ import javax.persistence.*;
  *
  */
 
-//@Entity
-//@Table(name="CLIENTE")
-//@Inheritance(strategy = InheritanceType.JOINED)
-
 @Entity
-@DiscriminatorColumn(name="TIPO")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name="CLIENTE")
+@Inheritance(strategy = InheritanceType.JOINED)
+
+//@Entity
+//@DiscriminatorColumn(name="TIPO")
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 
 public class Cliente implements Serializable {
 	

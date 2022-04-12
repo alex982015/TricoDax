@@ -1,5 +1,5 @@
 package exceptions;
 
-public class IngredientesIncorrectosException extends TrazabilidadException {
+public class IngredientesIncorrectosException extends ProyectoException {
 
 }

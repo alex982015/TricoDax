@@ -4,11 +4,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import exceptions.IngredientesIncorrectosException;
-import exceptions.LoteExistenteException;
-import exceptions.LoteNoEncontradoException;
-import exceptions.ProductoNoEncontradoException;
-import exceptions.TrazabilidadException;
+import exceptions.ProyectoException;
 import jpa.Lote;
 
 @Local
@@ -25,7 +21,7 @@ public interface GestionLotes {
 	 * @param lote Lote que se quiere insertar. 
 	 * El código y el mapa de lotes de los ingredientes no pueden ser null.
 	 */
-	public void insertarLote(String producto, Lote lote) throws TrazabilidadException;
+	public void insertarLote(String producto, Lote lote) throws ProyectoException;
 	
 	/**
 	 * Obtiene la lista de lotes asociados a un producto que se indica como argumento.
@@ -33,7 +29,7 @@ public interface GestionLotes {
 	 * no se encuentra se lanza la excepción ProductoNoEncontradoException
 	 * @return
 	 */
-	public List<Lote> obtenerLotesDeProducto(String nombre) throws TrazabilidadException;
+	public List<Lote> obtenerLotesDeProducto(String nombre) throws ProyectoException;
 	
 	/**
 	 * Actualiza el lote en la base de datos.
@@ -48,20 +44,20 @@ public interface GestionLotes {
 	 * @param lote Lote que se quiere actualizar. 
 	 * El código y el mapa de lotes de los ingredientes no pueden ser null.
 	 */
-	public void actualizarLote (String producto, Lote lote) throws TrazabilidadException;
+	public void actualizarLote (String producto, Lote lote) throws ProyectoException;
 	
 	/**
 	 * Elimina un lote de la base dedatos.
 	 * @param producto Nombre del producto. Si no exsite se lanza la excepción pertinente.
 	 * @param lote Lote a eliminar. Si no existe se lanza la excepción pertinente.
 	 */
-	public void eliminarLote(String producto, Lote lote) throws TrazabilidadException;
+	public void eliminarLote(String producto, Lote lote) throws ProyectoException;
 	
 	/**
 	 * Elimina todos los lotes asociados a un producto.
 	 * @param producto Nombre del producto cuyos lotes se quieren eliminar. 
 	 * Si el producto no existe se lanza la excepción pertinente.
 	 */
-	public void eliminarTodosLotes(String producto) throws TrazabilidadException;
+	public void eliminarTodosLotes(String producto) throws ProyectoException;
 
 }

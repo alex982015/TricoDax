@@ -96,8 +96,6 @@ public class Lote {
 	@CollectionTable(name = "LoteIngredientes")
 	@Column(name="lote")
 	private Map<Ingrediente, String> loteIngredientes;
-	
-	
 
 	public Lote() {
 	}

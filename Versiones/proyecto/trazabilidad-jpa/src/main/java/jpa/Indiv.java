@@ -10,11 +10,11 @@ import javax.persistence.*;
  *
  */
 
-//@Entity
-//@Table(name="INDIV")
-
 @Entity
-@DiscriminatorValue("Indiv")
+@Table(name="INDIV")
+
+//@Entity
+//@DiscriminatorValue("Indiv")
 
 public class Indiv extends Cliente implements Serializable {
 	
