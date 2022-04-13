@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 import jpa.Cliente;
 import jpa.Cuenta;
 import jpa.Divisa;
+import jpa.Empresa;
 
 public class BaseDatos {
 	public static void inicializaBaseDatos(String nombreUnidadPersistencia) {
@@ -24,6 +25,40 @@ public class BaseDatos {
 		
 		for (Cliente cliente: new Cliente [] {cliente1, cliente2, cliente3, cliente4}) {
 			em.persist(cliente);
+		}
+		
+		Empresa empresa1 = new Empresa ("RazonSocial1 S.L.");
+		empresa1.setIdent(345345345);
+		empresa1.setTipo_cliente("Indiv");
+		empresa1.setEstado(true);
+		empresa1.setFecha_Alta(Date.valueOf("2021-04-11"));
+		empresa1.setDireccion("Calle Ejemplo 231");
+		empresa1.setCiudad("Mallorca");
+		empresa1.setCodPostal(32453);
+		empresa1.setPais("España");
+		
+		Empresa empresa2 = new Empresa ("RazonSocial2 S.L.");
+		empresa2.setIdent(245235256);
+		empresa2.setTipo_cliente("Indiv");
+		empresa2.setEstado(true);
+		empresa2.setFecha_Alta(Date.valueOf("2019-04-11"));
+		empresa2.setDireccion("Calle Ejemplo 231");
+		empresa2.setCiudad("Madrid");
+		empresa2.setCodPostal(53456);
+		empresa2.setPais("España");
+		
+		Empresa empresa3 = new Empresa ("RazonSocial3 S.L.");
+		empresa3.setIdent(345345664);
+		empresa3.setTipo_cliente("Empresa");
+		empresa3.setEstado(true);
+		empresa3.setFecha_Alta(Date.valueOf("2020-07-21"));
+		empresa3.setDireccion("Calle Ejemplo 231");
+		empresa3.setCiudad("Barcelona");
+		empresa3.setCodPostal(34536);
+		empresa3.setPais("España");
+		
+		for (Empresa empresa: new Empresa [] {empresa1, empresa2, empresa3}) {
+			em.persist(empresa);
 		}
 		
 		Cuenta cuenta1 = new Cuenta (33445566,"swift");

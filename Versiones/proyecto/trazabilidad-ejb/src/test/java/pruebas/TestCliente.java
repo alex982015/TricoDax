@@ -47,7 +47,7 @@ public class TestCliente {
 		try {
 			gestionClientes.insertarCliente(cliente);
 			List<Cliente> clientes = gestionClientes.obtenerClientes();
-			assertEquals(5, clientes.size());
+			assertEquals(8, clientes.size());
 		} catch (ClienteExistenteException e) {
 			fail("Lanzó excepción al insertar");
 		} catch (ProyectoException e) {
@@ -59,7 +59,7 @@ public class TestCliente {
 	public void testObtenerClientes() {
 		try {
 			List<Cliente> clientes = gestionClientes.obtenerClientes();
-			assertEquals(4, clientes.size());
+			assertEquals(7, clientes.size());
 		} catch (ProyectoException e) {
 			fail("No debería lanzar excepción");
 		}
@@ -107,7 +107,7 @@ public class TestCliente {
 	@Test
 	public void testActualizarClienteNoEncontrado() {
 		
-		final long ID = 6;
+		final long ID = 9;
 		
 		try {
 			List<Cliente> clientes = gestionClientes.obtenerClientes();
@@ -130,7 +130,7 @@ public class TestCliente {
 			gestionClientes.eliminarCliente(cliente1);
 			
 			List<Cliente> c = gestionClientes.obtenerClientes();
-			assertEquals(3, c.size());
+			assertEquals(6, c.size());
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
 		}
@@ -141,7 +141,7 @@ public class TestCliente {
 		try {
 			List<Cliente> clientes = gestionClientes.obtenerClientes();
 			Cliente cliente1 = clientes.get(0);
-			cliente1.setID(6);
+			cliente1.setID(9);
 			
 			gestionClientes.eliminarCliente(cliente1);
 			fail("Debería lanzar la excepción de cliente no encontrado");
