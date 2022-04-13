@@ -21,6 +21,7 @@ import exceptions.ClienteExistenteException;
 import exceptions.ClienteNoEncontradoException;
 import exceptions.ProyectoException;
 import jpa.Cliente;
+import jpa.Cuenta;
 import jpa.CuentaFintech;
 
 public class TestCliente {
@@ -45,6 +46,8 @@ public class TestCliente {
 		
 		try {
 			gestionClientes.insertarCliente(cliente);
+			List<Cliente> clientes = gestionClientes.obtenerClientes();
+			assertEquals(5, clientes.size());
 		} catch (ClienteExistenteException e) {
 			fail("Lanzó excepción al insertar");
 		} catch (ProyectoException e) {

@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import jpa.Cliente;
+import jpa.Cuenta;
 import jpa.Divisa;
 
 public class BaseDatos {
@@ -23,6 +24,12 @@ public class BaseDatos {
 		
 		for (Cliente cliente: new Cliente [] {cliente1, cliente2, cliente3, cliente4}) {
 			em.persist(cliente);
+		}
+		
+		Cuenta cuenta1 = new Cuenta (33445566,"swift");
+		
+		for (Cuenta cuenta: new Cuenta [] {cuenta1}) {
+			em.persist(cuenta);
 		}
 		
 		Divisa divisa1 = new Divisa ("EUR", "Euro", "€", 1.0000);

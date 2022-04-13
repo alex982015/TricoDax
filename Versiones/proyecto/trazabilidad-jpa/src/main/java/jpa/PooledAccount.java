@@ -11,11 +11,11 @@ import javax.persistence.*;
  *
  */
 
-//@Entity
-//@Table(name="POOLEDACCOUNT")
-
 @Entity
-@DiscriminatorValue("PooledAccount")
+@Table(name="POOLEDACCOUNT")
+
+//@Entity
+//@DiscriminatorValue("PooledAccount")
 
 public class PooledAccount extends CuentaFintech implements Serializable {
 

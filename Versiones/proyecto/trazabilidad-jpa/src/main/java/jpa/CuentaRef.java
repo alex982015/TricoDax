@@ -12,11 +12,11 @@ import javax.persistence.*;
  *
  */
 
-//@Entity
-//@Table(name="CUENTAREF")
-
 @Entity
-@DiscriminatorValue("CuentaRef")
+@Table(name="CUENTAREF")
+
+//@Entity
+//@DiscriminatorValue("CuentaRef")
 
 public class CuentaRef extends Cuenta implements Serializable {
 	

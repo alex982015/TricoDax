@@ -8,11 +8,11 @@ import javax.persistence.*;
  *
  */
 
-//@Entity
-//@Table(name="SEGREGADA")
-
 @Entity
-@DiscriminatorValue("Segregada")
+@Table(name="SEGREGADA")
+
+//@Entity
+//@DiscriminatorValue("Segregada")
 
 public class Segregada extends CuentaFintech implements Serializable {
 

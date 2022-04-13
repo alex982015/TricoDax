@@ -10,11 +10,11 @@ import javax.persistence.*;
  *
  */
 
-//@Entity
-//@Table(name="CUENTAFINTECH")
-
 @Entity
-@DiscriminatorValue("CuentaFintech")
+@Table(name="CUENTAFINTECH")
+
+//@Entity
+//@DiscriminatorValue("CuentaFintech")
 
 public class CuentaFintech extends Cuenta implements Serializable {
 	
