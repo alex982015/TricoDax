@@ -17,38 +17,23 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ejb.GestionClientes;
-import ejb.GestionLotes;
-import ejb.GestionProductos;
 import exceptions.ClienteExistenteException;
 import exceptions.ClienteNoEncontradoException;
-import exceptions.IngredientesIncorrectosException;
-import exceptions.LoteExistenteException;
-import exceptions.LoteNoEncontradoException;
-import exceptions.ProductoNoEncontradoException;
 import exceptions.ProyectoException;
 import jpa.Cliente;
 import jpa.CuentaFintech;
-import jpa.Ingrediente;
-import jpa.Lote;
-import jpa.Producto;
 
 public class TestCliente {
 	
 	private static final Logger LOG = Logger.getLogger(TestCliente.class.getCanonicalName());
-	
-	private static final String PRODUCTOS_EJB = "java:global/classes/ProductosEJB";
-	private static final String LOTES_EJB = "java:global/classes/LotesEJB";
+
 	private static final String CLIENTES_EJB = "java:global/classes/ClientesEJB";
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "TrazabilidadTest";
 	
-	private GestionLotes gestionLotes;
-	private GestionProductos gestionProductos;
 	private GestionClientes gestionClientes;
 	
 	@Before
 	public void setup() throws NamingException  {
-		gestionLotes = (GestionLotes) SuiteTest.ctx.lookup(LOTES_EJB);
-		gestionProductos = (GestionProductos) SuiteTest.ctx.lookup(PRODUCTOS_EJB);
 		gestionClientes = (GestionClientes) SuiteTest.ctx.lookup(CLIENTES_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}

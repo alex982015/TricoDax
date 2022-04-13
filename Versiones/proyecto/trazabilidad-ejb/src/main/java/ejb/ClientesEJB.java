@@ -1,25 +1,17 @@
 package ejb;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import exceptions.ClienteExistenteException;
 import exceptions.ClienteNoEncontradoException;
-import exceptions.IngredientesIncorrectosException;
-import exceptions.LoteExistenteException;
-import exceptions.LoteNoEncontradoException;
-import exceptions.ProductoNoEncontradoException;
 import exceptions.ProyectoException;
 import jpa.Cliente;
-import jpa.Lote;
-import jpa.Producto;
 
 /**
  * Session Bean implementation class Sample
