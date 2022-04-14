@@ -1,13 +1,10 @@
 package pruebas;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -21,7 +18,6 @@ import exceptions.ClienteExistenteException;
 import exceptions.ClienteNoEncontradoException;
 import exceptions.ProyectoException;
 import jpa.Cliente;
-import jpa.Cuenta;
 import jpa.CuentaFintech;
 
 public class TestCliente {
@@ -47,7 +43,7 @@ public class TestCliente {
 		try {
 			gestionClientes.insertarCliente(cliente);
 			List<Cliente> clientes = gestionClientes.obtenerClientes();
-			assertEquals(8, clientes.size());
+			assertEquals(11, clientes.size());
 		} catch (ClienteExistenteException e) {
 			fail("Lanzó excepción al insertar");
 		} catch (ProyectoException e) {
@@ -59,7 +55,7 @@ public class TestCliente {
 	public void testObtenerClientes() {
 		try {
 			List<Cliente> clientes = gestionClientes.obtenerClientes();
-			assertEquals(7, clientes.size());
+			assertEquals(10, clientes.size());
 		} catch (ProyectoException e) {
 			fail("No debería lanzar excepción");
 		}
@@ -107,7 +103,7 @@ public class TestCliente {
 	@Test
 	public void testActualizarClienteNoEncontrado() {
 		
-		final long ID = 9;
+		final long ID = 12;
 		
 		try {
 			List<Cliente> clientes = gestionClientes.obtenerClientes();
@@ -130,7 +126,7 @@ public class TestCliente {
 			gestionClientes.eliminarCliente(cliente1);
 			
 			List<Cliente> c = gestionClientes.obtenerClientes();
-			assertEquals(6, c.size());
+			assertEquals(9, c.size());
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
 		}
@@ -141,7 +137,7 @@ public class TestCliente {
 		try {
 			List<Cliente> clientes = gestionClientes.obtenerClientes();
 			Cliente cliente1 = clientes.get(0);
-			cliente1.setID(9);
+			cliente1.setID(12);
 			
 			gestionClientes.eliminarCliente(cliente1);
 			fail("Debería lanzar la excepción de cliente no encontrado");

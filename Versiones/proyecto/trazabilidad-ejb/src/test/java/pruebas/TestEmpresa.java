@@ -13,10 +13,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ejb.GestionClientes;
-import ejb.GestionCuentas;
 import ejb.GestionEmpresa;
 import exceptions.CuentaExistenteException;
-import exceptions.CuentaNoEncontradoException;
 import exceptions.EmpresaExistenteException;
 import exceptions.EmpresaNoEncontradaException;
 import exceptions.ProyectoException;
@@ -57,7 +55,7 @@ public class TestEmpresa {
 			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
 			List<Cliente> clientes = gestionCliente.obtenerClientes();
 			assertEquals(4, empresas.size());
-			assertEquals(8, clientes.size());
+			assertEquals(11, clientes.size());
 		} catch (EmpresaExistenteException e) {
 			fail("Lanzó excepción al insertar");
 		} catch (CuentaExistenteException e) {
@@ -155,7 +153,7 @@ public class TestEmpresa {
 		try {
 			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
 			Empresa empresa = empresas.get(0);
-			empresa.setID(10);
+			empresa.setID(12);
 			
 			gestionEmpresa.eliminarEmpresa(empresa);
 			fail("Debería lanzar la excepción de empresa no encontrada");
