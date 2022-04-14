@@ -11,6 +11,8 @@ import jpa.Cuenta;
 import jpa.Divisa;
 import jpa.Empresa;
 import jpa.Indiv;
+import jpa.Trans;
+import jpa.UserApk;
 
 public class BaseDatos {
 	public static void inicializaBaseDatos(String nombreUnidadPersistencia) {
@@ -109,6 +111,24 @@ public class BaseDatos {
 		
 		for (Divisa divisa: new Divisa [] {divisa1, divisa2, divisa3, divisa4}) {
 			em.persist(divisa);
+		}
+		
+		Trans trans1 = new Trans(20, "Bizum", "2%", "España", Date.valueOf("2022-02-01"), Date.valueOf("2022-03-01"));
+		Trans trans2 = new Trans(300, "Bizum", "1%", "Noruega", Date.valueOf("2020-02-01"), Date.valueOf("2020-03-01"));
+		Trans trans3 = new Trans(10, "Bizum", "3%", "Nigeria", Date.valueOf("2021-02-01"), Date.valueOf("2021-03-01"));
+		Trans trans4 = new Trans(40, "Bizum", "15%", "Polonia", Date.valueOf("2019-02-01"), Date.valueOf("2019-03-01"));
+		
+		for(Trans trans : new Trans [] {trans1, trans2, trans3, trans4}) {
+			em.persist(trans);
+		}
+		
+		UserApk user1 = new UserApk("Snorlax", "1234", true, true);
+		UserApk user2 = new UserApk("Pikachu", "1234", true, true);
+		UserApk user3 = new UserApk("Ash", "1234", true, true);
+		UserApk user4 = new UserApk("Charizard", "1234", true, true);
+		
+		for(UserApk user : new UserApk [] {user1, user2, user3, user4}) {
+			em.persist(user);
 		}
 		
 		em.getTransaction().commit();

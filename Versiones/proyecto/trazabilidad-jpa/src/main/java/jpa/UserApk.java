@@ -35,10 +35,11 @@ public class UserApk implements Serializable {
 	public UserApk() {
 	}
 	
-	public UserApk(String user, String password, boolean autorizado) {
+	public UserApk(String user, String password, boolean autorizado, boolean administrativo) {
 		this.user = user;
 		this.password = password;
 		this.autorizado = autorizado;
+		this.administrativo = administrativo;
 	}
 
 /***************GETTERS AND SETTERS*******************************/
