@@ -20,7 +20,7 @@ public class PersAut implements Serializable {
 	@Id @GeneratedValue @Column(name="ID")
 	private long Id;
 	@Column(name="IDENT", nullable = false)
-	private String ident;
+	private long ident;
 	@Column(name="NOMBRE", nullable = false)
 	private String nombre;
 	@Column(name="APELLIDOS", nullable = false)
@@ -30,7 +30,7 @@ public class PersAut implements Serializable {
 	@Column(name="FECHANAC") @Temporal(TemporalType.DATE)
 	private Date fechaNac;
 	@Column(name="ESTADO")
-	private String estado;
+	private boolean estado;
 	@Column(name="FECHAINICIO") @Temporal(TemporalType.DATE)
 	private Date fechaInicio;
 	@Column(name="FECHAFIN") @Temporal(TemporalType.DATE)
@@ -51,7 +51,7 @@ public class PersAut implements Serializable {
 	
 	}
 
-	public PersAut(String ident, String nombre, String apellidos, String direccion) {
+	public PersAut(long ident, String nombre, String apellidos, String direccion) {
 		
 		this.ident = ident;
 		this.nombre = nombre;
@@ -59,8 +59,8 @@ public class PersAut implements Serializable {
 		this.direccion = direccion;
 	}
 
-	public PersAut(String ident, String nombre, String apellidos, String direccion, Date fechaNac,
-			String estado, Date fechaInicio, Date fechaFin) {
+	public PersAut(long ident, String nombre, String apellidos, String direccion, Date fechaNac,
+			boolean estado, Date fechaInicio, Date fechaFin) {
 
 		this.ident = ident;
 		this.nombre = nombre;
@@ -82,11 +82,11 @@ public class PersAut implements Serializable {
 		Id = id;
 	}
 	
-	public String getIdent() {
+	public long getIdent() {
 		return ident;
 	}
 
-	public void setIdent(String ident) {
+	public void setIdent(long ident) {
 		this.ident = ident;
 	}
 
@@ -122,11 +122,11 @@ public class PersAut implements Serializable {
 		this.fechaNac = fechaNac;
 	}
 
-	public String getEstado() {
+	public boolean getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
 

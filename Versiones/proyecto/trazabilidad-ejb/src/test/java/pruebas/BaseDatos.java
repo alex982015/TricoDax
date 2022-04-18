@@ -13,6 +13,7 @@ import jpa.CuentaRef;
 import jpa.Divisa;
 import jpa.Empresa;
 import jpa.Indiv;
+import jpa.PersAut;
 import jpa.Trans;
 import jpa.UserApk;
 
@@ -145,6 +146,14 @@ public class BaseDatos {
 		
 		for(UserApk user : new UserApk [] {user1, user2, user3, user4}) {
 			em.persist(user);
+		}
+		
+		PersAut persAut1 = new PersAut (123, "Nombre1", "Apellidos1", "Direccion1", Date.valueOf("2000-12-12"), true, Date.valueOf("2022-04-01"), null);
+		PersAut persAut2 = new PersAut (13423, "Nombre2", "Apellidos2", "Direccion2", Date.valueOf("2002-02-02"), true, Date.valueOf("2022-03-01"), null);
+		PersAut persAut3 = new PersAut (54354, "Nombre3", "Apellidos3", "Direccion3", Date.valueOf("2012-10-11"), true, Date.valueOf("2022-05-01"), null);
+		
+		for(PersAut persAut : new PersAut [] {persAut1, persAut2, persAut3}) {
+			em.persist(persAut);
 		}
 		
 		em.getTransaction().commit();
