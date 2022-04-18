@@ -14,7 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ejb.GestionClientes;
-import es.uma.informatica.sii.anotaciones.Requisitos;
+//import es.uma.informatica.sii.anotaciones.Requisitos;
 import exceptions.ClienteConCuentasAsociadasException;
 import exceptions.ClienteExistenteException;
 import exceptions.ClienteNoEncontradoException;
@@ -37,7 +37,7 @@ public class TestCliente {
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
 
-	@Requisitos({"RF2"}) 
+	//@Requisitos({"RF2"}) 
 	@Test
 	public void testInsertarCliente() {
 		
@@ -64,7 +64,7 @@ public class TestCliente {
 		}
 	}
 	
-	@Requisitos({"RF3"}) 
+	//@Requisitos({"RF3"}) 
 	@Test
 	public void testActualizarCliente() {
 		
@@ -102,7 +102,7 @@ public class TestCliente {
 		}
 	}
 	
-	@Requisitos({"RF4"}) 
+	//@Requisitos({"RF4"}) 
 	@Test
 	public void testDarBajaCliente() {
 		

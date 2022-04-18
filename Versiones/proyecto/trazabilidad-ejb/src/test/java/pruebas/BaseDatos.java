@@ -8,6 +8,8 @@ import javax.persistence.Persistence;
 
 import jpa.Cliente;
 import jpa.Cuenta;
+import jpa.CuentaFintech;
+import jpa.CuentaRef;
 import jpa.Divisa;
 import jpa.Empresa;
 import jpa.Indiv;
@@ -96,6 +98,20 @@ public class BaseDatos {
 		
 		for (Indiv indiv: new Indiv [] {indiv1, indiv2, indiv3}) {
 			em.persist(indiv);
+		}
+		
+		CuentaFintech cuentaFintech1 = new CuentaFintech (true,Date.valueOf("2022-06-27"),null,true);
+		cuentaFintech1.setIBAN(33334444);
+		
+		for (CuentaFintech cuenta: new CuentaFintech [] {cuentaFintech1}) {
+			em.persist(cuenta);
+		}
+		
+		CuentaRef cuentaRef1 = new CuentaRef ("Santander",24,"España",2000.0,Date.valueOf("2022-06-26"),true);
+		cuentaRef1.setIBAN(33334445);
+		
+		for (CuentaRef cuenta: new CuentaRef [] {cuentaRef1}) {
+			em.persist(cuenta);
 		}
 		
 		Cuenta cuenta1 = new Cuenta (33445566,"swift");

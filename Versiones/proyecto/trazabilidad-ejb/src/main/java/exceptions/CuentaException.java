@@ -8,5 +8,6 @@ package exceptions;
  *
  */
 public class CuentaException extends ProyectoException {
-
+	
+	
 }

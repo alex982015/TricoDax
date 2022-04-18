@@ -33,7 +33,7 @@ public class CuentaRef extends Cuenta implements Serializable {
 	@Column(name="FECHAAPERTURA") @Temporal(TemporalType.DATE)
 	private Date fechaApertura;
 	@Column(name="ESTADO")
-	private String estado;
+	private boolean estado;
 
 	@ElementCollection
     @CollectionTable(name="DEPOSITEN",joinColumns = {@JoinColumn(name="IBANPOOLEDACCOUNT")})
@@ -56,7 +56,7 @@ public class CuentaRef extends Cuenta implements Serializable {
 		Saldo = saldo;
 	}
 
-	public CuentaRef(String nombreBanco, int sucursal, String pais, double saldo, Date fechaApertura, String estado) {
+	public CuentaRef(String nombreBanco, int sucursal, String pais, double saldo, Date fechaApertura, boolean estado) {
 		super();
 		NombreBanco = nombreBanco;
 		Sucursal = sucursal;
@@ -108,11 +108,11 @@ public class CuentaRef extends Cuenta implements Serializable {
 		this.fechaApertura = fechaApertura;
 	}
 
-	public String getEstado() {
+	public boolean getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
 	

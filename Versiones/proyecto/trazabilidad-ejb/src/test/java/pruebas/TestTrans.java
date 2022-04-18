@@ -13,7 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 
-import ejb.GestionUser;
+import ejb.GestionTrans;
 import exceptions.ClienteNoEncontradoException;
 import exceptions.ProyectoException;
 import exceptions.TransExistenteException;
@@ -28,11 +28,11 @@ public class TestTrans {
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "TrazabilidadTest";
 	
 
-	private GestionUser gestionTrans;
+	private GestionTrans gestionTrans;
 	
 	@Before
 	public void setup() throws NamingException  {
-		gestionTrans = (GestionUser) SuiteTest.ctx.lookup(TRANS_EJB);
+		gestionTrans = (GestionTrans) SuiteTest.ctx.lookup(TRANS_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
 

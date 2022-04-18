@@ -17,7 +17,7 @@ import jpa.Trans;
  * Session Bean implementation class TransEJB
  */
 @Stateless
-public class TransEJB implements GestionUser{
+public class TransEJB implements GestionTrans{
 	
 	 @PersistenceContext(name="Trazabilidad")
 	 private EntityManager em;

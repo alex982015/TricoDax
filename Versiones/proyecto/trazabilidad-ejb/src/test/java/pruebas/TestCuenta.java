@@ -39,7 +39,7 @@ public class TestCuenta {
 			
 			gestionCuentas.insertarCuenta(cuenta);
 			List<Cuenta> cuentas = gestionCuentas.obtenerCuentas();
-			assertEquals(2, cuentas.size());
+			assertEquals(4, cuentas.size());
 			
 		} catch (CuentaExistenteException e) {
 			fail("Lanzó excepción al insertar");
@@ -52,7 +52,7 @@ public class TestCuenta {
 	public void testObtenerCuentas() {
 		try {
 			List<Cuenta> cuentas = gestionCuentas.obtenerCuentas();
-			assertEquals(1, cuentas.size());
+			assertEquals(3, cuentas.size());
 		} catch (ProyectoException e) {
 			fail("No debería lanzar excepción");
 		}
@@ -105,7 +105,7 @@ public class TestCuenta {
 			gestionCuentas.eliminarCuenta(cuenta1);
 			
 			List<Cuenta> c = gestionCuentas.obtenerCuentas();
-			assertEquals(0, c.size());
+			assertEquals(2, c.size());
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
 		}

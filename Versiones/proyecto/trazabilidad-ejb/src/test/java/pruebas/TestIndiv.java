@@ -14,7 +14,7 @@ import org.junit.Test;
 
 import ejb.GestionClientes;
 import ejb.GestionIndiv;
-import es.uma.informatica.sii.anotaciones.Requisitos;
+//import es.uma.informatica.sii.anotaciones.Requisitos;
 import exceptions.CuentaExistenteException;
 import exceptions.IndivExistenteException;
 import exceptions.IndivNoEncontradoException;
@@ -38,7 +38,7 @@ public class TestIndiv {
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
 
-	@Requisitos({"RF2"}) 
+	//@Requisitos({"RF2"}) 
 	@Test
 	public void testInsertarIndiv() {
 		final Indiv particular = new Indiv ("Nombre","Apellidos",Date.valueOf("1998-07-12"));
@@ -76,7 +76,7 @@ public class TestIndiv {
 		}
 	}
 	
-	@Requisitos({"RF3"})
+	//@Requisitos({"RF3"})
 	@Test
 	public void testActualizarIndiv() {
 		List<CuentaFintech> cuentas = new ArrayList<CuentaFintech>();
