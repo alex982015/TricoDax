@@ -14,6 +14,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ejb.GestionClientes;
+import es.uma.informatica.sii.anotaciones.Requisitos;
+import exceptions.ClienteConCuentasAsociadasException;
 import exceptions.ClienteExistenteException;
 import exceptions.ClienteNoEncontradoException;
 import exceptions.ProyectoException;
@@ -35,6 +37,7 @@ public class TestCliente {
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
 
+	@Requisitos({"RF2"}) 
 	@Test
 	public void testInsertarCliente() {
 		
@@ -61,6 +64,7 @@ public class TestCliente {
 		}
 	}
 	
+	@Requisitos({"RF3"}) 
 	@Test
 	public void testActualizarCliente() {
 		
@@ -68,7 +72,6 @@ public class TestCliente {
 		
 		final long nuevaIdent = 1234L;
 		final String nuevoTipoCliente = "2020-01-01";
-		final boolean nuevoEstado = true;
 		final Date nuevaFechaAlta = Date.valueOf("2020-01-01");
 		final Date nuevaFechaBaja = null;
 		final String nuevaDireccion = "Carne pruebas 123";
@@ -84,7 +87,6 @@ public class TestCliente {
 			
 			c.setIdent(nuevaIdent);
 			c.setTipo_cliente(nuevoTipoCliente);
-			c.setEstado(nuevoEstado);
 			c.setFecha_Alta(nuevaFechaAlta);
 			c.setFecha_Baja(nuevaFechaBaja);
 			c.setDireccion(nuevaDireccion);
@@ -95,6 +97,30 @@ public class TestCliente {
 			
 			gestionClientes.actualizarCliente(c);
 
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al actualizar");
+		}
+	}
+	
+	@Requisitos({"RF4"}) 
+	@Test
+	public void testDarBajaCliente() {
+		
+		final boolean nuevoEstado = false;
+		
+		try {
+			
+			List<Cliente> clientes = gestionClientes.obtenerClientes();
+			Cliente c = clientes.get(0);
+			
+			if(c.getCuentas().size() == 0) {
+				c.setEstado(nuevoEstado);
+			}
+			
+			gestionClientes.bajaCliente(c);
+
+		} catch (ClienteConCuentasAsociadasException e) {
+			fail("Cliente con cuentas asociadas");
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al actualizar");
 		}

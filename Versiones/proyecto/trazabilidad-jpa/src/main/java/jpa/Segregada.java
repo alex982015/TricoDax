@@ -20,7 +20,7 @@ public class Segregada extends CuentaFintech implements Serializable {
 	
 	@Column(name="COMISION")
 	private double comision;
-	@OneToOne
+	@ManyToOne
 	private CuentaRef referenciada;
 
 /****************CONSTRUCTORES*************************************/

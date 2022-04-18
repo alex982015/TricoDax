@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import ejb.GestionClientes;
 import ejb.GestionEmpresa;
+import es.uma.informatica.sii.anotaciones.Requisitos;
 import exceptions.CuentaExistenteException;
 import exceptions.EmpresaExistenteException;
 import exceptions.EmpresaNoEncontradaException;
@@ -37,7 +38,8 @@ public class TestEmpresa {
 		gestionEmpresa = (GestionEmpresa) SuiteTest.ctx.lookup(EMPRESA_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
-
+	
+	@Requisitos({"RF2"}) 
 	@Test
 	public void testInsertarEmpresa() {
 		final Empresa empresa = new Empresa ("RazonSocial S.L.");
@@ -75,6 +77,7 @@ public class TestEmpresa {
 		}
 	}
 	
+	@Requisitos({"RF3"})
 	@Test
 	public void testActualizarEmpresa() {
 		List<CuentaFintech> cuentas = new ArrayList<CuentaFintech>();

@@ -21,7 +21,7 @@ public class CuentaFintech extends Cuenta implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Column(name="ESTADO", nullable = false)
-	private String estado;
+	private boolean estado;
 	@Column(name="FECHAAPERTURA", nullable = false) @Temporal(TemporalType.DATE)
 	private Date fechaApertura;
 	@Column(name="FECHACIERRE") @Temporal(TemporalType.DATE)
@@ -38,13 +38,13 @@ public class CuentaFintech extends Cuenta implements Serializable {
 		super();
 	}
 	
-	public CuentaFintech(String estado, Date fechaApertura) {
+	public CuentaFintech(boolean estado, Date fechaApertura) {
 		super();
 		this.estado = estado;
 		this.fechaApertura = fechaApertura;
 	}
 
-	public CuentaFintech(String estado, Date fechaApertura, Date fechaCierre, boolean clasificacion) {
+	public CuentaFintech(boolean estado, Date fechaApertura, Date fechaCierre, boolean clasificacion) {
 		super();
 		this.estado = estado;
 		this.fechaApertura = fechaApertura;
@@ -54,11 +54,11 @@ public class CuentaFintech extends Cuenta implements Serializable {
 
 /***************GETTERS AND SETTERS*******************************/
 
-	public String getEstado() {
+	public boolean getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
 

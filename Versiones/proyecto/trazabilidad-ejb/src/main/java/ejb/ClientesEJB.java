@@ -8,10 +8,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import exceptions.ClienteConCuentasAsociadasException;
 import exceptions.ClienteExistenteException;
 import exceptions.ClienteNoEncontradoException;
 import exceptions.ProyectoException;
 import jpa.Cliente;
+import jpa.CuentaFintech;
 
 /**
  * Session Bean implementation class Sample
@@ -49,7 +51,6 @@ public class ClientesEJB implements GestionClientes {
 		
 		clienteEntity.setIdent(cliente.getIdent());
 		clienteEntity.setTipo_cliente(cliente.getTipo_cliente());
-		clienteEntity.setEstado(cliente.isEstado());
 		clienteEntity.setFecha_Alta(cliente.getFecha_Alta());
 		clienteEntity.setFecha_Baja(cliente.getFecha_Baja());
 		clienteEntity.setDireccion(cliente.getDireccion());
@@ -58,6 +59,29 @@ public class ClientesEJB implements GestionClientes {
 		clienteEntity.setPais(cliente.getPais());
 		clienteEntity.setCuentas(cliente.getCuentas());
 	
+		em.merge(clienteEntity);
+	}
+	
+	@Override
+	public void bajaCliente(Cliente cliente) throws ProyectoException {
+		Cliente clienteEntity = em.find(Cliente.class, cliente.getID());
+		if (clienteEntity == null) {
+			throw new ClienteNoEncontradoException();
+		}
+			
+		if (clienteEntity.getCuentas().size() == 0) {
+			clienteEntity.setEstado(false);
+		} else {
+			
+			for(CuentaFintech c : clienteEntity.getCuentas()) {
+				if(c.getEstado()) {
+					throw new ClienteConCuentasAsociadasException();
+				}
+			}
+			
+			clienteEntity.setEstado(false);
+		}
+		
 		em.merge(clienteEntity);
 	}
 	
