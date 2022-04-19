@@ -12,23 +12,19 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ejb.GestionCuentaFintech;
-import ejb.GestionCuentas;
 import exceptions.CuentaExistenteException;
 import exceptions.CuentaNoEncontradoException;
 import exceptions.ProyectoException;
 import jpa.CuentaFintech;
 
 public class TestCuentaFintech {
-	private static final String CUENTA_EJB = "java:global/classes/CuentaEJB";
 	private static final String CUENTAFINTECH_EJB = "java:global/classes/CuentaFintechEJB";
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "TrazabilidadTest";
 	
-	private GestionCuentas gestionCuentas;
 	private GestionCuentaFintech gestionCuentasFintech;
 	
 	@Before
 	public void setup() throws NamingException  {
-		gestionCuentas = (GestionCuentas) SuiteTest.ctx.lookup(CUENTA_EJB);
 		gestionCuentasFintech = (GestionCuentaFintech) SuiteTest.ctx.lookup(CUENTAFINTECH_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}

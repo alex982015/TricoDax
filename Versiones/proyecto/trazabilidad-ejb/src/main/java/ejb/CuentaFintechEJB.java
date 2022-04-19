@@ -16,7 +16,7 @@ import jpa.CuentaFintech;
 import jpa.Empresa;
 
 @Stateless
-public class CuentaFintechEJB extends CuentaEJB implements GestionCuentaFintech {
+public class CuentaFintechEJB implements GestionCuentaFintech {
 
 	@PersistenceContext(name="Trazabilidad")
 	private EntityManager em;
@@ -72,7 +72,7 @@ public class CuentaFintechEJB extends CuentaEJB implements GestionCuentaFintech 
 		
 		for (CuentaFintech e : cuentas) {
 			Cuenta cuentaEntity = em.find(Cuenta.class, e.getIBAN());
-			eliminarCuenta(cuentaEntity);
+			em.remove(cuentaEntity);
 		}
 		
 		for (CuentaFintech e : cuentas) {

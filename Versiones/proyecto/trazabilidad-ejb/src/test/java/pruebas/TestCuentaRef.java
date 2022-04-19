@@ -12,23 +12,19 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ejb.GestionCuentaRef;
-import ejb.GestionCuentas;
 import exceptions.CuentaExistenteException;
 import exceptions.CuentaNoEncontradoException;
 import exceptions.ProyectoException;
 import jpa.CuentaRef;
 
 public class TestCuentaRef {
-	private static final String CUENTA_EJB = "java:global/classes/CuentaEJB";
 	private static final String CUENTAREF_EJB = "java:global/classes/CuentaRefEJB";
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "TrazabilidadTest";
 	
-	private GestionCuentas gestionCuentas;
 	private GestionCuentaRef gestionCuentasRef;
 	
 	@Before
 	public void setup() throws NamingException  {
-		gestionCuentas = (GestionCuentas) SuiteTest.ctx.lookup(CUENTA_EJB);
 		gestionCuentasRef = (GestionCuentaRef) SuiteTest.ctx.lookup(CUENTAREF_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}

@@ -17,7 +17,7 @@ import jpa.CuentaRef;
  * Session Bean implementation class CuentaRefEJB
  */
 @Stateless
-public class CuentaRefEJB extends CuentaEJB implements GestionCuentaRef {
+public class CuentaRefEJB implements GestionCuentaRef {
 
 	@PersistenceContext(name="Trazabilidad")
 	private EntityManager em;
@@ -75,7 +75,7 @@ public class CuentaRefEJB extends CuentaEJB implements GestionCuentaRef {
 		
 		for (CuentaRef e : cuentas) {
 			Cuenta cuentaEntity = em.find(Cuenta.class, e.getIBAN());
-			eliminarCuenta(cuentaEntity);
+			em.remove(cuentaEntity);
 		}
 		
 		for (CuentaRef e : cuentas) {

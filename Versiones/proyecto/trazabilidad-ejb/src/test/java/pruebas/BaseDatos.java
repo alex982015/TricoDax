@@ -128,12 +128,6 @@ public class BaseDatos {
 			em.persist(cuenta);
 		}
 		
-		Cuenta cuenta1 = new Cuenta (33445566,"swift");
-		
-		for (Cuenta cuenta: new Cuenta [] {cuenta1}) {
-			em.persist(cuenta);
-		}
-		
 		Divisa divisa1 = new Divisa ("EUR", "Euro", "€", 1.0000);
 		Divisa divisa2 = new Divisa ("USD", "Dólar estadounidense", "US$", 0.9200);
 		Divisa divisa3 = new Divisa ("GBP", "Libra esterlina", "£", 1.2000);
