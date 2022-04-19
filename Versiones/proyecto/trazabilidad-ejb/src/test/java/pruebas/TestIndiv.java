@@ -12,15 +12,13 @@ import javax.naming.NamingException;
 import org.junit.Before;
 import org.junit.Test;
 
-import ejb.GestionClientes;
 import ejb.GestionIndiv;
+import exceptions.ClienteExistenteException;
+import exceptions.ClienteNoEncontradoException;
 //import es.uma.informatica.sii.anotaciones.Requisitos;
-import exceptions.CuentaExistenteException;
-import exceptions.IndivExistenteException;
-import exceptions.IndivNoEncontradoException;
 import exceptions.ProyectoException;
-import jpa.Cliente;
 import jpa.CuentaFintech;
+import jpa.Empresa;
 import jpa.Indiv;
 
 public class TestIndiv {
@@ -28,12 +26,10 @@ public class TestIndiv {
 	private static final String INDIV_EJB = "java:global/classes/IndivEJB";
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "TrazabilidadTest";
 	
-	private GestionClientes gestionCliente;
 	private GestionIndiv gestionIndiv;
 	
 	@Before
 	public void setup() throws NamingException  {
-		gestionCliente = (GestionClientes) SuiteTest.ctx.lookup(CLIENTES_EJB);
 		gestionIndiv = (GestionIndiv) SuiteTest.ctx.lookup(INDIV_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
@@ -54,12 +50,8 @@ public class TestIndiv {
 		try {
 			gestionIndiv.insertarIndiv(particular);
 			List<Indiv> particulares = gestionIndiv.obtenerIndiv();
-			List<Cliente> clientes = gestionCliente.obtenerClientes();
 			assertEquals(4, particulares.size());
-			assertEquals(11, clientes.size());
-		} catch (IndivExistenteException e) {
-			fail("Lanzó excepción al insertar");
-		} catch (CuentaExistenteException e) {
+		} catch (ClienteExistenteException e) {
 			fail("Lanzó excepción al insertar");
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al insertar"); 
@@ -122,6 +114,7 @@ public class TestIndiv {
 		}
 	}
 	
+	//@Requisitos({"RF3"})
 	@Test
 	public void testActualizarIndivNoEncontrado() {
 		
@@ -133,10 +126,41 @@ public class TestIndiv {
 			i.setID(ID);
 			gestionIndiv.actualizarIndiv(i);
 			fail("Debería lanzar excepción de particular no encontrado");
-		} catch (IndivNoEncontradoException e) {
+		} catch (ClienteNoEncontradoException e) {
 			// OK
 		} catch (ProyectoException e) {
 			fail("Debería lanzar excepción de particular no encontrado");
+		}
+	}
+	
+	//@Requisitos({"RF4"})
+	@Test
+	public void testCerrarCuentaIndiv() {
+		try {
+			List<Indiv> particulares = gestionIndiv.obtenerIndiv();
+			Indiv i = particulares.get(0);
+		
+			gestionIndiv.cerrarCuentaIndiv(i);
+
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al cerrar cuenta");
+		}
+	}
+
+	//@Requisitos({"RF4"})
+	@Test
+	public void testCerrarCuentaIndivNoExistente() {
+		try {
+			List<Indiv> particulares = gestionIndiv.obtenerIndiv();
+			Indiv i = particulares.get(0);
+			i.setID(10);
+		
+			gestionIndiv.cerrarCuentaIndiv(i);
+
+		} catch (ClienteNoEncontradoException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al cerrar cuenta");
 		}
 	}
 	
@@ -163,7 +187,7 @@ public class TestIndiv {
 			
 			gestionIndiv.eliminarIndiv(i);
 			fail("Debería lanzar la excepción de particular no encontrado");
-		} catch (IndivNoEncontradoException e) {
+		} catch (ClienteNoEncontradoException e) {
 			// OK
 		} catch (ProyectoException e) {
 			fail("Debería lanzar la excepción de particular no encontrado");
@@ -173,16 +197,9 @@ public class TestIndiv {
 	@Test
 	public void testEliminarTodosIndiv() {
 		try {
-			List<Cliente> clientesA = gestionCliente.obtenerClientes();
-			
-			List<Indiv> particularA = gestionIndiv.obtenerIndiv();
 			gestionIndiv.eliminarTodosIndiv();
-			List<Indiv> particularB = gestionIndiv.obtenerIndiv();
-			
-			List<Cliente> clientesB = gestionCliente.obtenerClientes();
-		
-			assertEquals(clientesA.size() - clientesB.size(), particularA.size());
-			assertEquals(0, particularB.size());
+			List<Indiv> particular = gestionIndiv.obtenerIndiv();
+			assertEquals(0, particular.size());
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
 		}

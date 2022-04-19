@@ -40,7 +40,7 @@ public class TestUserApk {
 	@Test
 	public void testInsertarUser() {
 		
-		final UserApk user = new UserApk("USUARIO", "1234", true, true);
+		final UserApk user = new UserApk("USUARIO", "1234", true);
 		
 		try {
 			gestionUser.insertarUser(user);
@@ -67,7 +67,6 @@ public class TestUserApk {
 	public void testActualizarUser() {
 		
 		final String nuevoPassword = "1235";
-		final boolean nuevoAutorizado= true;
 		final boolean nuevaAdministrativo = true;
 		
 		try {
@@ -76,7 +75,6 @@ public class TestUserApk {
 			UserApk u = userExistente.get(0);
 			
 			u.setPassword(nuevoPassword);
-			u.setAutorizado(nuevoAutorizado);
 			u.setAdministrativo(nuevaAdministrativo);
 			
 			gestionUser.actualizarUser(u);

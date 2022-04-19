@@ -23,6 +23,8 @@ public class Empresa extends Cliente implements Serializable {
 
 	@Column(name="RAZONSOCIAL", nullable = false)
 	private String razonSocial;
+	@Column(name="BLOQUEO", nullable = false)
+	private boolean block;
 
 	@ElementCollection
     @CollectionTable(name="AUTORIZ",joinColumns = {@JoinColumn(name="IDPERSAUT")})
@@ -36,9 +38,10 @@ public class Empresa extends Cliente implements Serializable {
 		super();
 	}
 
-	public Empresa(String razonSocial) {
+	public Empresa(String razonSocial, boolean block) {
 		super();
 		this.razonSocial = razonSocial;
+		this.block = block;
 	}
 
 /***************GETTERS AND SETTERS*******************************/
@@ -49,6 +52,14 @@ public class Empresa extends Cliente implements Serializable {
 
 	public void setRazonSocial(String razonSocial) {
 		this.razonSocial = razonSocial;
+	}
+	
+	public boolean isBlock() {
+		return block;
+	}
+
+	public void setBlock(boolean block) {
+		this.block = block;
 	}
 
 	public Map<PersAut, String> getAutoriz() {
@@ -65,7 +76,7 @@ public class Empresa extends Cliente implements Serializable {
 	public String toString() {
 		return "Empresa [ID=" + super.getID() + ", Ident=" + super.getIdent() + ", tipo_cliente=" + super.getTipo_cliente() + ", estado=" + super.isEstado()
 				+ ", Fecha_Alta=" + super.getFecha_Alta() + ", Fecha_Baja=" + super.getFecha_Baja() + ", Direccion=" + super.getDireccion() + ", Ciudad="
-				+ super.getCiudad() + ", CodPostal=" + super.getCodPostal() + ", Pais=" + super.getPais() + ", Razon_Social=" + razonSocial + ", Autorizado="+ autoriz + "]";
+				+ super.getCiudad() + ", CodPostal=" + super.getCodPostal() + ", Pais=" + super.getPais() + ", Razon_Social=" + razonSocial + ", Bloqueo="+ block + ", Autorizado="+ autoriz + "]";
 	}
 	
 }

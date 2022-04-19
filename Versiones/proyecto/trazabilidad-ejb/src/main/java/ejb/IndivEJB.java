@@ -8,27 +8,28 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import exceptions.IndivExistenteException;
-import exceptions.IndivNoEncontradoException;
+import exceptions.ClienteExistenteException;
+import exceptions.ClienteNoEncontradoException;
 import exceptions.ProyectoException;
 import jpa.Cliente;
+import jpa.Empresa;
 import jpa.Indiv;
 
 /**
  * Session Bean implementation class IndivEJB
  */
 @Stateless
-public class IndivEJB extends ClientesEJB implements GestionIndiv {
+public class IndivEJB implements GestionIndiv {
 private static final Logger LOG = Logger.getLogger(IndivEJB.class.getCanonicalName());
 	
 	@PersistenceContext(name="Trazabilidad")
 	private EntityManager em;
 
 	@Override
-	public void insertarIndiv(Indiv indiv) throws IndivExistenteException {
+	public void insertarIndiv(Indiv indiv) throws ClienteExistenteException {
 		Indiv indivExistente = em.find(Indiv.class, indiv.getID());
 		if (indivExistente != null) {
-			throw new IndivExistenteException();
+			throw new ClienteExistenteException();
 		}
 		
 		em.persist(indiv);
@@ -44,13 +45,25 @@ private static final Logger LOG = Logger.getLogger(IndivEJB.class.getCanonicalNa
 	public void actualizarIndiv(Indiv indiv) throws ProyectoException {
 		Indiv indivEntity = em.find(Indiv.class, indiv.getID());
 		if (indivEntity == null) {
-			throw new IndivNoEncontradoException();
+			throw new ClienteNoEncontradoException();
 		}
 		
 		indivEntity.setNombre(indiv.getNombre());
 		indivEntity.setApellido(indiv.getApellido());
 		indivEntity.setFechaNac(indiv.getFechaNac());
 		
+		
+		em.merge(indivEntity);
+	}
+	
+	@Override
+	public void cerrarCuentaIndiv(Indiv indiv) throws ProyectoException {
+		Indiv indivEntity = em.find(Indiv.class, indiv.getID());
+		if (indivEntity == null) {
+			throw new ClienteNoEncontradoException();
+		}
+		
+		indivEntity.setEstado(false);
 		
 		em.merge(indivEntity);
 	}
@@ -61,7 +74,7 @@ private static final Logger LOG = Logger.getLogger(IndivEJB.class.getCanonicalNa
 		Cliente clienteEntity = em.find(Cliente.class, indiv.getID());
 		
 		if ((indivEntity == null) && (clienteEntity == null)) {
-			throw new IndivNoEncontradoException();
+			throw new ClienteNoEncontradoException();
 		}
 		
 		em.remove(indivEntity);
@@ -74,7 +87,7 @@ private static final Logger LOG = Logger.getLogger(IndivEJB.class.getCanonicalNa
 		
 		for (Indiv i : particulares) {
 			Cliente clienteEntity = em.find(Cliente.class, i.getID());
-			eliminarCliente(clienteEntity);
+			em.remove(clienteEntity);
 		}
 		
 		for (Indiv i : particulares) {

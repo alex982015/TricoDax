@@ -8,8 +8,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import exceptions.CuentaExistenteException;
-import exceptions.CuentaFintechExistenteException;
-import exceptions.CuentaFintechNoEncontradaException;
 import exceptions.CuentaNoEncontradoException;
 import exceptions.ProyectoException;
 import jpa.Cliente;
@@ -18,16 +16,16 @@ import jpa.CuentaFintech;
 import jpa.Empresa;
 
 @Stateless
-public class CuentaFintechEJB extends CuentaEJB implements GestionCuentaFintech{
+public class CuentaFintechEJB extends CuentaEJB implements GestionCuentaFintech {
 
 	@PersistenceContext(name="Trazabilidad")
 	private EntityManager em;
     
 	@Override
-	public void insertarCuentaFintech(CuentaFintech cuenta) throws CuentaFintechExistenteException {
+	public void insertarCuentaFintech(CuentaFintech cuenta) throws CuentaExistenteException {
 		CuentaFintech cuentaExistente = em.find(CuentaFintech.class, cuenta.getIBAN());
 		if (cuentaExistente != null) {
-			throw new CuentaFintechExistenteException();
+			throw new CuentaExistenteException();
 		}
 		
 		em.persist(cuenta);
@@ -43,7 +41,7 @@ public class CuentaFintechEJB extends CuentaEJB implements GestionCuentaFintech{
 	public void actualizarCuentaFintech(CuentaFintech cuenta) throws ProyectoException {
 		CuentaFintech cuentaEntity = em.find(CuentaFintech.class, cuenta.getIBAN());
 		if (cuentaEntity == null) {
-			throw new CuentaFintechNoEncontradaException();
+			throw new CuentaNoEncontradoException();
 		}
 		
 		cuentaEntity.setEstado(cuenta.getEstado());
@@ -60,7 +58,7 @@ public class CuentaFintechEJB extends CuentaEJB implements GestionCuentaFintech{
 		Cuenta cuentaEntity = em.find(Cuenta.class, cuenta.getIBAN());
 		
 		if (cuentaFintechEntity == null && (cuentaEntity == null)) {
-			throw new CuentaFintechNoEncontradaException();
+			throw new CuentaNoEncontradoException();
 		}
 		
 		em.remove(cuentaFintechEntity);

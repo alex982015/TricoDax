@@ -14,10 +14,8 @@ import org.junit.Test;
 import ejb.GestionCuentaFintech;
 import ejb.GestionCuentas;
 import exceptions.CuentaExistenteException;
-import exceptions.CuentaFintechNoEncontradaException;
 import exceptions.CuentaNoEncontradoException;
 import exceptions.ProyectoException;
-import jpa.Cuenta;
 import jpa.CuentaFintech;
 
 public class TestCuentaFintech {
@@ -102,7 +100,7 @@ public class TestCuentaFintech {
 			
 			gestionCuentasFintech.actualizarCuentaFintech(c);
 			fail("Debería lanzar excepción de cuentaFintech no encontrado");
-		} catch (CuentaFintechNoEncontradaException e) {
+		} catch (CuentaNoEncontradoException e) {
 			// OK
 		} catch (ProyectoException e) {
 			fail("Debería lanzar excepción de cuentaFintech no encontrado");
@@ -134,7 +132,7 @@ public class TestCuentaFintech {
 			
 			gestionCuentasFintech.eliminarCuentaFintech(cuenta1);
 			fail("Debería lanzar la excepción de cuentaFintech no encontrada");
-		} catch (CuentaFintechNoEncontradaException e) {
+		} catch (CuentaNoEncontradoException e) {
 			// OK
 		} catch (ProyectoException e) {
 			fail("Debería lanzar la excepción de cuentaFintech no encontrada");

@@ -8,10 +8,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import exceptions.ClienteNoEncontradoException;
 import exceptions.PersAutExistenteException;
 import exceptions.PersAutNoEncontradaException;
 import exceptions.ProyectoException;
-
+import jpa.Indiv;
 import jpa.PersAut;
 
 /**
@@ -55,6 +56,18 @@ public class PersAutEJB implements GestionPersAut {
 		persAutEntity.setFechaNac(persAut.getFechaNac());
 		persAutEntity.setFechaFin(persAut.getFechaFin());
 	
+		em.merge(persAutEntity);
+	}
+	
+	@Override
+	public void cerrarCuentaPersAut(PersAut persAut) throws ProyectoException {
+		PersAut persAutEntity = em.find(PersAut.class, persAut.getId());
+		if (persAutEntity == null) {
+			throw new ClienteNoEncontradoException();
+		}
+		
+		persAutEntity.setEstado(false);
+		
 		em.merge(persAutEntity);
 	}
 	

@@ -49,7 +49,6 @@ public class UserApkEJB implements GestionUserApk {
 			}
 			//Actualización de atributos propios de clase
 			userEntity.setPassword(user.getPassword());
-			userEntity.setAutorizado(user.isAutorizado());
 			userEntity.setAdministrativo(user.isAdministrativo());
 			//Actualización de parámetros de relación
 			/*

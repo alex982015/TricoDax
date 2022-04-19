@@ -35,6 +35,9 @@ public class PersAut implements Serializable {
 	private Date fechaInicio;
 	@Column(name="FECHAFIN") @Temporal(TemporalType.DATE)
 	private Date fechaFin;
+	@Column(name="BLOQUEO", nullable = false)
+	private boolean block;
+	
 	
 	@ElementCollection
     @CollectionTable(name="AUTORIZ",joinColumns = {@JoinColumn(name="IDEMPRESA")})
@@ -51,16 +54,17 @@ public class PersAut implements Serializable {
 	
 	}
 
-	public PersAut(long ident, String nombre, String apellidos, String direccion) {
+	public PersAut(long ident, String nombre, String apellidos, String direccion, boolean block) {
 		
 		this.ident = ident;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.direccion = direccion;
+		this.block = block;
 	}
 
 	public PersAut(long ident, String nombre, String apellidos, String direccion, Date fechaNac,
-			boolean estado, Date fechaInicio, Date fechaFin) {
+			boolean estado, Date fechaInicio, Date fechaFin, boolean block) {
 
 		this.ident = ident;
 		this.nombre = nombre;
@@ -70,6 +74,7 @@ public class PersAut implements Serializable {
 		this.estado = estado;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
+		this.block = block;
 	}
 
 /***************GETTERS AND SETTERS*******************************/
@@ -147,6 +152,14 @@ public class PersAut implements Serializable {
 		this.fechaFin = fechaFin;
 	}
 
+	public boolean isBlock() {
+		return block;
+	}
+
+	public void setBlock(boolean block) {
+		this.block = block;
+	}
+
 	public Map<Empresa, String> getAutoriz() {
 		return autoriz;
 	}
@@ -190,7 +203,7 @@ public class PersAut implements Serializable {
 	public String toString() {
 		return "PersAut [Id=" + Id + ", ident=" + ident + ", nombre=" + nombre + ", apellidos=" + apellidos
 				+ ", direccion=" + direccion + ", fechaNac=" + fechaNac + ", estado=" + estado + ", fechaInicio="
-				+ fechaInicio + ", fechaFin=" + fechaFin + ", autoriz=" + autoriz + ", usuarioAutApk=" + usuarioAutApk
+				+ fechaInicio + ", fechaFin=" + fechaFin + ", Bloqueo=" + block + ", autoriz=" + autoriz + ", usuarioAutApk=" + usuarioAutApk
 				+ "]";
 	}
 	

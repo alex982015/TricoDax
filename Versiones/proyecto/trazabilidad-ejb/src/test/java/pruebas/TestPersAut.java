@@ -12,11 +12,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ejb.GestionPersAut;
-
+import exceptions.ClienteNoEncontradoException;
 import exceptions.PersAutExistenteException;
 import exceptions.PersAutNoEncontradaException;
 import exceptions.ProyectoException;
-
+import jpa.Indiv;
 import jpa.PersAut;
 
 public class TestPersAut {
@@ -35,7 +35,7 @@ public class TestPersAut {
 	@Test
 	public void testInsertarPersAut() {
 		
-		final PersAut persAut = new PersAut (123, "Nombre1", "Apellidos1", "Direccion1", Date.valueOf("2000-12-12"), true, Date.valueOf("2022-04-01"), null);
+		final PersAut persAut = new PersAut (123, "Nombre1", "Apellidos1", "Direccion1", Date.valueOf("2000-12-12"), true, Date.valueOf("2022-04-01"), null, false);
 		
 		try {
 			gestionPersAut.insertarPersAut(persAut);
@@ -56,6 +56,7 @@ public class TestPersAut {
 		}
 	}
 	
+	//@Requisitos({"RF7"})
 	@Test
 	public void testActualizarPersAut() {
 		
@@ -86,6 +87,7 @@ public class TestPersAut {
 		}
 	}
 	
+	//@Requisitos({"RF7"})
 	@Test
 	public void testActualizarPersAutNoEncontrada() {
 		
@@ -103,6 +105,38 @@ public class TestPersAut {
 			fail("Debería lanzar excepción de PersAut no encontrada");
 		}
 	}
+	
+	//@Requisitos({"RF8"})
+		@Test
+		public void testCerrarCuentaPersAut() {
+			try {
+				List<PersAut> persAut = gestionPersAut.obtenerPersAut();
+				PersAut p = persAut.get(0);
+			
+				gestionPersAut.cerrarCuentaPersAut(p);
+
+			} catch (ProyectoException e) {
+				fail("Lanzó excepción al cerrar persAut");
+			}
+		}
+
+		//@Requisitos({"RF8"})
+		@Test
+		public void testCerrarCuentaPersAutNoExistente() {
+			try {
+				List<PersAut> persAut = gestionPersAut.obtenerPersAut();
+				PersAut p = persAut.get(0);
+				p.setId(10);
+			
+				gestionPersAut.cerrarCuentaPersAut(p);
+
+			} catch (ClienteNoEncontradoException e) {
+				// OK
+			} catch (ProyectoException e) {
+				fail("Lanzó excepción al cerrar persAut");
+			}
+		}
+
 	
 	@Test
 	public void testEliminarPersAut() {

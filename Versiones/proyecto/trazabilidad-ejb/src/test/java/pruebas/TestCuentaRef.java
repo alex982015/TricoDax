@@ -11,16 +11,11 @@ import javax.naming.NamingException;
 import org.junit.Before;
 import org.junit.Test;
 
-import ejb.GestionCuentaFintech;
 import ejb.GestionCuentaRef;
 import ejb.GestionCuentas;
 import exceptions.CuentaExistenteException;
-import exceptions.CuentaFintechNoEncontradaException;
 import exceptions.CuentaNoEncontradoException;
-import exceptions.CuentaRefNoEncontradoException;
 import exceptions.ProyectoException;
-import jpa.Cuenta;
-import jpa.CuentaFintech;
 import jpa.CuentaRef;
 
 public class TestCuentaRef {
@@ -109,7 +104,7 @@ public class TestCuentaRef {
 			
 			gestionCuentasRef.actualizarCuentaRef(c);
 			fail("Debería lanzar excepción de cuentaRef no encontrado");
-		} catch (CuentaRefNoEncontradoException e) {
+		} catch (CuentaNoEncontradoException e) {
 			// OK
 		} catch (ProyectoException e) {
 			fail("Debería lanzar excepción de cuentaRef no encontrado");
@@ -141,7 +136,7 @@ public class TestCuentaRef {
 			
 			gestionCuentasRef.eliminarCuentaRef(cuenta1);
 			fail("Debería lanzar la excepción de cuentaRef no encontrada");
-		} catch (CuentaRefNoEncontradoException e) {
+		} catch (CuentaNoEncontradoException e) {
 			// OK
 		} catch (ProyectoException e) {
 			fail("Debería lanzar la excepción de cuentaRef no encontrada");

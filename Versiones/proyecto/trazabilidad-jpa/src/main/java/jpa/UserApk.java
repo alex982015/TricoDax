@@ -20,8 +20,7 @@ public class UserApk implements Serializable {
 	private String user;
 	@Column(name="PASSWORD", nullable = false)
 	private String password;
-	@Column(name="AUTORIZADO", nullable = false)
-	private boolean autorizado;
+	
 	@Column(name="ADMINISTRATIVO", nullable = false)
 	private boolean administrativo;
 	
@@ -35,10 +34,9 @@ public class UserApk implements Serializable {
 	public UserApk() {
 	}
 	
-	public UserApk(String user, String password, boolean autorizado, boolean administrativo) {
+	public UserApk(String user, String password, boolean administrativo) {
 		this.user = user;
 		this.password = password;
-		this.autorizado = autorizado;
 		this.administrativo = administrativo;
 	}
 
@@ -58,14 +56,6 @@ public class UserApk implements Serializable {
 	
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	
-	public boolean isAutorizado() {
-		return autorizado;
-	}
-	
-	public void setAutorizado(boolean autorizado) {
-		this.autorizado = autorizado;
 	}
 	
 	public Indiv getPersonaIndividual() {
@@ -114,6 +104,6 @@ public class UserApk implements Serializable {
 
 	@Override
 	public String toString() {
-		return "UserApk [user=" + user + ", password=" + password + ", autorizado=" + autorizado + "]";
+		return "UserApk [user=" + user + ", password=" + password + "]";
 	}
 }

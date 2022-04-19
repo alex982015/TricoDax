@@ -24,16 +24,7 @@ public class BaseDatos {
 		
 		em.getTransaction().begin();
 		
-		Cliente cliente1 = new Cliente (12345678, "Indiv", true, Date.valueOf("2021-04-11"), "Calle Ejemplo 123", "Málaga", 29407, "España");
-		Cliente cliente2 = new Cliente (32145376, "Empresa", true, Date.valueOf("2020-07-21"), "Calle Ejemplo 231", "Madrid", 35057, "España");
-		Cliente cliente3 = new Cliente (63525264, "Indiv", true, Date.valueOf("2021-01-08"), "Calle Ejemplo 132", "Barcelona", 46758, "España");
-		Cliente cliente4 = new Cliente (35744665, "Empresa", true, Date.valueOf("2022-02-15"), "Calle Ejemplo 321", "Sevilla", 16858, "España");
-		
-		for (Cliente cliente: new Cliente [] {cliente1, cliente2, cliente3, cliente4}) {
-			em.persist(cliente);
-		}
-		
-		Empresa empresa1 = new Empresa ("RazonSocial1 S.L.");
+		Empresa empresa1 = new Empresa ("RazonSocial1 S.L.", false);
 		empresa1.setIdent(345345345);
 		empresa1.setTipo_cliente("Empresa");
 		empresa1.setEstado(true);
@@ -43,7 +34,7 @@ public class BaseDatos {
 		empresa1.setCodPostal(32453);
 		empresa1.setPais("España");
 		
-		Empresa empresa2 = new Empresa ("RazonSocial2 S.L.");
+		Empresa empresa2 = new Empresa ("RazonSocial2 S.L.", false);
 		empresa2.setIdent(245235256);
 		empresa2.setTipo_cliente("Empresa");
 		empresa2.setEstado(true);
@@ -53,7 +44,7 @@ public class BaseDatos {
 		empresa2.setCodPostal(53456);
 		empresa2.setPais("España");
 		
-		Empresa empresa3 = new Empresa ("RazonSocial3 S.L.");
+		Empresa empresa3 = new Empresa ("RazonSocial3 S.L.", false);
 		empresa3.setIdent(345345664);
 		empresa3.setTipo_cliente("Empresa");
 		empresa3.setEstado(true);
@@ -139,18 +130,18 @@ public class BaseDatos {
 			em.persist(trans);
 		}
 		
-		UserApk user1 = new UserApk("Snorlax", "1234", true, true);
-		UserApk user2 = new UserApk("Pikachu", "1234", true, true);
-		UserApk user3 = new UserApk("Ash", "1234", true, true);
-		UserApk user4 = new UserApk("Charizard", "1234", true, true);
+		UserApk user1 = new UserApk("Snorlax", "1234", true);
+		UserApk user2 = new UserApk("Pikachu", "1234", true);
+		UserApk user3 = new UserApk("Ash", "1234", true);
+		UserApk user4 = new UserApk("Charizard", "1234", true);
 		
 		for(UserApk user : new UserApk [] {user1, user2, user3, user4}) {
 			em.persist(user);
 		}
 		
-		PersAut persAut1 = new PersAut (123, "Nombre1", "Apellidos1", "Direccion1", Date.valueOf("2000-12-12"), true, Date.valueOf("2022-04-01"), null);
-		PersAut persAut2 = new PersAut (13423, "Nombre2", "Apellidos2", "Direccion2", Date.valueOf("2002-02-02"), true, Date.valueOf("2022-03-01"), null);
-		PersAut persAut3 = new PersAut (54354, "Nombre3", "Apellidos3", "Direccion3", Date.valueOf("2012-10-11"), true, Date.valueOf("2022-05-01"), null);
+		PersAut persAut1 = new PersAut (123, "Nombre1", "Apellidos1", "Direccion1", Date.valueOf("2000-12-12"), true, Date.valueOf("2022-04-01"), null, false);
+		PersAut persAut2 = new PersAut (13423, "Nombre2", "Apellidos2", "Direccion2", Date.valueOf("2002-02-02"), true, Date.valueOf("2022-03-01"), null, false);
+		PersAut persAut3 = new PersAut (54354, "Nombre3", "Apellidos3", "Direccion3", Date.valueOf("2012-10-11"), true, Date.valueOf("2022-05-01"), null, false);
 		
 		for(PersAut persAut : new PersAut [] {persAut1, persAut2, persAut3}) {
 			em.persist(persAut);

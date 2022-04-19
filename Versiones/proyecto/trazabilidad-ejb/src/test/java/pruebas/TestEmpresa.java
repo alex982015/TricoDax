@@ -12,14 +12,11 @@ import javax.naming.NamingException;
 import org.junit.Before;
 import org.junit.Test;
 
-import ejb.GestionClientes;
 import ejb.GestionEmpresa;
+import exceptions.ClienteExistenteException;
+import exceptions.ClienteNoEncontradoException;
 //import es.uma.informatica.sii.anotaciones.Requisitos;
-import exceptions.CuentaExistenteException;
-import exceptions.EmpresaExistenteException;
-import exceptions.EmpresaNoEncontradaException;
 import exceptions.ProyectoException;
-import jpa.Cliente;
 import jpa.CuentaFintech;
 import jpa.Empresa;
 
@@ -29,12 +26,10 @@ public class TestEmpresa {
 	private static final String EMPRESA_EJB = "java:global/classes/EmpresaEJB";
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "TrazabilidadTest";
 	
-	private GestionClientes gestionCliente;
 	private GestionEmpresa gestionEmpresa;
 	
 	@Before
 	public void setup() throws NamingException  {
-		gestionCliente = (GestionClientes) SuiteTest.ctx.lookup(CLIENTES_EJB);
 		gestionEmpresa = (GestionEmpresa) SuiteTest.ctx.lookup(EMPRESA_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
@@ -42,7 +37,7 @@ public class TestEmpresa {
 	//@Requisitos({"RF2"}) 
 	@Test
 	public void testInsertarEmpresa() {
-		final Empresa empresa = new Empresa ("RazonSocial S.L.");
+		final Empresa empresa = new Empresa ("RazonSocial S.L.", false);
 		empresa.setIdent(53636734);
 		empresa.setTipo_cliente("Indiv");
 		empresa.setEstado(true);
@@ -55,12 +50,8 @@ public class TestEmpresa {
 		try {
 			gestionEmpresa.insertarEmpresa(empresa);
 			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
-			List<Cliente> clientes = gestionCliente.obtenerClientes();
 			assertEquals(4, empresas.size());
-			assertEquals(11, clientes.size());
-		} catch (EmpresaExistenteException e) {
-			fail("Lanzó excepción al insertar");
-		} catch (CuentaExistenteException e) {
+		} catch (ClienteExistenteException e) {
 			fail("Lanzó excepción al insertar");
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al insertar"); 
@@ -118,7 +109,8 @@ public class TestEmpresa {
 			fail("Lanzó excepción al actualizar");
 		}
 	}
-	
+
+	//@Requisitos({"RF3"})
 	@Test
 	public void testActualizarEmpresaNoEncontrada() {
 		
@@ -130,10 +122,41 @@ public class TestEmpresa {
 			e.setID(ID);
 			gestionEmpresa.actualizarEmpresa(e);
 			fail("Debería lanzar excepción de empresa no encontrada");
-		} catch (EmpresaNoEncontradaException e) {
+		} catch (ClienteNoEncontradoException e) {
 			// OK
 		} catch (ProyectoException e) {
 			fail("Debería lanzar excepción de empresa no encontrada");
+		}
+	}
+	
+	//@Requisitos({"RF4"})
+	@Test
+	public void testCerrarCuentaEmpresa() {
+		try {
+			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
+			Empresa e = empresas.get(0);
+		
+			gestionEmpresa.cerrarCuentaEmpresa(e);
+
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al cerrar cuenta");
+		}
+	}
+
+	//@Requisitos({"RF4"})
+	@Test
+	public void testCerrarCuentaEmpresaNoExistente() {
+		try {
+			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
+			Empresa e = empresas.get(0);
+			e.setID(10);
+		
+			gestionEmpresa.cerrarCuentaEmpresa(e);
+
+		} catch (ClienteNoEncontradoException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al cerrar cuenta");
 		}
 	}
 	
@@ -160,7 +183,7 @@ public class TestEmpresa {
 			
 			gestionEmpresa.eliminarEmpresa(empresa);
 			fail("Debería lanzar la excepción de empresa no encontrada");
-		} catch (EmpresaNoEncontradaException e) {
+		} catch (ClienteNoEncontradoException e) {
 			// OK
 		} catch (ProyectoException e) {
 			fail("Debería lanzar la excepción de empresa no encontrada");
@@ -170,16 +193,9 @@ public class TestEmpresa {
 	@Test
 	public void testEliminarTodasEmpresas() {
 		try {
-			List<Cliente> clientesA = gestionCliente.obtenerClientes();
-			
-			List<Empresa> empresasA = gestionEmpresa.obtenerEmpresas();
 			gestionEmpresa.eliminarTodasEmpresas();
-			List<Empresa> empresasB = gestionEmpresa.obtenerEmpresas();
-			
-			List<Cliente> clientesB = gestionCliente.obtenerClientes();
-		
-			assertEquals(clientesA.size() - clientesB.size(), empresasA.size());
-			assertEquals(0, empresasB.size());
+			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
+			assertEquals(0, empresas.size());
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
 		}

@@ -8,8 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import exceptions.EmpresaExistenteException;
-import exceptions.EmpresaNoEncontradaException;
+import exceptions.ClienteExistenteException;
+import exceptions.ClienteNoEncontradoException;
 import exceptions.ProyectoException;
 import jpa.Cliente;
 import jpa.Empresa;
@@ -18,7 +18,7 @@ import jpa.Empresa;
  * Session Bean implementation class EmpresaEJB
  */
 @Stateless
-public class EmpresaEJB extends ClientesEJB implements GestionEmpresa {
+public class EmpresaEJB implements GestionEmpresa {
 
 private static final Logger LOG = Logger.getLogger(EmpresaEJB.class.getCanonicalName());
 	
@@ -26,10 +26,10 @@ private static final Logger LOG = Logger.getLogger(EmpresaEJB.class.getCanonical
 	private EntityManager em;
 
 	@Override
-	public void insertarEmpresa(Empresa empresa) throws EmpresaExistenteException {
+	public void insertarEmpresa(Empresa empresa) throws ClienteExistenteException {
 		Empresa empresaExistente = em.find(Empresa.class, empresa.getID());
 		if (empresaExistente != null) {
-			throw new EmpresaExistenteException();
+			throw new ClienteExistenteException();
 		}
 		
 		em.persist(empresa);
@@ -45,7 +45,7 @@ private static final Logger LOG = Logger.getLogger(EmpresaEJB.class.getCanonical
 	public void actualizarEmpresa(Empresa empresa) throws ProyectoException {
 		Empresa empresaEntity = em.find(Empresa.class, empresa.getID());
 		if (empresaEntity == null) {
-			throw new EmpresaNoEncontradaException();
+			throw new ClienteNoEncontradoException();
 		}
 		
 		empresaEntity.setRazonSocial(empresa.getRazonSocial());
@@ -54,12 +54,25 @@ private static final Logger LOG = Logger.getLogger(EmpresaEJB.class.getCanonical
 	}
 
 	@Override
+	public void cerrarCuentaEmpresa(Empresa empresa) throws ProyectoException {
+		Empresa empresaEntity = em.find(Empresa.class, empresa.getID());
+		if (empresaEntity == null) {
+			throw new ClienteNoEncontradoException();
+		}
+		
+		empresaEntity.setEstado(false);
+		
+		em.merge(empresaEntity);
+	}
+
+	
+	@Override
 	public void eliminarEmpresa(Empresa empresa) throws ProyectoException {
 		Empresa empresaEntity = em.find(Empresa.class, empresa.getID());
 		Cliente clienteEntity = em.find(Cliente.class, empresa.getID());
 		
 		if ((empresaEntity == null) && (clienteEntity == null)) {
-			throw new EmpresaNoEncontradaException();
+			throw new ClienteNoEncontradoException();
 		}
 		
 		em.remove(empresaEntity);
@@ -72,7 +85,7 @@ private static final Logger LOG = Logger.getLogger(EmpresaEJB.class.getCanonical
 		
 		for (Empresa e : empresas) {
 			Cliente clienteEntity = em.find(Cliente.class, e.getID());
-			eliminarCliente(clienteEntity);
+			em.remove(clienteEntity);
 		}
 		
 		for (Empresa e : empresas) {

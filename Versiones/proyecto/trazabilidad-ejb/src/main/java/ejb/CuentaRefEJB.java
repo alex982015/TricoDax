@@ -2,35 +2,31 @@ package ejb;
 
 import java.util.List;
 
-import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import exceptions.CuentaFintechExistenteException;
-import exceptions.CuentaFintechNoEncontradaException;
-import exceptions.CuentaRefExistenteException;
-import exceptions.CuentaRefNoEncontradoException;
+import exceptions.CuentaExistenteException;
+import exceptions.CuentaNoEncontradoException;
 import exceptions.ProyectoException;
 import jpa.Cuenta;
-import jpa.CuentaFintech;
 import jpa.CuentaRef;
 
 /**
  * Session Bean implementation class CuentaRefEJB
  */
 @Stateless
-public class CuentaRefEJB extends CuentaEJB implements GestionCuentaRef{
+public class CuentaRefEJB extends CuentaEJB implements GestionCuentaRef {
 
 	@PersistenceContext(name="Trazabilidad")
 	private EntityManager em;
     
 	@Override
-	public void insertarCuentaRef(CuentaRef cuenta) throws CuentaRefExistenteException {
+	public void insertarCuentaRef(CuentaRef cuenta) throws CuentaExistenteException {
 		CuentaRef cuentaExistente = em.find(CuentaRef.class, cuenta.getIBAN());
 		if (cuentaExistente != null) {
-			throw new CuentaRefExistenteException();
+			throw new CuentaExistenteException();
 		}
 		
 		em.persist(cuenta);
@@ -46,7 +42,7 @@ public class CuentaRefEJB extends CuentaEJB implements GestionCuentaRef{
 	public void actualizarCuentaRef(CuentaRef cuenta) throws ProyectoException {
 		CuentaRef cuentaEntity = em.find(CuentaRef.class, cuenta.getIBAN());
 		if (cuentaEntity == null) {
-			throw new CuentaRefNoEncontradoException();
+			throw new CuentaNoEncontradoException();
 		}
 		
 		cuentaEntity.setNombreBanco(cuenta.getNombreBanco());
@@ -65,7 +61,7 @@ public class CuentaRefEJB extends CuentaEJB implements GestionCuentaRef{
 		Cuenta cuentaEntity = em.find(Cuenta.class, cuenta.getIBAN());
 		
 		if (cuentaRefEntity == null && (cuentaEntity == null)) {
-			throw new CuentaRefNoEncontradoException();
+			throw new CuentaNoEncontradoException();
 		}
 		
 		em.remove(cuentaRefEntity);
