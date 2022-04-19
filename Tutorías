@@ -92,6 +92,7 @@ TUTORÍA(19/04/2022)
 2-¿Atributo autorizado en UserAPK?
 
 Respuestas de la tutoría:
-
+1-Creamos los extremos y los asignamos al Map (Método asignarPersAut).
+2-No, usamos un boolean block en ambos extremos.
 
 Próximas tutorías...
