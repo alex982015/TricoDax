@@ -44,7 +44,7 @@ public class TestCuentaFintech {
 			
 			gestionCuentasFintech.insertarCuentaFintech(cuenta);
 			List<CuentaFintech> cuentas = gestionCuentasFintech.obtenerCuentasFintech();
-			assertEquals(2, cuentas.size());
+			assertEquals(4, cuentas.size());
 			
 		} catch (CuentaExistenteException e) {
 			fail("Lanzó excepción al insertar");
@@ -57,7 +57,7 @@ public class TestCuentaFintech {
 	public void testObtenerCuentasFintech() {
 		try {
 			List<CuentaFintech> cuentas = gestionCuentasFintech.obtenerCuentasFintech();
-			assertEquals(1, cuentas.size());
+			assertEquals(3, cuentas.size());
 		} catch (ProyectoException e) {
 			fail("No debería lanzar excepción");
 		}
@@ -115,7 +115,7 @@ public class TestCuentaFintech {
 			gestionCuentasFintech.eliminarCuentaFintech(cuenta1);
 			
 			List<CuentaFintech> c = gestionCuentasFintech.obtenerCuentasFintech();
-			assertEquals(0, c.size());
+			assertEquals(2, c.size());
 			
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");

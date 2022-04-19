@@ -14,6 +14,8 @@ import jpa.Divisa;
 import jpa.Empresa;
 import jpa.Indiv;
 import jpa.PersAut;
+import jpa.PooledAccount;
+import jpa.Segregada;
 import jpa.Trans;
 import jpa.UserApk;
 
@@ -90,6 +92,26 @@ public class BaseDatos {
 		
 		for (Indiv indiv: new Indiv [] {indiv1, indiv2, indiv3}) {
 			em.persist(indiv);
+		}
+		
+		PooledAccount pooledAccount1 = new PooledAccount ();
+		pooledAccount1.setIBAN(455833400);
+		pooledAccount1.setEstado(true);
+		pooledAccount1.setFechaApertura(Date.valueOf("2022-06-27"));
+		pooledAccount1.setClasificacion(true);
+		
+		for (PooledAccount cuenta: new PooledAccount [] {pooledAccount1}) {
+			em.persist(cuenta);
+		}
+		
+		Segregada segregada1 = new Segregada (20.0);
+		segregada1.setIBAN(45583380);
+		segregada1.setEstado(true);
+		segregada1.setFechaApertura(Date.valueOf("2022-06-27"));
+		segregada1.setClasificacion(true);
+		
+		for (Segregada cuenta: new Segregada [] {segregada1}) {
+			em.persist(cuenta);
 		}
 		
 		CuentaFintech cuentaFintech1 = new CuentaFintech (true,Date.valueOf("2022-06-27"),null,true);
