@@ -1,6 +1,8 @@
 package pruebas;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -114,6 +116,16 @@ public class BaseDatos {
 			em.persist(cuenta);
 		}
 		
+		List<CuentaFintech> cuentas1 = new ArrayList<CuentaFintech>();
+		cuentas1.add(pooledAccount1);
+		
+		indiv1.setCuentas(cuentas1);
+		
+		List<CuentaFintech> cuentas2 = new ArrayList<CuentaFintech>();
+		cuentas2.add(segregada1);
+		
+		empresa1.setCuentas(cuentas2);
+		
 		CuentaFintech cuentaFintech1 = new CuentaFintech (true,Date.valueOf("2022-06-27"),null,true);
 		cuentaFintech1.setIBAN(33334444);
 		
@@ -147,7 +159,7 @@ public class BaseDatos {
 		}
 		
 		UserApk user1 = new UserApk("Snorlax", "1234", true);
-		UserApk user2 = new UserApk("Pikachu", "1234", true);
+		UserApk user2 = new UserApk("Pikachu", "1234", false);
 		UserApk user3 = new UserApk("Ash", "1234", true);
 		UserApk user4 = new UserApk("Charizard", "1234", true);
 		

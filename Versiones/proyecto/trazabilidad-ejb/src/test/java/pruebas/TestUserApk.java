@@ -17,6 +17,7 @@ import exceptions.ProyectoException;
 import exceptions.TransExistenteException;
 import exceptions.TransNoEncontradaException;
 import exceptions.UserExistenteException;
+import exceptions.UserNoAdminException;
 import exceptions.UserNoEncontradoException;
 import jpa.Trans;
 import jpa.UserApk;
@@ -144,4 +145,45 @@ public class TestUserApk {
 		}
 	}
 
+	//@Requisitos({"RF1"}) 
+	@Test
+	public void testcheckUserAdmin() {
+		try {
+			List<UserApk> u = gestionUser.obtenerUser();
+			UserApk user = u.get(0);
+			gestionUser.checkUserAdmin(user);
+			
+		} catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
+		}
+	}
+	
+	//@Requisitos({"RF1"}) 
+		@Test
+		public void testcheckUserAdminNoEncontrado() {
+			try {
+				List<UserApk> u = gestionUser.obtenerUser();
+				UserApk user = u.get(0);
+				user.setUser("example");
+				gestionUser.checkUserAdmin(user);
+			} catch (UserNoEncontradoException e) {
+				// OK
+			} catch (ProyectoException e) {
+				fail("No debería lanzarse excepción");
+			}
+		}
+		
+		//@Requisitos({"RF1"}) 
+		@Test
+		public void testcheckUserNoAdmin() {
+			try {
+				List<UserApk> u = gestionUser.obtenerUser();
+				UserApk user = u.get(1);
+				gestionUser.checkUserAdmin(user);
+			} catch (UserNoAdminException e) {
+				// OK
+			} catch (ProyectoException e) {
+				fail("No debería lanzarse excepción");
+			}
+		}	
 }

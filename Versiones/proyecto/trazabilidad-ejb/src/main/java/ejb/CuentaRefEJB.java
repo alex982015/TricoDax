@@ -12,6 +12,7 @@ import exceptions.CuentaNoEncontradoException;
 import exceptions.ProyectoException;
 import jpa.Cuenta;
 import jpa.CuentaRef;
+import jpa.Divisa;
 
 /**
  * Session Bean implementation class CuentaRefEJB
@@ -29,7 +30,7 @@ public class CuentaRefEJB implements GestionCuentaRef {
 			throw new CuentaExistenteException();
 		}
 		
-		em.persist(cuenta);
+		 em.persist(cuentaExistente);
 	}
 
 	@Override

@@ -15,6 +15,7 @@ import org.junit.Test;
 import ejb.GestionEmpresa;
 import exceptions.ClienteExistenteException;
 import exceptions.ClienteNoEncontradoException;
+import exceptions.NoBajaClienteException;
 //import es.uma.informatica.sii.anotaciones.Requisitos;
 import exceptions.ProyectoException;
 import jpa.CuentaFintech;
@@ -134,7 +135,7 @@ public class TestEmpresa {
 	public void testCerrarCuentaEmpresa() {
 		try {
 			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
-			Empresa e = empresas.get(0);
+			Empresa e = empresas.get(1);
 		
 			gestionEmpresa.cerrarCuentaEmpresa(e);
 
@@ -159,6 +160,22 @@ public class TestEmpresa {
 			fail("Lanzó excepción al cerrar cuenta");
 		}
 	}
+	
+	//@Requisitos({"RF4"})
+		@Test
+		public void testNoBajaCuentaEmpresa() {
+			try {
+				List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
+				Empresa e = empresas.get(0);
+			
+				gestionEmpresa.cerrarCuentaEmpresa(e);
+
+			} catch (NoBajaClienteException e) {
+				// OK
+			} catch (ProyectoException e) {
+				fail("Lanzó excepción al cerrar cuenta");
+			}
+		}
 	
 	@Test
 	public void testEliminarEmpresa() {

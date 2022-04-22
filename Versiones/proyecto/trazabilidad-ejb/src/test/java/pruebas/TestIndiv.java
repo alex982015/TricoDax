@@ -15,6 +15,7 @@ import org.junit.Test;
 import ejb.GestionIndiv;
 import exceptions.ClienteExistenteException;
 import exceptions.ClienteNoEncontradoException;
+import exceptions.NoBajaClienteException;
 //import es.uma.informatica.sii.anotaciones.Requisitos;
 import exceptions.ProyectoException;
 import jpa.CuentaFintech;
@@ -138,7 +139,7 @@ public class TestIndiv {
 	public void testCerrarCuentaIndiv() {
 		try {
 			List<Indiv> particulares = gestionIndiv.obtenerIndiv();
-			Indiv i = particulares.get(0);
+			Indiv i = particulares.get(1);
 		
 			gestionIndiv.cerrarCuentaIndiv(i);
 
@@ -163,6 +164,22 @@ public class TestIndiv {
 			fail("Lanzó excepción al cerrar cuenta");
 		}
 	}
+	
+	//@Requisitos({"RF4"})
+			@Test
+			public void testNoBajaCuentaIndiv() {
+				try {
+					List<Indiv> particulares = gestionIndiv.obtenerIndiv();
+					Indiv i = particulares.get(0);
+				
+					gestionIndiv.cerrarCuentaIndiv(i);
+
+				} catch (NoBajaClienteException e) {
+					// OK
+				} catch (ProyectoException e) {
+					fail("Lanzó excepción al cerrar cuenta");
+				}
+			}
 	
 	@Test
 	public void testEliminarIndiv() {

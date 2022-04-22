@@ -1,6 +1,9 @@
 package ejb;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -13,6 +16,8 @@ import exceptions.CuentaNoEncontradoException;
 import exceptions.ProyectoException;
 import jpa.Cuenta;
 import jpa.CuentaFintech;
+import jpa.CuentaRef;
+import jpa.Divisa;
 import jpa.PooledAccount;
 
 @Stateless
@@ -28,7 +33,36 @@ public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledA
 			throw new CuentaExistenteException();
 		}
 		
+		Set<CuentaRef> cuentasAsociadas = cuentaExistente.getDepositEn().keySet();
+		
+		for (CuentaRef c : cuentasAsociadas) {
+			if(c.getMonedas().size() > 1) {
+				for (Divisa d : c.getMonedas()) {
+					List<Divisa> m = new ArrayList<Divisa>();
+					m.add(d);
+					
+					CuentaRef account = new CuentaRef();
+					account.setIBAN(c.getIBAN());
+					account.setSwift(c.getSwift());
+					account.setNombreBanco(c.getNombreBanco());
+					account.setSucursal(c.getSucursal());
+					account.setPais(c.getPais());
+					account.setSaldo(c.getSaldo());
+					account.setFechaApertura(c.getFechaApertura());
+					account.setEstado(c.getEstado());
+					account.setMonedas(m);
+					
+					em.persist(account);
+				}
+			} else {
+				em.persist(c);
+			}
+		}
+		
 		em.persist(cuenta);
+
+		
+		/** FALTAN COSAS **/
 	}
 
 	@Override

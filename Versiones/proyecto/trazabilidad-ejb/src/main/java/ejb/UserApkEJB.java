@@ -12,6 +12,7 @@ import exceptions.ProyectoException;
 import exceptions.TransExistenteException;
 import exceptions.TransNoEncontradaException;
 import exceptions.UserExistenteException;
+import exceptions.UserNoAdminException;
 import exceptions.UserNoEncontradoException;
 import jpa.Trans;
 import jpa.UserApk;
@@ -77,6 +78,24 @@ public class UserApkEJB implements GestionUserApk {
 			for (UserApk u : user) {
 				em.remove(u);
 			}
+			
+		}
+
+		@Override
+		public boolean checkUserAdmin(UserApk user) throws ProyectoException {
+			UserApk userEntity = em.find(UserApk.class, user.getUser());
+			boolean ok = true;
+			
+			if (userEntity == null) {
+				throw new UserNoEncontradoException();
+			}
+			
+			if(!userEntity.isAdministrativo()) {
+				ok = false;
+				throw new UserNoAdminException();
+			}
+			
+			return ok;
 			
 		}
    

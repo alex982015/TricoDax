@@ -3,6 +3,7 @@ package jpa;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.*;
@@ -42,7 +43,7 @@ public class CuentaRef extends Cuenta implements Serializable {
     private Map<PooledAccount, Double> depositEn = new HashMap<>();
 
 	@ManyToOne
-	private Divisa moneda;
+	private List<Divisa> monedas;
 	
 /****************CONSTRUCTORES*************************************/
 
@@ -124,12 +125,12 @@ public class CuentaRef extends Cuenta implements Serializable {
 		this.depositEn = depositEn;
 	}
 
-	public Divisa getMoneda() {
-		return moneda;
+	public List<Divisa> getMonedas() {
+		return monedas;
 	}
 
-	public void setMoneda(Divisa moneda) {
-		this.moneda = moneda;
+	public void setMonedas(List<Divisa> moneda) {
+		this.monedas = moneda;
 	}
 
 /******************STRING****************************************/
@@ -137,7 +138,7 @@ public class CuentaRef extends Cuenta implements Serializable {
 	@Override
 	public String toString() {
 		return "CuentaRef [IBAN=" + super.getIBAN() + ", swift=" + super.getSwift() +", NombreBanco=" + NombreBanco + ", Sucursal=" + Sucursal + ", Pais=" + Pais + ", Saldo=" + Saldo
-				+ ", fechaApertura=" + fechaApertura + ", estado=" + estado + ", depositEn=" + depositEn + ", moneda=" + moneda + "]";
+				+ ", fechaApertura=" + fechaApertura + ", estado=" + estado + ", depositEn=" + depositEn + ", moneda=" + monedas + "]";
 	}
 	
 }

@@ -10,8 +10,10 @@ import javax.persistence.TypedQuery;
 
 import exceptions.ClienteExistenteException;
 import exceptions.ClienteNoEncontradoException;
+import exceptions.NoBajaClienteException;
 import exceptions.ProyectoException;
 import jpa.Cliente;
+import jpa.CuentaFintech;
 import jpa.Empresa;
 import jpa.Indiv;
 
@@ -59,11 +61,25 @@ private static final Logger LOG = Logger.getLogger(IndivEJB.class.getCanonicalNa
 	@Override
 	public void cerrarCuentaIndiv(Indiv indiv) throws ProyectoException {
 		Indiv indivEntity = em.find(Indiv.class, indiv.getID());
+		
 		if (indivEntity == null) {
 			throw new ClienteNoEncontradoException();
 		}
 		
-		indivEntity.setEstado(false);
+		List<CuentaFintech> cuentasEmpresa = indivEntity.getCuentas();
+		boolean ok = false;
+		
+		for(CuentaFintech c : cuentasEmpresa) {
+			if(c.getEstado() == true) {
+				ok = true;
+			}
+		}
+		
+		if(!ok) {
+			indivEntity.setEstado(ok);
+		} else {
+			throw new NoBajaClienteException();
+		}
 		
 		em.merge(indivEntity);
 	}
