@@ -42,6 +42,9 @@ public class CuentaRef extends Cuenta implements Serializable {
 	@Column(name="SALDO")
     private Map<PooledAccount, Double> depositEn = new HashMap<>();
 
+	@ElementCollection
+    @CollectionTable(name = "Monedas", joinColumns = @JoinColumn(name = "IBAN"))
+    @Column(name = "Moneda")
 	@ManyToOne
 	private List<Divisa> monedas;
 	

@@ -33,7 +33,7 @@ public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledA
 			throw new CuentaExistenteException();
 		}
 		
-		Set<CuentaRef> cuentasAsociadas = cuentaExistente.getDepositEn().keySet();
+		Set<CuentaRef> cuentasAsociadas = cuenta.getDepositEn().keySet();
 		
 		for (CuentaRef c : cuentasAsociadas) {
 			if(c.getMonedas().size() > 1) {

@@ -30,7 +30,7 @@ public class CuentaRefEJB implements GestionCuentaRef {
 			throw new CuentaExistenteException();
 		}
 		
-		 em.persist(cuentaExistente);
+		 em.persist(cuenta);
 	}
 
 	@Override
