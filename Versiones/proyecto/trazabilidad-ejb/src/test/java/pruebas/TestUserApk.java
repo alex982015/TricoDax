@@ -149,8 +149,9 @@ public class TestUserApk {
 	@Test
 	public void testcheckUserAdmin() {
 		try {
-			List<UserApk> u = gestionUser.obtenerUser();
-			UserApk user = u.get(0);
+			final UserApk user = new UserApk("USUARIO", "1234", true);
+			gestionUser.insertarUser(user);
+			
 			gestionUser.checkUserAdmin(user);
 			
 		} catch (ProyectoException e) {

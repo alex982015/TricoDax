@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import exceptions.CuentaConSaldoException;
 import exceptions.CuentaExistenteException;
 import exceptions.CuentaNoEncontradoException;
 import exceptions.ProyectoException;
@@ -113,5 +114,51 @@ public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledA
 		
 	}
 
+	@Override
+	public void cerrarCuentaPooledAccount(PooledAccount cuenta) throws ProyectoException {
+		PooledAccount cuentaEntity = em.find(PooledAccount.class, cuenta.getIBAN());
+		if (cuentaEntity == null) {
+			throw new CuentaNoEncontradoException();
+		}
+		
+		Set<CuentaRef> cuentasAsociadas = cuentaEntity.getDepositEn().keySet();
+		boolean ok = false;
+		
+		for (CuentaRef c : cuentasAsociadas) {
+			if(c.getSaldo() > 0) {
+				ok = true;
+			}
+		}
+		
+		if(ok) {
+			throw new CuentaConSaldoException();
+		} else {
+			cuentaEntity.setEstado(ok);
+		}
+	}
+	
+	@Override
+	public void cambiarDivisaPooledAccount(PooledAccount cuenta, Divisa origen, Divisa destino) throws ProyectoException {
+		PooledAccount cuentaEntity = em.find(PooledAccount.class, cuenta.getIBAN());
+		if (cuentaEntity == null) {
+			throw new CuentaNoEncontradoException();
+		}
+		
+		Set<CuentaRef> cuentasAsociadas = cuentaEntity.getDepositEn().keySet();
+		
+		for (CuentaRef c : cuentasAsociadas) {
+			for(Divisa d : c.getMonedas()) {
+				if(d.equals(origen)) {
+					/** ACTUALIZO EL SALDO **/
+					c.setSaldo(c.getSaldo() * destino.getCambioEuro());
+					/** ACTUALIZO CAMBIO DE DIVISA **/
+					d.setAbreviatura(destino.getAbreviatura());
+					d.setNombre(destino.getNombre());
+					d.setSimbolo(destino.getSimbolo());
+				}
+			}
+		}
+		
+	}
 
 }

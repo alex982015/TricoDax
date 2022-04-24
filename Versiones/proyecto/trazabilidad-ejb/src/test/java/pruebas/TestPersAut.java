@@ -3,6 +3,7 @@ package pruebas;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
 
@@ -11,24 +12,28 @@ import javax.naming.NamingException;
 import org.junit.Before;
 import org.junit.Test;
 
+import ejb.GestionEmpresa;
 import ejb.GestionPersAut;
 import exceptions.ClienteNoEncontradoException;
 import exceptions.PersAutExistenteException;
 import exceptions.PersAutNoEncontradaException;
 import exceptions.ProyectoException;
-import jpa.Indiv;
+import jpa.Empresa;
 import jpa.PersAut;
 
 public class TestPersAut {
 
 	private static final String PERSAUT_EJB = "java:global/classes/PersAutEJB";
+	private static final String EMPRESA_EJB = "java:global/classes/EmpresaEJB";
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "TrazabilidadTest";
 	
 	private GestionPersAut gestionPersAut;
+	private GestionEmpresa gestionEmpresa;
 	
 	@Before
 	public void setup() throws NamingException  {
 		gestionPersAut = (GestionPersAut) SuiteTest.ctx.lookup(PERSAUT_EJB);
+		gestionEmpresa = (GestionEmpresa) SuiteTest.ctx.lookup(EMPRESA_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
 
@@ -106,38 +111,125 @@ public class TestPersAut {
 		}
 	}
 	
-	//@Requisitos({"RF8"})
-		@Test
-		public void testCerrarCuentaPersAut() {
-			try {
-				List<PersAut> persAut = gestionPersAut.obtenerPersAut();
-				PersAut p = persAut.get(0);
+	//@Requisitos({"RF6"})
+	@Test
+	public void testAsignarPersAut() {
+		try {
+			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
+			PersAut p = persAut.get(0);
 			
-				gestionPersAut.cerrarCuentaPersAut(p);
-
-			} catch (ProyectoException e) {
-				fail("Lanzó excepción al cerrar persAut");
-			}
-		}
-
-		//@Requisitos({"RF8"})
-		@Test
-		public void testCerrarCuentaPersAutNoExistente() {
-			try {
-				List<PersAut> persAut = gestionPersAut.obtenerPersAut();
-				PersAut p = persAut.get(0);
-				p.setId(10);
+			List<Empresa> empresa = gestionEmpresa.obtenerEmpresas();
+			Empresa e = empresa.get(0);
 			
-				gestionPersAut.cerrarCuentaPersAut(p);
+			gestionPersAut.anyadirAutorizadoAEmpresa(p, e);
 
-			} catch (ClienteNoEncontradoException e) {
-				// OK
-			} catch (ProyectoException e) {
-				fail("Lanzó excepción al cerrar persAut");
-			}
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al asociar persAut");
 		}
+	}
+		
+	//@Requisitos({"RF6"})
+	@Test
+	public void testAsignarPersAutNoExistente() {
+		try {
+			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
+			PersAut p = persAut.get(0);
+			p.setId(10);
+			
+			List<Empresa> empresa = gestionEmpresa.obtenerEmpresas();
+			Empresa e = empresa.get(0);
+			
+			gestionPersAut.anyadirAutorizadoAEmpresa(p, e);
 
+		} catch (PersAutNoEncontradaException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al asociar persAut");
+		}
+	}
+
+	//@Requisitos({"RF6"})
+	@Test
+	public void testAsignarPersAutEmpresaNoExistente() {
+		try {
+			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
+			PersAut p = persAut.get(0);
+			
+			List<Empresa> empresa = gestionEmpresa.obtenerEmpresas();
+			Empresa e = empresa.get(0);
+			e.setID(10);
+			
+			gestionPersAut.anyadirAutorizadoAEmpresa(p, e);
+
+		} catch (ClienteNoEncontradoException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al asociar persAut");
+		}
+	}
 	
+	//@Requisitos({"RF8"})
+	@Test
+	public void testCerrarCuentaPersAut() {
+		try {
+			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
+			PersAut p = persAut.get(0);
+		
+			gestionPersAut.cerrarCuentaPersAut(p);
+
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al cerrar persAut");
+		}
+	}
+
+	//@Requisitos({"RF8"})
+	@Test
+	public void testCerrarCuentaPersAutNoExistente() {
+		try {
+			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
+			PersAut p = persAut.get(0);
+			p.setId(10);
+		
+			gestionPersAut.cerrarCuentaPersAut(p);
+
+		} catch (ClienteNoEncontradoException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al cerrar persAut");
+		}
+	}
+	
+	//@Requisitos({"RF16"})
+	@Test
+	public void testBloquearCuentaPersAut() {
+		try {
+			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
+			PersAut p = persAut.get(0);
+		
+			gestionPersAut.bloquearCuentaPersAut(p);
+
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al cerrar persAut");
+		}
+	}	
+	
+	//@Requisitos({"RF16"})
+	@Test
+	public void testBloquearCuentaPersAutNoExistente() {
+		try {
+			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
+			PersAut p = persAut.get(0);
+			p.setId(10);
+		
+			gestionPersAut.bloquearCuentaPersAut(p);
+
+		} catch (ClienteNoEncontradoException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al cerrar persAut");
+		}
+	}
+
 	@Test
 	public void testEliminarPersAut() {
 		try {
@@ -160,7 +252,7 @@ public class TestPersAut {
 			persAut1.setId(3);
 			
 			gestionPersAut.eliminarPersAut(persAut1);
-			fail("Debería lanzar la excepción de PersAut no encontrada");
+			
 		} catch (PersAutNoEncontradaException e) {
 			// OK
 		} catch (ProyectoException e) {
@@ -179,4 +271,21 @@ public class TestPersAut {
 			fail("No debería lanzarse excepción");
 		}
 	}
+	
+	//@Requisitos({"RF12"})
+	/*@Test
+	public void testGenerarInformePersAut() {
+		try {
+			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
+			PersAut persAut1 = persAut.get(0);
+			String ruta = "C:\\informe1.csv";
+			
+			gestionPersAut.generarInforme(persAut1, ruta);
+			
+		} catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
+		} catch (IOException e) {
+			fail("No debería lanzarse excepción");
+		}
+	}*/
 }

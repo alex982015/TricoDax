@@ -1,5 +1,6 @@
 package ejb;
 
+import java.io.IOException;
 import java.util.List;
 
 import exceptions.ProyectoException;

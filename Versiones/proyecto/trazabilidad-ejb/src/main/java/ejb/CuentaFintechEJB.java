@@ -10,10 +10,8 @@ import javax.persistence.TypedQuery;
 import exceptions.CuentaExistenteException;
 import exceptions.CuentaNoEncontradoException;
 import exceptions.ProyectoException;
-import jpa.Cliente;
 import jpa.Cuenta;
 import jpa.CuentaFintech;
-import jpa.Empresa;
 
 @Stateless
 public class CuentaFintechEJB implements GestionCuentaFintech {

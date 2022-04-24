@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import exceptions.CuentaConSaldoException;
 import exceptions.CuentaExistenteException;
 import exceptions.CuentaNoEncontradoException;
 import exceptions.ProyectoException;
@@ -50,6 +51,21 @@ public class SegregadaEJB extends CuentaFintechEJB implements GestionSegregada{
 		}
 		
 		em.merge(cuentaEntity);
+	}
+	
+	@Override
+	public void cerrarCuentaSegregada(Segregada cuenta) throws ProyectoException {
+		Segregada cuentaEntity = em.find(Segregada.class, cuenta.getIBAN());
+		if (cuentaEntity == null) {
+			throw new CuentaNoEncontradoException();
+		}
+		
+		if(!(cuentaEntity.getReferenciada().getSaldo() > 0)) {
+			cuentaEntity.setEstado(false);
+		} else {
+			throw new CuentaConSaldoException();
+		}
+		
 	}
 
 	@Override

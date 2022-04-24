@@ -45,7 +45,7 @@ public class CuentaRef extends Cuenta implements Serializable {
 	@ElementCollection
     @CollectionTable(name = "Monedas", joinColumns = @JoinColumn(name = "IBAN"))
     @Column(name = "Moneda")
-	@ManyToOne
+	@ManyToMany
 	private List<Divisa> monedas;
 	
 /****************CONSTRUCTORES*************************************/

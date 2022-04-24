@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ejb.GestionPooledAccount;
+import exceptions.CuentaConSaldoException;
 import exceptions.CuentaExistenteException;
 import exceptions.CuentaNoEncontradoException;
 import exceptions.ProyectoException;
@@ -98,6 +99,50 @@ public class TestPooledAccount {
 			fail("Debería lanzar excepción de PooledAccount no encontrado");
 		}
 	}
+	
+	//@Requisitos{"R9"}
+		@Test
+		public void testCerrarPooledAccount() {
+			try {
+				List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
+				PooledAccount cuenta1 = cuentas.get(0);
+				gestionPooledAccount.cerrarCuentaPooledAccount(cuenta1);
+				
+			} catch (ProyectoException e) {
+				fail("No debería lanzarse excepción");
+			}
+		}
+		
+		//@Requisitos{"R9"}
+		@Test
+		public void testCerrarPooledAccountNoEncontrada() {
+			try {
+				List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
+				PooledAccount cuenta1 = cuentas.get(0);
+				cuenta1.setIBAN(1234);
+				gestionPooledAccount.cerrarCuentaPooledAccount(cuenta1);
+				
+			} catch (CuentaNoEncontradoException e) {
+				// OK
+			} catch (ProyectoException e) {
+				fail("No debería lanzarse excepción");
+			}
+		}
+		
+		//@Requisitos{"R9"}
+		@Test
+		public void testCerrarPooledAccountConSaldo() {
+			try {
+				List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
+				PooledAccount cuenta1 = cuentas.get(0);
+				gestionPooledAccount.cerrarCuentaPooledAccount(cuenta1);
+				
+			} catch (CuentaConSaldoException e) {
+				// OK
+			} catch (ProyectoException e) {
+				fail("No debería lanzarse excepción");
+			}
+		}
 	
 	@Test
 	public void testEliminarPooledAccount() {

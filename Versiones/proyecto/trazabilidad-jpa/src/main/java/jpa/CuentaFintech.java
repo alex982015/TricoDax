@@ -32,6 +32,7 @@ public class CuentaFintech extends Cuenta implements Serializable {
 	@ManyToOne
 	private Cliente cliente;
 	
+
 /****************CONSTRUCTORES*************************************/
 
 	public CuentaFintech() {
@@ -86,6 +87,14 @@ public class CuentaFintech extends Cuenta implements Serializable {
 		this.clasificacion = clasificacion;
 	}
 
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+	
 /******************STRING****************************************/
 	
 	@Override
