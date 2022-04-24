@@ -36,7 +36,7 @@ public class BaseDatos {
 		empresa1.setDireccion("Calle Ejemplo 231");
 		empresa1.setCiudad("Mallorca");
 		empresa1.setCodPostal(32453);
-		empresa1.setPais("España");
+		empresa1.setPais("Spain");
 		
 		Empresa empresa2 = new Empresa ("RazonSocial2 S.L.", false);
 		empresa2.setIdent(245235256);
@@ -46,7 +46,7 @@ public class BaseDatos {
 		empresa2.setDireccion("Calle Ejemplo 231");
 		empresa2.setCiudad("Madrid");
 		empresa2.setCodPostal(53456);
-		empresa2.setPais("España");
+		empresa2.setPais("Spain");
 		
 		Empresa empresa3 = new Empresa ("RazonSocial3 S.L.", false);
 		empresa3.setIdent(345345664);
@@ -56,7 +56,7 @@ public class BaseDatos {
 		empresa3.setDireccion("Calle Ejemplo 231");
 		empresa3.setCiudad("Barcelona");
 		empresa3.setCodPostal(34536);
-		empresa3.setPais("España");
+		empresa3.setPais("Spain");
 		
 		for (Empresa empresa: new Empresa [] {empresa1, empresa2, empresa3}) {
 			em.persist(empresa);
@@ -70,7 +70,7 @@ public class BaseDatos {
 		indiv1.setDireccion("Calle Ejemplo 223");
 		indiv1.setCiudad("Lugo");
 		indiv1.setCodPostal(43256);
-		indiv1.setPais("España");
+		indiv1.setPais("Spain");
 		
 		Indiv indiv2 = new Indiv ("Nombre2","Apellido2",Date.valueOf("1999-06-10"));
 		indiv2.setIdent(874747457);
@@ -78,7 +78,7 @@ public class BaseDatos {
 		indiv2.setEstado(true);
 		indiv2.setFecha_Alta(Date.valueOf("2019-09-05"));
 		indiv2.setDireccion("Calle Ejemplo 111");
-		indiv2.setCiudad("Leganés");
+		indiv2.setCiudad("Spain");
 		indiv2.setCodPostal(35256);
 		indiv2.setPais("España");
 		
@@ -90,7 +90,7 @@ public class BaseDatos {
 		indiv3.setDireccion("Calle Ejemplo 322");
 		indiv3.setCiudad("Valencia");
 		indiv3.setCodPostal(54363);
-		indiv3.setPais("España");
+		indiv3.setPais("Spain");
 		
 		for (Indiv indiv: new Indiv [] {indiv1, indiv2, indiv3}) {
 			em.persist(indiv);
@@ -145,7 +145,7 @@ public class BaseDatos {
 			em.persist(divisa);
 		}
 		
-		Trans trans1 = new Trans(20, "Bizum", "2%", "España", Date.valueOf("2022-02-01"), Date.valueOf("2022-03-01"));
+		Trans trans1 = new Trans(20, "Bizum", "2%", "Spain", Date.valueOf("2022-02-01"), Date.valueOf("2022-03-01"));
 		Trans trans2 = new Trans(300, "Bizum", "1%", "Noruega", Date.valueOf("2020-02-01"), Date.valueOf("2020-03-01"));
 		Trans trans3 = new Trans(10, "Bizum", "3%", "Nigeria", Date.valueOf("2021-02-01"), Date.valueOf("2021-03-01"));
 		Trans trans4 = new Trans(40, "Bizum", "15%", "Polonia", Date.valueOf("2019-02-01"), Date.valueOf("2019-03-01"));
@@ -154,10 +154,10 @@ public class BaseDatos {
 			em.persist(trans);
 		}
 		
-		UserApk user1 = new UserApk("Snorlax", "1234", true);
-		UserApk user2 = new UserApk("Pikachu", "1234", false);
-		UserApk user3 = new UserApk("Ash", "1234", true);
-		UserApk user4 = new UserApk("Charizard", "1234", true);
+		UserApk user1 = new UserApk("UserApk1", "1234", true);
+		UserApk user2 = new UserApk("UserApk2", "2134", false);
+		UserApk user3 = new UserApk("UserApk3", "2114", true);
+		UserApk user4 = new UserApk("UserApk4", "1421", true);
 		
 		for(UserApk user : new UserApk [] {user1, user2, user3, user4}) {
 			em.persist(user);

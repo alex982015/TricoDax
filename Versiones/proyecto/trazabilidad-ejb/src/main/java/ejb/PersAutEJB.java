@@ -171,6 +171,8 @@ public class PersAutEJB implements GestionPersAut {
 							fw.append(", ");
 							fw.append(String.valueOf(e.getCodPostal()));
 							fw.append(", ");
+							fw.append(String.valueOf(e.getPais()));
+							fw.append(", ");
 							fw.append(String.valueOf(persAut.getIdent()));
 							fw.append(", ");
 							fw.append(String.valueOf(persAut.getFechaNac()));
