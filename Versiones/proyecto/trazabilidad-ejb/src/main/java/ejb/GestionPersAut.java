@@ -14,7 +14,7 @@ public interface GestionPersAut {
 	public void actualizarPersAut(PersAut persAut) throws ProyectoException;
 	public void cerrarCuentaPersAut(PersAut persAut) throws ProyectoException;
 	public void bloquearCuentaPersAut(PersAut persAut) throws ProyectoException;
-	public void anyadirAutorizadoAEmpresa(PersAut persAut, Empresa empresa) throws ProyectoException;
+	public void anyadirAutorizadoAEmpresa(PersAut persAut, Empresa empresa, String tipo) throws ProyectoException;
 	public void eliminarPersAut(PersAut persAut) throws ProyectoException;
 	public void eliminarTodasPersAut() throws ProyectoException;
 	public void generarInforme(PersAut persAut, String ruta) throws ProyectoException, IOException;

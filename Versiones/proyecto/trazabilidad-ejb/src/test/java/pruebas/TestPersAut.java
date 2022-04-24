@@ -5,35 +5,46 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.naming.NamingException;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import ejb.GestionCuentaFintech;
 import ejb.GestionEmpresa;
 import ejb.GestionPersAut;
 import exceptions.ClienteNoEncontradoException;
 import exceptions.PersAutExistenteException;
 import exceptions.PersAutNoEncontradaException;
+import exceptions.PersAutYaAsignadaException;
 import exceptions.ProyectoException;
+import jpa.CuentaFintech;
+import jpa.CuentaRef;
 import jpa.Empresa;
 import jpa.PersAut;
+import jpa.PooledAccount;
 
 public class TestPersAut {
 
 	private static final String PERSAUT_EJB = "java:global/classes/PersAutEJB";
 	private static final String EMPRESA_EJB = "java:global/classes/EmpresaEJB";
+	private static final String CUENTAFINTECH_EJB = "java:global/classes/CuentaFintechEJB";
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "TrazabilidadTest";
 	
 	private GestionPersAut gestionPersAut;
 	private GestionEmpresa gestionEmpresa;
+	private GestionCuentaFintech gestionCuentaFintech;
 	
 	@Before
 	public void setup() throws NamingException  {
 		gestionPersAut = (GestionPersAut) SuiteTest.ctx.lookup(PERSAUT_EJB);
 		gestionEmpresa = (GestionEmpresa) SuiteTest.ctx.lookup(EMPRESA_EJB);
+		gestionCuentaFintech = (GestionCuentaFintech) SuiteTest.ctx.lookup(CUENTAFINTECH_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
 
@@ -121,7 +132,9 @@ public class TestPersAut {
 			List<Empresa> empresa = gestionEmpresa.obtenerEmpresas();
 			Empresa e = empresa.get(0);
 			
-			gestionPersAut.anyadirAutorizadoAEmpresa(p, e);
+			String t = "AUTORIZADO";
+			
+			gestionPersAut.anyadirAutorizadoAEmpresa(p, e, t);
 
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al asociar persAut");
@@ -139,7 +152,9 @@ public class TestPersAut {
 			List<Empresa> empresa = gestionEmpresa.obtenerEmpresas();
 			Empresa e = empresa.get(0);
 			
-			gestionPersAut.anyadirAutorizadoAEmpresa(p, e);
+			String t = "AUTORIZADO";
+			
+			gestionPersAut.anyadirAutorizadoAEmpresa(p, e, t);
 
 		} catch (PersAutNoEncontradaException e) {
 			// OK
@@ -159,7 +174,9 @@ public class TestPersAut {
 			Empresa e = empresa.get(0);
 			e.setID(10);
 			
-			gestionPersAut.anyadirAutorizadoAEmpresa(p, e);
+			String t = "AUTORIZADO";
+			
+			gestionPersAut.anyadirAutorizadoAEmpresa(p, e, t);
 
 		} catch (ClienteNoEncontradoException e) {
 			// OK
@@ -273,12 +290,24 @@ public class TestPersAut {
 	}
 	
 	//@Requisitos({"RF12"})
-	/*@Test
+	@Test
 	public void testGenerarInformePersAut() {
 		try {
 			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
 			PersAut persAut1 = persAut.get(0);
-			String ruta = "C:\\informe1.csv";
+			
+			List<Empresa> empresa = gestionEmpresa.obtenerEmpresas();
+			Empresa empresa1 = empresa.get(0);
+			
+			List<CuentaFintech> cuentas = gestionCuentaFintech.obtenerCuentasFintech();
+			empresa1.setCuentas(cuentas);
+			
+			Map<Empresa, String> m = persAut1.getAutoriz();
+			
+			m.put(empresa1, "AUTORIZADO");
+			persAut1.setAutoriz(m);
+			
+			String ruta = "C:\\Users\\Alex\\Desktop\\informe1.csv";
 			
 			gestionPersAut.generarInforme(persAut1, ruta);
 			
@@ -287,5 +316,5 @@ public class TestPersAut {
 		} catch (IOException e) {
 			fail("No debería lanzarse excepción");
 		}
-	}*/
+	}
 }

@@ -109,7 +109,7 @@ public class PersAutEJB implements GestionPersAut {
 	}
 
 	@Override
-	public void anyadirAutorizadoAEmpresa(PersAut persAut, Empresa empresa) throws ProyectoException {
+	public void anyadirAutorizadoAEmpresa(PersAut persAut, Empresa empresa, String tipo) throws ProyectoException {
 		PersAut persAutEntity = em.find(PersAut.class, persAut.getId());
 		
 		if (persAutEntity == null) {
@@ -124,7 +124,7 @@ public class PersAutEJB implements GestionPersAut {
 		Map<Empresa, String> m = persAutEntity.getAutoriz();
 		
 		if(!m.containsKey(empresaEntity)) {
-			m.put(empresaEntity, "AUTORIZADO");
+			m.put(empresaEntity, tipo);
 			persAutEntity.setAutoriz(m);
 		} else {
 			throw new PersAutYaAsignadaException();
@@ -143,20 +143,51 @@ public class PersAutEJB implements GestionPersAut {
 	@Override
 	public void generarInforme(PersAut persAut, String ruta) throws ProyectoException, IOException {
 		Set<Empresa> cuentasAsociadas = persAut.getAutoriz().keySet();
-		CSVPrinter printer = new CSVPrinter(new FileWriter(ruta), CSVFormat.DEFAULT);
-		printer.printRecord("IBAN", "Apellidos", "Nombre", "Dirección", "Ciudad", "Código postal", "País", "Identificación", "Fecha de nacimiento");
-	
-		for (Empresa e : cuentasAsociadas) {
+		FileWriter fw = new FileWriter(ruta);
+		
+		try {
+			fw.append("IBAN, Apellidos, Nombre, Direccion, Ciudad, Codigo postal, Pais, Identificacion, Fecha de nacimiento");
+			fw.append("\n");
+			
+			for (Empresa e : cuentasAsociadas) {
 				if(e.isEstado()) {
+					System.out.println(e.getRazonSocial());
+					System.out.println(e.getID());
+					System.out.println(e.getCuentas().size());
 					for (CuentaFintech c : e.getCuentas()) {
+						System.out.println("HOLAAAAA");
+						System.out.println(e.getCuentas().toString());
+						System.out.println(c.getIBAN());
 						if(c.getEstado()) {
-							printer.printRecord(c.getIBAN(), persAut.getApellidos(), persAut.getNombre(), e.getDireccion(), e.getCiudad(), e.getCodPostal(), e.getPais(), persAut.getIdent(), persAut.getFechaNac());
-							printer.flush();
+							fw.append(String.valueOf(c.getIBAN()));
+							fw.append(", ");
+							fw.append(persAut.getApellidos());
+							fw.append(", ");
+							fw.append(persAut.getNombre());
+							fw.append(", ");
+							fw.append(persAut.getDireccion());
+							fw.append(", ");
+							fw.append(e.getCiudad());
+							fw.append(", ");
+							fw.append(String.valueOf(e.getCodPostal()));
+							fw.append(", ");
+							fw.append(String.valueOf(persAut.getIdent()));
+							fw.append(", ");
+							fw.append(String.valueOf(persAut.getFechaNac()));
+							fw.append("\n");
 						}
 					}
 				}
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				fw.flush();
+				fw.close();
+			} catch(Exception ex) {
+				ex.printStackTrace();
+			}
 		}
-		
-		printer.close();
 	}
 }

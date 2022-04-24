@@ -15,6 +15,7 @@ import ejb.GestionSegregada;
 import exceptions.CuentaExistenteException;
 import exceptions.CuentaNoEncontradoException;
 import exceptions.ProyectoException;
+import jpa.CuentaFintech;
 import jpa.Segregada;
 
 public class TestSegregada {
@@ -33,7 +34,7 @@ public class TestSegregada {
 	public void testInsertarSegregada() {
 		
 		final long IBAN=455833699;
-		final Segregada cuenta = new Segregada (21.0);
+		final CuentaFintech cuenta = new Segregada (21.0);
 		cuenta.setIBAN(IBAN);
 		cuenta.setEstado(true);
 		cuenta.setFechaApertura(Date.valueOf("2022-06-27"));
@@ -65,12 +66,10 @@ public class TestSegregada {
 	@Test
 	public void testActualizarSegregada() {
 		
-		
 		try {
 			
 			List<Segregada> cuenta = gestionSegregada.obtenerSegregada();
-			Segregada c = cuenta.get(0);
-			
+			Segregada c = cuenta.get(0);	
 			
 			gestionSegregada.actualizarSegregada(c);
 

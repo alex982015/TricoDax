@@ -27,7 +27,7 @@ public class BaseDatos {
 		EntityManager em = emf.createEntityManager();
 		
 		em.getTransaction().begin();
-		
+			
 		Empresa empresa1 = new Empresa ("RazonSocial1 S.L.", false);
 		empresa1.setIdent(345345345);
 		empresa1.setTipo_cliente("Empresa");
@@ -96,25 +96,21 @@ public class BaseDatos {
 			em.persist(indiv);
 		}
 		
-		PooledAccount pooledAccount1 = new PooledAccount ();
+		CuentaFintech pooledAccount1 = new PooledAccount ();
 		pooledAccount1.setIBAN(455833400);
 		pooledAccount1.setEstado(true);
 		pooledAccount1.setFechaApertura(Date.valueOf("2022-06-27"));
 		pooledAccount1.setClasificacion(true);
 		
-		for (PooledAccount cuenta: new PooledAccount [] {pooledAccount1}) {
-			em.persist(cuenta);
-		}
+		em.persist(pooledAccount1);
 		
-		Segregada segregada1 = new Segregada (20.0);
+		CuentaFintech segregada1 = new Segregada (20.0);
 		segregada1.setIBAN(45583380);
 		segregada1.setEstado(true);
 		segregada1.setFechaApertura(Date.valueOf("2022-06-27"));
 		segregada1.setClasificacion(true);
 		
-		for (Segregada cuenta: new Segregada [] {segregada1}) {
-			em.persist(cuenta);
-		}
+		em.persist(segregada1);
 		
 		List<CuentaFintech> cuentas1 = new ArrayList<CuentaFintech>();
 		cuentas1.add(pooledAccount1);

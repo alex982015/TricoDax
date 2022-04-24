@@ -16,6 +16,7 @@ import exceptions.CuentaConSaldoException;
 import exceptions.CuentaExistenteException;
 import exceptions.CuentaNoEncontradoException;
 import exceptions.ProyectoException;
+import jpa.CuentaFintech;
 import jpa.PooledAccount;
 
 public class TestPooledAccount {
@@ -34,7 +35,7 @@ public class TestPooledAccount {
 	public void testInsertarPooledAccount() {
 		
 		final long IBAN=455833265;
-		final PooledAccount cuenta = new PooledAccount ();
+		final CuentaFintech cuenta = new PooledAccount ();
 		cuenta.setIBAN(IBAN);
 		cuenta.setEstado(true);
 		cuenta.setFechaApertura(Date.valueOf("2022-06-27"));

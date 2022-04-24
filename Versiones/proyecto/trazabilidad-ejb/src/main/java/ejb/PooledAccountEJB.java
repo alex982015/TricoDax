@@ -28,13 +28,14 @@ public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledA
 	private EntityManager em;
     
 	@Override
-	public void insertarPooledAccount(PooledAccount cuenta) throws CuentaExistenteException {
+	public void insertarPooledAccount(CuentaFintech cuenta) throws CuentaExistenteException {
 		PooledAccount cuentaExistente = em.find(PooledAccount.class, cuenta.getIBAN());
+		PooledAccount cuentaFintech = em.find(PooledAccount.class, cuenta.getIBAN());
 		if (cuentaExistente != null) {
 			throw new CuentaExistenteException();
 		}
 		
-		Set<CuentaRef> cuentasAsociadas = cuenta.getDepositEn().keySet();
+		Set<CuentaRef> cuentasAsociadas = ((PooledAccount) cuenta).getDepositEn().keySet();
 		
 		for (CuentaRef c : cuentasAsociadas) {
 			if(c.getMonedas().size() > 1) {
@@ -73,8 +74,8 @@ public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledA
 	}
 
 	@Override
-	public void actualizarPooledAccount(PooledAccount cuenta) throws ProyectoException {
-		PooledAccount cuentaEntity = em.find(PooledAccount.class, cuenta.getIBAN());
+	public void actualizarPooledAccount(CuentaFintech cuenta) throws ProyectoException {
+		CuentaFintech cuentaEntity = em.find(CuentaFintech.class, cuenta.getIBAN());
 		if (cuentaEntity == null) {
 			throw new CuentaNoEncontradoException();
 		}
@@ -83,7 +84,7 @@ public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledA
 	}
 
 	@Override
-	public void eliminarPooledAccount(PooledAccount cuenta) throws ProyectoException {
+	public void eliminarPooledAccount(CuentaFintech cuenta) throws ProyectoException {
 		
 		PooledAccount PooledAccountEntity = em.find(PooledAccount.class, cuenta.getIBAN());
 		CuentaFintech cuentaFintechEntity = em.find(CuentaFintech.class, cuenta.getIBAN());
@@ -100,8 +101,7 @@ public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledA
 
 	@Override
 	public void eliminarTodasPooledAccount() throws ProyectoException {
-		List<PooledAccount> cuentas = obtenerPooledAccount();
-		
+		List<PooledAccount> cuentas = obtenerPooledAccount();		
 		
 		for (PooledAccount e : cuentas) {
 			Cuenta cuentaEntity = em.find(Cuenta.class, e.getIBAN());
@@ -115,13 +115,13 @@ public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledA
 	}
 
 	@Override
-	public void cerrarCuentaPooledAccount(PooledAccount cuenta) throws ProyectoException {
-		PooledAccount cuentaEntity = em.find(PooledAccount.class, cuenta.getIBAN());
+	public void cerrarCuentaPooledAccount(CuentaFintech cuenta) throws ProyectoException {
+		CuentaFintech cuentaEntity = em.find(CuentaFintech.class, cuenta.getIBAN());
 		if (cuentaEntity == null) {
 			throw new CuentaNoEncontradoException();
 		}
 		
-		Set<CuentaRef> cuentasAsociadas = cuentaEntity.getDepositEn().keySet();
+		Set<CuentaRef> cuentasAsociadas = ((PooledAccount) cuentaEntity).getDepositEn().keySet();
 		boolean ok = false;
 		
 		for (CuentaRef c : cuentasAsociadas) {
@@ -138,13 +138,13 @@ public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledA
 	}
 	
 	@Override
-	public void cambiarDivisaPooledAccount(PooledAccount cuenta, Divisa origen, Divisa destino) throws ProyectoException {
-		PooledAccount cuentaEntity = em.find(PooledAccount.class, cuenta.getIBAN());
+	public void cambiarDivisaPooledAccount(CuentaFintech cuenta, Divisa origen, Divisa destino) throws ProyectoException {
+		CuentaFintech cuentaEntity = em.find(CuentaFintech.class, cuenta.getIBAN());
 		if (cuentaEntity == null) {
 			throw new CuentaNoEncontradoException();
 		}
 		
-		Set<CuentaRef> cuentasAsociadas = cuentaEntity.getDepositEn().keySet();
+		Set<CuentaRef> cuentasAsociadas = ((PooledAccount) cuentaEntity).getDepositEn().keySet();
 		
 		for (CuentaRef c : cuentasAsociadas) {
 			for(Divisa d : c.getMonedas()) {

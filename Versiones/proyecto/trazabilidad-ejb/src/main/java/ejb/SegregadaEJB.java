@@ -28,8 +28,8 @@ public class SegregadaEJB extends CuentaFintechEJB implements GestionSegregada{
 	private EntityManager em;
     
 	@Override
-	public void insertarSegregada(Segregada cuenta) throws CuentaExistenteException {
-		Segregada cuentaExistente = em.find(Segregada.class, cuenta.getIBAN());
+	public void insertarSegregada(CuentaFintech cuenta) throws CuentaExistenteException {
+		CuentaFintech cuentaExistente = em.find(CuentaFintech.class, cuenta.getIBAN());
 		if (cuentaExistente != null) {
 			throw new CuentaExistenteException();
 		}
@@ -44,8 +44,8 @@ public class SegregadaEJB extends CuentaFintechEJB implements GestionSegregada{
 	}
 
 	@Override
-	public void actualizarSegregada(Segregada cuenta) throws ProyectoException {
-		Segregada cuentaEntity = em.find(Segregada.class, cuenta.getIBAN());
+	public void actualizarSegregada(CuentaFintech cuenta) throws ProyectoException {
+		CuentaFintech cuentaEntity = em.find(CuentaFintech.class, cuenta.getIBAN());
 		if (cuentaEntity == null) {
 			throw new CuentaNoEncontradoException();
 		}
@@ -54,13 +54,13 @@ public class SegregadaEJB extends CuentaFintechEJB implements GestionSegregada{
 	}
 	
 	@Override
-	public void cerrarCuentaSegregada(Segregada cuenta) throws ProyectoException {
-		Segregada cuentaEntity = em.find(Segregada.class, cuenta.getIBAN());
+	public void cerrarCuentaSegregada(CuentaFintech cuenta) throws ProyectoException {
+		CuentaFintech cuentaEntity = em.find(CuentaFintech.class, cuenta.getIBAN());
 		if (cuentaEntity == null) {
 			throw new CuentaNoEncontradoException();
 		}
 		
-		if(!(cuentaEntity.getReferenciada().getSaldo() > 0)) {
+		if(!(((Segregada) cuentaEntity).getReferenciada().getSaldo() > 0)) {
 			cuentaEntity.setEstado(false);
 		} else {
 			throw new CuentaConSaldoException();
@@ -69,7 +69,7 @@ public class SegregadaEJB extends CuentaFintechEJB implements GestionSegregada{
 	}
 
 	@Override
-	public void eliminarSegregada(Segregada cuenta) throws ProyectoException {
+	public void eliminarSegregada(CuentaFintech cuenta) throws ProyectoException {
 		
 		Segregada SegregadaEntity = em.find(Segregada.class, cuenta.getIBAN());
 		CuentaFintech cuentaFintechEntity = em.find(CuentaFintech.class, cuenta.getIBAN());
