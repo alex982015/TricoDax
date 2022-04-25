@@ -1,29 +1,21 @@
 package ejb;
 
 import java.util.List;
-import java.util.logging.Logger;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-
 import exceptions.ClienteExistenteException;
 import exceptions.ClienteNoEncontradoException;
 import exceptions.NoBajaClienteException;
 import exceptions.ProyectoException;
 import jpa.Cliente;
 import jpa.CuentaFintech;
-import jpa.Empresa;
 import jpa.Indiv;
 
-/**
- * Session Bean implementation class IndivEJB
- */
 @Stateless
 public class IndivEJB implements GestionIndiv {
-private static final Logger LOG = Logger.getLogger(IndivEJB.class.getCanonicalName());
-	
+
 	@PersistenceContext(name="Trazabilidad")
 	private EntityManager em;
 

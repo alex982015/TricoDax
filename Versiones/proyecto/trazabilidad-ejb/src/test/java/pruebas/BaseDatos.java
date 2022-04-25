@@ -1,15 +1,9 @@
 package pruebas;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-
-import jpa.Cliente;
-import jpa.Cuenta;
 import jpa.CuentaFintech;
 import jpa.CuentaRef;
 import jpa.Divisa;
@@ -107,7 +101,7 @@ public class BaseDatos {
 		CuentaFintech segregada1 = new Segregada (20.0);
 		segregada1.setIBAN(45583380);
 		segregada1.setEstado(true);
-		segregada1.setFechaApertura(Date.valueOf("2022-06-27"));
+		segregada1.setFechaApertura(Date.valueOf("2021-06-27"));
 		segregada1.setClasificacion(true);
 		
 		em.persist(segregada1);

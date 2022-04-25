@@ -1,7 +1,6 @@
 package ejb;
 
 import java.util.List;
-
 import exceptions.ProyectoException;
 import jpa.CuentaRef;
 

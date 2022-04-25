@@ -1,40 +1,36 @@
 package ejb;
 
 import java.util.List;
-
-import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-
 import exceptions.CuentaConSaldoException;
 import exceptions.CuentaExistenteException;
 import exceptions.CuentaNoEncontradoException;
 import exceptions.ProyectoException;
 import jpa.Cuenta;
 import jpa.CuentaFintech;
-import jpa.PooledAccount;
 import jpa.Segregada;
 
-/**
- * Session Bean implementation class SegregadaEJB
- */
 @Stateless
-@LocalBean
 public class SegregadaEJB extends CuentaFintechEJB implements GestionSegregada{
 
 	@PersistenceContext(name="Trazabilidad")
 	private EntityManager em;
     
 	@Override
-	public void insertarSegregada(CuentaFintech cuenta) throws CuentaExistenteException {
+	public void insertarSegregada(Segregada cuenta) throws CuentaExistenteException {
 		CuentaFintech cuentaExistente = em.find(CuentaFintech.class, cuenta.getIBAN());
-		if (cuentaExistente != null) {
+		Segregada cuentaSegregada = em.find(Segregada.class, cuenta.getIBAN());
+		if ((cuentaExistente != null) && (cuentaSegregada != null)) {
 			throw new CuentaExistenteException();
 		}
 		
+		cuentaSegregada = cuenta;
+		
 		em.persist(cuenta);
+		em.persist(cuentaSegregada);
 	}
 
 	@Override
@@ -44,7 +40,7 @@ public class SegregadaEJB extends CuentaFintechEJB implements GestionSegregada{
 	}
 
 	@Override
-	public void actualizarSegregada(CuentaFintech cuenta) throws ProyectoException {
+	public void actualizarSegregada(Segregada cuenta) throws ProyectoException {
 		CuentaFintech cuentaEntity = em.find(CuentaFintech.class, cuenta.getIBAN());
 		if (cuentaEntity == null) {
 			throw new CuentaNoEncontradoException();
@@ -54,23 +50,21 @@ public class SegregadaEJB extends CuentaFintechEJB implements GestionSegregada{
 	}
 	
 	@Override
-	public void cerrarCuentaSegregada(CuentaFintech cuenta) throws ProyectoException {
+	public void cerrarCuentaSegregada(Segregada cuenta) throws ProyectoException {
 		CuentaFintech cuentaEntity = em.find(CuentaFintech.class, cuenta.getIBAN());
 		if (cuentaEntity == null) {
 			throw new CuentaNoEncontradoException();
 		}
 		
-		if(!(((Segregada) cuentaEntity).getReferenciada().getSaldo() > 0)) {
+		if(!(cuenta.getReferenciada().getSaldo() > 0)) {
 			cuentaEntity.setEstado(false);
 		} else {
 			throw new CuentaConSaldoException();
 		}
-		
 	}
 
 	@Override
-	public void eliminarSegregada(CuentaFintech cuenta) throws ProyectoException {
-		
+	public void eliminarSegregada(Segregada cuenta) throws ProyectoException {
 		Segregada SegregadaEntity = em.find(Segregada.class, cuenta.getIBAN());
 		CuentaFintech cuentaFintechEntity = em.find(CuentaFintech.class, cuenta.getIBAN());
 		Cuenta cuentaEntity = em.find(Cuenta.class, cuenta.getIBAN());
@@ -80,14 +74,12 @@ public class SegregadaEJB extends CuentaFintechEJB implements GestionSegregada{
 		}
 		em.remove(SegregadaEntity);
 		em.remove(cuentaFintechEntity);
-		em.remove(cuentaEntity);
-		
+		em.remove(cuentaEntity);		
 	}
 
 	@Override
 	public void eliminarTodasSegregada() throws ProyectoException {
 		List<Segregada> cuentas = obtenerSegregada();
-		
 		
 		for (Segregada e : cuentas) {
 			Cuenta cuentaEntity = em.find(Cuenta.class, e.getIBAN());

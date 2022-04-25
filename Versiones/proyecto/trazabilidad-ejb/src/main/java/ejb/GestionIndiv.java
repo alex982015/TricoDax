@@ -1,10 +1,8 @@
 package ejb;
 
 import java.util.List;
-
 import exceptions.ProyectoException;
 import jpa.Indiv;
-
 
 public interface GestionIndiv {
 	public void insertarIndiv(Indiv indiv) throws ProyectoException;

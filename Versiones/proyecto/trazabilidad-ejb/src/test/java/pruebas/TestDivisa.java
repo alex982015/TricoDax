@@ -2,15 +2,10 @@ package pruebas;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-
 import java.util.List;
-import java.util.logging.Logger;
-
 import javax.naming.NamingException;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import ejb.GestionDivisa;
 import exceptions.DivisaExistenteException;
 import exceptions.DivisaNoEncontradaException;
@@ -18,8 +13,7 @@ import exceptions.ProyectoException;
 import jpa.Divisa;
 
 public class TestDivisa {
-	private static final Logger LOG = Logger.getLogger(TestDivisa.class.getCanonicalName());
-
+	
 	private static final String DIVISA_EJB = "java:global/classes/DivisaEJB";
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "TrazabilidadTest";
 	

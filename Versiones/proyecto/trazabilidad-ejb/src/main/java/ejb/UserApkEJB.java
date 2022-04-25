@@ -1,36 +1,67 @@
 package ejb;
 
 import java.util.List;
-
-import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-
 import exceptions.ProyectoException;
-import exceptions.TransExistenteException;
-import exceptions.TransNoEncontradaException;
+import exceptions.UserAsociadoNoExistenteException;
 import exceptions.UserExistenteException;
 import exceptions.UserNoAdminException;
 import exceptions.UserNoEncontradoException;
-import jpa.Trans;
+import jpa.Indiv;
+import jpa.PersAut;
 import jpa.UserApk;
 
-/**
- * Session Bean implementation class GestionUserApk
- */
 @Stateless
 public class UserApkEJB implements GestionUserApk {
 	
 	@PersistenceContext(name="Trazabilidad")
 	private EntityManager em;
-	    
-    @Override
-	public void insertarUser(UserApk user) throws UserExistenteException {
+	
+	@Override
+	public void insertarUserAdmin(UserApk user) throws ProyectoException {
 		UserApk userExistente= em.find(UserApk.class, user.getUser());
 		if (userExistente != null) {
 			throw new UserExistenteException();
+		}
+		
+		if(!user.isAdministrativo()) {
+			throw new UserNoAdminException();
+		}
+			
+		em.persist(user);
+	}
+    
+	
+    @Override
+	public void insertarUserIndividual(UserApk user) throws ProyectoException {
+		UserApk userExistente= em.find(UserApk.class, user.getUser());
+		if (userExistente != null) {
+			throw new UserExistenteException();
+		}
+		
+		Indiv indivExistente = em.find(Indiv.class, user.getPersonaIndividual().getID());
+	
+		if (indivExistente == null) {
+			throw new UserAsociadoNoExistenteException();
+		}
+		
+		em.persist(user);
+	}
+    
+    @Override
+	public void insertarUserAutorizado(UserApk user) throws ProyectoException {
+		UserApk userExistente= em.find(UserApk.class, user.getUser());
+		if (userExistente != null) {
+			throw new UserExistenteException();
+		}
+		
+		PersAut persAutExistente = em.find(PersAut.class, user.getPersonaAutorizada().getId());
+	
+		if (persAutExistente == null) {
+			throw new UserAsociadoNoExistenteException();
 		}
 		
 		em.persist(user);
@@ -48,14 +79,11 @@ public class UserApkEJB implements GestionUserApk {
 		if (userEntity == null) {
 			throw new UserNoEncontradoException();
 		}
-		//Actualización de atributos propios de clase
+
 		userEntity.setPassword(user.getPassword());
 		userEntity.setAdministrativo(user.isAdministrativo());
-		//Actualización de parámetros de relación
-		/*
 		userEntity.setPersonaAutorizada(user.getPersonaAutorizada());
 		userEntity.setPersonaIndividual(user.getPersonaIndividual());
-		*/
 
 		em.merge(userEntity);
 	}

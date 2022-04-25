@@ -2,15 +2,11 @@ package pruebas;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-
 import java.sql.Date;
 import java.util.List;
-
 import javax.naming.NamingException;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import ejb.GestionCuentaRef;
 import exceptions.CuentaExistenteException;
 import exceptions.CuentaNoEncontradoException;

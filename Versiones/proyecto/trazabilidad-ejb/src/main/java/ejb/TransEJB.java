@@ -1,21 +1,15 @@
 package ejb;
 
 import java.util.List;
-
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-
 import exceptions.ProyectoException;
 import exceptions.TransExistenteException;
 import exceptions.TransNoEncontradaException;
 import jpa.Trans;
 
-/**
- * Session Bean implementation class TransEJB
- */
 @Stateless
 public class TransEJB implements GestionTrans{
 	

@@ -2,20 +2,15 @@ package pruebas;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-
 import java.sql.Date;
 import java.util.List;
-
 import javax.naming.NamingException;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import ejb.GestionSegregada;
 import exceptions.CuentaExistenteException;
 import exceptions.CuentaNoEncontradoException;
 import exceptions.ProyectoException;
-import jpa.CuentaFintech;
 import jpa.Segregada;
 
 public class TestSegregada {
@@ -32,20 +27,17 @@ public class TestSegregada {
 
 	@Test
 	public void testInsertarSegregada() {
-		
 		final long IBAN=455833699;
-		final CuentaFintech cuenta = new Segregada (21.0);
+		final Segregada cuenta = new Segregada (21.0);
 		cuenta.setIBAN(IBAN);
 		cuenta.setEstado(true);
 		cuenta.setFechaApertura(Date.valueOf("2022-06-27"));
 		cuenta.setClasificacion(true);
 		
 		try {
-			
 			gestionSegregada.insertarSegregada(cuenta);
 			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
 			assertEquals(2, cuentas.size());
-			
 		} catch (CuentaExistenteException e) {
 			fail("Lanzó excepción al insertar");
 		} catch (ProyectoException e) {
@@ -65,14 +57,11 @@ public class TestSegregada {
 	
 	@Test
 	public void testActualizarSegregada() {
-		
-		try {
-			
+
+		try {			
 			List<Segregada> cuenta = gestionSegregada.obtenerSegregada();
 			Segregada c = cuenta.get(0);	
-			
 			gestionSegregada.actualizarSegregada(c);
-
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al actualizar");
 		}
@@ -80,15 +69,12 @@ public class TestSegregada {
 	
 	@Test
 	public void testActualizarSegregadaNoEncontrada() {
-		
 		final long IBAN = 455833218;
 		
 		try {
 			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
 			Segregada c = cuentas.get(0);
-			
 			c.setIBAN(IBAN);
-			
 			gestionSegregada.actualizarSegregada(c);
 			fail("Debería lanzar excepción de Segregada no encontrado");
 		} catch (CuentaNoEncontradoException e) {
@@ -104,10 +90,9 @@ public class TestSegregada {
 			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
 			Segregada cuenta1 = cuentas.get(0);
 			gestionSegregada.eliminarSegregada(cuenta1);
-			
+
 			List<Segregada> c = gestionSegregada.obtenerSegregada();
-			assertEquals(0, c.size());
-			
+			assertEquals(0, c.size());			
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
 		}
@@ -115,12 +100,11 @@ public class TestSegregada {
 	
 	@Test
 	public void testEliminarSegregadaNoEncontrado() {
+		
 		try {
 			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
-			Segregada cuenta1 = cuentas.get(0);
-			
+			Segregada cuenta1 = cuentas.get(0);	
 			cuenta1.setIBAN(455833220);
-			
 			gestionSegregada.eliminarSegregada(cuenta1);
 			fail("Debería lanzar la excepción de Segregada no encontrada");
 		} catch (CuentaNoEncontradoException e) {
@@ -132,9 +116,9 @@ public class TestSegregada {
 	
 	@Test
 	public void testEliminarTodasSegregada() {
+		
 		try {
-			gestionSegregada.eliminarTodasSegregada();
-			
+			gestionSegregada.eliminarTodasSegregada();	
 			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
 			assertEquals(0, cuentas.size());
 		} catch (ProyectoException e) {

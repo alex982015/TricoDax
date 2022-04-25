@@ -1,42 +1,29 @@
 package ejb;
 
-import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVPrinter;
-
 import exceptions.ClienteNoEncontradoException;
 import exceptions.PersAutExistenteException;
 import exceptions.PersAutNoEncontradaException;
 import exceptions.PersAutYaAsignadaException;
 import exceptions.ProyectoException;
 import jpa.CuentaFintech;
-import jpa.CuentaRef;
-import jpa.Divisa;
 import jpa.Empresa;
-import jpa.Indiv;
 import jpa.PersAut;
 
-/**
- * Session Bean implementation class PersAutEJB
- */
 @Stateless
 
 public class PersAutEJB implements GestionPersAut {
-
 	
 	@PersistenceContext(name="Trazabilidad")
 	private EntityManager em;
@@ -141,54 +128,102 @@ public class PersAutEJB implements GestionPersAut {
 	}
 
 	@Override
-	public void generarInforme(PersAut persAut, String ruta) throws ProyectoException, IOException {
+	public void generarInforme(PersAut persAut, String ruta, String tipo) throws ProyectoException, IOException {
+		PersAut persAutEntity = em.find(PersAut.class, persAut.getId());
+		
+		if (persAutEntity == null) {
+			throw new PersAutNoEncontradaException();
+		}
+		
 		Set<Empresa> cuentasAsociadas = persAut.getAutoriz().keySet();
 		FileWriter fw = new FileWriter(ruta);
 		
-		try {
-			fw.append("IBAN, Apellidos, Nombre, Direccion, Ciudad, Codigo postal, Pais, Identificacion, Fecha de nacimiento");
-			fw.append("\n");
-			
-			for (Empresa e : cuentasAsociadas) {
-				if(e.isEstado()) {
-					System.out.println(e.getRazonSocial());
-					System.out.println(e.getID());
-					System.out.println(e.getCuentas().size());
-					for (CuentaFintech c : e.getCuentas()) {
-						System.out.println("HOLAAAAA");
-						System.out.println(e.getCuentas().toString());
-						System.out.println(c.getIBAN());
-						if(c.getEstado()) {
-							fw.append(String.valueOf(c.getIBAN()));
-							fw.append(", ");
-							fw.append(persAut.getApellidos());
-							fw.append(", ");
-							fw.append(persAut.getNombre());
-							fw.append(", ");
-							fw.append(persAut.getDireccion());
-							fw.append(", ");
-							fw.append(e.getCiudad());
-							fw.append(", ");
-							fw.append(String.valueOf(e.getCodPostal()));
-							fw.append(", ");
-							fw.append(String.valueOf(e.getPais()));
-							fw.append(", ");
-							fw.append(String.valueOf(persAut.getIdent()));
-							fw.append(", ");
-							fw.append(String.valueOf(persAut.getFechaNac()));
-							fw.append("\n");
+		if(tipo.equals("Inicial")) {
+			try {
+				fw.append("IBAN, Apellidos, Nombre, Direccion, Ciudad, Codigo postal, Pais, Identificacion, Fecha de nacimiento");
+				fw.append("\n");
+				
+				for (Empresa e : cuentasAsociadas) {
+					if(e.isEstado()) {
+						for (CuentaFintech c : e.getCuentas()) {
+							if(c.getEstado()) {
+								fw.append(String.valueOf(c.getIBAN()));
+								fw.append(", ");
+								fw.append(persAut.getApellidos());
+								fw.append(", ");
+								fw.append(persAut.getNombre());
+								fw.append(", ");
+								fw.append(persAut.getDireccion());
+								fw.append(", ");
+								fw.append(e.getCiudad());
+								fw.append(", ");
+								fw.append(String.valueOf(e.getCodPostal()));
+								fw.append(", ");
+								fw.append(String.valueOf(e.getPais()));
+								fw.append(", ");
+								fw.append(String.valueOf(persAut.getIdent()));
+								fw.append(", ");
+								fw.append(String.valueOf(persAut.getFechaNac()));
+								fw.append("\n");
+							}
 						}
 					}
 				}
-			}
-		} catch(Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			try {
-				fw.flush();
-				fw.close();
 			} catch(Exception ex) {
 				ex.printStackTrace();
+			} finally {
+				try {
+					fw.flush();
+					fw.close();
+				} catch(Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+		} else if(tipo.equals("Semanal")) {
+			try {
+				fw.append("IBAN, Apellidos, Nombre, Direccion, Ciudad, Codigo postal, Pais, Identificacion, Fecha de nacimiento");
+				fw.append("\n");
+				
+				for (Empresa e : cuentasAsociadas) {
+					if(e.isEstado()) {
+						for (CuentaFintech c : e.getCuentas()) {
+							LocalDate old = c.getFechaApertura().toInstant()
+								      .atZone(ZoneId.systemDefault())
+								      .toLocalDate();
+							long noOfDaysBetween = ChronoUnit.DAYS.between(old, LocalDate.now());
+							System.out.println(noOfDaysBetween);
+							if(c.getEstado() && (noOfDaysBetween <= 7)) {
+								fw.append(String.valueOf(c.getIBAN()));
+								fw.append(", ");
+								fw.append(persAut.getApellidos());
+								fw.append(", ");
+								fw.append(persAut.getNombre());
+								fw.append(", ");
+								fw.append(persAut.getDireccion());
+								fw.append(", ");
+								fw.append(e.getCiudad());
+								fw.append(", ");
+								fw.append(String.valueOf(e.getCodPostal()));
+								fw.append(", ");
+								fw.append(String.valueOf(e.getPais()));
+								fw.append(", ");
+								fw.append(String.valueOf(persAut.getIdent()));
+								fw.append(", ");
+								fw.append(String.valueOf(persAut.getFechaNac()));
+								fw.append("\n");
+							}
+						}
+					}
+				}
+			} catch(Exception ex) {
+				ex.printStackTrace();
+			} finally {
+				try {
+					fw.flush();
+					fw.close();
+				} catch(Exception ex) {
+					ex.printStackTrace();
+				}
 			}
 		}
 	}

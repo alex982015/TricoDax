@@ -12,11 +12,7 @@ import exceptions.CuentaNoEncontradoException;
 import exceptions.ProyectoException;
 import jpa.Cuenta;
 import jpa.CuentaRef;
-import jpa.Divisa;
 
-/**
- * Session Bean implementation class CuentaRefEJB
- */
 @Stateless
 public class CuentaRefEJB implements GestionCuentaRef {
 

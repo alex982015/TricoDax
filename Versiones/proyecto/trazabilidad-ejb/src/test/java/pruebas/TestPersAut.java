@@ -2,55 +2,47 @@ package pruebas;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 import javax.naming.NamingException;
-
 import org.junit.Before;
 import org.junit.Test;
-
-import ejb.GestionCuentaFintech;
 import ejb.GestionEmpresa;
 import ejb.GestionPersAut;
+import ejb.GestionSegregada;
 import exceptions.ClienteNoEncontradoException;
 import exceptions.PersAutExistenteException;
 import exceptions.PersAutNoEncontradaException;
-import exceptions.PersAutYaAsignadaException;
 import exceptions.ProyectoException;
 import jpa.CuentaFintech;
-import jpa.CuentaRef;
 import jpa.Empresa;
 import jpa.PersAut;
-import jpa.PooledAccount;
+import jpa.Segregada;
 
 public class TestPersAut {
 
 	private static final String PERSAUT_EJB = "java:global/classes/PersAutEJB";
 	private static final String EMPRESA_EJB = "java:global/classes/EmpresaEJB";
-	private static final String CUENTAFINTECH_EJB = "java:global/classes/CuentaFintechEJB";
+	private static final String SEGREGADA_EJB = "java:global/classes/SegregadaEJB";
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "TrazabilidadTest";
 	
 	private GestionPersAut gestionPersAut;
 	private GestionEmpresa gestionEmpresa;
-	private GestionCuentaFintech gestionCuentaFintech;
+	private GestionSegregada gestionSegregada;
 	
 	@Before
 	public void setup() throws NamingException  {
 		gestionPersAut = (GestionPersAut) SuiteTest.ctx.lookup(PERSAUT_EJB);
 		gestionEmpresa = (GestionEmpresa) SuiteTest.ctx.lookup(EMPRESA_EJB);
-		gestionCuentaFintech = (GestionCuentaFintech) SuiteTest.ctx.lookup(CUENTAFINTECH_EJB);
+		gestionSegregada = (GestionSegregada) SuiteTest.ctx.lookup(SEGREGADA_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
 
 	@Test
 	public void testInsertarPersAut() {
-		
 		final PersAut persAut = new PersAut (123, "Nombre1", "Apellidos1", "Direccion1", Date.valueOf("2000-12-12"), true, Date.valueOf("2022-04-01"), null, false);
 		
 		try {
@@ -75,7 +67,6 @@ public class TestPersAut {
 	//@Requisitos({"RF7"})
 	@Test
 	public void testActualizarPersAut() {
-		
 		final long nuevoIdent = 12342;
 		final String nuevoNombre = "Nombre2";
 		final String nuevoApellido = "Apellidos2";
@@ -83,9 +74,7 @@ public class TestPersAut {
 		final Date nuevaFechaNac = Date.valueOf("1999-12-12");
 		final Date nuevaFechaFin = Date.valueOf("2022-12-14");
 		
-		
 		try {
-			
 			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
 			PersAut p = persAut.get(0);
 			
@@ -106,7 +95,6 @@ public class TestPersAut {
 	//@Requisitos({"RF7"})
 	@Test
 	public void testActualizarPersAutNoEncontrada() {
-		
 		final long ID = 3;
 		
 		try {
@@ -299,7 +287,13 @@ public class TestPersAut {
 			List<Empresa> empresa = gestionEmpresa.obtenerEmpresas();
 			Empresa empresa1 = empresa.get(0);
 			
-			List<CuentaFintech> cuentas = gestionCuentaFintech.obtenerCuentasFintech();
+			List<Segregada> segregadas = gestionSegregada.obtenerSegregada();
+			List<CuentaFintech> cuentas = new ArrayList<>();
+			
+			for (Segregada s : segregadas) {
+				cuentas.add(s);
+			}
+			
 			empresa1.setCuentas(cuentas);
 			
 			Map<Empresa, String> m = persAut1.getAutoriz();
@@ -309,7 +303,9 @@ public class TestPersAut {
 			
 			String ruta = "C:\\Users\\Alex\\Desktop\\informe1.csv";
 			
-			gestionPersAut.generarInforme(persAut1, ruta);
+			String tipo = "Inicial";
+			
+			gestionPersAut.generarInforme(persAut1, ruta, tipo);
 			
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
@@ -317,4 +313,44 @@ public class TestPersAut {
 			fail("No debería lanzarse excepción");
 		}
 	}
+	
+	//@Requisitos({"RF12"})
+		@Test
+		public void testGenerarInformePersAutNoEncontrada() {
+			try {
+				List<PersAut> persAut = gestionPersAut.obtenerPersAut();
+				PersAut persAut1 = persAut.get(0);
+				persAut1.setId(10);
+				
+				List<Empresa> empresa = gestionEmpresa.obtenerEmpresas();
+				Empresa empresa1 = empresa.get(0);
+				
+				List<Segregada> segregadas = gestionSegregada.obtenerSegregada();
+				List<CuentaFintech> cuentas = new ArrayList<>();
+				
+				for (Segregada s : segregadas) {
+					cuentas.add(s);
+				}
+				
+				empresa1.setCuentas(cuentas);
+				
+				Map<Empresa, String> m = persAut1.getAutoriz();
+				
+				m.put(empresa1, "AUTORIZADO");
+				persAut1.setAutoriz(m);
+				
+				String ruta = "C:\\Users\\Alex\\Desktop\\informe1.csv";
+				
+				String tipo = "Inicial";
+				
+				gestionPersAut.generarInforme(persAut1, ruta, tipo);
+				
+			} catch (PersAutNoEncontradaException e) {
+				// OK
+			} catch (ProyectoException e) {
+				fail("No debería lanzarse excepción");
+			} catch (IOException e) {
+				fail("No debería lanzarse excepción");
+			}
+		}
 }

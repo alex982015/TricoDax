@@ -1,9 +1,6 @@
 package ejb;
 
 import java.util.List;
-import java.util.logging.Logger;
-
-import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,12 +11,8 @@ import exceptions.DivisaNoEncontradaException;
 import exceptions.ProyectoException;
 import jpa.Divisa;
 
-/**
- * Session Bean implementation class DivisaEJB
- */
 @Stateless
 public class DivisaEJB implements GestionDivisa {
-private static final Logger LOG = Logger.getLogger(DivisaEJB.class.getCanonicalName());
 	
 	@PersistenceContext(name="Trazabilidad")
 	private EntityManager em;

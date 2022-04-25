@@ -6,12 +6,9 @@ import static org.junit.Assert.fail;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.naming.NamingException;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import ejb.GestionEmpresa;
 import exceptions.ClienteExistenteException;
 import exceptions.ClienteNoEncontradoException;
@@ -23,7 +20,6 @@ import jpa.Empresa;
 
 public class TestEmpresa {
 
-	private static final String CLIENTES_EJB = "java:global/classes/ClientesEJB";
 	private static final String EMPRESA_EJB = "java:global/classes/EmpresaEJB";
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "TrazabilidadTest";
 	

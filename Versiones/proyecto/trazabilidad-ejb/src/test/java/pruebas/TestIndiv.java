@@ -2,16 +2,12 @@ package pruebas;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.naming.NamingException;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import ejb.GestionIndiv;
 import exceptions.ClienteExistenteException;
 import exceptions.ClienteNoEncontradoException;
@@ -19,11 +15,9 @@ import exceptions.NoBajaClienteException;
 //import es.uma.informatica.sii.anotaciones.Requisitos;
 import exceptions.ProyectoException;
 import jpa.CuentaFintech;
-import jpa.Empresa;
 import jpa.Indiv;
 
 public class TestIndiv {
-	private static final String CLIENTES_EJB = "java:global/classes/ClientesEJB";
 	private static final String INDIV_EJB = "java:global/classes/IndivEJB";
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "TrazabilidadTest";
 	

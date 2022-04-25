@@ -12,7 +12,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="CUENTAFINTECH")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 
 //@Entity
 //@DiscriminatorValue("CuentaFintech")

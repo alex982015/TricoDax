@@ -1,29 +1,20 @@
 package ejb;
 
 import java.util.List;
-import java.util.logging.Logger;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-
 import exceptions.ClienteExistenteException;
 import exceptions.ClienteNoEncontradoException;
 import exceptions.NoBajaClienteException;
 import exceptions.ProyectoException;
 import jpa.Cliente;
-import jpa.Cuenta;
 import jpa.CuentaFintech;
 import jpa.Empresa;
 
-/**
- * Session Bean implementation class EmpresaEJB
- */
 @Stateless
 public class EmpresaEJB implements GestionEmpresa {
-
-private static final Logger LOG = Logger.getLogger(EmpresaEJB.class.getCanonicalName());
 	
 	@PersistenceContext(name="Trazabilidad")
 	private EntityManager em;
@@ -31,6 +22,7 @@ private static final Logger LOG = Logger.getLogger(EmpresaEJB.class.getCanonical
 	@Override
 	public void insertarEmpresa(Empresa empresa) throws ClienteExistenteException {
 		Empresa empresaExistente = em.find(Empresa.class, empresa.getID());
+		
 		if (empresaExistente != null) {
 			throw new ClienteExistenteException();
 		}

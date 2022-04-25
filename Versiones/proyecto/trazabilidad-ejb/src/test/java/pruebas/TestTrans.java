@@ -2,31 +2,21 @@ package pruebas;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-
 import java.sql.Date;
 import java.util.List;
-import java.util.logging.Logger;
-
 import javax.naming.NamingException;
-
 import org.junit.Before;
 import org.junit.Test;
-
-
 import ejb.GestionTrans;
-import exceptions.ClienteNoEncontradoException;
 import exceptions.ProyectoException;
 import exceptions.TransExistenteException;
 import exceptions.TransNoEncontradaException;
 import jpa.Trans;
 
 public class TestTrans {
-	
-	private static final Logger LOG = Logger.getLogger(TestTrans.class.getCanonicalName());
 
 	private static final String TRANS_EJB = "java:global/classes/TransEJB";
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "TrazabilidadTest";
-	
 
 	private GestionTrans gestionTrans;
 	
@@ -37,8 +27,7 @@ public class TestTrans {
 	}
 
 	@Test
-	public void testInsertarTrans() {
-		
+	public void testInsertarTrans() {		
 		final Trans trans = new Trans(100,"Servicio", "10%", "Noruega", Date.valueOf("2022-03-12"), Date.valueOf("2022-03-10") );
 		
 		try {
@@ -64,7 +53,6 @@ public class TestTrans {
 	
 	@Test
 	public void testActualizarTrans() {
-		
 		final int nuevaCantidad = 105;
 		final String nuevoTipo = "Barrer";
 		final String nuevaComision = "1%";
@@ -76,7 +64,7 @@ public class TestTrans {
 			
 			List<Trans> transExistente = gestionTrans.obtenerTrans();
 			Trans t = transExistente.get(0);
-			
+
 			t.setCantidad(nuevaCantidad);
 			t.setTipo(nuevoTipo);
 			t.setComision(nuevaComision);
@@ -85,7 +73,6 @@ public class TestTrans {
 			t.setFechaEjecucion(nuevaFechaEjecucion);
 			
 			gestionTrans.actualizarTrans(t);
-
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al actualizar");
 		}
@@ -93,9 +80,8 @@ public class TestTrans {
 	
 	@Test
 	public void testActualizarTransNoEncontrada() {
-		
 		final long ID = 134;
-		
+	
 		try {
 			List<Trans> trans = gestionTrans.obtenerTrans();
 			Trans t = trans.get(0);
@@ -142,8 +128,7 @@ public class TestTrans {
 	@Test
 	public void testEliminarTodosTrans() {
 		try {
-			gestionTrans.eliminarTodasTrans();
-			
+			gestionTrans.eliminarTodasTrans();		
 			List<Trans> trans = gestionTrans.obtenerTrans();
 			assertEquals(0, trans.size());
 		} catch (ProyectoException e) {

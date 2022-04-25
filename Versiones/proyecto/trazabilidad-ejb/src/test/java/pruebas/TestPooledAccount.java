@@ -2,21 +2,16 @@ package pruebas;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-
 import java.sql.Date;
 import java.util.List;
-
 import javax.naming.NamingException;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import ejb.GestionPooledAccount;
 import exceptions.CuentaConSaldoException;
 import exceptions.CuentaExistenteException;
 import exceptions.CuentaNoEncontradoException;
 import exceptions.ProyectoException;
-import jpa.CuentaFintech;
 import jpa.PooledAccount;
 
 public class TestPooledAccount {
@@ -32,21 +27,18 @@ public class TestPooledAccount {
 	}
 
 	@Test
-	public void testInsertarPooledAccount() {
-		
+	public void testInsertarPooledAccount() {	
 		final long IBAN=455833265;
-		final CuentaFintech cuenta = new PooledAccount ();
+		final PooledAccount cuenta = new PooledAccount ();
 		cuenta.setIBAN(IBAN);
 		cuenta.setEstado(true);
 		cuenta.setFechaApertura(Date.valueOf("2022-06-27"));
 		cuenta.setClasificacion(true);
 		
 		try {
-			
 			gestionPooledAccount.insertarPooledAccount(cuenta);
 			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
 			assertEquals(2, cuentas.size());
-			
 		} catch (CuentaExistenteException e) {
 			fail("Lanzó excepción al insertar");
 		} catch (ProyectoException e) {
@@ -66,16 +58,10 @@ public class TestPooledAccount {
 	
 	@Test
 	public void testActualizarPooledAccount() {
-		
-		
 		try {
-			
 			List<PooledAccount> cuenta = gestionPooledAccount.obtenerPooledAccount();
 			PooledAccount c = cuenta.get(0);
-			
-			
 			gestionPooledAccount.actualizarPooledAccount(c);
-
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al actualizar");
 		}
@@ -83,15 +69,12 @@ public class TestPooledAccount {
 	
 	@Test
 	public void testActualizarPooledAccountNoEncontrada() {
-		
 		final long IBAN = 455833218;
 		
 		try {
 			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
 			PooledAccount c = cuentas.get(0);
-			
 			c.setIBAN(IBAN);
-			
 			gestionPooledAccount.actualizarPooledAccount(c);
 			fail("Debería lanzar excepción de PooledAccount no encontrado");
 		} catch (CuentaNoEncontradoException e) {
@@ -108,7 +91,6 @@ public class TestPooledAccount {
 				List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
 				PooledAccount cuenta1 = cuentas.get(0);
 				gestionPooledAccount.cerrarCuentaPooledAccount(cuenta1);
-				
 			} catch (ProyectoException e) {
 				fail("No debería lanzarse excepción");
 			}
@@ -122,7 +104,6 @@ public class TestPooledAccount {
 				PooledAccount cuenta1 = cuentas.get(0);
 				cuenta1.setIBAN(1234);
 				gestionPooledAccount.cerrarCuentaPooledAccount(cuenta1);
-				
 			} catch (CuentaNoEncontradoException e) {
 				// OK
 			} catch (ProyectoException e) {
@@ -137,7 +118,6 @@ public class TestPooledAccount {
 				List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
 				PooledAccount cuenta1 = cuentas.get(0);
 				gestionPooledAccount.cerrarCuentaPooledAccount(cuenta1);
-				
 			} catch (CuentaConSaldoException e) {
 				// OK
 			} catch (ProyectoException e) {
@@ -154,7 +134,6 @@ public class TestPooledAccount {
 			
 			List<PooledAccount> c = gestionPooledAccount.obtenerPooledAccount();
 			assertEquals(0, c.size());
-			
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
 		}
@@ -165,9 +144,7 @@ public class TestPooledAccount {
 		try {
 			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
 			PooledAccount cuenta1 = cuentas.get(0);
-			
 			cuenta1.setIBAN(455833220);
-			
 			gestionPooledAccount.eliminarPooledAccount(cuenta1);
 			fail("Debería lanzar la excepción de PooledAccount no encontrada");
 		} catch (CuentaNoEncontradoException e) {
@@ -181,7 +158,6 @@ public class TestPooledAccount {
 	public void testEliminarTodasPooledAccount() {
 		try {
 			gestionPooledAccount.eliminarTodasPooledAccount();
-			
 			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
 			assertEquals(0, cuentas.size());
 		} catch (ProyectoException e) {
