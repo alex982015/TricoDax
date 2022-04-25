@@ -131,12 +131,19 @@ public class PersAutEJB implements GestionPersAut {
 	public void generarInforme(PersAut persAut, String ruta, String tipo) throws ProyectoException, IOException {
 		PersAut persAutEntity = em.find(PersAut.class, persAut.getId());
 		
+		System.out.println("---" + ruta + "---");
+		
+		String informe1 = ruta.concat("Report1.csv");
+		String informe2 = ruta.concat("Report2.csv");
+		
+		System.out.println("---" + informe1 + "---");
 		if (persAutEntity == null) {
 			throw new PersAutNoEncontradaException();
 		}
 		
 		Set<Empresa> cuentasAsociadas = persAut.getAutoriz().keySet();
-		FileWriter fw = new FileWriter(ruta);
+		FileWriter fw = new FileWriter(informe1);
+		FileWriter fw2 = new FileWriter(informe2);
 		
 		if(tipo.equals("Inicial")) {
 			try {
@@ -169,12 +176,42 @@ public class PersAutEJB implements GestionPersAut {
 						}
 					}
 				}
+				
+				fw2.append("IBAN, Apellidos, Nombre, Direccion, Ciudad, Codigo postal, Pais, Identificacion, Fecha de nacimiento");
+				fw2.append("\n");
+				
+				for (Empresa e : cuentasAsociadas) {
+					if(e.isEstado()) {
+						for (CuentaFintech c : e.getCuentas()) {
+							fw2.append(String.valueOf(c.getIBAN()));
+							fw2.append(", ");
+							fw2.append(persAut.getApellidos());
+							fw2.append(", ");
+							fw2.append(persAut.getNombre());
+							fw2.append(", ");
+							fw2.append(persAut.getDireccion());
+							fw2.append(", ");
+							fw2.append(e.getCiudad());
+							fw2.append(", ");
+							fw2.append(String.valueOf(e.getCodPostal()));
+							fw2.append(", ");
+							fw2.append(String.valueOf(e.getPais()));
+							fw2.append(", ");
+							fw2.append(String.valueOf(persAut.getIdent()));
+							fw2.append(", ");
+							fw2.append(String.valueOf(persAut.getFechaNac()));
+							fw2.append("\n");
+						}
+					}
+				}
 			} catch(Exception ex) {
 				ex.printStackTrace();
 			} finally {
 				try {
 					fw.flush();
+					fw2.flush();
 					fw.close();
+					fw2.close();
 				} catch(Exception ex) {
 					ex.printStackTrace();
 				}
@@ -190,9 +227,8 @@ public class PersAutEJB implements GestionPersAut {
 							LocalDate old = c.getFechaApertura().toInstant()
 								      .atZone(ZoneId.systemDefault())
 								      .toLocalDate();
-							long noOfDaysBetween = ChronoUnit.DAYS.between(old, LocalDate.now());
-							System.out.println(noOfDaysBetween);
-							if(c.getEstado() && (noOfDaysBetween <= 7)) {
+							long noOfYearsBetween = ChronoUnit.YEARS.between(old, LocalDate.now());
+							if(c.getEstado() && (noOfYearsBetween <= 5)) {
 								fw.append(String.valueOf(c.getIBAN()));
 								fw.append(", ");
 								fw.append(persAut.getApellidos());
@@ -215,12 +251,48 @@ public class PersAutEJB implements GestionPersAut {
 						}
 					}
 				}
+				
+				fw2.append("IBAN, Apellidos, Nombre, Direccion, Ciudad, Codigo postal, Pais, Identificacion, Fecha de nacimiento");
+				fw2.append("\n");
+				
+				for (Empresa e : cuentasAsociadas) {
+					if(e.isEstado()) {
+						for (CuentaFintech c : e.getCuentas()) {
+							LocalDate old = c.getFechaApertura().toInstant()
+								      .atZone(ZoneId.systemDefault())
+								      .toLocalDate();
+							long noOfYearsBetween = ChronoUnit.YEARS.between(old, LocalDate.now());
+							if(noOfYearsBetween <= 5) {
+								fw2.append(String.valueOf(c.getIBAN()));
+								fw2.append(", ");
+								fw2.append(persAut.getApellidos());
+								fw2.append(", ");
+								fw2.append(persAut.getNombre());
+								fw2.append(", ");
+								fw2.append(persAut.getDireccion());
+								fw2.append(", ");
+								fw2.append(e.getCiudad());
+								fw2.append(", ");
+								fw2.append(String.valueOf(e.getCodPostal()));
+								fw2.append(", ");
+								fw2.append(String.valueOf(e.getPais()));
+								fw2.append(", ");
+								fw2.append(String.valueOf(persAut.getIdent()));
+								fw2.append(", ");
+								fw2.append(String.valueOf(persAut.getFechaNac()));
+								fw2.append("\n");
+							}
+						}
+					}
+				}
 			} catch(Exception ex) {
 				ex.printStackTrace();
 			} finally {
 				try {
 					fw.flush();
+					fw2.flush();
 					fw.close();
+					fw2.close();
 				} catch(Exception ex) {
 					ex.printStackTrace();
 				}

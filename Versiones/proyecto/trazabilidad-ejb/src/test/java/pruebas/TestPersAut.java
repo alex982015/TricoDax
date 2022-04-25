@@ -301,7 +301,7 @@ public class TestPersAut {
 			m.put(empresa1, "AUTORIZADO");
 			persAut1.setAutoriz(m);
 			
-			String ruta = "C:\\Users\\Alex\\Desktop\\informe1.csv";
+			String ruta = "C:\\Users\\Alex\\Desktop\\";
 			
 			String tipo = "Inicial";
 			
@@ -339,7 +339,7 @@ public class TestPersAut {
 				m.put(empresa1, "AUTORIZADO");
 				persAut1.setAutoriz(m);
 				
-				String ruta = "C:\\Users\\Alex\\Desktop\\informe1.csv";
+				String ruta = "C:\\Users\\Alex\\Desktop\\";
 				
 				String tipo = "Inicial";
 				

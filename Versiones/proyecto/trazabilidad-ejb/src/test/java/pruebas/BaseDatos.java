@@ -100,8 +100,8 @@ public class BaseDatos {
 		
 		CuentaFintech segregada1 = new Segregada (20.0);
 		segregada1.setIBAN(45583380);
-		segregada1.setEstado(true);
-		segregada1.setFechaApertura(Date.valueOf("2021-06-27"));
+		segregada1.setEstado(false);
+		segregada1.setFechaApertura(Date.valueOf("2015-06-27"));
 		segregada1.setClasificacion(true);
 		
 		em.persist(segregada1);
