@@ -3,9 +3,6 @@ package ejb;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
-
-import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,8 +26,8 @@ public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledA
     
 	@Override
 	public void insertarPooledAccount(CuentaFintech cuenta) throws CuentaExistenteException {
-		PooledAccount cuentaExistente = em.find(PooledAccount.class, cuenta.getIBAN());
-		PooledAccount cuentaFintech = em.find(PooledAccount.class, cuenta.getIBAN());
+		CuentaFintech cuentaExistente = em.find(CuentaFintech.class, cuenta.getIBAN());
+		
 		if (cuentaExistente != null) {
 			throw new CuentaExistenteException();
 		}

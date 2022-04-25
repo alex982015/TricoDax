@@ -112,23 +112,6 @@ public class BaseDatos {
 		
 		em.persist(segregada1);
 		
-		List<CuentaFintech> cuentas1 = new ArrayList<CuentaFintech>();
-		cuentas1.add(pooledAccount1);
-		
-		indiv1.setCuentas(cuentas1);
-		
-		List<CuentaFintech> cuentas2 = new ArrayList<CuentaFintech>();
-		cuentas2.add(segregada1);
-		
-		empresa1.setCuentas(cuentas2);
-		
-		CuentaFintech cuentaFintech1 = new CuentaFintech (true,Date.valueOf("2022-06-27"),null,true);
-		cuentaFintech1.setIBAN(33334444);
-		
-		for (CuentaFintech cuenta: new CuentaFintech [] {cuentaFintech1}) {
-			em.persist(cuenta);
-		}
-		
 		CuentaRef cuentaRef1 = new CuentaRef ("Santander",24,"España",2000.0,Date.valueOf("2022-06-26"),true);
 		cuentaRef1.setIBAN(33334445);
 		
