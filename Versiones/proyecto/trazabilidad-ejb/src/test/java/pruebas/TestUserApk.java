@@ -82,24 +82,8 @@ public class TestUserApk {
 			fail("No debería lanzarse excepción");
 		}
 	}
-
-	/******** TEST ADICIONALES *********/
 	
-	@Test
-	public void testInsertarUserAdmin() throws ProyectoException {
-		final UserApk user = new UserApk("USUARIO", "1234", true);
-		
-		try {
-			gestionUser.insertarUserAdmin(user);
-			List<UserApk> UserExistentes = gestionUser.obtenerUser();
-			assertEquals(5, UserExistentes.size());
-		} catch (UserExistenteException e) {
-			fail("Lanzó excepción al insertar");
-		} catch (ProyectoException e) {
-			fail("Lanzó excepción al insertar"); 
-		}
-	}
-	
+	@Requisitos({"RF10"}) 
 	@Test
 	public void testInsertarUserNoAdmin() throws ProyectoException {
 		final UserApk user = new UserApk("USUARIO", "1234", false);
@@ -117,6 +101,7 @@ public class TestUserApk {
 		}
 	}
 	
+	@Requisitos({"RF10"}) 
 	@Test
 	public void testInsertarUserIndividual() throws ProyectoException {
 		List<Indiv> particulares = gestionIndiv.obtenerIndiv();
@@ -136,6 +121,7 @@ public class TestUserApk {
 		}
 	}
 	
+	@Requisitos({"RF10"}) 
 	@Test
 	public void testInsertarUserIndividualNoExistente() throws ProyectoException {
 		List<Indiv> particulares = gestionIndiv.obtenerIndiv();
@@ -162,6 +148,7 @@ public class TestUserApk {
 		}
 	}
 	
+	@Requisitos({"RF10"}) 
 	@Test
 	public void testInsertarUserAutorizado() throws ProyectoException {
 		List<PersAut> autorizados = gestionPersAut.obtenerPersAut();
@@ -181,6 +168,7 @@ public class TestUserApk {
 		}
 	}
 	
+	@Requisitos({"RF10"}) 
 	@Test
 	public void testInsertarUserAutorizadoNoExistente() throws ProyectoException {
 		List<PersAut> autorizados = gestionPersAut.obtenerPersAut();
@@ -197,6 +185,23 @@ public class TestUserApk {
 		} catch (UserAsociadoNoExistenteException e) {
 			// OK
 		} catch (UserNoEncontradoException e) {
+			fail("Lanzó excepción al insertar");
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al insertar"); 
+		}
+	}
+
+	/******** TEST ADICIONALES *********/
+	
+	@Test
+	public void testInsertarUserAdmin() throws ProyectoException {
+		final UserApk user = new UserApk("USUARIO", "1234", true);
+		
+		try {
+			gestionUser.insertarUserAdmin(user);
+			List<UserApk> UserExistentes = gestionUser.obtenerUser();
+			assertEquals(5, UserExistentes.size());
+		} catch (UserExistenteException e) {
 			fail("Lanzó excepción al insertar");
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al insertar"); 

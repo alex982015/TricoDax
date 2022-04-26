@@ -11,7 +11,6 @@ import javax.naming.NamingException;
 import org.junit.Before;
 import org.junit.Test;
 import ejb.GestionEmpresa;
-import ejb.GestionIndiv;
 import ejb.GestionPersAut;
 import ejb.GestionSegregada;
 import ejb.GestionUserApk;
@@ -24,7 +23,6 @@ import exceptions.UserNoAdminException;
 import exceptions.UserNoEncontradoException;
 import jpa.CuentaFintech;
 import jpa.Empresa;
-import jpa.Indiv;
 import jpa.PersAut;
 import jpa.Segregada;
 import jpa.UserApk;
@@ -270,73 +268,6 @@ public class TestPersAut {
 			fail("Lanzó excepción al cerrar persAut");
 		}
 	}
-
-	/******** TEST ADICIONALES *********/
-
-	@Test
-	public void testInsertarPersAut() {
-		final PersAut persAut = new PersAut (123, "Nombre1", "Apellidos1", "Direccion1", Date.valueOf("2000-12-12"), true, Date.valueOf("2022-04-01"), null, false);
-		
-		try {
-			gestionPersAut.insertarPersAut(persAut);
-		} catch (PersAutExistenteException e) {
-			fail("Lanzó excepción al insertar");
-		} catch (ProyectoException e) {
-			fail("Lanzó excepción al insertar"); 
-		}
-	}
-	
-	@Test
-	public void testObtenerPersAut() {
-		try {
-			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
-			assertEquals(3, persAut.size());
-		} catch (ProyectoException e) {
-			fail("No debería lanzar excepción");
-		}
-	}
-	
-	@Test
-	public void testEliminarPersAut() {
-		try {
-			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
-			PersAut persAut1 = persAut.get(0);
-			gestionPersAut.eliminarPersAut(persAut1);
-			
-			List<PersAut> p = gestionPersAut.obtenerPersAut();
-			assertEquals(2, p.size());
-		} catch (ProyectoException e) {
-			fail("No debería lanzarse excepción");
-		}
-	}
-	
-	@Test
-	public void testEliminarPersAutNoEncontrada() {
-		try {
-			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
-			PersAut persAut1 = persAut.get(0);
-			persAut1.setId(3);
-			
-			gestionPersAut.eliminarPersAut(persAut1);
-			
-		} catch (PersAutNoEncontradaException e) {
-			// OK
-		} catch (ProyectoException e) {
-			fail("Debería lanzar la excepción de PersAut no encontrada");
-		}
-	}
-	
-	@Test
-	public void testEliminarTodasPersAut() {
-		try {
-			gestionPersAut.eliminarTodasPersAut();
-			
-			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
-			assertEquals(0, persAut.size());
-		} catch (ProyectoException e) {
-			fail("No debería lanzarse excepción");
-		}
-	}
 	
 	@Requisitos({"RF12"})
 	@Test
@@ -411,6 +342,73 @@ public class TestPersAut {
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
 		} catch (IOException e) {
+			fail("No debería lanzarse excepción");
+		}
+	}
+
+	/******** TEST ADICIONALES *********/
+
+	@Test
+	public void testInsertarPersAut() {
+		final PersAut persAut = new PersAut (123, "Nombre1", "Apellidos1", "Direccion1", Date.valueOf("2000-12-12"), true, Date.valueOf("2022-04-01"), null, false);
+		
+		try {
+			gestionPersAut.insertarPersAut(persAut);
+		} catch (PersAutExistenteException e) {
+			fail("Lanzó excepción al insertar");
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al insertar"); 
+		}
+	}
+	
+	@Test
+	public void testObtenerPersAut() {
+		try {
+			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
+			assertEquals(3, persAut.size());
+		} catch (ProyectoException e) {
+			fail("No debería lanzar excepción");
+		}
+	}
+	
+	@Test
+	public void testEliminarPersAut() {
+		try {
+			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
+			PersAut persAut1 = persAut.get(0);
+			gestionPersAut.eliminarPersAut(persAut1);
+			
+			List<PersAut> p = gestionPersAut.obtenerPersAut();
+			assertEquals(2, p.size());
+		} catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
+		}
+	}
+	
+	@Test
+	public void testEliminarPersAutNoEncontrada() {
+		try {
+			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
+			PersAut persAut1 = persAut.get(0);
+			persAut1.setId(3);
+			
+			gestionPersAut.eliminarPersAut(persAut1);
+			
+		} catch (PersAutNoEncontradaException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Debería lanzar la excepción de PersAut no encontrada");
+		}
+	}
+	
+	@Test
+	public void testEliminarTodasPersAut() {
+		try {
+			gestionPersAut.eliminarTodasPersAut();
+			
+			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
+			assertEquals(0, persAut.size());
+		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
 		}
 	}

@@ -5,15 +5,10 @@ import static org.junit.Assert.fail;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map.Entry;
-import java.util.Set;
-
 import javax.naming.NamingException;
 import org.junit.Before;
 import org.junit.Test;
-
 import ejb.GestionCuentaRef;
-import ejb.GestionDivisa;
 import ejb.GestionPooledAccount;
 import ejb.GestionUserApk;
 import es.uma.informatica.sii.anotaciones.Requisitos;
@@ -21,8 +16,6 @@ import exceptions.CuentaConSaldoException;
 import exceptions.CuentaExistenteException;
 import exceptions.CuentaNoEncontradoException;
 import exceptions.CuentaRefNoCashException;
-import exceptions.CuentaRefNoVinculadaException;
-import exceptions.CuentaRefOrigenDestinoNoEncontrada;
 import exceptions.ProyectoException;
 import exceptions.UserNoAdminException;
 import exceptions.UserNoEncontradoException;
@@ -52,7 +45,7 @@ public class TestPooledAccount {
 
 	/******** TEST REQUISITOS OBLIGATORIOS *********/
 	
-	@Requisitos({"R5"})
+	@Requisitos({"RF5"})
 	@Test
 	public void testInsertarPooledAccount() throws ProyectoException {	
 		final long IBAN=455833265;
@@ -83,7 +76,7 @@ public class TestPooledAccount {
 		}
 	}
 
-	@Requisitos({"R5"})
+	@Requisitos({"RF5"})
 	@Test
 	public void testInsertarPooledAccountYaExistente() throws ProyectoException {	
 		List<PooledAccount> pooledEntity = gestionPooledAccount.obtenerPooledAccount();
@@ -105,7 +98,7 @@ public class TestPooledAccount {
 		}
 	}
 	
-	@Requisitos({"R5"})
+	@Requisitos({"RF5"})
 	@Test
 	public void testInsertarPooledAccountUserApkNoExistente() throws ProyectoException {	
 		final long IBAN=455833265;
@@ -132,7 +125,7 @@ public class TestPooledAccount {
 		}
 	}
 	
-	@Requisitos({"R5"})
+	@Requisitos({"RF5"})
 	@Test
 	public void testInsertarPooledAccountUserApkNoAdmin() throws ProyectoException {	
 		final long IBAN=455833265;
@@ -159,7 +152,7 @@ public class TestPooledAccount {
 		}
 	}	
 	
-	@Requisitos({"R9"})
+	@Requisitos({"RF9"})
 	@Test
 	public void testCerrarPooledAccount() {
 		try {
@@ -171,7 +164,7 @@ public class TestPooledAccount {
 		}
 	}
 		
-	@Requisitos({"R9"})
+	@Requisitos({"RF9"})
 	@Test
 	public void testCerrarPooledAccountNoEncontrada() {
 		try {
@@ -186,7 +179,7 @@ public class TestPooledAccount {
 		}
 	}
 		
-	@Requisitos({"R9"})
+	@Requisitos({"RF9"})
 	@Test
 	public void testCerrarPooledAccountConSaldo() {
 		try {
@@ -200,7 +193,7 @@ public class TestPooledAccount {
 		}
 	}
 
-	@Requisitos({"R17"})
+	@Requisitos({"RF17"})
 	@Test
 	public void testCambioDivisaPooledAccount() throws ProyectoException {
 		try {
@@ -238,7 +231,47 @@ public class TestPooledAccount {
 		}
 	}
 	
-	@Requisitos({"R18"})
+	@Requisitos({"RF17"})
+	@Test
+	public void testCambioDivisaPooledAccountNoExistente() throws ProyectoException {
+		try {
+			final long IBAN=14325254;
+			final PooledAccount cuenta = new PooledAccount ();
+			cuenta.setIBAN(IBAN);
+			cuenta.setEstado(true);
+			cuenta.setFechaApertura(Date.valueOf("2022-06-27"));
+			cuenta.setClasificacion(true);
+
+			Divisa divisa1 = new Divisa ("EUR", "Euro", "€", 1.0000);
+			Divisa divisa2 = new Divisa ("USD", "Dólar estadounidense", "US$", 0.9200);			
+			
+			List<CuentaRef> cuentasRef = gestionCuentaRef.obtenerCuentasRef();
+			CuentaRef origen = cuentasRef.get(0);
+			origen.setMoneda(divisa1);
+			
+			CuentaRef destino = cuentasRef.get(1);
+			destino.setMoneda(divisa2);
+			
+			List<CuentaRef> cuentas = new ArrayList<CuentaRef>();
+			cuentas.add(origen);
+			cuentas.add(destino);
+			
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionPooledAccount.insertarPooledAccount(u, cuenta, cuentas);
+			
+			gestionPooledAccount.cambiarDivisaPooledAccount(cuenta, origen, destino, 100.0);
+			
+		} catch (CuentaNoEncontradoException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
+		}
+	}
+	
+	@Requisitos({"RF18"})
 	@Test
 	public void testCambioDivisaPooledAccountAdministrativo() throws ProyectoException {
 		try {
@@ -276,7 +309,7 @@ public class TestPooledAccount {
 		}
 	}
 	
-	@Requisitos({"R18"})
+	@Requisitos({"RF18"})
 	@Test
 	public void testCambioDivisaPooledAccountNoAdministrativo() throws ProyectoException {
 		try {
@@ -310,6 +343,47 @@ public class TestPooledAccount {
 			gestionPooledAccount.cambiarDivisaPooledAccountAdministrativo(u, cuenta, origen, destino, 100.0);
 			
 		} catch (UserNoAdminException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
+		}
+	}
+	
+	@Requisitos({"RF18"})
+	@Test
+	public void testCambioDivisaPooledAccountSinSaldo() throws ProyectoException {
+		try {
+			final long IBAN=455833265;
+			final PooledAccount cuenta = new PooledAccount ();
+			cuenta.setIBAN(IBAN);
+			cuenta.setEstado(true);
+			cuenta.setFechaApertura(Date.valueOf("2022-06-27"));
+			cuenta.setClasificacion(true);
+
+			Divisa divisa1 = new Divisa ("EUR", "Euro", "€", 1.0000);
+			Divisa divisa2 = new Divisa ("USD", "Dólar estadounidense", "US$", 0.9200);			
+			
+			List<CuentaRef> cuentasRef = gestionCuentaRef.obtenerCuentasRef();
+			CuentaRef origen = cuentasRef.get(0);
+			origen.setMoneda(divisa1);
+			origen.setSaldo(0);
+			
+			CuentaRef destino = cuentasRef.get(1);
+			destino.setMoneda(divisa2);
+			
+			List<CuentaRef> cuentas = new ArrayList<CuentaRef>();
+			cuentas.add(origen);
+			cuentas.add(destino);
+			
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionPooledAccount.insertarPooledAccount(u, cuenta, cuentas);
+			
+			gestionPooledAccount.cambiarDivisaPooledAccount(cuenta, origen, destino, 100.0);
+			
+		} catch (CuentaRefNoCashException e) {
 			// OK
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");

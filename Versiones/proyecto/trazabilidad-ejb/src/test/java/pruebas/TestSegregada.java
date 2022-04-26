@@ -7,26 +7,35 @@ import java.util.List;
 import javax.naming.NamingException;
 import org.junit.Before;
 import org.junit.Test;
+import ejb.GestionCuentaRef;
 import ejb.GestionSegregada;
+import es.uma.informatica.sii.anotaciones.Requisitos;
+import exceptions.CuentaConSaldoException;
 import exceptions.CuentaExistenteException;
 import exceptions.CuentaNoEncontradoException;
 import exceptions.ProyectoException;
+import jpa.CuentaRef;
 import jpa.Segregada;
 
 public class TestSegregada {
+	
+	private static final String CUENTAREF_EJB = "java:global/classes/CuentaRefEJB";
 	private static final String SEGREGADA_EJB = "java:global/classes/SegregadaEJB";
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "TrazabilidadTest";
 	
 	private GestionSegregada gestionSegregada;
+	private GestionCuentaRef gestionCuentaRef;
 	
 	@Before
 	public void setup() throws NamingException  {
 		gestionSegregada = (GestionSegregada) SuiteTest.ctx.lookup(SEGREGADA_EJB);
+		gestionCuentaRef = (GestionCuentaRef) SuiteTest.ctx.lookup(CUENTAREF_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
 
-	/******** TEST ADICIONALES *********/
+	/******** TEST REQUISITOS OBLIGATORIOS *********/
 	
+	@Requisitos({"RF5"})
 	@Test
 	public void testInsertarSegregada() {
 		final long IBAN=455833699;
@@ -46,6 +55,60 @@ public class TestSegregada {
 			fail("Lanzó excepción al insertar"); 
 		}
 	}
+	
+	@Requisitos({"RF9"})
+	@Test
+	public void testCerrarSegregada() {
+		try {
+			List<CuentaRef> cuentasRef = gestionCuentaRef.obtenerCuentasRef();
+			CuentaRef cuenta = cuentasRef.get(0);
+			cuenta.setSaldo(0);
+			
+			List<Segregada> segregadas = gestionSegregada.obtenerSegregada();
+			Segregada segregada = segregadas.get(0);
+			segregada.setReferenciada(cuenta);
+			
+			gestionSegregada.cerrarCuentaSegregada(segregada);
+		}  catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
+		}
+	}
+		
+	@Requisitos({"RF9"})
+	@Test
+	public void testCerrarSegregadaNoEncontrada() {
+		try {
+			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
+			Segregada cuenta1 = cuentas.get(0);
+			cuenta1.setIBAN(1234);
+			gestionSegregada.cerrarCuentaSegregada(cuenta1);
+		} catch (CuentaNoEncontradoException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
+		}
+	}
+		
+	@Requisitos({"RF9"})
+	@Test
+	public void testCerrarSegregadaConSaldo() {
+		try {
+			List<CuentaRef> cuentasRef = gestionCuentaRef.obtenerCuentasRef();
+			CuentaRef cuenta = cuentasRef.get(0);
+			
+			List<Segregada> segregadas = gestionSegregada.obtenerSegregada();
+			Segregada segregada = segregadas.get(0);
+			segregada.setReferenciada(cuenta);
+			
+			gestionSegregada.cerrarCuentaSegregada(segregada);
+		} catch (CuentaConSaldoException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
+		}
+	}
+	
+	/******** TEST ADICIONALES *********/
 	
 	@Test
 	public void testObtenerSegregada() {

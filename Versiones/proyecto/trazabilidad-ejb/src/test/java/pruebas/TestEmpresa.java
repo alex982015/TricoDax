@@ -2,7 +2,6 @@ package pruebas;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,13 +17,11 @@ import exceptions.ClienteNoEncontradoException;
 import exceptions.CuentaNoEncontradoException;
 import exceptions.CuentaSegregadaYaAsignadaException;
 import exceptions.NoBajaClienteException;
-//import es.uma.informatica.sii.anotaciones.Requisitos;
 import exceptions.ProyectoException;
 import exceptions.UserNoAdminException;
 import exceptions.UserNoEncontradoException;
 import jpa.CuentaFintech;
 import jpa.Empresa;
-import jpa.PersAut;
 import jpa.Segregada;
 import jpa.UserApk;
 
