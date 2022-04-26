@@ -42,11 +42,8 @@ public class CuentaRef extends Cuenta implements Serializable {
 	@Column(name="SALDO")
     private Map<PooledAccount, Double> depositEn = new HashMap<>();
 
-	@ElementCollection
-    @CollectionTable(name = "Monedas", joinColumns = @JoinColumn(name = "IBAN"))
-    @Column(name = "Moneda")
-	@ManyToMany
-	private List<Divisa> monedas;
+	@ManyToOne
+	private Divisa moneda;
 	
 /****************CONSTRUCTORES*************************************/
 
@@ -128,12 +125,12 @@ public class CuentaRef extends Cuenta implements Serializable {
 		this.depositEn = depositEn;
 	}
 
-	public List<Divisa> getMonedas() {
-		return monedas;
+	public Divisa getMoneda() {
+		return moneda;
 	}
 
-	public void setMonedas(List<Divisa> moneda) {
-		this.monedas = moneda;
+	public void setMoneda(Divisa moneda) {
+		this.moneda = moneda;
 	}
 
 /******************STRING****************************************/
@@ -141,7 +138,7 @@ public class CuentaRef extends Cuenta implements Serializable {
 	@Override
 	public String toString() {
 		return "CuentaRef [IBAN=" + super.getIBAN() + ", swift=" + super.getSwift() +", NombreBanco=" + NombreBanco + ", Sucursal=" + Sucursal + ", Pais=" + Pais + ", Saldo=" + Saldo
-				+ ", fechaApertura=" + fechaApertura + ", estado=" + estado + ", depositEn=" + depositEn + ", moneda=" + monedas + "]";
+				+ ", fechaApertura=" + fechaApertura + ", estado=" + estado + ", depositEn=" + depositEn + ", moneda=" + moneda + "]";
 	}
 	
 }

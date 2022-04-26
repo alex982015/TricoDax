@@ -36,7 +36,7 @@ public class TestCuentaRef {
 			
 			gestionCuentasRef.insertarCuentaRef(cuenta);
 			List<CuentaRef> cuentas = gestionCuentasRef.obtenerCuentasRef();
-			assertEquals(2, cuentas.size());
+			assertEquals(3, cuentas.size());
 			
 		} catch (CuentaExistenteException e) {
 			fail("Lanzó excepción al insertar");
@@ -49,7 +49,7 @@ public class TestCuentaRef {
 	public void testObtenerCuentasRef() {
 		try {
 			List<CuentaRef> cuentas = gestionCuentasRef.obtenerCuentasRef();
-			assertEquals(1, cuentas.size());
+			assertEquals(2, cuentas.size());
 		} catch (ProyectoException e) {
 			fail("No debería lanzar excepción");
 		}
@@ -111,7 +111,7 @@ public class TestCuentaRef {
 			gestionCuentasRef.eliminarCuentaRef(cuenta1);
 			
 			List<CuentaRef> c = gestionCuentasRef.obtenerCuentasRef();
-			assertEquals(0, c.size());
+			assertEquals(1, c.size());
 			
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");

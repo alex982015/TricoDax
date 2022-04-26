@@ -1,7 +1,9 @@
 package ejb;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -10,12 +12,19 @@ import javax.persistence.TypedQuery;
 import exceptions.CuentaConSaldoException;
 import exceptions.CuentaExistenteException;
 import exceptions.CuentaNoEncontradoException;
+import exceptions.CuentaRefNoCashException;
+import exceptions.CuentaRefNoVinculadaException;
+import exceptions.CuentaRefOrigenDestinoNoEncontrada;
 import exceptions.ProyectoException;
+import exceptions.UserExistenteException;
+import exceptions.UserNoAdminException;
+import exceptions.UserNoEncontradoException;
 import jpa.Cuenta;
 import jpa.CuentaFintech;
 import jpa.CuentaRef;
 import jpa.Divisa;
 import jpa.PooledAccount;
+import jpa.UserApk;
 
 @Stateless
 public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledAccount {
@@ -24,47 +33,40 @@ public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledA
 	private EntityManager em;
     
 	@Override
-	public void insertarPooledAccount(PooledAccount cuenta) throws CuentaExistenteException {
-		PooledAccount pooledAccountEntity = em.find(PooledAccount.class, cuenta.getIBAN());
-		CuentaFintech cuentaExistente = em.find(CuentaFintech.class, cuenta.getIBAN());
+	public void insertarPooledAccount(UserApk user, PooledAccount pooled, List<CuentaRef> cuenta) throws UserNoEncontradoException, CuentaExistenteException, UserNoAdminException {
+		UserApk userApkEntity = em.find(UserApk.class, user.getUser());
 		
-		if ((cuentaExistente != null) && (pooledAccountEntity != null)) {
+		if(userApkEntity == null) {
+			throw new UserNoEncontradoException();
+		}
+		
+		PooledAccount pooledAccountEntity = em.find(PooledAccount.class, pooled.getIBAN());
+		
+		if(pooledAccountEntity != null) {
 			throw new CuentaExistenteException();
 		}
 		
-		Set<CuentaRef> cuentasAsociadas = cuenta.getDepositEn().keySet();
-		
-		for (CuentaRef c : cuentasAsociadas) {
-			if(c.getMonedas().size() > 1) {
-				for (Divisa d : c.getMonedas()) {
-					List<Divisa> m = new ArrayList<Divisa>();
-					m.add(d);
-					
-					CuentaRef account = new CuentaRef();
-					account.setIBAN(c.getIBAN());
-					account.setSwift(c.getSwift());
-					account.setNombreBanco(c.getNombreBanco());
-					account.setSucursal(c.getSucursal());
-					account.setPais(c.getPais());
-					account.setSaldo(c.getSaldo());
-					account.setFechaApertura(c.getFechaApertura());
-					account.setEstado(c.getEstado());
-					account.setMonedas(m);
-					
-					em.persist(account);
-				}
-			} else {
-				em.persist(c);
+		if(user.isAdministrativo()) {
+			
+			Map<CuentaRef, Double> deposit = new HashMap<CuentaRef, Double>();
+			
+			for(CuentaRef c : cuenta) {
+				CuentaRef account = em.find(CuentaRef.class, c.getIBAN());
+				
+				if(account != null) {
+					deposit.put(account, account.getSaldo());
+				} else {
+					deposit.put(c, c.getSaldo());
+					em.persist(c);
+				}	
 			}
+			
+			pooled.setDepositEn(deposit);
+			em.persist(pooled);
+		} else {
+			throw new UserNoAdminException();
 		}
 		
-		cuentaExistente = cuenta;
-		
-		em.persist(cuentaExistente);
-		em.persist(cuenta);
-
-		
-		/** FALTAN COSAS **/
 	}
 
 	@Override
@@ -139,27 +141,79 @@ public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledA
 	}
 	
 	@Override
-	public void cambiarDivisaPooledAccount(PooledAccount cuenta, Divisa origen, Divisa destino) throws ProyectoException {
+	public void cambiarDivisaPooledAccountAdministrativo(UserApk user, PooledAccount cuenta, CuentaRef origen, CuentaRef destino, double cantidad) throws ProyectoException {
+		
+		UserApk userEntity = em.find(UserApk.class, user.getUser());
+		if (userEntity == null) {
+			throw new UserNoAdminException();
+		}
+		
 		PooledAccount cuentaEntity = em.find(PooledAccount.class, cuenta.getIBAN());
 		if (cuentaEntity == null) {
 			throw new CuentaNoEncontradoException();
 		}
 		
-		Set<CuentaRef> cuentasAsociadas = cuentaEntity.getDepositEn().keySet();
+		CuentaRef origenEntity = em.find(CuentaRef.class, origen.getIBAN());
+		CuentaRef destinoEntity = em.find(CuentaRef.class, destino.getIBAN());		
 		
-		for (CuentaRef c : cuentasAsociadas) {
-			for(Divisa d : c.getMonedas()) {
-				if(d.equals(origen)) {
-					/** ACTUALIZO EL SALDO **/
-					c.setSaldo(c.getSaldo() * destino.getCambioEuro());
-					/** ACTUALIZO CAMBIO DE DIVISA **/
-					d.setAbreviatura(destino.getAbreviatura());
-					d.setNombre(destino.getNombre());
-					d.setSimbolo(destino.getSimbolo());
+		if ((origenEntity != null) && (destinoEntity != null)) {
+			if((cuentaEntity.getDepositEn().containsKey(origen)) && (cuentaEntity.getDepositEn().containsKey(destino))) {
+				if(origen.getSaldo() >= cantidad) {				
+					if(origen.getMoneda().getCambioEuro() == 1.0) {
+						origen.setSaldo(origen.getSaldo() - cantidad);
+						em.merge(origen);
+						destino.setSaldo(destino.getSaldo() + cantidad * (1 / destino.getMoneda().getCambioEuro()));
+						em.merge(destino);
+					} else {
+						origen.setSaldo(origen.getSaldo() - cantidad);
+						em.merge(origen);
+						destino.setSaldo(destino.getSaldo() + cantidad * destino.getMoneda().getCambioEuro());
+						em.merge(destino);
+					}
+				} else {
+					throw new CuentaRefNoCashException();
 				}
+			} else {
+				throw new CuentaRefNoVinculadaException();
 			}
+		} else {
+			throw new CuentaRefOrigenDestinoNoEncontrada();
+		}
+	}
+	
+	@Override
+	public void cambiarDivisaPooledAccount(PooledAccount cuenta, CuentaRef origen, CuentaRef destino, double cantidad) throws ProyectoException {
+		PooledAccount cuentaEntity = em.find(PooledAccount.class, cuenta.getIBAN());
+		if (cuentaEntity == null) {
+			throw new CuentaNoEncontradoException();
 		}
 		
+		CuentaRef origenEntity = em.find(CuentaRef.class, origen.getIBAN());
+		CuentaRef destinoEntity = em.find(CuentaRef.class, destino.getIBAN());		
+		
+		if ((origenEntity != null) && (destinoEntity != null)) {
+			if((cuentaEntity.getDepositEn().containsKey(origen)) && (cuentaEntity.getDepositEn().containsKey(destino))) {
+				if(origen.getSaldo() >= cantidad) {				
+					if(origen.getMoneda().getCambioEuro() == 1.0) {
+						origen.setSaldo(origen.getSaldo() - cantidad);
+						em.merge(origen);
+						destino.setSaldo(destino.getSaldo() + cantidad * (1 / destino.getMoneda().getCambioEuro()));
+						em.merge(destino);
+					} else {
+						origen.setSaldo(origen.getSaldo() - cantidad);
+						em.merge(origen);
+						destino.setSaldo(destino.getSaldo() + cantidad * destino.getMoneda().getCambioEuro());
+						em.merge(destino);
+					}
+				} else {
+					throw new CuentaRefNoCashException();
+				}
+			} else {
+				throw new CuentaRefNoVinculadaException();
+			}
+		} else {
+			throw new CuentaRefOrigenDestinoNoEncontrada();
+		}
 	}
 
 }

@@ -126,7 +126,6 @@ public class TestDivisa {
 	public void testEliminarTodasDivisas() {
 		try {
 			gestionDivisa.eliminarTodasDivisas();
-			
 			List<Divisa> divisas = gestionDivisa.obtenerDivisas();
 			assertEquals(0, divisas.size());
 		} catch (ProyectoException e) {

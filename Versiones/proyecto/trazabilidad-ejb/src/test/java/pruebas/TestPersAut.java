@@ -13,29 +13,36 @@ import org.junit.Test;
 import ejb.GestionEmpresa;
 import ejb.GestionPersAut;
 import ejb.GestionSegregada;
+import ejb.GestionUserApk;
 import exceptions.ClienteNoEncontradoException;
 import exceptions.PersAutExistenteException;
 import exceptions.PersAutNoEncontradaException;
 import exceptions.ProyectoException;
+import exceptions.UserNoAdminException;
+import exceptions.UserNoEncontradoException;
 import jpa.CuentaFintech;
 import jpa.Empresa;
 import jpa.PersAut;
 import jpa.Segregada;
+import jpa.UserApk;
 
 public class TestPersAut {
 
 	private static final String PERSAUT_EJB = "java:global/classes/PersAutEJB";
+	private static final String USERAPK_EJB = "java:global/classes/UserApkEJB";
 	private static final String EMPRESA_EJB = "java:global/classes/EmpresaEJB";
 	private static final String SEGREGADA_EJB = "java:global/classes/SegregadaEJB";
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "TrazabilidadTest";
 	
 	private GestionPersAut gestionPersAut;
+	private GestionUserApk gestionUserApk;
 	private GestionEmpresa gestionEmpresa;
 	private GestionSegregada gestionSegregada;
 	
 	@Before
 	public void setup() throws NamingException  {
 		gestionPersAut = (GestionPersAut) SuiteTest.ctx.lookup(PERSAUT_EJB);
+		gestionUserApk = (GestionUserApk) SuiteTest.ctx.lookup(USERAPK_EJB);
 		gestionEmpresa = (GestionEmpresa) SuiteTest.ctx.lookup(EMPRESA_EJB);
 		gestionSegregada = (GestionSegregada) SuiteTest.ctx.lookup(SEGREGADA_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
@@ -211,7 +218,11 @@ public class TestPersAut {
 			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
 			PersAut p = persAut.get(0);
 		
-			gestionPersAut.bloquearCuentaPersAut(p);
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionPersAut.bloquearCuentaPersAut(u, p, true);
 
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al cerrar persAut");
@@ -226,15 +237,58 @@ public class TestPersAut {
 			PersAut p = persAut.get(0);
 			p.setId(10);
 		
-			gestionPersAut.bloquearCuentaPersAut(p);
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			
+			gestionPersAut.bloquearCuentaPersAut(u, p, true);
 
-		} catch (ClienteNoEncontradoException e) {
+		} catch (PersAutNoEncontradaException e) {
 			// OK
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al cerrar persAut");
 		}
 	}
 
+	//@Requisitos({"RF16"})
+	@Test
+	public void testBloquearCuentaUserApkNoExistente() {
+		try {
+			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
+			PersAut p = persAut.get(0);
+		
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setUser("U");
+			
+			gestionPersAut.bloquearCuentaPersAut(u, p, true);
+
+		} catch (UserNoEncontradoException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al cerrar persAut");
+		}
+	}
+	
+	//@Requisitos({"RF16"})
+	@Test
+	public void testBloquearCuentaUserApkNoAdministrativo() {
+		try {
+			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
+			PersAut p = persAut.get(0);
+		
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(false);
+			
+			gestionPersAut.bloquearCuentaPersAut(u, p, true);
+
+		} catch (UserNoAdminException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al cerrar persAut");
+		}
+	}
+	
 	@Test
 	public void testEliminarPersAut() {
 		try {
@@ -301,7 +355,7 @@ public class TestPersAut {
 			m.put(empresa1, "AUTORIZADO");
 			persAut1.setAutoriz(m);
 			
-			String ruta = "C:\\Users\\Alex\\Desktop\\";
+			String ruta = "C:\\Users\\Alex\\Desktop\\Reporte.csv";
 			
 			String tipo = "Inicial";
 			
@@ -339,7 +393,7 @@ public class TestPersAut {
 				m.put(empresa1, "AUTORIZADO");
 				persAut1.setAutoriz(m);
 				
-				String ruta = "C:\\Users\\Alex\\Desktop\\";
+				String ruta = "C:\\Users\\Alex\\Desktop\\Reporte.csv";
 				
 				String tipo = "Inicial";
 				
