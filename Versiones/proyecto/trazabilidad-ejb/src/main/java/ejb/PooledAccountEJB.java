@@ -218,6 +218,8 @@ public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledA
 					}
 					
 					Trans transaccion = new Trans(cantidad, "Cambio Divisa", "0%", true, null, Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+					transaccion.setMonedaOrigen(origen.getMoneda());
+					transaccion.setMonedaDestino(destino.getMoneda());
 					
 					List<Trans> t = cuenta.getTransacciones();
 					t.add(transaccion);
