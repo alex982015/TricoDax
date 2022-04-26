@@ -28,7 +28,7 @@ public class TestTrans {
 
 	@Test
 	public void testInsertarTrans() {		
-		final Trans trans = new Trans(100,"Servicio", "10%", "Noruega", Date.valueOf("2022-03-12"), Date.valueOf("2022-03-10") );
+		final Trans trans = new Trans(100,"Servicio", "10%", true, Date.valueOf("2022-03-12"), Date.valueOf("2022-03-10") );
 		
 		try {
 			gestionTrans.insertarTrans(trans);
@@ -56,12 +56,11 @@ public class TestTrans {
 		final int nuevaCantidad = 105;
 		final String nuevoTipo = "Barrer";
 		final String nuevaComision = "1%";
-		final String nuevaInternational = "Noruega";
+		final boolean nuevaInternational = true;
 		final Date nuevaFechaInstruccion = Date.valueOf("2020-01-01");
 		final Date nuevaFechaEjecucion = Date.valueOf("2020-02-01");
 		
 		try {
-			
 			List<Trans> transExistente = gestionTrans.obtenerTrans();
 			Trans t = transExistente.get(0);
 

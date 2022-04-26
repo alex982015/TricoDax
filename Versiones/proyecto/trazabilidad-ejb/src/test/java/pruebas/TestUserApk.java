@@ -9,6 +9,8 @@ import org.junit.Test;
 import ejb.GestionIndiv;
 import ejb.GestionPersAut;
 import ejb.GestionUserApk;
+import es.uma.informatica.sii.anotaciones.Requisitos;
+import exceptions.ClienteExistenteException;
 import exceptions.ProyectoException;
 import exceptions.UserAsociadoNoExistenteException;
 import exceptions.UserExistenteException;
@@ -81,7 +83,7 @@ public class TestUserApk {
 			gestionUser.insertarUserIndividual(user);
 			List<UserApk> UserExistentes = gestionUser.obtenerUser();
 			assertEquals(5, UserExistentes.size());
-		} catch (UserExistenteException e) {
+		} catch (ClienteExistenteException e) {
 			fail("Lanzó excepción al insertar");
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al insertar"); 
@@ -253,7 +255,7 @@ public class TestUserApk {
 		}
 	}
 
-	//@Requisitos({"RF1"}) 
+	@Requisitos({"RF1"}) 
 	@Test
 	public void testcheckUserAdmin() {
 		
@@ -266,7 +268,7 @@ public class TestUserApk {
 		}
 	}
 	
-	//@Requisitos({"RF1"}) 
+	@Requisitos({"RF1"}) 
 	@Test
 	public void testcheckUserAdminNoEncontrado() {
 		try {
@@ -281,7 +283,7 @@ public class TestUserApk {
 		}
 	}
 		
-	//@Requisitos({"RF1"}) 
+	@Requisitos({"RF1"}) 
 	@Test
 	public void testcheckUserNoAdmin() {
 		try {

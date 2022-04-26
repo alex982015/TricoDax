@@ -41,17 +41,20 @@ public class SegregadaEJB extends CuentaFintechEJB implements GestionSegregada{
 
 	@Override
 	public void actualizarSegregada(Segregada cuenta) throws ProyectoException {
-		CuentaFintech cuentaEntity = em.find(CuentaFintech.class, cuenta.getIBAN());
+		Segregada cuentaEntity = em.find(Segregada.class, cuenta.getIBAN());
 		if (cuentaEntity == null) {
 			throw new CuentaNoEncontradoException();
 		}
+		
+		cuentaEntity.setSwift(cuenta.getSwift());
+		cuentaEntity.setComision(cuenta.getComision());
 		
 		em.merge(cuentaEntity);
 	}
 	
 	@Override
 	public void cerrarCuentaSegregada(Segregada cuenta) throws ProyectoException {
-		CuentaFintech cuentaEntity = em.find(CuentaFintech.class, cuenta.getIBAN());
+		Segregada cuentaEntity = em.find(Segregada.class, cuenta.getIBAN());
 		if (cuentaEntity == null) {
 			throw new CuentaNoEncontradoException();
 		}

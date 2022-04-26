@@ -21,13 +21,13 @@ public class Trans implements Serializable {
 	@Id @GeneratedValue @Column(name="ID")
 	private long ID;
 	@Column(name="CANTIDAD", nullable = false)
-	private int cantidad;
+	private double cantidad;
 	@Column(name="TIPO", nullable = false)
 	private String tipo;
 	@Column(name="COMISION")
 	private String comision;
 	@Column(name="INTERNACIONAL")
-	private String international;
+	private boolean international;
 	@Column(name="FECHAEJECUCION") @Temporal(TemporalType.DATE)
 	private Date fechaEjecucion;
 	@Column(name="FECHAINSTRUCCION", nullable = false) @Temporal(TemporalType.DATE)
@@ -37,6 +37,7 @@ public class Trans implements Serializable {
 	private Divisa monedaOrigen;
 	@ManyToOne
 	private Divisa monedaDestino;
+
 	@ManyToOne
 	private Cuenta cuenta;
 	@ManyToOne
@@ -48,14 +49,14 @@ public class Trans implements Serializable {
 		super();
 	}
 	
-	public Trans(int cantidad, String tipo, Date fechaInstruccion) {
+	public Trans(double cantidad, String tipo, Date fechaInstruccion) {
 		super();
 		this.cantidad = cantidad;
 		this.tipo = tipo;
 		this.fechaInstruccion = fechaInstruccion;
 	}
 
-	public Trans(int cantidad, String tipo, String comision, String international, Date fechaEjecucion, Date fechaInstruccion) {
+	public Trans(double cantidad, String tipo, String comision, boolean international, Date fechaEjecucion, Date fechaInstruccion) {
 		super();
 		this.cantidad = cantidad;
 		this.tipo = tipo;
@@ -75,11 +76,11 @@ public class Trans implements Serializable {
 		ID = iD;
 	}
 	
-	public int getCantidad() {
+	public double getCantidad() {
 		return cantidad;
 	}
 	
-	public void setCantidad(int cantidad) {
+	public void setCantidad(double cantidad) {
 		this.cantidad = cantidad;
 	}
 	
@@ -99,11 +100,11 @@ public class Trans implements Serializable {
 		this.comision = comision;
 	}
 	
-	public String getInternational() {
+	public boolean isInternational() {
 		return international;
 	}
 	
-	public void setInternational(String international) {
+	public void setInternational(boolean international) {
 		this.international = international;
 	}
 	

@@ -26,6 +26,7 @@ public class UserApk implements Serializable {
 	
 	@OneToOne (mappedBy="usuarioApk")
 	private Indiv personaIndividual;
+	
 	@OneToOne (mappedBy="usuarioAutApk")
 	private PersAut personaAutorizada;
 	

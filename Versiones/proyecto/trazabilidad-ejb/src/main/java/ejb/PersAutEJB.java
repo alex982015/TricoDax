@@ -137,7 +137,7 @@ public class PersAutEJB implements GestionPersAut {
 			em.remove(p);
 		}
 	}
-
+	
 	@Override
 	public void generarInforme(PersAut persAut, String ruta, String tipo) throws ProyectoException, IOException {
 		PersAut persAutEntity = em.find(PersAut.class, persAut.getId());

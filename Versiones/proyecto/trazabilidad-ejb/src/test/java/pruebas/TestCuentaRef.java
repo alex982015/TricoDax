@@ -26,18 +26,15 @@ public class TestCuentaRef {
 	}
 
 	@Test
-	public void testInsertarCuentaRef() {
-		
+	public void testInsertarCuentaRef() {	
 		final long IBAN=455833220;
 		final CuentaRef cuenta = new CuentaRef ("Santander",23,"España",2000.0,Date.valueOf("2022-06-26"),true);
 		cuenta.setIBAN(IBAN);
 		
 		try {
-			
 			gestionCuentasRef.insertarCuentaRef(cuenta);
 			List<CuentaRef> cuentas = gestionCuentasRef.obtenerCuentasRef();
 			assertEquals(3, cuentas.size());
-			
 		} catch (CuentaExistenteException e) {
 			fail("Lanzó excepción al insertar");
 		} catch (ProyectoException e) {

@@ -10,28 +10,35 @@ import javax.naming.NamingException;
 import org.junit.Before;
 import org.junit.Test;
 import ejb.GestionEmpresa;
+import ejb.GestionSegregada;
+import es.uma.informatica.sii.anotaciones.Requisitos;
 import exceptions.ClienteExistenteException;
 import exceptions.ClienteNoEncontradoException;
+import exceptions.CuentaSegregadaYaAsignadaException;
 import exceptions.NoBajaClienteException;
 //import es.uma.informatica.sii.anotaciones.Requisitos;
 import exceptions.ProyectoException;
 import jpa.CuentaFintech;
 import jpa.Empresa;
+import jpa.Segregada;
 
 public class TestEmpresa {
 
 	private static final String EMPRESA_EJB = "java:global/classes/EmpresaEJB";
+	private static final String SEGREGADA_EJB = "java:global/classes/SegregadaEJB";
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "TrazabilidadTest";
 	
 	private GestionEmpresa gestionEmpresa;
+	private GestionSegregada gestionSegregada;
 	
 	@Before
 	public void setup() throws NamingException  {
 		gestionEmpresa = (GestionEmpresa) SuiteTest.ctx.lookup(EMPRESA_EJB);
+		gestionSegregada = (GestionSegregada) SuiteTest.ctx.lookup(SEGREGADA_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
 	
-	//@Requisitos({"RF2"}) 
+	@Requisitos({"RF2"}) 
 	@Test
 	public void testInsertarEmpresa() {
 		final Empresa empresa = new Empresa ("RazonSocial S.L.", false);
@@ -65,7 +72,7 @@ public class TestEmpresa {
 		}
 	}
 	
-	//@Requisitos({"RF3"})
+	@Requisitos({"RF3"})
 	@Test
 	public void testActualizarEmpresa() {
 		List<CuentaFintech> cuentas = new ArrayList<CuentaFintech>();
@@ -107,7 +114,53 @@ public class TestEmpresa {
 		}
 	}
 
-	//@Requisitos({"RF3"})
+	@Requisitos({"RF3"})
+	@Test
+	public void testActualizarEmpresaSegregadaAsociada() throws ProyectoException {
+		final long nuevaIdent = 1234L;
+		final String nuevoTipoCliente = "2020-01-01";
+		final boolean nuevoEstado = true;
+		final Date nuevaFechaAlta = Date.valueOf("2020-01-01");
+		final Date nuevaFechaBaja = null;
+		final String nuevaDireccion = "Carne pruebas 123";
+		final String nuevaCiudad = "Ciudad test";
+		final int nuevoCodPostal = 12345;
+		final String nuevoPais = "España";
+		
+		List<Segregada> segregadas = gestionSegregada.obtenerSegregada();
+		
+		final List<CuentaFintech> nuevasCuentas = new ArrayList<CuentaFintech>();
+		nuevasCuentas.add(segregadas.get(0));
+		
+		final String nuevaRazon= "RazonSocial2 S.L.";
+		
+		try {
+			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
+			Empresa e = empresas.get(0);
+			
+			e.setIdent(nuevaIdent);
+			e.setTipo_cliente(nuevoTipoCliente);
+			e.setEstado(nuevoEstado);
+			e.setFecha_Alta(nuevaFechaAlta);
+			e.setFecha_Baja(nuevaFechaBaja);
+			e.setDireccion(nuevaDireccion);
+			e.setCiudad(nuevaCiudad);
+			e.setCodPostal(nuevoCodPostal);
+			e.setPais(nuevoPais);
+			e.setCuentas(nuevasCuentas);
+			
+			e.setRazonSocial(nuevaRazon);
+			
+			gestionEmpresa.actualizarEmpresa(e);
+
+		} catch (CuentaSegregadaYaAsignadaException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al actualizar");
+		}
+	}
+	
+	@Requisitos({"RF3"})
 	@Test
 	public void testActualizarEmpresaNoEncontrada() {
 		
@@ -126,7 +179,7 @@ public class TestEmpresa {
 		}
 	}
 	
-	//@Requisitos({"RF4"})
+	@Requisitos({"RF4"})
 	@Test
 	public void testCerrarCuentaEmpresa() {
 		try {
@@ -140,7 +193,7 @@ public class TestEmpresa {
 		}
 	}
 
-	//@Requisitos({"RF4"})
+	@Requisitos({"RF4"})
 	@Test
 	public void testCerrarCuentaEmpresaNoExistente() {
 		try {
@@ -157,7 +210,7 @@ public class TestEmpresa {
 		}
 	}
 	
-	//@Requisitos({"RF4"})
+	@Requisitos({"RF4"})
 		@Test
 		public void testNoBajaCuentaEmpresa() {
 			try {

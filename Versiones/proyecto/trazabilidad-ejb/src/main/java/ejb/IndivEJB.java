@@ -7,11 +7,13 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import exceptions.ClienteExistenteException;
 import exceptions.ClienteNoEncontradoException;
+import exceptions.CuentaSegregadaYaAsignadaException;
 import exceptions.NoBajaClienteException;
 import exceptions.ProyectoException;
 import jpa.Cliente;
 import jpa.CuentaFintech;
 import jpa.Indiv;
+import jpa.Segregada;
 
 @Stateless
 public class IndivEJB implements GestionIndiv {
@@ -45,7 +47,27 @@ public class IndivEJB implements GestionIndiv {
 		indivEntity.setNombre(indiv.getNombre());
 		indivEntity.setApellido(indiv.getApellido());
 		indivEntity.setFechaNac(indiv.getFechaNac());
+		indivEntity.setCiudad(indiv.getCiudad());
+		indivEntity.setCodPostal(indiv.getCodPostal());
+		indivEntity.setFecha_Alta(indiv.getFecha_Alta());
+		indivEntity.setDireccion(indiv.getDireccion());
+		indivEntity.setIdent(indiv.getIdent());
+		indivEntity.setPais(indiv.getPais());
+		indivEntity.setTipo_cliente(indiv.getTipo_cliente());
+		indivEntity.setFecha_Baja(indiv.getFecha_Baja());
+		indivEntity.setUsuarioApk(indiv.getUsuarioApk());
 		
+		TypedQuery<Segregada> query = em.createQuery("SELECT s FROM Segregada s", Segregada.class);
+		
+		for(Segregada s : query.getResultList()) {
+			for(CuentaFintech c : indiv.getCuentas()) {
+				if(s.getIBAN() == c.getIBAN()) {
+					throw new CuentaSegregadaYaAsignadaException();
+				} else {
+					indivEntity.setCuentas(indiv.getCuentas());
+				}
+			}
+		}
 		
 		em.merge(indivEntity);
 	}

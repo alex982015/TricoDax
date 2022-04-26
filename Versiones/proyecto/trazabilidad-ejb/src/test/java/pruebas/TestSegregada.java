@@ -37,7 +37,7 @@ public class TestSegregada {
 		try {
 			gestionSegregada.insertarSegregada(cuenta);
 			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
-			assertEquals(2, cuentas.size());
+			assertEquals(3, cuentas.size());
 		} catch (CuentaExistenteException e) {
 			fail("Lanzó excepción al insertar");
 		} catch (ProyectoException e) {
@@ -49,7 +49,7 @@ public class TestSegregada {
 	public void testObtenerSegregada() {
 		try {
 			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
-			assertEquals(1, cuentas.size());
+			assertEquals(2, cuentas.size());
 		} catch (ProyectoException e) {
 			fail("No debería lanzar excepción");
 		}
@@ -92,7 +92,7 @@ public class TestSegregada {
 			gestionSegregada.eliminarSegregada(cuenta1);
 
 			List<Segregada> c = gestionSegregada.obtenerSegregada();
-			assertEquals(0, c.size());			
+			assertEquals(1, c.size());			
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
 		}

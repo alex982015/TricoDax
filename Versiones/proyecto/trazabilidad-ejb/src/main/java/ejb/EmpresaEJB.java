@@ -7,11 +7,13 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import exceptions.ClienteExistenteException;
 import exceptions.ClienteNoEncontradoException;
+import exceptions.CuentaSegregadaYaAsignadaException;
 import exceptions.NoBajaClienteException;
 import exceptions.ProyectoException;
 import jpa.Cliente;
 import jpa.CuentaFintech;
 import jpa.Empresa;
+import jpa.Segregada;
 
 @Stateless
 public class EmpresaEJB implements GestionEmpresa {
@@ -43,7 +45,29 @@ public class EmpresaEJB implements GestionEmpresa {
 			throw new ClienteNoEncontradoException();
 		}
 		
+		empresaEntity.setCiudad(empresa.getCiudad());
+		empresaEntity.setCodPostal(empresa.getCodPostal());
+		empresaEntity.setCuentas(empresa.getCuentas());
+		empresaEntity.setFecha_Alta(empresa.getFecha_Alta());
+		empresaEntity.setDireccion(empresa.getDireccion());
+		empresaEntity.setIdent(empresa.getIdent());
+		empresaEntity.setPais(empresa.getPais());
+		empresaEntity.setTipo_cliente(empresa.getTipo_cliente());
+		empresaEntity.setFecha_Baja(empresa.getFecha_Baja());
+		
 		empresaEntity.setRazonSocial(empresa.getRazonSocial());
+		
+		TypedQuery<Segregada> query = em.createQuery("SELECT s FROM Segregada s", Segregada.class);
+		
+		for(Segregada s : query.getResultList()) {
+			for(CuentaFintech c : empresa.getCuentas()) {
+				if(s.getIBAN() == c.getIBAN()) {
+					throw new CuentaSegregadaYaAsignadaException();
+				} else {
+					empresaEntity.setCuentas(empresa.getCuentas());
+				}
+			}
+		}
 		
 		em.merge(empresaEntity);
 	}

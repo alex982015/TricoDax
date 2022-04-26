@@ -51,11 +51,11 @@
     		<artifactId>commons-csv</artifactId>
     		<version>1.9.0</version>
 		</dependency>
-	<!--	<dependency>
+		<dependency>
     		<groupId>es.uma.informatica.sii</groupId>
     		<artifactId>anotaciones</artifactId>
     		<version>1.0.0</version>
-		</dependency>-->
+		</dependency>
 	</dependencies>
 
 	<build>

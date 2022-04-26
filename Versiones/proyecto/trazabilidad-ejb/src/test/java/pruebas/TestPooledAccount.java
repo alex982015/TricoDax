@@ -16,6 +16,7 @@ import ejb.GestionCuentaRef;
 import ejb.GestionDivisa;
 import ejb.GestionPooledAccount;
 import ejb.GestionUserApk;
+import es.uma.informatica.sii.anotaciones.Requisitos;
 import exceptions.CuentaConSaldoException;
 import exceptions.CuentaExistenteException;
 import exceptions.CuentaNoEncontradoException;
@@ -33,7 +34,6 @@ import jpa.UserApk;
 public class TestPooledAccount {
 	
 	private static final String USERAPK_EJB = "java:global/classes/UserApkEJB";
-	private static final String DIVISA_EJB = "java:global/classes/DivisaEJB";
 	private static final String CUENTAREF_EJB = "java:global/classes/CuentaRefEJB";
 	private static final String POOLEDACCOUNT_EJB = "java:global/classes/PooledAccountEJB";
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "TrazabilidadTest";
@@ -41,18 +41,16 @@ public class TestPooledAccount {
 	private GestionPooledAccount gestionPooledAccount;
 	private GestionUserApk gestionUserApk;
 	private GestionCuentaRef gestionCuentaRef;
-	private GestionDivisa gestionDivisa;
 	
 	@Before
 	public void setup() throws NamingException  {
 		gestionPooledAccount = (GestionPooledAccount) SuiteTest.ctx.lookup(POOLEDACCOUNT_EJB);
 		gestionUserApk = (GestionUserApk) SuiteTest.ctx.lookup(USERAPK_EJB);
 		gestionCuentaRef = (GestionCuentaRef) SuiteTest.ctx.lookup(CUENTAREF_EJB);
-		gestionDivisa = (GestionDivisa) SuiteTest.ctx.lookup(DIVISA_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
 
-	//@Requisitos{R5}
+	@Requisitos({"R5"})
 	@Test
 	public void testInsertarPooledAccount() throws ProyectoException {	
 		final long IBAN=455833265;
@@ -83,7 +81,7 @@ public class TestPooledAccount {
 		}
 	}
 
-	//@Requisitos{R5}
+	@Requisitos({"R5"})
 	@Test
 	public void testInsertarPooledAccountYaExistente() throws ProyectoException {	
 		List<PooledAccount> pooledEntity = gestionPooledAccount.obtenerPooledAccount();
@@ -105,7 +103,7 @@ public class TestPooledAccount {
 		}
 	}
 	
-	//@Requisitos{R5}
+	@Requisitos({"R5"})
 	@Test
 	public void testInsertarPooledAccountUserApkNoExistente() throws ProyectoException {	
 		final long IBAN=455833265;
@@ -132,7 +130,7 @@ public class TestPooledAccount {
 		}
 	}
 	
-	//@Requisitos{R5}
+	@Requisitos({"R5"})
 	@Test
 	public void testInsertarPooledAccountUserApkNoAdmin() throws ProyectoException {	
 		final long IBAN=455833265;
@@ -197,7 +195,7 @@ public class TestPooledAccount {
 		}
 	}
 	
-	//@Requisitos{"R9"}
+	@Requisitos({"R9"})
 		@Test
 		public void testCerrarPooledAccount() {
 			try {
@@ -209,22 +207,22 @@ public class TestPooledAccount {
 			}
 		}
 		
-		//@Requisitos{"R9"}
-		@Test
-		public void testCerrarPooledAccountNoEncontrada() {
-			try {
-				List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
-				PooledAccount cuenta1 = cuentas.get(0);
-				cuenta1.setIBAN(1234);
-				gestionPooledAccount.cerrarCuentaPooledAccount(cuenta1);
-			} catch (CuentaNoEncontradoException e) {
-				// OK
-			} catch (ProyectoException e) {
-				fail("No debería lanzarse excepción");
-			}
+	@Requisitos({"R9"})
+	@Test
+	public void testCerrarPooledAccountNoEncontrada() {
+		try {
+			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
+			PooledAccount cuenta1 = cuentas.get(0);
+			cuenta1.setIBAN(1234);
+			gestionPooledAccount.cerrarCuentaPooledAccount(cuenta1);
+		} catch (CuentaNoEncontradoException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
 		}
+	}
 		
-	//@Requisitos{"R9"}
+	@Requisitos({"R9"})
 	@Test
 	public void testCerrarPooledAccountConSaldo() {
 		try {
@@ -238,7 +236,7 @@ public class TestPooledAccount {
 		}
 	}
 
-	//@Requisitos{R17}
+	@Requisitos({"R17"})
 	@Test
 	public void testCambioDivisaPooledAccount() throws ProyectoException {
 		try {
@@ -276,7 +274,7 @@ public class TestPooledAccount {
 		}
 	}
 	
-	//@Requisitos{R18}
+	@Requisitos({"R18"})
 	@Test
 	public void testCambioDivisaPooledAccountAdministrativo() throws ProyectoException {
 		try {
@@ -314,7 +312,7 @@ public class TestPooledAccount {
 		}
 	}
 	
-	//@Requisitos{R18}
+	@Requisitos({"R18"})
 	@Test
 	public void testCambioDivisaPooledAccountNoAdministrativo() throws ProyectoException {
 		try {

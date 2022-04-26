@@ -38,20 +38,17 @@ public class TransEJB implements GestionTrans{
 			if (transEntity == null) {
 				throw new TransNoEncontradaException();
 			}
-			//Actualización de atributos propios de clase
+
 			transEntity.setCantidad(trans.getCantidad());
 			transEntity.setTipo(trans.getTipo());
 			transEntity.setComision(trans.getComision());
-			transEntity.setInternational(trans.getInternational());
+			transEntity.setInternational(trans.isInternational());
 			transEntity.setFechaInstruccion(trans.getFechaInstruccion());
 			transEntity.setFechaEjecucion(trans.getFechaEjecucion());
-			//Actualización de parámetros de relación
-			/*
 			transEntity.setMonedaDestino(trans.getMonedaOrigen());
 			transEntity.setMonedaDestino(trans.getMonedaDestino());
 			transEntity.setCuenta(trans.getCuenta());
 			transEntity.setTransaccion(trans.getTransaccion());
-			*/
 			
 			em.merge(transEntity);
 		}

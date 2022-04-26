@@ -26,8 +26,7 @@ public class TestDivisa {
 	}
 
 	@Test
-	public void testInsertarDivisa() {
-		
+	public void testInsertarDivisa() {	
 		final Divisa divisa = new Divisa ("JPYII", "Yen japonés ii", "¥", 0.0080);
 		
 		try {
@@ -51,7 +50,6 @@ public class TestDivisa {
 	
 	@Test
 	public void testActualizarDivisa() {
-		
 		final String nuevaAbreb = "EUR";
 		final String nuevoNombre = "Euro";
 		final String nuevoSimbolo = "€";

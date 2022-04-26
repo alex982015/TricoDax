@@ -3,6 +3,7 @@ package ejb;
 import java.io.IOException;
 import java.util.List;
 import exceptions.ProyectoException;
+import jpa.CuentaFintech;
 import jpa.Empresa;
 import jpa.PersAut;
 import jpa.UserApk;

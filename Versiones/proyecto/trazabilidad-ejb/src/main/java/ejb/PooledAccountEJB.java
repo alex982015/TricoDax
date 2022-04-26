@@ -1,6 +1,9 @@
 package ejb;
 
-import java.util.ArrayList;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,14 +19,13 @@ import exceptions.CuentaRefNoCashException;
 import exceptions.CuentaRefNoVinculadaException;
 import exceptions.CuentaRefOrigenDestinoNoEncontrada;
 import exceptions.ProyectoException;
-import exceptions.UserExistenteException;
 import exceptions.UserNoAdminException;
 import exceptions.UserNoEncontradoException;
 import jpa.Cuenta;
 import jpa.CuentaFintech;
 import jpa.CuentaRef;
-import jpa.Divisa;
 import jpa.PooledAccount;
+import jpa.Trans;
 import jpa.UserApk;
 
 @Stateless
@@ -77,18 +79,19 @@ public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledA
 
 	@Override
 	public void actualizarPooledAccount(PooledAccount cuenta) throws ProyectoException {
-		CuentaFintech cuentaEntity = em.find(CuentaFintech.class, cuenta.getIBAN());
+		PooledAccount cuentaEntity = em.find(PooledAccount.class, cuenta.getIBAN());
 		
 		if (cuentaEntity == null) {
 			throw new CuentaNoEncontradoException();
 		}
+		
+		cuentaEntity.setSwift(cuenta.getSwift());
 		
 		em.merge(cuenta);
 	}
 
 	@Override
 	public void eliminarPooledAccount(PooledAccount cuenta) throws ProyectoException {
-		
 		PooledAccount PooledAccountEntity = em.find(PooledAccount.class, cuenta.getIBAN());
 		CuentaFintech cuentaFintechEntity = em.find(CuentaFintech.class, cuenta.getIBAN());
 		Cuenta cuentaEntity = em.find(Cuenta.class, cuenta.getIBAN());
@@ -142,7 +145,6 @@ public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledA
 	
 	@Override
 	public void cambiarDivisaPooledAccountAdministrativo(UserApk user, PooledAccount cuenta, CuentaRef origen, CuentaRef destino, double cantidad) throws ProyectoException {
-		
 		UserApk userEntity = em.find(UserApk.class, user.getUser());
 		if (userEntity == null) {
 			throw new UserNoAdminException();
@@ -170,6 +172,15 @@ public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledA
 						destino.setSaldo(destino.getSaldo() + cantidad * destino.getMoneda().getCambioEuro());
 						em.merge(destino);
 					}
+					
+					Trans transaccion = new Trans(cantidad, "Cambio Divisa", "0%", true, null, Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+					
+					List<Trans> t = cuenta.getTransacciones();
+					t.add(transaccion);
+					cuenta.setTransacciones(t);
+					em.persist(transaccion);
+					em.merge(cuenta);
+					
 				} else {
 					throw new CuentaRefNoCashException();
 				}
@@ -205,6 +216,14 @@ public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledA
 						destino.setSaldo(destino.getSaldo() + cantidad * destino.getMoneda().getCambioEuro());
 						em.merge(destino);
 					}
+					
+					Trans transaccion = new Trans(cantidad, "Cambio Divisa", "0%", true, null, Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+					
+					List<Trans> t = cuenta.getTransacciones();
+					t.add(transaccion);
+					cuenta.setTransacciones(t);
+					em.persist(transaccion);
+					em.merge(cuenta);
 				} else {
 					throw new CuentaRefNoCashException();
 				}
@@ -215,5 +234,4 @@ public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledA
 			throw new CuentaRefOrigenDestinoNoEncontrada();
 		}
 	}
-
 }

@@ -106,6 +106,14 @@ public class BaseDatos {
 		
 		em.persist(segregada1);
 		
+		CuentaFintech segregada2 = new Segregada (50.0);
+		segregada2.setIBAN(45367457);
+		segregada2.setEstado(true);
+		segregada2.setFechaApertura(Date.valueOf("2019-06-12"));
+		segregada2.setClasificacion(true);
+		
+		em.persist(segregada2);
+		
 		Divisa divisa1 = new Divisa ("EUR", "Euro", "€", 1.0000);
 		Divisa divisa2 = new Divisa ("USD", "Dólar estadounidense", "US$", 0.9200);
 		Divisa divisa3 = new Divisa ("GBP", "Libra esterlina", "£", 1.2000);
@@ -125,10 +133,10 @@ public class BaseDatos {
 			em.persist(cuenta);
 		}
 		
-		Trans trans1 = new Trans(20, "Bizum", "2%", "Spain", Date.valueOf("2022-02-01"), Date.valueOf("2022-03-01"));
-		Trans trans2 = new Trans(300, "Bizum", "1%", "Noruega", Date.valueOf("2020-02-01"), Date.valueOf("2020-03-01"));
-		Trans trans3 = new Trans(10, "Bizum", "3%", "Nigeria", Date.valueOf("2021-02-01"), Date.valueOf("2021-03-01"));
-		Trans trans4 = new Trans(40, "Bizum", "15%", "Polonia", Date.valueOf("2019-02-01"), Date.valueOf("2019-03-01"));
+		Trans trans1 = new Trans(20, "Bizum", "2%", true, Date.valueOf("2022-02-01"), Date.valueOf("2022-03-01"));
+		Trans trans2 = new Trans(300, "Bizum", "1%", true, Date.valueOf("2020-02-01"), Date.valueOf("2020-03-01"));
+		Trans trans3 = new Trans(10, "Bizum", "3%", true, Date.valueOf("2021-02-01"), Date.valueOf("2021-03-01"));
+		Trans trans4 = new Trans(40, "Bizum", "15%", true, Date.valueOf("2019-02-01"), Date.valueOf("2019-03-01"));
 		
 		for(Trans trans : new Trans [] {trans1, trans2, trans3, trans4}) {
 			em.persist(trans);
