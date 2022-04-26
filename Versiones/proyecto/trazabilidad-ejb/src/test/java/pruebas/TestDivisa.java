@@ -25,6 +25,8 @@ public class TestDivisa {
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
 
+	/******** TEST ADICIONALES *********/
+	
 	@Test
 	public void testInsertarDivisa() {	
 		final Divisa divisa = new Divisa ("JPYII", "Yen japonés ii", "¥", 0.0080);

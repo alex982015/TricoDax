@@ -36,6 +36,8 @@ public class TestIndiv {
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
 
+	/******** TEST REQUISITOS OBLIGATORIOS *********/
+	
 	@Requisitos({"RF2"}) 
 	@Test
 	public void testInsertarIndiv() {
@@ -57,16 +59,6 @@ public class TestIndiv {
 			fail("Lanzó excepción al insertar");
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al insertar"); 
-		}
-	}
-	
-	@Test
-	public void testObtenerIndiv() {
-		try {
-			List<Indiv> particulares = gestionIndiv.obtenerIndiv();
-			assertEquals(3, particulares.size());
-		} catch (ProyectoException e) {
-			fail("No debería lanzar excepción");
 		}
 	}
 	
@@ -225,20 +217,32 @@ public class TestIndiv {
 	}
 	
 	@Requisitos({"RF4"})
-			@Test
-			public void testNoBajaCuentaIndiv() {
-				try {
-					List<Indiv> particulares = gestionIndiv.obtenerIndiv();
-					Indiv i = particulares.get(0);
-				
-					gestionIndiv.cerrarCuentaIndiv(i);
+	@Test
+	public void testNoBajaCuentaIndiv() {
+		try {
+			List<Indiv> particulares = gestionIndiv.obtenerIndiv();
+			Indiv i = particulares.get(0);
+		
+			gestionIndiv.cerrarCuentaIndiv(i);
 
-				} catch (NoBajaClienteException e) {
-					// OK
-				} catch (ProyectoException e) {
-					fail("Lanzó excepción al cerrar cuenta");
-				}
-			}
+		} catch (NoBajaClienteException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al cerrar cuenta");
+		}
+	}
+
+	/******** TEST ADICIONALES *********/
+	
+	@Test
+	public void testObtenerIndiv() {
+		try {
+			List<Indiv> particulares = gestionIndiv.obtenerIndiv();
+			assertEquals(3, particulares.size());
+		} catch (ProyectoException e) {
+			fail("No debería lanzar excepción");
+		}
+	}
 	
 	@Test
 	public void testEliminarIndiv() {

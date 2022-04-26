@@ -11,32 +11,43 @@ import org.junit.Before;
 import org.junit.Test;
 import ejb.GestionEmpresa;
 import ejb.GestionSegregada;
+import ejb.GestionUserApk;
 import es.uma.informatica.sii.anotaciones.Requisitos;
 import exceptions.ClienteExistenteException;
 import exceptions.ClienteNoEncontradoException;
+import exceptions.CuentaNoEncontradoException;
 import exceptions.CuentaSegregadaYaAsignadaException;
 import exceptions.NoBajaClienteException;
 //import es.uma.informatica.sii.anotaciones.Requisitos;
 import exceptions.ProyectoException;
+import exceptions.UserNoAdminException;
+import exceptions.UserNoEncontradoException;
 import jpa.CuentaFintech;
 import jpa.Empresa;
+import jpa.PersAut;
 import jpa.Segregada;
+import jpa.UserApk;
 
 public class TestEmpresa {
 
 	private static final String EMPRESA_EJB = "java:global/classes/EmpresaEJB";
+	private static final String USERAPK_EJB = "java:global/classes/UserApkEJB";
 	private static final String SEGREGADA_EJB = "java:global/classes/SegregadaEJB";
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "TrazabilidadTest";
 	
 	private GestionEmpresa gestionEmpresa;
 	private GestionSegregada gestionSegregada;
+	private GestionUserApk gestionUserApk;
 	
 	@Before
 	public void setup() throws NamingException  {
 		gestionEmpresa = (GestionEmpresa) SuiteTest.ctx.lookup(EMPRESA_EJB);
 		gestionSegregada = (GestionSegregada) SuiteTest.ctx.lookup(SEGREGADA_EJB);
+		gestionUserApk = (GestionUserApk) SuiteTest.ctx.lookup(USERAPK_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
+	
+	/******** TEST REQUISITOS OBLIGATORIOS *********/
 	
 	@Requisitos({"RF2"}) 
 	@Test
@@ -59,16 +70,6 @@ public class TestEmpresa {
 			fail("Lanzó excepción al insertar");
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al insertar"); 
-		}
-	}
-	
-	@Test
-	public void testObtenerEmpresas() {
-		try {
-			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
-			assertEquals(3, empresas.size());
-		} catch (ProyectoException e) {
-			fail("No debería lanzar excepción");
 		}
 	}
 	
@@ -211,20 +212,108 @@ public class TestEmpresa {
 	}
 	
 	@Requisitos({"RF4"})
-		@Test
-		public void testNoBajaCuentaEmpresa() {
-			try {
-				List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
-				Empresa e = empresas.get(0);
-			
-				gestionEmpresa.cerrarCuentaEmpresa(e);
+	@Test
+	public void testNoBajaCuentaEmpresa() {
+		try {
+			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
+			Empresa e = empresas.get(0);
+		
+			gestionEmpresa.cerrarCuentaEmpresa(e);
 
-			} catch (NoBajaClienteException e) {
-				// OK
-			} catch (ProyectoException e) {
-				fail("Lanzó excepción al cerrar cuenta");
-			}
+		} catch (NoBajaClienteException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al cerrar cuenta");
 		}
+	}
+	
+	/******** TEST ADICIONALES *********/	
+	
+	@Test
+	public void testObtenerEmpresas() {
+		try {
+			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
+			assertEquals(3, empresas.size());
+		} catch (ProyectoException e) {
+			fail("No debería lanzar excepción");
+		}
+	}
+	
+	@Test
+	public void testBloquearCuentaEmpresa() {
+		try {
+			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
+			Empresa e = empresas.get(0);
+		
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionEmpresa.bloquearCuentaEmpresa(u, e, true);
+
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al cerrar persAut");
+		}
+	}	
+
+	@Test
+	public void testBloquearCuentaEmpresaNoExistente() {
+		try {
+			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
+			Empresa e = empresas.get(0);
+			e.setID(10);
+		
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionEmpresa.bloquearCuentaEmpresa(u, e, true);
+
+		} catch (CuentaNoEncontradoException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al cerrar persAut");
+		}
+	}
+	
+	@Test
+	public void testBloquearUserApkNoExistente() {
+		try {
+			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
+			Empresa e = empresas.get(0);
+		
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setUser("U");
+			u.setAdministrativo(true);
+			
+			gestionEmpresa.bloquearCuentaEmpresa(u, e, true);
+
+		} catch (UserNoEncontradoException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al cerrar persAut");
+		}
+	}
+	
+	@Test
+	public void testBloquearUserApkNoAdministrativo() {
+		try {
+			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
+			Empresa e = empresas.get(0);
+		
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(false);
+			
+			gestionEmpresa.bloquearCuentaEmpresa(u, e, true);
+
+		} catch (UserNoAdminException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al cerrar persAut");
+		}
+	}
 	
 	@Test
 	public void testEliminarEmpresa() {

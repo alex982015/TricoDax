@@ -51,28 +51,7 @@ public class TestPersAut {
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
 
-	@Test
-	public void testInsertarPersAut() {
-		final PersAut persAut = new PersAut (123, "Nombre1", "Apellidos1", "Direccion1", Date.valueOf("2000-12-12"), true, Date.valueOf("2022-04-01"), null, false);
-		
-		try {
-			gestionPersAut.insertarPersAut(persAut);
-		} catch (PersAutExistenteException e) {
-			fail("Lanzó excepción al insertar");
-		} catch (ProyectoException e) {
-			fail("Lanzó excepción al insertar"); 
-		}
-	}
-	
-	@Test
-	public void testObtenerPersAut() {
-		try {
-			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
-			assertEquals(3, persAut.size());
-		} catch (ProyectoException e) {
-			fail("No debería lanzar excepción");
-		}
-	}
+	/******** TEST REQUISITOS OBLIGATORIOS *********/
 	
 	@Requisitos({"RF7"})
 	@Test
@@ -289,6 +268,31 @@ public class TestPersAut {
 			// OK
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al cerrar persAut");
+		}
+	}
+
+	/******** TEST ADICIONALES *********/
+
+	@Test
+	public void testInsertarPersAut() {
+		final PersAut persAut = new PersAut (123, "Nombre1", "Apellidos1", "Direccion1", Date.valueOf("2000-12-12"), true, Date.valueOf("2022-04-01"), null, false);
+		
+		try {
+			gestionPersAut.insertarPersAut(persAut);
+		} catch (PersAutExistenteException e) {
+			fail("Lanzó excepción al insertar");
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al insertar"); 
+		}
+	}
+	
+	@Test
+	public void testObtenerPersAut() {
+		try {
+			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
+			assertEquals(3, persAut.size());
+		} catch (ProyectoException e) {
+			fail("No debería lanzar excepción");
 		}
 	}
 	

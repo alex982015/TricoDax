@@ -25,6 +25,8 @@ public class TestSegregada {
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
 
+	/******** TEST ADICIONALES *********/
+	
 	@Test
 	public void testInsertarSegregada() {
 		final long IBAN=455833699;

@@ -50,6 +50,8 @@ public class TestPooledAccount {
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
 
+	/******** TEST REQUISITOS OBLIGATORIOS *********/
+	
 	@Requisitos({"R5"})
 	@Test
 	public void testInsertarPooledAccount() throws ProyectoException {	
@@ -155,57 +157,19 @@ public class TestPooledAccount {
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al insertar"); 
 		}
-	}
-	
-	@Test
-	public void testObtenerPooledAccount() {
-		try {
-			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
-			assertEquals(1, cuentas.size());
-		} catch (ProyectoException e) {
-			fail("No debería lanzar excepción");
-		}
-	}
-	
-	@Test
-	public void testActualizarPooledAccount() {
-		try {
-			List<PooledAccount> cuenta = gestionPooledAccount.obtenerPooledAccount();
-			PooledAccount c = cuenta.get(0);
-			gestionPooledAccount.actualizarPooledAccount(c);
-		} catch (ProyectoException e) {
-			fail("Lanzó excepción al actualizar");
-		}
-	}
-	
-	@Test
-	public void testActualizarPooledAccountNoEncontrada() {
-		final long IBAN = 455833218;
-		
-		try {
-			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
-			PooledAccount c = cuentas.get(0);
-			c.setIBAN(IBAN);
-			gestionPooledAccount.actualizarPooledAccount(c);
-			fail("Debería lanzar excepción de PooledAccount no encontrado");
-		} catch (CuentaNoEncontradoException e) {
-			// OK
-		} catch (ProyectoException e) {
-			fail("Debería lanzar excepción de PooledAccount no encontrado");
-		}
-	}
+	}	
 	
 	@Requisitos({"R9"})
-		@Test
-		public void testCerrarPooledAccount() {
-			try {
-				List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
-				PooledAccount cuenta1 = cuentas.get(0);
-				gestionPooledAccount.cerrarCuentaPooledAccount(cuenta1);
-			} catch (ProyectoException e) {
-				fail("No debería lanzarse excepción");
-			}
+	@Test
+	public void testCerrarPooledAccount() {
+		try {
+			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
+			PooledAccount cuenta1 = cuentas.get(0);
+			gestionPooledAccount.cerrarCuentaPooledAccount(cuenta1);
+		} catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
 		}
+	}
 		
 	@Requisitos({"R9"})
 	@Test
@@ -351,6 +315,47 @@ public class TestPooledAccount {
 			fail("No debería lanzarse excepción");
 		}
 	}
+
+	/******** TEST ADICIONALES *********/
+	
+	@Test
+	public void testObtenerPooledAccount() {
+		try {
+			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
+			assertEquals(1, cuentas.size());
+		} catch (ProyectoException e) {
+			fail("No debería lanzar excepción");
+		}
+	}
+	
+	@Test
+	public void testActualizarPooledAccount() {
+		try {
+			List<PooledAccount> cuenta = gestionPooledAccount.obtenerPooledAccount();
+			PooledAccount c = cuenta.get(0);
+			gestionPooledAccount.actualizarPooledAccount(c);
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al actualizar");
+		}
+	}
+	
+	@Test
+	public void testActualizarPooledAccountNoEncontrada() {
+		final long IBAN = 455833218;
+		
+		try {
+			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
+			PooledAccount c = cuentas.get(0);
+			c.setIBAN(IBAN);
+			gestionPooledAccount.actualizarPooledAccount(c);
+			fail("Debería lanzar excepción de PooledAccount no encontrado");
+		} catch (CuentaNoEncontradoException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Debería lanzar excepción de PooledAccount no encontrado");
+		}
+	}
+
 	
 	@Test
 	public void testEliminarPooledAccount() {

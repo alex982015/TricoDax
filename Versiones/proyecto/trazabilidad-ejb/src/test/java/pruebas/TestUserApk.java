@@ -38,7 +38,53 @@ public class TestUserApk {
 		gestionPersAut = (GestionPersAut) SuiteTest.ctx.lookup(PERSAUT_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
+	
+	/******** TEST REQUISITOS OBLIGATORIOS *********/
 
+	@Requisitos({"RF1"}) 
+	@Test
+	public void testcheckUserAdmin() {
+		
+		try {
+			final UserApk user = new UserApk("USUARIO", "1234", true);
+			gestionUser.insertarUserAdmin(user);	
+			gestionUser.checkUserAdmin(user);
+		} catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
+		}
+	}
+	
+	@Requisitos({"RF1"}) 
+	@Test
+	public void testcheckUserAdminNoEncontrado() {
+		try {
+			List<UserApk> u = gestionUser.obtenerUser();
+			UserApk user = u.get(0);
+			user.setUser("example");
+			gestionUser.checkUserAdmin(user);
+		} catch (UserNoEncontradoException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
+		}
+	}
+		
+	@Requisitos({"RF1"}) 
+	@Test
+	public void testcheckUserNoAdmin() {
+		try {
+			List<UserApk> u = gestionUser.obtenerUser();
+			UserApk user = u.get(1);
+			gestionUser.checkUserAdmin(user);
+		} catch (UserNoAdminException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
+		}
+	}
+
+	/******** TEST ADICIONALES *********/
+	
 	@Test
 	public void testInsertarUserAdmin() throws ProyectoException {
 		final UserApk user = new UserApk("USUARIO", "1234", true);
@@ -250,48 +296,6 @@ public class TestUserApk {
 			gestionUser.eliminarTodasUser();
 			List<UserApk> user = gestionUser.obtenerUser();
 			assertEquals(0, user.size());
-		} catch (ProyectoException e) {
-			fail("No debería lanzarse excepción");
-		}
-	}
-
-	@Requisitos({"RF1"}) 
-	@Test
-	public void testcheckUserAdmin() {
-		
-		try {
-			final UserApk user = new UserApk("USUARIO", "1234", true);
-			gestionUser.insertarUserAdmin(user);	
-			gestionUser.checkUserAdmin(user);
-		} catch (ProyectoException e) {
-			fail("No debería lanzarse excepción");
-		}
-	}
-	
-	@Requisitos({"RF1"}) 
-	@Test
-	public void testcheckUserAdminNoEncontrado() {
-		try {
-			List<UserApk> u = gestionUser.obtenerUser();
-			UserApk user = u.get(0);
-			user.setUser("example");
-			gestionUser.checkUserAdmin(user);
-		} catch (UserNoEncontradoException e) {
-			// OK
-		} catch (ProyectoException e) {
-			fail("No debería lanzarse excepción");
-		}
-	}
-		
-	@Requisitos({"RF1"}) 
-	@Test
-	public void testcheckUserNoAdmin() {
-		try {
-			List<UserApk> u = gestionUser.obtenerUser();
-			UserApk user = u.get(1);
-			gestionUser.checkUserAdmin(user);
-		} catch (UserNoAdminException e) {
-			// OK
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
 		}

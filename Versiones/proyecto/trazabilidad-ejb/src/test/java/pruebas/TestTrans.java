@@ -26,6 +26,8 @@ public class TestTrans {
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
 
+	/******** TEST ADICIONALES *********/
+	
 	@Test
 	public void testInsertarTrans() {		
 		final Trans trans = new Trans(100,"Servicio", "10%", true, Date.valueOf("2022-03-12"), Date.valueOf("2022-03-10") );

@@ -7,13 +7,19 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import exceptions.ClienteExistenteException;
 import exceptions.ClienteNoEncontradoException;
+import exceptions.CuentaNoEncontradoException;
 import exceptions.CuentaSegregadaYaAsignadaException;
 import exceptions.NoBajaClienteException;
+import exceptions.PersAutNoEncontradaException;
 import exceptions.ProyectoException;
+import exceptions.UserNoAdminException;
+import exceptions.UserNoEncontradoException;
 import jpa.Cliente;
 import jpa.CuentaFintech;
 import jpa.Empresa;
+import jpa.PersAut;
 import jpa.Segregada;
+import jpa.UserApk;
 
 @Stateless
 public class EmpresaEJB implements GestionEmpresa {
@@ -72,6 +78,26 @@ public class EmpresaEJB implements GestionEmpresa {
 		em.merge(empresaEntity);
 	}
 
+	@Override
+	public void bloquearCuentaEmpresa(UserApk user, Empresa empresa, boolean tipoBloqueo) throws ProyectoException {
+		Empresa empresaEntity = em.find(Empresa.class, empresa.getID());
+		if (empresaEntity == null) {
+			throw new CuentaNoEncontradoException();
+		}
+		
+		UserApk userApkEntity = em.find(UserApk.class, user.getUser());
+		if (userApkEntity == null) {
+			throw new UserNoEncontradoException();
+		}
+		
+		if(user.isAdministrativo()) {
+			empresaEntity.setBlock(tipoBloqueo);
+			em.merge(empresaEntity);
+		} else {
+			throw new UserNoAdminException();
+		}
+	}
+	
 	@Override
 	public void cerrarCuentaEmpresa(Empresa empresa) throws ProyectoException {
 		Empresa empresaEntity = em.find(Empresa.class, empresa.getID());
