@@ -56,6 +56,23 @@ public class TestSegregada {
 		}
 	}
 	
+	@Requisitos({"RF5"})
+	@Test
+	public void testInsertarSegregadaYaExistente() throws ProyectoException {
+		List<Segregada> segregadas = gestionSegregada.obtenerSegregada();
+		Segregada s = segregadas.get(0);
+		
+		try {
+			gestionSegregada.insertarSegregada(s);
+			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
+			assertEquals(3, cuentas.size());
+		} catch (CuentaExistenteException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al insertar"); 
+		}
+	}
+	
 	@Requisitos({"RF9"})
 	@Test
 	public void testCerrarSegregada() {
