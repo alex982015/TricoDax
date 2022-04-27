@@ -30,7 +30,7 @@ public class EmpresaEJB implements GestionEmpresa {
 	@Override
 	public void insertarEmpresa(Empresa empresa) throws ClienteExistenteException {
 		Empresa empresaExistente = em.find(Empresa.class, empresa.getID());
-		
+		//Hace falta ver admin
 		if (empresaExistente != null) {
 			throw new ClienteExistenteException();
 		}

@@ -23,6 +23,7 @@ public class IndivEJB implements GestionIndiv {
 
 	@Override
 	public void insertarIndiv(Indiv indiv) throws ClienteExistenteException {
+		//Hace falta ver admin 
 		Indiv indivExistente = em.find(Indiv.class, indiv.getID());
 		if (indivExistente != null) {
 			throw new ClienteExistenteException();

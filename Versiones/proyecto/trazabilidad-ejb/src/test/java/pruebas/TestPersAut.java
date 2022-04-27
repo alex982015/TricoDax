@@ -292,7 +292,7 @@ public class TestPersAut {
 			
 			m.put(empresa1, "AUTORIZADO");
 			persAut1.setAutoriz(m);
-			
+			//Es un fallo estándar debido a que la ruta es la del que trabaja último.
 			String ruta = "C:\\Users\\Alex\\Desktop\\Reporte.csv";
 			
 			String tipo = "Inicial";

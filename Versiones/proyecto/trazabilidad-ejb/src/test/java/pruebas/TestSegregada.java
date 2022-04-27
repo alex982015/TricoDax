@@ -9,44 +9,52 @@ import org.junit.Before;
 import org.junit.Test;
 import ejb.GestionCuentaRef;
 import ejb.GestionSegregada;
+import ejb.GestionUserApk;
 import es.uma.informatica.sii.anotaciones.Requisitos;
 import exceptions.CuentaConSaldoException;
 import exceptions.CuentaExistenteException;
 import exceptions.CuentaNoEncontradoException;
 import exceptions.ProyectoException;
+import exceptions.UserNoAdminException;
+import exceptions.UserNoEncontradoException;
 import jpa.CuentaRef;
 import jpa.Segregada;
+import jpa.UserApk;
 
 public class TestSegregada {
 	
 	private static final String CUENTAREF_EJB = "java:global/classes/CuentaRefEJB";
 	private static final String SEGREGADA_EJB = "java:global/classes/SegregadaEJB";
+	private static final String USERAPK_EJB = "java:global/classes/UserApkEJB";
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "TrazabilidadTest";
 	
 	private GestionSegregada gestionSegregada;
 	private GestionCuentaRef gestionCuentaRef;
+	private GestionUserApk gestionUserApk;
 	
 	@Before
 	public void setup() throws NamingException  {
 		gestionSegregada = (GestionSegregada) SuiteTest.ctx.lookup(SEGREGADA_EJB);
 		gestionCuentaRef = (GestionCuentaRef) SuiteTest.ctx.lookup(CUENTAREF_EJB);
+		gestionUserApk = (GestionUserApk) SuiteTest.ctx.lookup(USERAPK_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
 
-	/******** TEST REQUISITOS OBLIGATORIOS *********/
+	/******** TEST REQUISITOS OBLIGATORIOS  *********/
 	
 	@Requisitos({"RF5"})
 	@Test
-	public void testInsertarSegregada() {
+	public void testInsertarSegregada() throws ProyectoException {
 		final long IBAN=455833699;
 		final Segregada cuenta = new Segregada (21.0);
 		cuenta.setIBAN(IBAN);
 		cuenta.setEstado(true);
 		cuenta.setFechaApertura(Date.valueOf("2022-06-27"));
 		cuenta.setClasificacion(true);
-		
+		List<UserApk> users = gestionUserApk.obtenerUser();
+		UserApk user= users.get(0);
 		try {
-			gestionSegregada.insertarSegregada(cuenta);
+			gestionSegregada.insertarSegregada(user, cuenta);
 			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
 			assertEquals(3, cuentas.size());
 		} catch (CuentaExistenteException e) {
@@ -61,12 +69,51 @@ public class TestSegregada {
 	public void testInsertarSegregadaYaExistente() throws ProyectoException {
 		List<Segregada> segregadas = gestionSegregada.obtenerSegregada();
 		Segregada s = segregadas.get(0);
-		
+		List<UserApk> users = gestionUserApk.obtenerUser();
+		UserApk user= users.get(0);
 		try {
-			gestionSegregada.insertarSegregada(s);
+			gestionSegregada.insertarSegregada(user, s);
 			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
 			assertEquals(3, cuentas.size());
 		} catch (CuentaExistenteException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al insertar"); 
+		}
+	}
+	
+	@Requisitos({"RF5"})
+	@Test
+	public void testInsertarSegregadaNoAdmin() throws ProyectoException {
+		List<Segregada> segregadas = gestionSegregada.obtenerSegregada();
+		Segregada s = segregadas.get(0);
+		List<UserApk> users = gestionUserApk.obtenerUser();
+		UserApk user= users.get(0);
+		user.setAdministrativo(false);
+		try {
+			gestionSegregada.insertarSegregada(user, s);
+			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
+			assertEquals(3, cuentas.size());
+		} catch (UserNoAdminException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al insertar"); 
+		}
+	}
+	
+	@Requisitos({"RF5"})
+	@Test
+	public void testInsertarSegregadaUserNoEncontrado() throws ProyectoException {
+		List<Segregada> segregadas = gestionSegregada.obtenerSegregada();
+		Segregada s = segregadas.get(0);
+		List<UserApk> users = gestionUserApk.obtenerUser();
+		UserApk user= users.get(0);
+		user.setUser("hola");
+		try {
+			gestionSegregada.insertarSegregada(user, s);
+			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
+			assertEquals(3, cuentas.size());
+		} catch (UserNoEncontradoException e) {
 			// OK
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al insertar"); 

@@ -9,9 +9,12 @@ import exceptions.CuentaConSaldoException;
 import exceptions.CuentaExistenteException;
 import exceptions.CuentaNoEncontradoException;
 import exceptions.ProyectoException;
+import exceptions.UserNoAdminException;
+import exceptions.UserNoEncontradoException;
 import jpa.Cuenta;
 import jpa.CuentaFintech;
 import jpa.Segregada;
+import jpa.UserApk;
 
 @Stateless
 public class SegregadaEJB extends CuentaFintechEJB implements GestionSegregada{
@@ -20,17 +23,26 @@ public class SegregadaEJB extends CuentaFintechEJB implements GestionSegregada{
 	private EntityManager em;
     
 	@Override
-	public void insertarSegregada(Segregada cuenta) throws CuentaExistenteException {
-		CuentaFintech cuentaExistente = em.find(CuentaFintech.class, cuenta.getIBAN());
-		Segregada cuentaSegregada = em.find(Segregada.class, cuenta.getIBAN());
-		if ((cuentaExistente != null) && (cuentaSegregada != null)) {
-			throw new CuentaExistenteException();
+	public void insertarSegregada(UserApk user, Segregada cuenta) throws ProyectoException {
+		UserApk userApkEntity = em.find(UserApk.class, user.getUser());
+		if(userApkEntity == null) {
+			throw new UserNoEncontradoException();
 		}
 		
-		cuentaSegregada = cuenta;
+		if(user.isAdministrativo()) {
+			
+			Segregada cuentaSegregada = em.find(Segregada.class, cuenta.getIBAN());
+			
+			if ((cuentaSegregada != null)) {
+				throw new CuentaExistenteException();
+			}
+			
+			em.persist(cuenta);	
+			
+		}else {
+			throw new UserNoAdminException();
+		}
 		
-		em.persist(cuenta);
-		em.persist(cuentaSegregada);
 	}
 
 	@Override
