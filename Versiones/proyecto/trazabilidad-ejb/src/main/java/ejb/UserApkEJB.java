@@ -75,7 +75,7 @@ public class UserApkEJB implements GestionUserApk {
 		if(userEntity == null) {
 			throw new UserNoEncontradoException();
 		} else {
-			if(user.hashCode() == userEntity.hashCode()) {
+			if(user.getPassword().hashCode() == userEntity.getPassword().hashCode()) {
 				ok = true;
 			} else {
 				throw new UserBadPasswordException();
