@@ -13,6 +13,7 @@ import es.uma.informatica.sii.anotaciones.Requisitos;
 import exceptions.ClienteExistenteException;
 import exceptions.ProyectoException;
 import exceptions.UserAsociadoNoExistenteException;
+import exceptions.UserBadPasswordException;
 import exceptions.UserExistenteException;
 import exceptions.UserNoAdminException;
 import exceptions.UserNoEncontradoException;
@@ -203,6 +204,48 @@ public class TestUserApk {
 			assertEquals(5, UserExistentes.size());
 		} catch (UserExistenteException e) {
 			fail("Lanzó excepción al insertar");
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al insertar"); 
+		}
+	}
+	
+	@Test
+	public void testIniciarSesion() throws ProyectoException {
+		List<UserApk> users = gestionUser.obtenerUser();
+		UserApk u = users.get(0);
+		
+		try {
+			gestionUser.iniciarSesion(u);
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al insertar"); 
+		}
+	}
+	
+	@Test
+	public void testIniciarSesionUserNoExistente() throws ProyectoException {
+		List<UserApk> users = gestionUser.obtenerUser();
+		UserApk u = users.get(0);
+		u.setUser("U");
+		
+		try {
+			gestionUser.iniciarSesion(u);
+		} catch (UserNoEncontradoException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al insertar"); 
+		}
+	}
+	
+	@Test
+	public void testIniciarSesionBadPassword() throws ProyectoException {
+		List<UserApk> users = gestionUser.obtenerUser();
+		UserApk u = users.get(0);
+		u.setPassword("Password");
+		
+		try {
+			gestionUser.iniciarSesion(u);
+		} catch (UserBadPasswordException e) {
+			// OK
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al insertar"); 
 		}

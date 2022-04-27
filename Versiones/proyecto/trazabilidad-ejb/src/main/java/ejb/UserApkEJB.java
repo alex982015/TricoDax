@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import exceptions.ProyectoException;
 import exceptions.UserAsociadoNoExistenteException;
+import exceptions.UserBadPasswordException;
 import exceptions.UserExistenteException;
 import exceptions.UserNoAdminException;
 import exceptions.UserNoEncontradoException;
@@ -33,7 +34,6 @@ public class UserApkEJB implements GestionUserApk {
 			
 		em.persist(user);
 	}
-    
 	
     @Override
 	public void insertarUserIndividual(UserApk user) throws ProyectoException {
@@ -67,6 +67,24 @@ public class UserApkEJB implements GestionUserApk {
 		em.persist(user);
 	}
 
+    @Override
+	public boolean iniciarSesion(UserApk user) throws ProyectoException {
+		UserApk userEntity = em.find(UserApk.class, user.getUser());
+		boolean ok = false;
+		
+		if(userEntity == null) {
+			throw new UserNoEncontradoException();
+		} else {
+			if(user.hashCode() == userEntity.hashCode()) {
+				ok = true;
+			} else {
+				throw new UserBadPasswordException();
+			}
+		}
+		
+		return ok;
+	}
+    
 	@Override
 	public List<UserApk> obtenerUser() throws ProyectoException {
 		TypedQuery<UserApk> query = em.createQuery("SELECT u FROM UserApk u", UserApk.class);
@@ -125,6 +143,5 @@ public class UserApkEJB implements GestionUserApk {
 		}
 		
 		return ok;
-	}
-   
+	}   
 }
