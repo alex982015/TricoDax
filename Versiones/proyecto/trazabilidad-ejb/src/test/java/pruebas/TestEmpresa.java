@@ -48,7 +48,7 @@ public class TestEmpresa {
 	
 	@Requisitos({"RF2"}) 
 	@Test
-	public void testInsertarEmpresa() {
+	public void testInsertarEmpresa() throws ProyectoException {
 		final Empresa empresa = new Empresa ("RazonSocial S.L.", false);
 		empresa.setIdent(53636734);
 		empresa.setTipo_cliente("Indiv");
@@ -59,12 +59,83 @@ public class TestEmpresa {
 		empresa.setCodPostal(32453);
 		empresa.setPais("España");
 		
+		List<UserApk> user = gestionUserApk.obtenerUser();
+		UserApk u = user.get(0);
+		u.setAdministrativo(true);
+		
 		try {
-			gestionEmpresa.insertarEmpresa(empresa);
-			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
-			assertEquals(4, empresas.size());
+			gestionEmpresa.insertarEmpresa(u, empresa);
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al insertar"); 
+		}
+	}
+	
+	@Requisitos({"RF2"}) 
+	@Test
+	public void testInsertarEmpresaYaExistente() throws ProyectoException {
+		List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
+		Empresa empresa = empresas.get(0);
+		
+		List<UserApk> user = gestionUserApk.obtenerUser();
+		UserApk u = user.get(0);
+		u.setAdministrativo(true);
+		
+		try {
+			gestionEmpresa.insertarEmpresa(u, empresa);
 		} catch (ClienteExistenteException e) {
-			fail("Lanzó excepción al insertar");
+			// OK
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al insertar"); 
+		}
+	}
+	
+	@Requisitos({"RF2"}) 
+	@Test
+	public void testInsertarEmpresaNoAdmin() throws ProyectoException {
+		final Empresa empresa = new Empresa ("RazonSocial S.L.", false);
+		empresa.setIdent(53636734);
+		empresa.setTipo_cliente("Indiv");
+		empresa.setEstado(true);
+		empresa.setFecha_Alta(Date.valueOf("2021-04-11"));
+		empresa.setDireccion("Calle Ejemplo 231");
+		empresa.setCiudad("Mallorca");
+		empresa.setCodPostal(32453);
+		empresa.setPais("España");
+		
+		List<UserApk> user = gestionUserApk.obtenerUser();
+		UserApk u = user.get(0);
+		u.setAdministrativo(false);
+		
+		try {
+			gestionEmpresa.insertarEmpresa(u, empresa);
+		} catch (UserNoAdminException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al insertar"); 
+		}
+	}
+	
+	@Requisitos({"RF2"}) 
+	@Test
+	public void testInsertarEmpresaUserNoEncontrado() throws ProyectoException {
+		final Empresa empresa = new Empresa ("RazonSocial S.L.", false);
+		empresa.setIdent(53636734);
+		empresa.setTipo_cliente("Indiv");
+		empresa.setEstado(true);
+		empresa.setFecha_Alta(Date.valueOf("2021-04-11"));
+		empresa.setDireccion("Calle Ejemplo 231");
+		empresa.setCiudad("Mallorca");
+		empresa.setCodPostal(32453);
+		empresa.setPais("España");
+		
+		List<UserApk> user = gestionUserApk.obtenerUser();
+		UserApk u = user.get(0);
+		u.setUser("U");
+		
+		try {
+			gestionEmpresa.insertarEmpresa(u, empresa);
+		} catch (UserNoEncontradoException e) {
+			// OK
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al insertar"); 
 		}
@@ -72,7 +143,7 @@ public class TestEmpresa {
 	
 	@Requisitos({"RF3"})
 	@Test
-	public void testActualizarEmpresa() {
+	public void testActualizarEmpresa() throws ProyectoException {
 		List<CuentaFintech> cuentas = new ArrayList<CuentaFintech>();
 		
 		final long nuevaIdent = 1234L;
@@ -87,6 +158,10 @@ public class TestEmpresa {
 		final List<CuentaFintech> nuevasCuentas = cuentas;
 		
 		final String nuevaRazon= "RazonSocial2 S.L.";
+		
+		List<UserApk> user = gestionUserApk.obtenerUser();
+		UserApk u = user.get(0);
+		u.setAdministrativo(true);
 		
 		try {
 			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
@@ -105,8 +180,56 @@ public class TestEmpresa {
 			
 			e.setRazonSocial(nuevaRazon);
 			
-			gestionEmpresa.actualizarEmpresa(e);
+			gestionEmpresa.actualizarEmpresa(u,e);
 
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al actualizar");
+		}
+	}
+	
+	@Requisitos({"RF3"})
+	@Test
+	public void testActualizarEmpresaNoAdmin() throws ProyectoException {
+		List<CuentaFintech> cuentas = new ArrayList<CuentaFintech>();
+		
+		final long nuevaIdent = 1234L;
+		final String nuevoTipoCliente = "2020-01-01";
+		final boolean nuevoEstado = true;
+		final Date nuevaFechaAlta = Date.valueOf("2020-01-01");
+		final Date nuevaFechaBaja = null;
+		final String nuevaDireccion = "Carne pruebas 123";
+		final String nuevaCiudad = "Ciudad test";
+		final int nuevoCodPostal = 12345;
+		final String nuevoPais = "España";
+		final List<CuentaFintech> nuevasCuentas = cuentas;
+		
+		final String nuevaRazon= "RazonSocial2 S.L.";
+		
+		List<UserApk> user = gestionUserApk.obtenerUser();
+		UserApk u = user.get(0);
+		u.setAdministrativo(false);
+		
+		try {
+			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
+			Empresa e = empresas.get(0);
+			
+			e.setIdent(nuevaIdent);
+			e.setTipo_cliente(nuevoTipoCliente);
+			e.setEstado(nuevoEstado);
+			e.setFecha_Alta(nuevaFechaAlta);
+			e.setFecha_Baja(nuevaFechaBaja);
+			e.setDireccion(nuevaDireccion);
+			e.setCiudad(nuevaCiudad);
+			e.setCodPostal(nuevoCodPostal);
+			e.setPais(nuevoPais);
+			e.setCuentas(nuevasCuentas);
+			
+			e.setRazonSocial(nuevaRazon);
+			
+			gestionEmpresa.actualizarEmpresa(u,e);
+
+		} catch (UserNoAdminException e) {
+			// OK
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al actualizar");
 		}
@@ -114,7 +237,55 @@ public class TestEmpresa {
 
 	@Requisitos({"RF3"})
 	@Test
-	public void testActualizarEmpresaSegregadaAsociada() throws ProyectoException {
+	public void testActualizarEmpresaUserNoEncontrado() throws ProyectoException {
+		List<CuentaFintech> cuentas = new ArrayList<CuentaFintech>();
+		
+		final long nuevaIdent = 1234L;
+		final String nuevoTipoCliente = "2020-01-01";
+		final boolean nuevoEstado = true;
+		final Date nuevaFechaAlta = Date.valueOf("2020-01-01");
+		final Date nuevaFechaBaja = null;
+		final String nuevaDireccion = "Carne pruebas 123";
+		final String nuevaCiudad = "Ciudad test";
+		final int nuevoCodPostal = 12345;
+		final String nuevoPais = "España";
+		final List<CuentaFintech> nuevasCuentas = cuentas;
+		
+		final String nuevaRazon= "RazonSocial2 S.L.";
+		
+		List<UserApk> user = gestionUserApk.obtenerUser();
+		UserApk u = user.get(0);
+		u.setUser("U");
+		
+		try {
+			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
+			Empresa e = empresas.get(0);
+			
+			e.setIdent(nuevaIdent);
+			e.setTipo_cliente(nuevoTipoCliente);
+			e.setEstado(nuevoEstado);
+			e.setFecha_Alta(nuevaFechaAlta);
+			e.setFecha_Baja(nuevaFechaBaja);
+			e.setDireccion(nuevaDireccion);
+			e.setCiudad(nuevaCiudad);
+			e.setCodPostal(nuevoCodPostal);
+			e.setPais(nuevoPais);
+			e.setCuentas(nuevasCuentas);
+			
+			e.setRazonSocial(nuevaRazon);
+			
+			gestionEmpresa.actualizarEmpresa(u,e);
+
+		} catch (UserNoEncontradoException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al actualizar");
+		}
+	}
+	
+	@Requisitos({"RF3"})
+	@Test
+	public void testActualizarEmpresaSegregadaYaAsociada() throws ProyectoException {
 		final long nuevaIdent = 1234L;
 		final String nuevoTipoCliente = "2020-01-01";
 		final boolean nuevoEstado = true;
@@ -132,6 +303,10 @@ public class TestEmpresa {
 		
 		final String nuevaRazon= "RazonSocial2 S.L.";
 		
+		List<UserApk> user = gestionUserApk.obtenerUser();
+		UserApk u = user.get(0);
+		u.setAdministrativo(true);
+		
 		try {
 			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
 			Empresa e = empresas.get(0);
@@ -149,7 +324,7 @@ public class TestEmpresa {
 			
 			e.setRazonSocial(nuevaRazon);
 			
-			gestionEmpresa.actualizarEmpresa(e);
+			gestionEmpresa.actualizarEmpresa(u,e);
 
 		} catch (CuentaSegregadaYaAsignadaException e) {
 			// OK
@@ -160,15 +335,19 @@ public class TestEmpresa {
 	
 	@Requisitos({"RF3"})
 	@Test
-	public void testActualizarEmpresaNoEncontrada() {
+	public void testActualizarEmpresaNoEncontrada() throws ProyectoException {
 		
 		final long ID = 10;
+		
+		List<UserApk> user = gestionUserApk.obtenerUser();
+		UserApk u = user.get(0);
+		u.setAdministrativo(true);
 		
 		try {
 			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
 			Empresa e = empresas.get(0);
 			e.setID(ID);
-			gestionEmpresa.actualizarEmpresa(e);
+			gestionEmpresa.actualizarEmpresa(u,e);
 			fail("Debería lanzar excepción de empresa no encontrada");
 		} catch (ClienteNoEncontradoException e) {
 			// OK
@@ -184,7 +363,11 @@ public class TestEmpresa {
 			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
 			Empresa e = empresas.get(1);
 		
-			gestionEmpresa.cerrarCuentaEmpresa(e);
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionEmpresa.cerrarCuentaEmpresa(u,e);
 
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al cerrar cuenta");
@@ -198,10 +381,35 @@ public class TestEmpresa {
 			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
 			Empresa e = empresas.get(0);
 			e.setID(10);
+			
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
 		
-			gestionEmpresa.cerrarCuentaEmpresa(e);
+			gestionEmpresa.cerrarCuentaEmpresa(u,e);
 
 		} catch (ClienteNoEncontradoException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al cerrar cuenta");
+		}
+	}
+
+	@Requisitos({"RF4"})
+	@Test
+	public void testCerrarCuentaEmpresaNoAdmin() {
+		try {
+			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
+			Empresa e = empresas.get(0);
+			e.setID(10);
+			
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(false);
+		
+			gestionEmpresa.cerrarCuentaEmpresa(u,e);
+
+		} catch (UserNoAdminException e) {
 			// OK
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al cerrar cuenta");
@@ -214,8 +422,12 @@ public class TestEmpresa {
 		try {
 			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
 			Empresa e = empresas.get(0);
-		
-			gestionEmpresa.cerrarCuentaEmpresa(e);
+
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionEmpresa.cerrarCuentaEmpresa(u,e);
 
 		} catch (NoBajaClienteException e) {
 			// OK
@@ -274,7 +486,7 @@ public class TestEmpresa {
 	}
 	
 	@Test
-	public void testBloquearUserApkNoExistente() {
+	public void testBloquearCuentaEmpresaUserApkNoExistente() {
 		try {
 			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
 			Empresa e = empresas.get(0);
@@ -294,7 +506,7 @@ public class TestEmpresa {
 	}
 	
 	@Test
-	public void testBloquearUserApkNoAdministrativo() {
+	public void testBloquearCuentaEmpresaUserApkNoAdministrativo() {
 		try {
 			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
 			Empresa e = empresas.get(0);
@@ -317,7 +529,12 @@ public class TestEmpresa {
 		try {
 			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
 			Empresa empresa = empresas.get(0);
-			gestionEmpresa.eliminarEmpresa(empresa);
+			
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionEmpresa.eliminarEmpresa(u,empresa);
 			
 			List<Empresa> e = gestionEmpresa.obtenerEmpresas();
 			assertEquals(2, e.size());
@@ -333,7 +550,11 @@ public class TestEmpresa {
 			Empresa empresa = empresas.get(0);
 			empresa.setID(12);
 			
-			gestionEmpresa.eliminarEmpresa(empresa);
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionEmpresa.eliminarEmpresa(u,empresa);
 			fail("Debería lanzar la excepción de empresa no encontrada");
 		} catch (ClienteNoEncontradoException e) {
 			// OK
@@ -343,11 +564,52 @@ public class TestEmpresa {
 	}
 	
 	@Test
+	public void testEliminarEmpresaNoAdmin() {
+		try {
+			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
+			Empresa empresa = empresas.get(0);
+			empresa.setID(12);
+			
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(false);
+			
+			gestionEmpresa.eliminarEmpresa(u,empresa);
+			fail("Debería lanzar la excepción de empresa no encontrada");
+		} catch (UserNoAdminException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Debería lanzar la excepción de empresa no encontrada");
+		}
+	}
+	
+	@Test
 	public void testEliminarTodasEmpresas() {
 		try {
-			gestionEmpresa.eliminarTodasEmpresas();
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionEmpresa.eliminarTodasEmpresas(u);
 			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
 			assertEquals(0, empresas.size());
+		} catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
+		}
+	}
+	
+	@Test
+	public void testEliminarTodasEmpresasNoAdmin() {
+		try {
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(false);
+			
+			gestionEmpresa.eliminarTodasEmpresas(u);
+			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
+			assertEquals(0, empresas.size());
+		} catch (UserNoAdminException e) {
+			// OK
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
 		}
