@@ -237,6 +237,7 @@ public class TestSegregada {
 	
 	/******** TEST ADICIONALES *********/
 	
+	@Requisitos({"RF ADICIONAL SEGREGADA"})
 	@Test
 	public void testObtenerSegregada() {
 		try {
@@ -247,6 +248,7 @@ public class TestSegregada {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL SEGREGADA"})
 	@Test
 	public void testActualizarSegregada() {
 
@@ -264,6 +266,7 @@ public class TestSegregada {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL SEGREGADA"})
 	@Test
 	public void testActualizarSegregadaNoEncontrada() {
 		final long IBAN = 455833218;
@@ -286,6 +289,7 @@ public class TestSegregada {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL SEGREGADA"})
 	@Test
 	public void testActualizarSegregadaUserNoEncontrado() {
 		final long IBAN = 455833218;
@@ -308,6 +312,7 @@ public class TestSegregada {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL SEGREGADA"})
 	@Test
 	public void testEliminarSegregada() {
 		try {
@@ -327,6 +332,7 @@ public class TestSegregada {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL SEGREGADA"})
 	@Test
 	public void testEliminarSegregadaNoEncontrado() {
 		
@@ -348,6 +354,7 @@ public class TestSegregada {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL SEGREGADA"})
 	@Test
 	public void testEliminarSegregadaNoAdmin() {
 		
@@ -369,6 +376,7 @@ public class TestSegregada {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL SEGREGADA"})
 	@Test
 	public void testEliminarSegregadaUserNoEncontrado() {
 		
@@ -390,6 +398,7 @@ public class TestSegregada {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL SEGREGADA"})
 	@Test
 	public void testEliminarTodasSegregada() {
 		
@@ -406,6 +415,7 @@ public class TestSegregada {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL SEGREGADA"})
 	@Test
 	public void testEliminarTodasSegregadaNoAdmin() {
 		

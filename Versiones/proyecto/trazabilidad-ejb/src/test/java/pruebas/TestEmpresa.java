@@ -438,6 +438,7 @@ public class TestEmpresa {
 	
 	/******** TEST ADICIONALES *********/	
 	
+	@Requisitos({"RF ADICIONAL EMPRESA"})
 	@Test
 	public void testObtenerEmpresas() {
 		try {
@@ -448,6 +449,7 @@ public class TestEmpresa {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL EMPRESA"})
 	@Test
 	public void testBloquearCuentaEmpresa() {
 		try {
@@ -465,6 +467,7 @@ public class TestEmpresa {
 		}
 	}	
 
+	@Requisitos({"RF ADICIONAL EMPRESA"})
 	@Test
 	public void testBloquearCuentaEmpresaNoExistente() {
 		try {
@@ -485,6 +488,7 @@ public class TestEmpresa {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL EMPRESA"})
 	@Test
 	public void testBloquearCuentaEmpresaUserApkNoExistente() {
 		try {
@@ -505,6 +509,7 @@ public class TestEmpresa {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL EMPRESA"})
 	@Test
 	public void testBloquearCuentaEmpresaUserApkNoAdministrativo() {
 		try {
@@ -524,6 +529,7 @@ public class TestEmpresa {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL EMPRESA"})
 	@Test
 	public void testEliminarEmpresa() {
 		try {
@@ -543,6 +549,7 @@ public class TestEmpresa {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL EMPRESA"})
 	@Test
 	public void testEliminarEmpresaNoEncontrada() {
 		try {
@@ -563,6 +570,7 @@ public class TestEmpresa {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL EMPRESA"})
 	@Test
 	public void testEliminarEmpresaNoAdmin() {
 		try {
@@ -583,6 +591,7 @@ public class TestEmpresa {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL EMPRESA"})
 	@Test
 	public void testEliminarTodasEmpresas() {
 		try {
@@ -598,6 +607,7 @@ public class TestEmpresa {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL EMPRESA"})
 	@Test
 	public void testEliminarTodasEmpresasNoAdmin() {
 		try {

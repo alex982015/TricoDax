@@ -427,6 +427,7 @@ public class TestIndiv {
 	
 	/******** TEST ADICIONALES *********/
 	
+	@Requisitos({"RF ADICIONAL INDIV"})
 	@Test
 	public void testObtenerIndiv() {
 		try {
@@ -437,6 +438,7 @@ public class TestIndiv {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL INDIV"})
 	@Test
 	public void testEliminarIndiv() {
 		try {
@@ -456,6 +458,7 @@ public class TestIndiv {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL INDIV"})
 	@Test
 	public void testEliminarIndivNoEncontrado() {
 		try {
@@ -476,6 +479,7 @@ public class TestIndiv {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL INDIV"})
 	@Test
 	public void testEliminarIndivNoAdmin() {
 		try {
@@ -496,6 +500,7 @@ public class TestIndiv {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL INDIV"})
 	@Test
 	public void testEliminarTodosIndiv() {
 		try {
@@ -511,6 +516,7 @@ public class TestIndiv {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL INDIV"})
 	@Test
 	public void testEliminarTodosIndivNoAdmin() {
 		try {

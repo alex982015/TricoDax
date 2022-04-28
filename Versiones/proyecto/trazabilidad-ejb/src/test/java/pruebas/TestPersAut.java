@@ -109,8 +109,6 @@ public class TestPersAut {
 	@Requisitos({"RF7"})
 	@Test
 	public void testActualizarPersAutNoAdmin() {
-		final long ID = 3;
-		
 		try {
 			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
 			PersAut p = persAut.get(0);
@@ -498,6 +496,7 @@ public class TestPersAut {
 
 	/******** TEST ADICIONALES *********/
 
+	@Requisitos({"RF ADICIONAL PERSAUT"})
 	@Test
 	public void testInsertarPersAut() throws ProyectoException {
 		final PersAut persAut = new PersAut (123, "Nombre1", "Apellidos1", "Direccion1", Date.valueOf("2000-12-12"), true, Date.valueOf("2022-04-01"), null, false);
@@ -514,6 +513,7 @@ public class TestPersAut {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL PERSAUT"})
 	@Test
 	public void testInsertarPersAutYaExistente() throws ProyectoException {
 		List<PersAut> autorizados = gestionPersAut.obtenerPersAut();
@@ -532,6 +532,7 @@ public class TestPersAut {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL PERSAUT"})
 	@Test
 	public void testInsertarPersAutNoAdmin() throws ProyectoException {
 		List<PersAut> autorizados = gestionPersAut.obtenerPersAut();
@@ -550,6 +551,7 @@ public class TestPersAut {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL PERSAUT"})
 	@Test
 	public void testObtenerPersAut() {
 		try {
@@ -560,6 +562,7 @@ public class TestPersAut {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL PERSAUT"})
 	@Test
 	public void testEliminarPersAut() {
 		try {
@@ -579,6 +582,7 @@ public class TestPersAut {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL PERSAUT"})
 	@Test
 	public void testEliminarPersAutNoEncontrada() {
 		try {
@@ -599,6 +603,7 @@ public class TestPersAut {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL PERSAUT"})
 	@Test
 	public void testEliminarPersAutNoAdmin() {
 		try {
@@ -619,6 +624,7 @@ public class TestPersAut {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL PERSAUT"})
 	@Test
 	public void testEliminarTodasPersAut() {
 		try {
@@ -635,6 +641,7 @@ public class TestPersAut {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL PERSAUT"})
 	@Test
 	public void testEliminarTodasPersAutNoAdmin() {
 		try {

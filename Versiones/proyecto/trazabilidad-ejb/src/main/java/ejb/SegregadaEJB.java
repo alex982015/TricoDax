@@ -26,22 +26,21 @@ public class SegregadaEJB extends CuentaFintechEJB implements GestionSegregada{
 		UserApk userApkEntity = em.find(UserApk.class, user.getUser());
 		if(userApkEntity == null) {
 			throw new UserNoEncontradoException();
-		}
-		
-		if(user.isAdministrativo()) {
-			
-			Segregada cuentaSegregada = em.find(Segregada.class, cuenta.getIBAN());
-			
-			if ((cuentaSegregada != null)) {
-				throw new CuentaExistenteException();
+		} else {
+			if(user.isAdministrativo()) {
+				
+				Segregada cuentaSegregada = em.find(Segregada.class, cuenta.getIBAN());
+				
+				if ((cuentaSegregada != null)) {
+					throw new CuentaExistenteException();
+				}
+				
+				em.persist(cuenta);	
+				
+			}else {
+				throw new UserNoAdminException();
 			}
-			
-			em.persist(cuenta);	
-			
-		}else {
-			throw new UserNoAdminException();
-		}
-		
+		}	
 	}
 
 	@Override
@@ -55,20 +54,20 @@ public class SegregadaEJB extends CuentaFintechEJB implements GestionSegregada{
 		UserApk userApkEntity = em.find(UserApk.class, user.getUser());
 		if(userApkEntity == null) {
 			throw new UserNoEncontradoException();
-		}
-		
-		if(user.isAdministrativo()) {
-			Segregada cuentaEntity = em.find(Segregada.class, cuenta.getIBAN());
-			if (cuentaEntity == null) {
-				throw new CuentaNoEncontradoException();
-			}
-			
-			cuentaEntity.setSwift(cuenta.getSwift());
-			cuentaEntity.setComision(cuenta.getComision());
-			
-			em.merge(cuentaEntity);	
 		} else {
-			throw new UserNoAdminException();
+			if(user.isAdministrativo()) {
+				Segregada cuentaEntity = em.find(Segregada.class, cuenta.getIBAN());
+				if (cuentaEntity == null) {
+					throw new CuentaNoEncontradoException();
+				}
+				
+				cuentaEntity.setSwift(cuenta.getSwift());
+				cuentaEntity.setComision(cuenta.getComision());
+				
+				em.merge(cuentaEntity);	
+			} else {
+				throw new UserNoAdminException();
+			}
 		}
 	}
 	
@@ -77,21 +76,21 @@ public class SegregadaEJB extends CuentaFintechEJB implements GestionSegregada{
 		UserApk userApkEntity = em.find(UserApk.class, user.getUser());
 		if(userApkEntity == null) {
 			throw new UserNoEncontradoException();
-		}
-		
-		if(user.isAdministrativo()) {
-			Segregada cuentaEntity = em.find(Segregada.class, cuenta.getIBAN());
-			if (cuentaEntity == null) {
-				throw new CuentaNoEncontradoException();
-			}
-			
-			if(!(cuenta.getReferenciada().getSaldo() > 0)) {
-				cuentaEntity.setEstado(false);
-			} else {
-				throw new CuentaConSaldoException();
-			}
 		} else {
-			throw new UserNoAdminException();
+			if(user.isAdministrativo()) {
+				Segregada cuentaEntity = em.find(Segregada.class, cuenta.getIBAN());
+				if (cuentaEntity == null) {
+					throw new CuentaNoEncontradoException();
+				}
+				
+				if(!(cuenta.getReferenciada().getSaldo() > 0)) {
+					cuentaEntity.setEstado(false);
+				} else {
+					throw new CuentaConSaldoException();
+				}
+			} else {
+				throw new UserNoAdminException();
+			}
 		}
 	}
 
@@ -100,17 +99,17 @@ public class SegregadaEJB extends CuentaFintechEJB implements GestionSegregada{
 		UserApk userApkEntity = em.find(UserApk.class, user.getUser());
 		if(userApkEntity == null) {
 			throw new UserNoEncontradoException();
-		}
-		
-		if(user.isAdministrativo()) {
-			Segregada segregadaEntity = em.find(Segregada.class, cuenta.getIBAN());
-			
-			if (segregadaEntity == null) {
-				throw new CuentaNoEncontradoException();
-			}
-			em.remove(segregadaEntity);
 		} else {
-			throw new UserNoAdminException();
+			if(user.isAdministrativo()) {
+				Segregada segregadaEntity = em.find(Segregada.class, cuenta.getIBAN());
+				
+				if (segregadaEntity == null) {
+					throw new CuentaNoEncontradoException();
+				}
+				em.remove(segregadaEntity);
+			} else {
+				throw new UserNoAdminException();
+			}
 		}
 	}
 
@@ -119,21 +118,21 @@ public class SegregadaEJB extends CuentaFintechEJB implements GestionSegregada{
 		UserApk userApkEntity = em.find(UserApk.class, user.getUser());
 		if(userApkEntity == null) {
 			throw new UserNoEncontradoException();
-		}
-		
-		if(user.isAdministrativo()) {
-			List<Segregada> cuentas = obtenerSegregada();
-			
-			for (Segregada e : cuentas) {
-				Cuenta cuentaEntity = em.find(Cuenta.class, e.getIBAN());
-				em.remove(cuentaEntity);
-			}
-			
-			for (Segregada e : cuentas) {
-				em.remove(e);
-			}	
 		} else {
-			throw new UserNoAdminException();
+			if(user.isAdministrativo()) {
+				List<Segregada> cuentas = obtenerSegregada();
+				
+				for (Segregada e : cuentas) {
+					Cuenta cuentaEntity = em.find(Cuenta.class, e.getIBAN());
+					em.remove(cuentaEntity);
+				}
+				
+				for (Segregada e : cuentas) {
+					em.remove(e);
+				}	
+			} else {
+				throw new UserNoAdminException();
+			}
 		}		
 	}
 

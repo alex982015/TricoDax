@@ -27,15 +27,15 @@ public class Cliente implements Serializable {
 	@Column(name="IDENT", nullable = false) 
 	private long Ident;
 	@Column(name="TIPOCLIENTE", nullable = false) 
-	private String tipo_cliente;
+	private String tipoCliente;
 	@Column(name="ESTADO", nullable = false)
 	private boolean estado;
 	@Column(name="FECHAALTA", nullable = false) @Temporal(TemporalType.DATE)
-	private Date Fecha_Alta;
+	private Date fechaAlta;
 	@Column(name="FECHABAJA") @Temporal(TemporalType.DATE)
-	private Date Fecha_Baja;
+	private Date fechaBaja;
 	@Column(name="DIRECCION", nullable = false) 
-	private String Direccion;
+	private String direccion;
 	@Column(name="CIUDAD", nullable = false) 
 	private String Ciudad;
 	@Column(name="CODPOSTAL", nullable = false) 
@@ -56,10 +56,10 @@ public class Cliente implements Serializable {
 			String ciudad, int codPostal, String pais) {
 
 		this.Ident = ident;
-		this.tipo_cliente = tipo_cliente;
+		this.tipoCliente = tipo_cliente;
 		this.estado = estado;
-		this.Fecha_Alta = fecha_Alta;
-		this.Direccion = direccion;
+		this.fechaAlta = fecha_Alta;
+		this.direccion = direccion;
 		this.Ciudad = ciudad;
 		this.CodPostal = codPostal;
 		this.Pais = pais;
@@ -70,11 +70,11 @@ public class Cliente implements Serializable {
 			String ciudad, int codPostal, String pais) {
 
 		this.Ident = ident;
-		this.tipo_cliente = tipo_cliente;
+		this.tipoCliente = tipo_cliente;
 		this.estado = estado;
-		this.Fecha_Alta = fecha_Alta;
-		this.Fecha_Baja=fecha_Baja;
-		this.Direccion = direccion;
+		this.fechaAlta = fecha_Alta;
+		this.fechaBaja=fecha_Baja;
+		this.direccion = direccion;
 		this.Ciudad = ciudad;
 		this.CodPostal = codPostal;
 		this.Pais = pais;
@@ -100,11 +100,11 @@ public class Cliente implements Serializable {
 	}
 
 	public String getTipo_cliente() {
-		return tipo_cliente;
+		return tipoCliente;
 	}
 
 	public void setTipo_cliente(String tipo_cliente) {
-		this.tipo_cliente = tipo_cliente;
+		this.tipoCliente = tipo_cliente;
 	}
 
 	public boolean isEstado() {
@@ -116,27 +116,27 @@ public class Cliente implements Serializable {
 	}
 
 	public Date getFecha_Alta() {
-		return Fecha_Alta;
+		return fechaAlta;
 	}
 
 	public void setFecha_Alta(Date fecha_Alta) {
-		Fecha_Alta = fecha_Alta;
+		fechaAlta = fecha_Alta;
 	}
 
 	public Date getFecha_Baja() {
-		return Fecha_Baja;
+		return fechaBaja;
 	}
 
 	public void setFecha_Baja(Date fecha_Baja) {
-		Fecha_Baja = fecha_Baja;
+		fechaBaja = fecha_Baja;
 	}
 
 	public String getDireccion() {
-		return Direccion;
+		return direccion;
 	}
 
 	public void setDireccion(String direccion) {
-		Direccion = direccion;
+		this.direccion = direccion;
 	}
 
 	public String getCiudad() {
@@ -195,8 +195,8 @@ public class Cliente implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Cliente [ID=" + ID + ", Ident=" + Ident + ", tipo_cliente=" + tipo_cliente + ", estado=" + estado
-				+ ", Fecha_Alta=" + Fecha_Alta + ", Fecha_Baja=" + Fecha_Baja + ", Direccion=" + Direccion + ", Ciudad="
+		return "Cliente [ID=" + ID + ", Ident=" + Ident + ", tipo_cliente=" + tipoCliente + ", estado=" + estado
+				+ ", Fecha_Alta=" + fechaAlta + ", Fecha_Baja=" + fechaBaja + ", Direccion=" + direccion + ", Ciudad="
 				+ Ciudad + ", CodPostal=" + CodPostal + ", Pais=" + Pais + ", cuentas=" + cuentas + "]";
 	}
 	

@@ -26,17 +26,17 @@ public class DivisaEJB implements GestionDivisa {
 		
 		if (userExistente == null) {
 			throw new UserNoEncontradoException();
-		}
-		
-		if(user.isAdministrativo()) {
-			Divisa divisaExistente = em.find(Divisa.class, divisa.getAbreviatura());
-			if (divisaExistente != null) {
-				throw new DivisaExistenteException();
-			}
-			
-			em.persist(divisa);
 		} else {
-			throw new UserNoAdminException();
+			if(user.isAdministrativo()) {
+				Divisa divisaExistente = em.find(Divisa.class, divisa.getAbreviatura());
+				if (divisaExistente != null) {
+					throw new DivisaExistenteException();
+				}
+				
+				em.persist(divisa);
+			} else {
+				throw new UserNoAdminException();
+			}
 		}
 	}
 
@@ -52,22 +52,22 @@ public class DivisaEJB implements GestionDivisa {
 		
 		if (userExistente == null) {
 			throw new UserNoEncontradoException();
-		}
-		
-		if(user.isAdministrativo()) {
-			Divisa divisaEntity = em.find(Divisa.class, divisa.getAbreviatura());
-			if (divisaEntity == null) {
-				throw new DivisaNoEncontradaException();
-			}
-			
-			divisaEntity.setAbreviatura(divisa.getAbreviatura());
-			divisaEntity.setCambioEuro(divisa.getCambioEuro());
-			divisaEntity.setNombre(divisa.getNombre());
-			divisaEntity.setSimbolo(divisa.getSimbolo());
-		
-			em.merge(divisaEntity);
 		} else {
-			throw new UserNoAdminException();
+			if(user.isAdministrativo()) {
+				Divisa divisaEntity = em.find(Divisa.class, divisa.getAbreviatura());
+				if (divisaEntity == null) {
+					throw new DivisaNoEncontradaException();
+				}
+				
+				divisaEntity.setAbreviatura(divisa.getAbreviatura());
+				divisaEntity.setCambioEuro(divisa.getCambioEuro());
+				divisaEntity.setNombre(divisa.getNombre());
+				divisaEntity.setSimbolo(divisa.getSimbolo());
+			
+				em.merge(divisaEntity);
+			} else {
+				throw new UserNoAdminException();
+			}
 		}
 	}
 	
@@ -77,17 +77,17 @@ public class DivisaEJB implements GestionDivisa {
 		
 		if (userExistente == null) {
 			throw new UserNoEncontradoException();
-		}
-		
-		if(user.isAdministrativo()) {
-			Divisa divisaEntity = em.find(Divisa.class, divisa.getAbreviatura());
-			if (divisaEntity == null) {
-				throw new DivisaNoEncontradaException();
-			}
-			
-			em.remove(divisaEntity);
 		} else {
-			throw new UserNoAdminException();
+			if(user.isAdministrativo()) {
+				Divisa divisaEntity = em.find(Divisa.class, divisa.getAbreviatura());
+				if (divisaEntity == null) {
+					throw new DivisaNoEncontradaException();
+				}
+				
+				em.remove(divisaEntity);
+			} else {
+				throw new UserNoAdminException();
+			}
 		}
 	}
 
@@ -97,16 +97,16 @@ public class DivisaEJB implements GestionDivisa {
 		
 		if (userExistente == null) {
 			throw new UserNoEncontradoException();
-		}
-		
-		if(user.isAdministrativo()) {
-			List<Divisa> divisas = obtenerDivisas();
-			
-			for (Divisa d : divisas) {
-				em.remove(d);
-			}
 		} else {
-			throw new UserNoAdminException();
+			if(user.isAdministrativo()) {
+				List<Divisa> divisas = obtenerDivisas();
+				
+				for (Divisa d : divisas) {
+					em.remove(d);
+				}
+			} else {
+				throw new UserNoAdminException();
+			}
 		}
 	}
 

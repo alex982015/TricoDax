@@ -34,18 +34,18 @@ public class EmpresaEJB implements GestionEmpresa {
 		
 		if (userExistente == null) {
 			throw new UserNoEncontradoException();
-		}
-		
-		if(user.isAdministrativo()) {
-			Empresa empresaExistente = em.find(Empresa.class, empresa.getID());
-
-			if (empresaExistente != null) {
-				throw new ClienteExistenteException();
-			}
-			
-			em.persist(empresa);
 		} else {
-			throw new UserNoAdminException();
+			if(user.isAdministrativo()) {
+				Empresa empresaExistente = em.find(Empresa.class, empresa.getID());
+
+				if (empresaExistente != null) {
+					throw new ClienteExistenteException();
+				}
+				
+				em.persist(empresa);
+			} else {
+				throw new UserNoAdminException();
+			}
 		}
 	}
 
@@ -61,61 +61,61 @@ public class EmpresaEJB implements GestionEmpresa {
 		
 		if (userExistente == null) {
 			throw new UserNoEncontradoException();
-		}
-		
-		if(user.isAdministrativo()) {
-			Empresa empresaEntity = em.find(Empresa.class, empresa.getID());
-			if (empresaEntity == null) {
-				throw new ClienteNoEncontradoException();
-			}
-			
-			empresaEntity.setCiudad(empresa.getCiudad());
-			empresaEntity.setCodPostal(empresa.getCodPostal());
-			empresaEntity.setCuentas(empresa.getCuentas());
-			empresaEntity.setFecha_Alta(empresa.getFecha_Alta());
-			empresaEntity.setDireccion(empresa.getDireccion());
-			empresaEntity.setIdent(empresa.getIdent());
-			empresaEntity.setPais(empresa.getPais());
-			empresaEntity.setTipo_cliente(empresa.getTipo_cliente());
-			empresaEntity.setFecha_Baja(empresa.getFecha_Baja());
-			
-			empresaEntity.setRazonSocial(empresa.getRazonSocial());
-			
-			TypedQuery<Segregada> query = em.createQuery("SELECT s FROM Segregada s", Segregada.class);
-			
-			for(Segregada s : query.getResultList()) {
-				for(CuentaFintech c : empresa.getCuentas()) {
-					if(s.getIBAN() == c.getIBAN()) {
-						throw new CuentaSegregadaYaAsignadaException();
-					} else {
-						empresaEntity.setCuentas(empresa.getCuentas());
+		} else {
+			if(user.isAdministrativo()) {
+				Empresa empresaEntity = em.find(Empresa.class, empresa.getID());
+				if (empresaEntity == null) {
+					throw new ClienteNoEncontradoException();
+				}
+				
+				empresaEntity.setCiudad(empresa.getCiudad());
+				empresaEntity.setCodPostal(empresa.getCodPostal());
+				empresaEntity.setCuentas(empresa.getCuentas());
+				empresaEntity.setFecha_Alta(empresa.getFecha_Alta());
+				empresaEntity.setDireccion(empresa.getDireccion());
+				empresaEntity.setIdent(empresa.getIdent());
+				empresaEntity.setPais(empresa.getPais());
+				empresaEntity.setTipo_cliente(empresa.getTipo_cliente());
+				empresaEntity.setFecha_Baja(empresa.getFecha_Baja());
+				
+				empresaEntity.setRazonSocial(empresa.getRazonSocial());
+				
+				TypedQuery<Segregada> query = em.createQuery("SELECT s FROM Segregada s", Segregada.class);
+				
+				for(Segregada s : query.getResultList()) {
+					for(CuentaFintech c : empresa.getCuentas()) {
+						if(s.getIBAN() == c.getIBAN()) {
+							throw new CuentaSegregadaYaAsignadaException();
+						} else {
+							empresaEntity.setCuentas(empresa.getCuentas());
+						}
 					}
 				}
+				
+				em.merge(empresaEntity);
+			} else {
+				throw new UserNoAdminException();
 			}
-			
-			em.merge(empresaEntity);
-		} else {
-			throw new UserNoAdminException();
 		}
 	}
 
 	@Override
 	public void bloquearCuentaEmpresa(UserApk user, Empresa empresa, boolean tipoBloqueo) throws ProyectoException {
-		Empresa empresaEntity = em.find(Empresa.class, empresa.getID());
-		if (empresaEntity == null) {
-			throw new CuentaNoEncontradoException();
-		}
-		
 		UserApk userApkEntity = em.find(UserApk.class, user.getUser());
 		if (userApkEntity == null) {
 			throw new UserNoEncontradoException();
-		}
-		
-		if(user.isAdministrativo()) {
-			empresaEntity.setBlock(tipoBloqueo);
-			em.merge(empresaEntity);
 		} else {
-			throw new UserNoAdminException();
+			Empresa empresaEntity = em.find(Empresa.class, empresa.getID());
+			if (empresaEntity == null) {
+				throw new CuentaNoEncontradoException();
+			}
+			
+			if(user.isAdministrativo()) {
+				empresaEntity.setBlock(tipoBloqueo);
+				em.merge(empresaEntity);
+			} else {
+				throw new UserNoAdminException();
+			}
 		}
 	}
 	
@@ -125,33 +125,33 @@ public class EmpresaEJB implements GestionEmpresa {
 		UserApk userApkEntity = em.find(UserApk.class, user.getUser());
 		if (userApkEntity == null) {
 			throw new UserNoEncontradoException();
-		}
-		
-		if(user.isAdministrativo()) {
-			Empresa empresaEntity = em.find(Empresa.class, empresa.getID());
-			
-			if (empresaEntity == null) {
-				throw new ClienteNoEncontradoException();
-			}
-			
-			List<CuentaFintech> cuentasEmpresa = empresaEntity.getCuentas();
-			boolean ok = false;
-			
-			for(CuentaFintech c : cuentasEmpresa) {
-				if(c.getEstado() == true) {
-					ok = true;
-				}
-			}
-			
-			if(!ok) {
-				empresaEntity.setEstado(ok);
-			} else {
-				throw new NoBajaClienteException();
-			}
-			
-			em.merge(empresaEntity);	
 		} else {
-			throw new UserNoAdminException();
+			if(user.isAdministrativo()) {
+				Empresa empresaEntity = em.find(Empresa.class, empresa.getID());
+				
+				if (empresaEntity == null) {
+					throw new ClienteNoEncontradoException();
+				}
+				
+				List<CuentaFintech> cuentasEmpresa = empresaEntity.getCuentas();
+				boolean ok = false;
+				
+				for(CuentaFintech c : cuentasEmpresa) {
+					if(c.getEstado() == true) {
+						ok = true;
+					}
+				}
+				
+				if(!ok) {
+					empresaEntity.setEstado(ok);
+				} else {
+					throw new NoBajaClienteException();
+				}
+				
+				em.merge(empresaEntity);	
+			} else {
+				throw new UserNoAdminException();
+			}
 		}
 	}
 
@@ -162,18 +162,18 @@ public class EmpresaEJB implements GestionEmpresa {
 		UserApk userApkEntity = em.find(UserApk.class, user.getUser());
 		if (userApkEntity == null) {
 			throw new UserNoEncontradoException();
-		}
-		
-		if(user.isAdministrativo()) {
-			Empresa empresaEntity = em.find(Empresa.class, empresa.getID());
-			
-			if (empresaEntity == null) {
-				throw new ClienteNoEncontradoException();
-			}
-			
-			em.remove(empresaEntity);	
 		} else {
-			throw new UserNoAdminException();
+			if(user.isAdministrativo()) {
+				Empresa empresaEntity = em.find(Empresa.class, empresa.getID());
+				
+				if (empresaEntity == null) {
+					throw new ClienteNoEncontradoException();
+				}
+				
+				em.remove(empresaEntity);	
+			} else {
+				throw new UserNoAdminException();
+			}
 		}
 	}
 
@@ -183,21 +183,21 @@ public class EmpresaEJB implements GestionEmpresa {
 		UserApk userApkEntity = em.find(UserApk.class, user.getUser());
 		if (userApkEntity == null) {
 			throw new UserNoEncontradoException();
-		}
-		
-		if(user.isAdministrativo()) {
-			List<Empresa> empresas = obtenerEmpresas();
-			
-			for (Empresa e : empresas) {
-				Cliente clienteEntity = em.find(Cliente.class, e.getID());
-				em.remove(clienteEntity);
-			}
-			
-			for (Empresa e : empresas) {
-				em.remove(e);
-			}
 		} else {
-			throw new UserNoAdminException();
+			if(user.isAdministrativo()) {
+				List<Empresa> empresas = obtenerEmpresas();
+				
+				for (Empresa e : empresas) {
+					Cliente clienteEntity = em.find(Cliente.class, e.getID());
+					em.remove(clienteEntity);
+				}
+				
+				for (Empresa e : empresas) {
+					em.remove(e);
+				}
+			} else {
+				throw new UserNoAdminException();
+			}
 		}
 	}
 

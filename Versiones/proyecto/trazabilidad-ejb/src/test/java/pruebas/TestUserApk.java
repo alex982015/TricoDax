@@ -2,6 +2,9 @@ package pruebas;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
 import org.junit.Before;
@@ -17,8 +20,10 @@ import exceptions.UserBadPasswordException;
 import exceptions.UserExistenteException;
 import exceptions.UserNoAdminException;
 import exceptions.UserNoEncontradoException;
+import jpa.Cliente;
 import jpa.Indiv;
 import jpa.PersAut;
+import jpa.Segregada;
 import jpa.UserApk;
 
 public class TestUserApk {
@@ -145,8 +150,73 @@ public class TestUserApk {
 		}
 	}
 	
+	@Requisitos({"RF11"})
+	@Test
+	public void testGenerarListaClientes() {
+		try {
+			List<UserApk> user = gestionUser.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			List<Cliente> clientes = gestionUser.generarListaClientes(u,"Nombre1","Apellido1","Calle Ejemplo 223",Date.valueOf("2020-08-25"),null);
+			assertEquals(1, clientes.size());
+		} catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
+		}
+	}
+	
+	@Requisitos({"RF11"})
+	@Test
+	public void testGenerarListaClientesNoAdmin() {
+		try {
+			List<UserApk> user = gestionUser.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(false);
+			
+			List<Cliente> clientes = gestionUser.generarListaClientes(u,"Nombre1","Apellido1","Calle Ejemplo 223",Date.valueOf("2020-08-25"),null);
+			assertEquals(1, clientes.size());
+		} catch (UserNoAdminException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
+		}
+	}
+	
+	@Requisitos({"RF11"})
+	@Test
+	public void testGenerarListaCuentas() {
+		try {
+			List<UserApk> user = gestionUser.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			List<Segregada> cuentas = gestionUser.generarListaCuentas(u, true, null);
+			assertEquals(1, cuentas.size());
+		} catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
+		}
+	}
+	
+	@Requisitos({"RF11"})
+	@Test
+	public void testGenerarListaCuentasNoAdmin() {
+		try {
+			List<UserApk> user = gestionUser.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(false);
+			
+			List<Segregada> cuentas = gestionUser.generarListaCuentas(u, true, null);
+			assertEquals(1, cuentas.size());
+		} catch (UserNoAdminException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
+		}
+	}
+	
 	/******** TEST ADICIONALES *********/
 
+	@Requisitos({"RF ADICIONAL USERAPK"})
 	@Test
 	public void testInsertarUserNoAdmin() throws ProyectoException {
 		final UserApk user = new UserApk("USUARIO", "1234", false);
@@ -164,6 +234,7 @@ public class TestUserApk {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL USERAPK"})
 	@Test
 	public void testInsertarUser() throws ProyectoException {
 		List<Indiv> particulares = gestionIndiv.obtenerIndiv();
@@ -187,6 +258,7 @@ public class TestUserApk {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL USERAPK"})
 	@Test
 	public void testInsertarUserYaExistente() throws ProyectoException {
 		List<Indiv> particulares = gestionIndiv.obtenerIndiv();
@@ -208,6 +280,7 @@ public class TestUserApk {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL USERAPK"})
 	@Test
 	public void testInsertarUserNoExistente() throws ProyectoException {
 		List<Indiv> particulares = gestionIndiv.obtenerIndiv();
@@ -229,6 +302,7 @@ public class TestUserApk {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL USERAPK"})
 	@Test
 	public void testInsertarUserAdmin() throws ProyectoException {
 		final UserApk user = new UserApk("USUARIO", "1234", true);
@@ -244,6 +318,7 @@ public class TestUserApk {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL USERAPK"})
 	@Test
 	public void testObtenerUser() {
 		try {
@@ -254,6 +329,7 @@ public class TestUserApk {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL USERAPK"})
 	@Test
 	public void testActualizarUser() throws ProyectoException {
 		final String nuevoPassword = "1235";
@@ -284,6 +360,7 @@ public class TestUserApk {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL USERAPK"})
 	@Test
 	public void testActualizarUserNoEncontrado() {
 		final String ID = "Smigle";
@@ -301,20 +378,24 @@ public class TestUserApk {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL USERAPK"})
 	@Test
 	public void testEliminarUser() {
 		
 		try {
 			List<UserApk> user = gestionUser.obtenerUser();
-			UserApk userExistente = user.get(0);
-			gestionUser.eliminarUser(userExistente);	
-			List<UserApk> u = gestionUser.obtenerUser();
-			assertEquals(3, u.size());
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionUser.eliminarUser(u);	
+			List<UserApk> users = gestionUser.obtenerUser();
+			assertEquals(3, users.size());
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL USERAPK"})
 	@Test
 	public void testEliminarTransNoEncontrada() {
 		
@@ -331,6 +412,7 @@ public class TestUserApk {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL USERAPK"})
 	@Test
 	public void testEliminarTodosUser() {
 		try {
@@ -340,5 +422,5 @@ public class TestUserApk {
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
 		}
-	}	
+	}
 }

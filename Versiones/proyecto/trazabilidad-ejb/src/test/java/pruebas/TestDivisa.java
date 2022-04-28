@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import ejb.GestionDivisa;
 import ejb.GestionUserApk;
+import es.uma.informatica.sii.anotaciones.Requisitos;
 import exceptions.DivisaExistenteException;
 import exceptions.DivisaNoEncontradaException;
 import exceptions.ProyectoException;
@@ -33,6 +34,7 @@ public class TestDivisa {
 
 	/******** TEST ADICIONALES *********/
 	
+	@Requisitos({"RF ADICIONAL DIVISA"})
 	@Test
 	public void testInsertarDivisa() throws ProyectoException {	
 		final Divisa divisa = new Divisa ("JPYII", "Yen japonés ii", "¥", 0.0080);
@@ -48,6 +50,7 @@ public class TestDivisa {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL DIVISA"})
 	@Test
 	public void testInsertarDivisaYaExistente() throws ProyectoException {	
 		List<Divisa> divisas = gestionDivisa.obtenerDivisas();
@@ -66,6 +69,7 @@ public class TestDivisa {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL DIVISA"})
 	@Test
 	public void testInsertarDivisaNoAdmin() throws ProyectoException {	
 		List<Divisa> divisas = gestionDivisa.obtenerDivisas();
@@ -84,6 +88,7 @@ public class TestDivisa {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL DIVISA"})
 	@Test
 	public void testObtenerDivisas() {
 		try {
@@ -94,6 +99,7 @@ public class TestDivisa {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL DIVISA"})
 	@Test
 	public void testActualizarDivisa() {
 		final String nuevaAbreb = "EUR";
@@ -122,6 +128,7 @@ public class TestDivisa {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL DIVISA"})
 	@Test
 	public void testActualizarDivisaNoEncontrada() {
 		
@@ -145,6 +152,7 @@ public class TestDivisa {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL DIVISA"})
 	@Test
 	public void testActualizarDivisaNoAdmin() {
 		
@@ -168,6 +176,7 @@ public class TestDivisa {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL DIVISA"})
 	@Test
 	public void testEliminarDivisa() {
 		try {
@@ -187,6 +196,7 @@ public class TestDivisa {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL DIVISA"})
 	@Test
 	public void testEliminarDivisaNoEncontrada() {
 		try {
@@ -207,6 +217,7 @@ public class TestDivisa {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL DIVISA"})
 	@Test
 	public void testEliminarDivisaNoAdmin() {
 		try {
@@ -227,6 +238,7 @@ public class TestDivisa {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL DIVISA"})
 	@Test
 	public void testEliminarTodasDivisas() {
 		try {
@@ -242,6 +254,7 @@ public class TestDivisa {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL DIVISA"})
 	@Test
 	public void testEliminarTodasDivisasNoAdmin() {
 		try {

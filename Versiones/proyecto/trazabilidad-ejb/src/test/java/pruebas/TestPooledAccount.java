@@ -467,6 +467,7 @@ public class TestPooledAccount {
 
 	/******** TEST ADICIONALES *********/
 	
+	@Requisitos({"RF ADICIONAL POOLEDACCOUNT"})
 	@Test
 	public void testObtenerPooledAccount() {
 		try {
@@ -477,6 +478,7 @@ public class TestPooledAccount {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL POOLEDACCOUNT"})
 	@Test
 	public void testActualizarPooledAccount() {
 		try {
@@ -493,6 +495,7 @@ public class TestPooledAccount {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL POOLEDACCOUNT"})
 	@Test
 	public void testActualizarPooledAccountNoEncontrada() {
 		final long IBAN = 455833218;
@@ -515,6 +518,7 @@ public class TestPooledAccount {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL POOLEDACCOUNT"})
 	@Test
 	public void testActualizarPooledAccountNoAdmin() {
 		final long IBAN = 455833218;
@@ -537,6 +541,7 @@ public class TestPooledAccount {
 		}
 	}
 
+	@Requisitos({"RF ADICIONAL POOLEDACCOUNT"})
 	@Test
 	public void testEliminarPooledAccount() {
 		try {
@@ -556,6 +561,7 @@ public class TestPooledAccount {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL POOLEDACCOUNT"})
 	@Test
 	public void testEliminarPooledAccountNoEncontrado() {
 		try {
@@ -576,6 +582,7 @@ public class TestPooledAccount {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL POOLEDACCOUNT"})
 	@Test
 	public void testEliminarPooledAccountNoAdmin() {
 		try {
@@ -596,6 +603,7 @@ public class TestPooledAccount {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL POOLEDACCOUNT"})
 	@Test
 	public void testEliminarTodasPooledAccount() {
 		try {
@@ -611,6 +619,7 @@ public class TestPooledAccount {
 		}
 	}
 	
+	@Requisitos({"RF ADICIONAL POOLEDACCOUNT"})
 	@Test
 	public void testEliminarTodasPooledAccountNoAdmin() {
 		try {

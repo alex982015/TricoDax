@@ -30,18 +30,18 @@ public class IndivEJB implements GestionIndiv {
 		UserApk userExistente = em.find(UserApk.class, user.getUser());
 		if (userExistente == null) {
 			throw new UserNoEncontradoException();
-		}
-		
-		if(user.isAdministrativo()) {
-			Indiv indivExistente = em.find(Indiv.class, indiv.getID());
-			
-			if (indivExistente != null) {
-				throw new ClienteExistenteException();
-			}
-			
-			em.persist(indiv);
 		} else {
-			throw new UserNoAdminException();
+			if(user.isAdministrativo()) {
+				Indiv indivExistente = em.find(Indiv.class, indiv.getID());
+				
+				if (indivExistente != null) {
+					throw new ClienteExistenteException();
+				}
+				
+				em.persist(indiv);
+			} else {
+				throw new UserNoAdminException();
+			}
 		}
 	}
 
@@ -57,42 +57,42 @@ public class IndivEJB implements GestionIndiv {
 		UserApk userEntity = em.find(UserApk.class, user.getUser());
 		if (userEntity == null) {
 			throw new UserNoEncontradoException();
-		}
-		
-		if(user.isAdministrativo()) {
-			Indiv indivEntity = em.find(Indiv.class, indiv.getID());
-			if (indivEntity == null) {
-				throw new ClienteNoEncontradoException();
-			}
-			
-			indivEntity.setNombre(indiv.getNombre());
-			indivEntity.setApellido(indiv.getApellido());
-			indivEntity.setFechaNac(indiv.getFechaNac());
-			indivEntity.setCiudad(indiv.getCiudad());
-			indivEntity.setCodPostal(indiv.getCodPostal());
-			indivEntity.setFecha_Alta(indiv.getFecha_Alta());
-			indivEntity.setDireccion(indiv.getDireccion());
-			indivEntity.setIdent(indiv.getIdent());
-			indivEntity.setPais(indiv.getPais());
-			indivEntity.setTipo_cliente(indiv.getTipo_cliente());
-			indivEntity.setFecha_Baja(indiv.getFecha_Baja());
-			indivEntity.setUsuarioApk(indiv.getUsuarioApk());
-			
-			TypedQuery<Segregada> query = em.createQuery("SELECT s FROM Segregada s", Segregada.class);
-			
-			for(Segregada s : query.getResultList()) {
-				for(CuentaFintech c : indiv.getCuentas()) {
-					if(s.getIBAN() == c.getIBAN()) {
-						throw new CuentaSegregadaYaAsignadaException();
-					} else {
-						indivEntity.setCuentas(indiv.getCuentas());
+		} else {
+			if(user.isAdministrativo()) {
+				Indiv indivEntity = em.find(Indiv.class, indiv.getID());
+				if (indivEntity == null) {
+					throw new ClienteNoEncontradoException();
+				}
+				
+				indivEntity.setNombre(indiv.getNombre());
+				indivEntity.setApellido(indiv.getApellido());
+				indivEntity.setFechaNac(indiv.getFechaNac());
+				indivEntity.setCiudad(indiv.getCiudad());
+				indivEntity.setCodPostal(indiv.getCodPostal());
+				indivEntity.setFecha_Alta(indiv.getFecha_Alta());
+				indivEntity.setDireccion(indiv.getDireccion());
+				indivEntity.setIdent(indiv.getIdent());
+				indivEntity.setPais(indiv.getPais());
+				indivEntity.setTipo_cliente(indiv.getTipo_cliente());
+				indivEntity.setFecha_Baja(indiv.getFecha_Baja());
+				indivEntity.setUsuarioApk(indiv.getUsuarioApk());
+				
+				TypedQuery<Segregada> query = em.createQuery("SELECT s FROM Segregada s", Segregada.class);
+				
+				for(Segregada s : query.getResultList()) {
+					for(CuentaFintech c : indiv.getCuentas()) {
+						if(s.getIBAN() == c.getIBAN()) {
+							throw new CuentaSegregadaYaAsignadaException();
+						} else {
+							indivEntity.setCuentas(indiv.getCuentas());
+						}
 					}
 				}
+				
+				em.merge(indivEntity);
+			} else {
+				throw new UserNoAdminException();
 			}
-			
-			em.merge(indivEntity);
-		} else {
-			throw new UserNoAdminException();
 		}
 	}
 	
@@ -102,33 +102,33 @@ public class IndivEJB implements GestionIndiv {
 		
 		if (userEntity == null) {
 			throw new UserNoEncontradoException();
-		}
-		
-		if(user.isAdministrativo()) {
-			Indiv indivEntity = em.find(Indiv.class, indiv.getID());
-			
-			if (indivEntity == null) {
-				throw new ClienteNoEncontradoException();
-			}
-			
-			List<CuentaFintech> cuentasEmpresa = indivEntity.getCuentas();
-			boolean ok = false;
-			
-			for(CuentaFintech c : cuentasEmpresa) {
-				if(c.getEstado() == true) {
-					ok = true;
-				}
-			}
-			
-			if(!ok) {
-				indivEntity.setEstado(ok);
-			} else {
-				throw new NoBajaClienteException();
-			}
-			
-			em.merge(indivEntity);
 		} else {
-			throw new UserNoAdminException();
+			if(user.isAdministrativo()) {
+				Indiv indivEntity = em.find(Indiv.class, indiv.getID());
+				
+				if (indivEntity == null) {
+					throw new ClienteNoEncontradoException();
+				}
+				
+				List<CuentaFintech> cuentasEmpresa = indivEntity.getCuentas();
+				boolean ok = false;
+				
+				for(CuentaFintech c : cuentasEmpresa) {
+					if(c.getEstado() == true) {
+						ok = true;
+					}
+				}
+				
+				if(!ok) {
+					indivEntity.setEstado(ok);
+				} else {
+					throw new NoBajaClienteException();
+				}
+				
+				em.merge(indivEntity);
+			} else {
+				throw new UserNoAdminException();
+			}	
 		}
 	}
 
@@ -139,20 +139,20 @@ public class IndivEJB implements GestionIndiv {
 		
 		if (userEntity == null) {
 			throw new UserNoEncontradoException();
-		}
-		
-		if(user.isAdministrativo()) {
-			
-			Indiv indivEntity = em.find(Indiv.class, indiv.getID());
-			
-			if (indivEntity == null) {
-				throw new ClienteNoEncontradoException();
-			}
-			
-			em.remove(indivEntity);
-
 		} else {
-			throw new UserNoAdminException();
+			if(user.isAdministrativo()) {
+				
+				Indiv indivEntity = em.find(Indiv.class, indiv.getID());
+				
+				if (indivEntity == null) {
+					throw new ClienteNoEncontradoException();
+				}
+				
+				em.remove(indivEntity);
+
+			} else {
+				throw new UserNoAdminException();
+			}
 		}
 	}
 
@@ -163,22 +163,22 @@ public class IndivEJB implements GestionIndiv {
 		
 		if (userEntity == null) {
 			throw new UserNoEncontradoException();
-		}
-		
-		if(user.isAdministrativo()) {
-			
-			List<Indiv> particulares = obtenerIndiv();
-			
-			for (Indiv i : particulares) {
-				Cliente clienteEntity = em.find(Cliente.class, i.getID());
-				em.remove(clienteEntity);
-			}
-			
-			for (Indiv i : particulares) {
-				em.remove(i);
-			}
 		} else {
-			throw new UserNoAdminException();
+			if(user.isAdministrativo()) {
+				
+				List<Indiv> particulares = obtenerIndiv();
+				
+				for (Indiv i : particulares) {
+					Cliente clienteEntity = em.find(Cliente.class, i.getID());
+					em.remove(clienteEntity);
+				}
+				
+				for (Indiv i : particulares) {
+					em.remove(i);
+				}
+			} else {
+				throw new UserNoAdminException();
+			}
 		}
 	}
 	
