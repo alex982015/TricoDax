@@ -359,7 +359,7 @@ public class TestIndiv {
 			gestionIndiv.cerrarCuentaIndiv(user, i);
 
 		} catch (ProyectoException e) {
-			fail("Lanzó excepción al cerrar cuenta");
+			fail("Lanzó excepción al cerrar cuenta Indiv");
 		}
 	}
 
@@ -380,7 +380,7 @@ public class TestIndiv {
 		} catch (ClienteNoEncontradoException e) {
 			// OK
 		} catch (ProyectoException e) {
-			fail("Lanzó excepción al cerrar cuenta");
+			fail("Lanzó excepción al cerrar cuenta Indiv");
 		}
 	}
 	
@@ -401,7 +401,7 @@ public class TestIndiv {
 		} catch (UserNoAdminException e) {
 			// OK
 		} catch (ProyectoException e) {
-			fail("Lanzó excepción al cerrar cuenta");
+			fail("Lanzó excepción al cerrar cuenta Indiv");
 		}
 	}
 	
@@ -421,7 +421,7 @@ public class TestIndiv {
 		} catch (NoBajaClienteException e) {
 			// OK
 		} catch (ProyectoException e) {
-			fail("Lanzó excepción al cerrar cuenta");
+			fail("Lanzó excepción al cerrar cuenta Indiv");
 		}
 	}
 	
@@ -471,11 +471,11 @@ public class TestIndiv {
 			user.setAdministrativo(true);
 			
 			gestionIndiv.eliminarIndiv(user, i);
-			fail("Debería lanzar la excepción de particular no encontrado");
+			fail("Debería lanzar la excepción de indiv no encontrado");
 		} catch (ClienteNoEncontradoException e) {
 			// OK
 		} catch (ProyectoException e) {
-			fail("Debería lanzar la excepción de particular no encontrado");
+			fail("Debería lanzar la excepción de indiv no encontrado");
 		}
 	}
 	
@@ -492,11 +492,11 @@ public class TestIndiv {
 			user.setAdministrativo(false);
 			
 			gestionIndiv.eliminarIndiv(user, i);
-			fail("Debería lanzar la excepción de particular no encontrado");
+			fail("Debería lanzar la excepción de indiv no encontrado");
 		} catch (UserNoAdminException e) {
 			// OK
 		} catch (ProyectoException e) {
-			fail("Debería lanzar la excepción de particular no encontrado");
+			fail("Debería lanzar la excepción de indiv no encontrado");
 		}
 	}
 	

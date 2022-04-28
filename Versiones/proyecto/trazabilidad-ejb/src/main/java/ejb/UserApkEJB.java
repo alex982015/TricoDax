@@ -1,17 +1,11 @@
 package ejb;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.Tuple;
-import javax.persistence.TupleElement;
 import javax.persistence.TypedQuery;
 import exceptions.ProyectoException;
 import exceptions.UserAsociadoNoExistenteException;
@@ -268,19 +262,19 @@ public class UserApkEJB implements GestionUserApk {
 				if(estado) {
 					if(IBAN == null) {
 						querySegregada = em.createQuery("SELECT s FROM Segregada s, CuentaFintech c WHERE s.IBAN = c.IBAN AND c.estado = :estado", Segregada.class);
-						querySegregada.setParameter("estado", true);
+						querySegregada.setParameter("estado", estado);
 					} else {
 						querySegregada = em.createQuery("SELECT s FROM Segregada s, CuentaFintech c WHERE s.IBAN = c.IBAN AND c.IBAN = :IBAN AND c.estado = :estado", Segregada.class);
-						querySegregada.setParameter("estado", true);
+						querySegregada.setParameter("estado", estado);
 						querySegregada.setParameter("IBAN", IBAN);
 					}
 				} else {
 					if(IBAN == null) {
 						querySegregada = em.createQuery("SELECT s FROM Segregada s, CuentaFintech c WHERE s.IBAN = c.IBAN AND c.estado = :estado", Segregada.class);
-						querySegregada.setParameter("estado", false);
+						querySegregada.setParameter("estado", estado);
 					} else {
 						querySegregada = em.createQuery("SELECT s FROM Segregada s, CuentaFintech c WHERE s.IBAN = c.IBAN AND c.IBAN = :IBAN AND c.estado = :estado", Segregada.class);
-						querySegregada.setParameter("estado", false);
+						querySegregada.setParameter("estado", estado);
 						querySegregada.setParameter("IBAN", IBAN);
 					}
 				}

@@ -10,7 +10,6 @@ import org.junit.Test;
 import ejb.GestionCuentaRef;
 import ejb.GestionUserApk;
 import es.uma.informatica.sii.anotaciones.Requisitos;
-import exceptions.CuentaExistenteException;
 import exceptions.CuentaNoEncontradoException;
 import exceptions.ProyectoException;
 import exceptions.UserNoAdminException;
@@ -167,11 +166,11 @@ public class TestCuentaRef {
 			u.setAdministrativo(true);
 			
 			gestionCuentasRef.actualizarCuentaRef(u,c);
-			fail("Debería lanzar excepción de cuentaRef no encontrado");
+			fail("Debería lanzar excepción de cuentaRef no encontrada");
 		} catch (CuentaNoEncontradoException e) {
 			// OK
 		} catch (ProyectoException e) {
-			fail("Debería lanzar excepción de cuentaRef no encontrado");
+			fail("Debería lanzar excepción de cuentaRef no encontrada");
 		}
 	}
 	

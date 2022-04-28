@@ -1,5 +1,5 @@
 package exceptions;
 
-public class MismaMonedaException extends ProyectoException{
+public class MismaMonedaException extends ProyectoException {
 
 }

@@ -10,14 +10,12 @@ import exceptions.ClienteNoEncontradoException;
 import exceptions.CuentaNoEncontradoException;
 import exceptions.CuentaSegregadaYaAsignadaException;
 import exceptions.NoBajaClienteException;
-import exceptions.PersAutNoEncontradaException;
 import exceptions.ProyectoException;
 import exceptions.UserNoAdminException;
 import exceptions.UserNoEncontradoException;
 import jpa.Cliente;
 import jpa.CuentaFintech;
 import jpa.Empresa;
-import jpa.PersAut;
 import jpa.Segregada;
 import jpa.UserApk;
 

@@ -107,11 +107,11 @@ public class TestTrans {
 			u.setAdministrativo(true);
 			
 			gestionTrans.actualizarTrans(u,t);
-			fail("Debería lanzar excepción de transaccion no encontrado");
+			fail("Debería lanzar excepción de transaccion no encontrada");
 		} catch (TransNoEncontradaException e) {
 			// OK
 		} catch (ProyectoException e) {
-			fail("Debería lanzar excepción de transaccion no encontrado");
+			fail("Debería lanzar excepción de transaccion no encontrada");
 		}
 	}
 	
@@ -127,11 +127,11 @@ public class TestTrans {
 			u.setAdministrativo(false);
 			
 			gestionTrans.actualizarTrans(u,t);
-			fail("Debería lanzar excepción de transaccion no encontrado");
+			fail("Debería lanzar excepción de transaccion no encontrada");
 		} catch (UserNoAdminException e) {
 			// OK
 		} catch (ProyectoException e) {
-			fail("Debería lanzar excepción de transaccion no encontrado");
+			fail("Debería lanzar excepción de transaccion no encontrada");
 		}
 	}
 	
@@ -168,11 +168,11 @@ public class TestTrans {
 			u.setAdministrativo(true);
 			
 			gestionTrans.eliminarTrans(u, transExistente);
-			fail("Debería lanzar la excepción de transaccion no encontrado");
+			fail("Debería lanzar la excepción de transaccion no encontrada");
 		} catch (TransNoEncontradaException e) {
 			// OK
 		} catch (ProyectoException e) {
-			fail("Debería lanzar la excepción de transaccion no encontrado");
+			fail("Debería lanzar la excepción de transaccion no encontrada");
 		}
 	}
 	
@@ -189,11 +189,11 @@ public class TestTrans {
 			u.setAdministrativo(false);
 			
 			gestionTrans.eliminarTrans(u, transExistente);
-			fail("Debería lanzar la excepción de transaccion no encontrado");
+			fail("Debería lanzar la excepción de transaccion no encontrada");
 		} catch (UserNoAdminException e) {
 			// OK
 		} catch (ProyectoException e) {
-			fail("Debería lanzar la excepción de transaccion no encontrado");
+			fail("Debería lanzar la excepción de transaccion no encontrada");
 		}
 	}
 	

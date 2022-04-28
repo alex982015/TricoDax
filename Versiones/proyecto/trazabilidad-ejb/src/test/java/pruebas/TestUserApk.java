@@ -2,9 +2,7 @@ package pruebas;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
 import org.junit.Before;
@@ -370,11 +368,11 @@ public class TestUserApk {
 			UserApk u = user.get(0);
 			u.setUser(ID);
 			gestionUser.actualizarUser(u);
-			fail("Debería lanzar excepción de transaccion no encontrado");
+			fail("Debería lanzar excepción de transaccion no encontrada");
 		} catch (UserNoEncontradoException e) {
 			// OK
 		} catch (ProyectoException e) {
-			fail("Debería lanzar excepción de transaccion no encontrado");
+			fail("Debería lanzar excepción de transaccion no encontrada");
 		}
 	}
 	
@@ -404,11 +402,11 @@ public class TestUserApk {
 			UserApk userExistente = user.get(0);
 			userExistente.setUser("Charmeleon");	
 			gestionUser.eliminarUser(userExistente);
-			fail("Debería lanzar la excepción de transaccion no encontrado");
+			fail("Debería lanzar la excepción de transaccion no encontrada");
 		} catch (UserNoEncontradoException e) {
 			// OK
 		} catch (ProyectoException e) {
-			fail("Debería lanzar la excepción de transaccion no encontrado");
+			fail("Debería lanzar la excepción de transaccion no encontrada");
 		}
 	}
 	

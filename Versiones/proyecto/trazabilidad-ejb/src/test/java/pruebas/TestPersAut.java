@@ -118,11 +118,11 @@ public class TestPersAut {
 			u.setAdministrativo(false);
 			
 			gestionPersAut.actualizarPersAut(u,p);
-			fail("Debería lanzar excepción de UserApk No Admin");
+			fail("Debería lanzar excepción de PersAut No Admin");
 		} catch (UserNoAdminException e) {
 			// OK
 		} catch (ProyectoException e) {
-			fail("Debería lanzar excepción de UserApk No Admin");
+			fail("Debería lanzar excepción de PersAut No Admin");
 		}
 	}
 	
@@ -475,8 +475,8 @@ public class TestPersAut {
 			m.put(empresa1, "AUTORIZADO");
 			persAut1.setAutoriz(m);
 			
-			String ruta = "C:\\Users\\Alex\\Desktop\\Reporte.csv";
-			
+			String ruta = System.getProperty("user.home").toString() + "\\Desktop\\Reporte.csv";
+				
 			String tipo = "Inicial";
 			
 			List<UserApk> user = gestionUserApk.obtenerUser();

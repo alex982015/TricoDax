@@ -17,7 +17,6 @@ import exceptions.PersAutExistenteException;
 import exceptions.PersAutNoEncontradaException;
 import exceptions.PersAutYaAsignadaException;
 import exceptions.ProyectoException;
-import exceptions.UserExistenteException;
 import exceptions.UserNoAdminException;
 import exceptions.UserNoEncontradoException;
 import jpa.CuentaFintech;

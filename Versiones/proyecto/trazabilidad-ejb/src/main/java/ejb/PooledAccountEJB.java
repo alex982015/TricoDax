@@ -2,12 +2,9 @@ package ejb;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.ZoneId;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -20,11 +17,11 @@ import exceptions.CuentaRefNoCashException;
 import exceptions.CuentaRefNoVinculadaException;
 import exceptions.CuentaRefOrigenDestinoNoEncontrada;
 import exceptions.MismaMonedaException;
+import exceptions.PooledConCuentaRefYaAsociadaException;
 import exceptions.ProyectoException;
 import exceptions.UserNoAdminException;
 import exceptions.UserNoEncontradoException;
 import jpa.Cuenta;
-import jpa.CuentaFintech;
 import jpa.CuentaRef;
 import jpa.PooledAccount;
 import jpa.Trans;
@@ -64,7 +61,7 @@ public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledA
 							em.persist(c);
 						}
 					} else {
-						throw new MismaMonedaException();
+						throw new PooledConCuentaRefYaAsociadaException();
 					}
 				}
 				

@@ -463,9 +463,9 @@ public class TestEmpresa {
 			gestionEmpresa.bloquearCuentaEmpresa(u, e, true);
 
 		} catch (ProyectoException e) {
-			fail("Lanzó excepción al cerrar persAut");
+			fail("Lanzó excepción al cerrar cuenta Empresa");
 		}
-	}	
+	}
 
 	@Requisitos({"RF ADICIONAL EMPRESA"})
 	@Test
@@ -484,7 +484,7 @@ public class TestEmpresa {
 		} catch (CuentaNoEncontradoException e) {
 			// OK
 		} catch (ProyectoException e) {
-			fail("Lanzó excepción al cerrar persAut");
+			fail("Lanzó excepción al cerrar cuenta Empresa");
 		}
 	}
 	
@@ -505,7 +505,7 @@ public class TestEmpresa {
 		} catch (UserNoEncontradoException e) {
 			// OK
 		} catch (ProyectoException e) {
-			fail("Lanzó excepción al cerrar persAut");
+			fail("Lanzó excepción al cerrar cuenta Empresa");
 		}
 	}
 	
@@ -525,7 +525,7 @@ public class TestEmpresa {
 		} catch (UserNoAdminException e) {
 			// OK
 		} catch (ProyectoException e) {
-			fail("Lanzó excepción al cerrar persAut");
+			fail("Lanzó excepción al cerrar cuenta Empresa");
 		}
 	}
 	
