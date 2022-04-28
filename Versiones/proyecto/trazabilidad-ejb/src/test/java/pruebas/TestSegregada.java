@@ -108,9 +108,11 @@ public class TestSegregada {
 	public void testInsertarSegregadaUserNoEncontrado() throws ProyectoException {
 		List<Segregada> segregadas = gestionSegregada.obtenerSegregada();
 		Segregada s = segregadas.get(0);
+		
 		List<UserApk> users = gestionUserApk.obtenerUser();
 		UserApk user= users.get(0);
 		user.setUser("hola");
+		
 		try {
 			gestionSegregada.insertarSegregada(user, s);
 			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
@@ -134,7 +136,11 @@ public class TestSegregada {
 			Segregada segregada = segregadas.get(0);
 			segregada.setReferenciada(cuenta);
 			
-			gestionSegregada.cerrarCuentaSegregada(segregada);
+			List<UserApk> users = gestionUserApk.obtenerUser();
+			UserApk user= users.get(0);
+			user.setAdministrativo(true);
+			
+			gestionSegregada.cerrarCuentaSegregada(user,segregada);
 		}  catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
 		}
@@ -147,7 +153,12 @@ public class TestSegregada {
 			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
 			Segregada cuenta1 = cuentas.get(0);
 			cuenta1.setIBAN(1234);
-			gestionSegregada.cerrarCuentaSegregada(cuenta1);
+			
+			List<UserApk> users = gestionUserApk.obtenerUser();
+			UserApk user= users.get(0);
+			user.setAdministrativo(true);
+			
+			gestionSegregada.cerrarCuentaSegregada(user,cuenta1);
 		} catch (CuentaNoEncontradoException e) {
 			// OK
 		} catch (ProyectoException e) {
@@ -166,8 +177,58 @@ public class TestSegregada {
 			Segregada segregada = segregadas.get(0);
 			segregada.setReferenciada(cuenta);
 			
-			gestionSegregada.cerrarCuentaSegregada(segregada);
+			List<UserApk> users = gestionUserApk.obtenerUser();
+			UserApk user= users.get(0);
+			user.setAdministrativo(true);
+			
+			gestionSegregada.cerrarCuentaSegregada(user,segregada);
 		} catch (CuentaConSaldoException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
+		}
+	}
+	
+	@Requisitos({"RF9"})
+	@Test
+	public void testCerrarSegregadaNoAdmin() {
+		try {
+			List<CuentaRef> cuentasRef = gestionCuentaRef.obtenerCuentasRef();
+			CuentaRef cuenta = cuentasRef.get(0);
+			
+			List<Segregada> segregadas = gestionSegregada.obtenerSegregada();
+			Segregada segregada = segregadas.get(0);
+			segregada.setReferenciada(cuenta);
+			
+			List<UserApk> users = gestionUserApk.obtenerUser();
+			UserApk user= users.get(0);
+			user.setAdministrativo(false);
+			
+			gestionSegregada.cerrarCuentaSegregada(user,segregada);
+		} catch (UserNoAdminException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
+		}
+	}
+	
+	@Requisitos({"RF9"})
+	@Test
+	public void testCerrarSegregadaUserNoEncontrado() {
+		try {
+			List<CuentaRef> cuentasRef = gestionCuentaRef.obtenerCuentasRef();
+			CuentaRef cuenta = cuentasRef.get(0);
+			
+			List<Segregada> segregadas = gestionSegregada.obtenerSegregada();
+			Segregada segregada = segregadas.get(0);
+			segregada.setReferenciada(cuenta);
+			
+			List<UserApk> users = gestionUserApk.obtenerUser();
+			UserApk user= users.get(0);
+			user.setUser("U");
+			
+			gestionSegregada.cerrarCuentaSegregada(user,segregada);
+		} catch (UserNoEncontradoException e) {
 			// OK
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
@@ -192,7 +253,12 @@ public class TestSegregada {
 		try {			
 			List<Segregada> cuenta = gestionSegregada.obtenerSegregada();
 			Segregada c = cuenta.get(0);	
-			gestionSegregada.actualizarSegregada(c);
+			
+			List<UserApk> users = gestionUserApk.obtenerUser();
+			UserApk user= users.get(0);
+			user.setAdministrativo(true);
+			
+			gestionSegregada.actualizarSegregada(user,c);
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al actualizar");
 		}
@@ -206,9 +272,36 @@ public class TestSegregada {
 			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
 			Segregada c = cuentas.get(0);
 			c.setIBAN(IBAN);
-			gestionSegregada.actualizarSegregada(c);
+			
+			List<UserApk> users = gestionUserApk.obtenerUser();
+			UserApk user= users.get(0);
+			user.setAdministrativo(true);
+			
+			gestionSegregada.actualizarSegregada(user,c);
 			fail("Debería lanzar excepción de Segregada no encontrado");
 		} catch (CuentaNoEncontradoException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Debería lanzar excepción de Segregada no encontrado");
+		}
+	}
+	
+	@Test
+	public void testActualizarSegregadaUserNoEncontrado() {
+		final long IBAN = 455833218;
+		
+		try {
+			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
+			Segregada c = cuentas.get(0);
+			c.setIBAN(IBAN);
+			
+			List<UserApk> users = gestionUserApk.obtenerUser();
+			UserApk user= users.get(0);
+			user.setUser("U");
+			
+			gestionSegregada.actualizarSegregada(user,c);
+			fail("Debería lanzar excepción de Segregada no encontrado");
+		} catch (UserNoEncontradoException e) {
 			// OK
 		} catch (ProyectoException e) {
 			fail("Debería lanzar excepción de Segregada no encontrado");
@@ -220,7 +313,12 @@ public class TestSegregada {
 		try {
 			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
 			Segregada cuenta1 = cuentas.get(0);
-			gestionSegregada.eliminarSegregada(cuenta1);
+			
+			List<UserApk> users = gestionUserApk.obtenerUser();
+			UserApk user= users.get(0);
+			user.setAdministrativo(true);
+			
+			gestionSegregada.eliminarSegregada(user,cuenta1);
 
 			List<Segregada> c = gestionSegregada.obtenerSegregada();
 			assertEquals(1, c.size());			
@@ -236,9 +334,56 @@ public class TestSegregada {
 			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
 			Segregada cuenta1 = cuentas.get(0);	
 			cuenta1.setIBAN(455833220);
-			gestionSegregada.eliminarSegregada(cuenta1);
+			
+			List<UserApk> users = gestionUserApk.obtenerUser();
+			UserApk user= users.get(0);
+			user.setAdministrativo(true);
+			
+			gestionSegregada.eliminarSegregada(user,cuenta1);
 			fail("Debería lanzar la excepción de Segregada no encontrada");
 		} catch (CuentaNoEncontradoException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Debería lanzar la excepción de Segregada no encontrada");
+		}
+	}
+	
+	@Test
+	public void testEliminarSegregadaNoAdmin() {
+		
+		try {
+			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
+			Segregada cuenta1 = cuentas.get(0);	
+			cuenta1.setIBAN(455833220);
+			
+			List<UserApk> users = gestionUserApk.obtenerUser();
+			UserApk user= users.get(0);
+			user.setAdministrativo(false);
+			
+			gestionSegregada.eliminarSegregada(user,cuenta1);
+			fail("Debería lanzar la excepción de Segregada no encontrada");
+		} catch (UserNoAdminException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Debería lanzar la excepción de Segregada no encontrada");
+		}
+	}
+	
+	@Test
+	public void testEliminarSegregadaUserNoEncontrado() {
+		
+		try {
+			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
+			Segregada cuenta1 = cuentas.get(0);	
+			cuenta1.setIBAN(455833220);
+			
+			List<UserApk> users = gestionUserApk.obtenerUser();
+			UserApk user= users.get(0);
+			user.setUser("U");
+			
+			gestionSegregada.eliminarSegregada(user,cuenta1);
+			fail("Debería lanzar la excepción de Segregada no encontrada");
+		} catch (UserNoEncontradoException e) {
 			// OK
 		} catch (ProyectoException e) {
 			fail("Debería lanzar la excepción de Segregada no encontrada");
@@ -249,9 +394,31 @@ public class TestSegregada {
 	public void testEliminarTodasSegregada() {
 		
 		try {
-			gestionSegregada.eliminarTodasSegregada();	
+			List<UserApk> users = gestionUserApk.obtenerUser();
+			UserApk user= users.get(0);
+			user.setAdministrativo(true);
+			
+			gestionSegregada.eliminarTodasSegregada(user);	
 			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
 			assertEquals(0, cuentas.size());
+		} catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
+		}
+	}
+	
+	@Test
+	public void testEliminarTodasSegregadaNoAdmin() {
+		
+		try {
+			List<UserApk> users = gestionUserApk.obtenerUser();
+			UserApk user= users.get(0);
+			user.setAdministrativo(false);
+			
+			gestionSegregada.eliminarTodasSegregada(user);	
+			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
+			assertEquals(0, cuentas.size());
+		} catch (UserNoAdminException e) {
+			// OK
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
 		}

@@ -84,68 +84,108 @@ public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledA
 	}
 
 	@Override
-	public void actualizarPooledAccount(PooledAccount cuenta) throws ProyectoException {
-		PooledAccount cuentaEntity = em.find(PooledAccount.class, cuenta.getIBAN());
+	public void actualizarPooledAccount(UserApk user, PooledAccount cuenta) throws ProyectoException {
+		UserApk userApkEntity = em.find(UserApk.class, user.getUser());
 		
-		if (cuentaEntity == null) {
-			throw new CuentaNoEncontradoException();
+		if(userApkEntity == null) {
+			throw new UserNoEncontradoException();
 		}
 		
-		cuentaEntity.setSwift(cuenta.getSwift());
-		
-		em.merge(cuenta);
-	}
-
-	@Override
-	public void eliminarPooledAccount(PooledAccount cuenta) throws ProyectoException {
-		PooledAccount PooledAccountEntity = em.find(PooledAccount.class, cuenta.getIBAN());
-		CuentaFintech cuentaFintechEntity = em.find(CuentaFintech.class, cuenta.getIBAN());
-		Cuenta cuentaEntity = em.find(Cuenta.class, cuenta.getIBAN());
-		
-		if ((cuentaFintechEntity == null) && (cuentaEntity == null) && (PooledAccountEntity == null)) {
-			throw new CuentaNoEncontradoException();
-		}
-		em.remove(PooledAccountEntity);
-		em.remove(cuentaFintechEntity);
-		em.remove(cuentaEntity);
-		
-	}
-
-	@Override
-	public void eliminarTodasPooledAccount() throws ProyectoException {
-		List<PooledAccount> cuentas = obtenerPooledAccount();		
-		
-		for (PooledAccount e : cuentas) {
-			Cuenta cuentaEntity = em.find(Cuenta.class, e.getIBAN());
-			em.remove(cuentaEntity);
-		}
-		
-		for (PooledAccount e : cuentas) {
-			em.remove(e);
-		}
-		
-	}
-
-	@Override
-	public void cerrarCuentaPooledAccount(PooledAccount cuenta) throws ProyectoException {
-		PooledAccount cuentaEntity = em.find(PooledAccount.class, cuenta.getIBAN());
-		if (cuentaEntity == null) {
-			throw new CuentaNoEncontradoException();
-		}
-		
-		Set<CuentaRef> cuentasAsociadas = cuentaEntity.getDepositEn().keySet();
-		boolean ok = false;
-		
-		for (CuentaRef c : cuentasAsociadas) {
-			if(c.getSaldo() > 0) {
-				ok = true;
+		if(user.isAdministrativo()) {
+			PooledAccount cuentaEntity = em.find(PooledAccount.class, cuenta.getIBAN());
+			
+			if (cuentaEntity == null) {
+				throw new CuentaNoEncontradoException();
 			}
+			
+			cuentaEntity.setSwift(cuenta.getSwift());
+			
+			em.merge(cuenta);	
+		} else {
+			throw new UserNoAdminException();
+		}
+	}
+
+	@Override
+	public void eliminarPooledAccount(UserApk user, PooledAccount cuenta) throws ProyectoException {
+		
+		UserApk userApkEntity = em.find(UserApk.class, user.getUser());
+		
+		if(userApkEntity == null) {
+			throw new UserNoEncontradoException();
 		}
 		
-		if(ok) {
-			throw new CuentaConSaldoException();
+		if(user.isAdministrativo()) {
+
+			PooledAccount pooledEntity = em.find(PooledAccount.class, cuenta.getIBAN());
+			
+			if (pooledEntity == null) {
+				throw new CuentaNoEncontradoException();
+			}
+
+			em.remove(pooledEntity);
+
 		} else {
-			cuentaEntity.setEstado(ok);
+			throw new UserNoAdminException();
+		}
+	}
+
+	@Override
+	public void eliminarTodasPooledAccount(UserApk user) throws ProyectoException {
+		
+		UserApk userApkEntity = em.find(UserApk.class, user.getUser());
+		
+		if(userApkEntity == null) {
+			throw new UserNoEncontradoException();
+		}
+		
+		if(user.isAdministrativo()) {
+			List<PooledAccount> cuentas = obtenerPooledAccount();		
+			
+			for (PooledAccount e : cuentas) {
+				Cuenta cuentaEntity = em.find(Cuenta.class, e.getIBAN());
+				em.remove(cuentaEntity);
+			}
+			
+			for (PooledAccount e : cuentas) {
+				em.remove(e);
+			}
+		} else {
+			throw new UserNoAdminException();
+		}	
+	}
+
+	@Override
+	public void cerrarCuentaPooledAccount(UserApk user, PooledAccount cuenta) throws ProyectoException {
+		
+		UserApk userApkEntity = em.find(UserApk.class, user.getUser());
+		
+		if(userApkEntity == null) {
+			throw new UserNoEncontradoException();
+		}
+		
+		if(user.isAdministrativo()) {
+			PooledAccount cuentaEntity = em.find(PooledAccount.class, cuenta.getIBAN());
+			if (cuentaEntity == null) {
+				throw new CuentaNoEncontradoException();
+			}
+			
+			Set<CuentaRef> cuentasAsociadas = cuentaEntity.getDepositEn().keySet();
+			boolean ok = false;
+			
+			for (CuentaRef c : cuentasAsociadas) {
+				if(c.getSaldo() > 0) {
+					ok = true;
+				}
+			}
+			
+			if(ok) {
+				throw new CuentaConSaldoException();
+			} else {
+				cuentaEntity.setEstado(ok);
+			}
+		} else {
+			throw new UserNoAdminException();
 		}
 	}
 	

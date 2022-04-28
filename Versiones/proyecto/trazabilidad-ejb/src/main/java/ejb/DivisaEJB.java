@@ -9,7 +9,10 @@ import javax.persistence.TypedQuery;
 import exceptions.DivisaExistenteException;
 import exceptions.DivisaNoEncontradaException;
 import exceptions.ProyectoException;
+import exceptions.UserNoAdminException;
+import exceptions.UserNoEncontradoException;
 import jpa.Divisa;
+import jpa.UserApk;
 
 @Stateless
 public class DivisaEJB implements GestionDivisa {
@@ -18,13 +21,23 @@ public class DivisaEJB implements GestionDivisa {
 	private EntityManager em;
 
 	@Override
-	public void insertarDivisa(Divisa divisa) throws DivisaExistenteException {
-		Divisa divisaExistente = em.find(Divisa.class, divisa.getAbreviatura());
-		if (divisaExistente != null) {
-			throw new DivisaExistenteException();
+	public void insertarDivisa(UserApk user, Divisa divisa) throws ProyectoException {
+		UserApk userExistente = em.find(UserApk.class, user.getUser());
+		
+		if (userExistente == null) {
+			throw new UserNoEncontradoException();
 		}
 		
-		em.persist(divisa);
+		if(user.isAdministrativo()) {
+			Divisa divisaExistente = em.find(Divisa.class, divisa.getAbreviatura());
+			if (divisaExistente != null) {
+				throw new DivisaExistenteException();
+			}
+			
+			em.persist(divisa);
+		} else {
+			throw new UserNoAdminException();
+		}
 	}
 
 	@Override
@@ -34,36 +47,66 @@ public class DivisaEJB implements GestionDivisa {
 	}
 
 	@Override
-	public void actualizarDivisa(Divisa divisa) throws ProyectoException {
-		Divisa divisaEntity = em.find(Divisa.class, divisa.getAbreviatura());
-		if (divisaEntity == null) {
-			throw new DivisaNoEncontradaException();
+	public void actualizarDivisa(UserApk user, Divisa divisa) throws ProyectoException {
+		UserApk userExistente = em.find(UserApk.class, user.getUser());
+		
+		if (userExistente == null) {
+			throw new UserNoEncontradoException();
 		}
 		
-		divisaEntity.setAbreviatura(divisa.getAbreviatura());
-		divisaEntity.setCambioEuro(divisa.getCambioEuro());
-		divisaEntity.setNombre(divisa.getNombre());
-		divisaEntity.setSimbolo(divisa.getSimbolo());
-	
-		em.merge(divisaEntity);
+		if(user.isAdministrativo()) {
+			Divisa divisaEntity = em.find(Divisa.class, divisa.getAbreviatura());
+			if (divisaEntity == null) {
+				throw new DivisaNoEncontradaException();
+			}
+			
+			divisaEntity.setAbreviatura(divisa.getAbreviatura());
+			divisaEntity.setCambioEuro(divisa.getCambioEuro());
+			divisaEntity.setNombre(divisa.getNombre());
+			divisaEntity.setSimbolo(divisa.getSimbolo());
+		
+			em.merge(divisaEntity);
+		} else {
+			throw new UserNoAdminException();
+		}
 	}
 	
 	@Override
-	public void eliminarDivisa(Divisa divisa) throws ProyectoException {
-		Divisa divisaEntity = em.find(Divisa.class, divisa.getAbreviatura());
-		if (divisaEntity == null) {
-			throw new DivisaNoEncontradaException();
+	public void eliminarDivisa(UserApk user, Divisa divisa) throws ProyectoException {
+		UserApk userExistente = em.find(UserApk.class, user.getUser());
+		
+		if (userExistente == null) {
+			throw new UserNoEncontradoException();
 		}
 		
-		em.remove(divisaEntity);
+		if(user.isAdministrativo()) {
+			Divisa divisaEntity = em.find(Divisa.class, divisa.getAbreviatura());
+			if (divisaEntity == null) {
+				throw new DivisaNoEncontradaException();
+			}
+			
+			em.remove(divisaEntity);
+		} else {
+			throw new UserNoAdminException();
+		}
 	}
 
 	@Override
-	public void eliminarTodasDivisas() throws ProyectoException {
-		List<Divisa> divisas = obtenerDivisas();
+	public void eliminarTodasDivisas(UserApk user) throws ProyectoException {
+		UserApk userExistente = em.find(UserApk.class, user.getUser());
 		
-		for (Divisa d : divisas) {
-			em.remove(d);
+		if (userExistente == null) {
+			throw new UserNoEncontradoException();
+		}
+		
+		if(user.isAdministrativo()) {
+			List<Divisa> divisas = obtenerDivisas();
+			
+			for (Divisa d : divisas) {
+				em.remove(d);
+			}
+		} else {
+			throw new UserNoAdminException();
 		}
 	}
 

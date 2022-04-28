@@ -89,7 +89,9 @@ public class TestUserApk {
 	public void testIniciarSesionAdminBadPassword() {
 		try {
 			List<UserApk> u = gestionUser.obtenerUser();
-			UserApk user = u.get(1);
+			UserApk user = u.get(0);
+			user.setPassword("Password");
+			
 			gestionUser.IniciarSesionUserAdmin(user);
 		} catch (UserBadPasswordException e) {
 			// OK
@@ -190,10 +192,6 @@ public class TestUserApk {
 		List<Indiv> particulares = gestionIndiv.obtenerIndiv();
 		Indiv i = particulares.get(0);
 		
-		for(Indiv ind : particulares) {
-			System.out.println(ind.getID());
-		}
-		
 		final UserApk user = new UserApk("USUARIO", "1234", false);
 		user.setPersonaIndividual(i);
 		
@@ -215,10 +213,6 @@ public class TestUserApk {
 		List<Indiv> particulares = gestionIndiv.obtenerIndiv();
 		Indiv i = particulares.get(0);
 		i.setID(10);
-		
-		for(Indiv ind : particulares) {
-			System.out.println(ind.getID());
-		}
 		
 		final UserApk user = new UserApk("USUARIO", "1234", false);
 		

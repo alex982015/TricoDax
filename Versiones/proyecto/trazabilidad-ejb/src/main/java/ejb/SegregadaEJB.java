@@ -12,7 +12,6 @@ import exceptions.ProyectoException;
 import exceptions.UserNoAdminException;
 import exceptions.UserNoEncontradoException;
 import jpa.Cuenta;
-import jpa.CuentaFintech;
 import jpa.Segregada;
 import jpa.UserApk;
 
@@ -52,59 +51,90 @@ public class SegregadaEJB extends CuentaFintechEJB implements GestionSegregada{
 	}
 
 	@Override
-	public void actualizarSegregada(Segregada cuenta) throws ProyectoException {
-		Segregada cuentaEntity = em.find(Segregada.class, cuenta.getIBAN());
-		if (cuentaEntity == null) {
-			throw new CuentaNoEncontradoException();
+	public void actualizarSegregada(UserApk user, Segregada cuenta) throws ProyectoException {
+		UserApk userApkEntity = em.find(UserApk.class, user.getUser());
+		if(userApkEntity == null) {
+			throw new UserNoEncontradoException();
 		}
 		
-		cuentaEntity.setSwift(cuenta.getSwift());
-		cuentaEntity.setComision(cuenta.getComision());
-		
-		em.merge(cuentaEntity);
+		if(user.isAdministrativo()) {
+			Segregada cuentaEntity = em.find(Segregada.class, cuenta.getIBAN());
+			if (cuentaEntity == null) {
+				throw new CuentaNoEncontradoException();
+			}
+			
+			cuentaEntity.setSwift(cuenta.getSwift());
+			cuentaEntity.setComision(cuenta.getComision());
+			
+			em.merge(cuentaEntity);	
+		} else {
+			throw new UserNoAdminException();
+		}
 	}
 	
 	@Override
-	public void cerrarCuentaSegregada(Segregada cuenta) throws ProyectoException {
-		Segregada cuentaEntity = em.find(Segregada.class, cuenta.getIBAN());
-		if (cuentaEntity == null) {
-			throw new CuentaNoEncontradoException();
+	public void cerrarCuentaSegregada(UserApk user, Segregada cuenta) throws ProyectoException {
+		UserApk userApkEntity = em.find(UserApk.class, user.getUser());
+		if(userApkEntity == null) {
+			throw new UserNoEncontradoException();
 		}
 		
-		if(!(cuenta.getReferenciada().getSaldo() > 0)) {
-			cuentaEntity.setEstado(false);
+		if(user.isAdministrativo()) {
+			Segregada cuentaEntity = em.find(Segregada.class, cuenta.getIBAN());
+			if (cuentaEntity == null) {
+				throw new CuentaNoEncontradoException();
+			}
+			
+			if(!(cuenta.getReferenciada().getSaldo() > 0)) {
+				cuentaEntity.setEstado(false);
+			} else {
+				throw new CuentaConSaldoException();
+			}
 		} else {
-			throw new CuentaConSaldoException();
+			throw new UserNoAdminException();
 		}
 	}
 
 	@Override
-	public void eliminarSegregada(Segregada cuenta) throws ProyectoException {
-		Segregada SegregadaEntity = em.find(Segregada.class, cuenta.getIBAN());
-		CuentaFintech cuentaFintechEntity = em.find(CuentaFintech.class, cuenta.getIBAN());
-		Cuenta cuentaEntity = em.find(Cuenta.class, cuenta.getIBAN());
-		
-		if ((cuentaFintechEntity == null) && (cuentaEntity == null) && (SegregadaEntity == null)) {
-			throw new CuentaNoEncontradoException();
+	public void eliminarSegregada(UserApk user, Segregada cuenta) throws ProyectoException {
+		UserApk userApkEntity = em.find(UserApk.class, user.getUser());
+		if(userApkEntity == null) {
+			throw new UserNoEncontradoException();
 		}
-		em.remove(SegregadaEntity);
-		em.remove(cuentaFintechEntity);
-		em.remove(cuentaEntity);		
+		
+		if(user.isAdministrativo()) {
+			Segregada segregadaEntity = em.find(Segregada.class, cuenta.getIBAN());
+			
+			if (segregadaEntity == null) {
+				throw new CuentaNoEncontradoException();
+			}
+			em.remove(segregadaEntity);
+		} else {
+			throw new UserNoAdminException();
+		}
 	}
 
 	@Override
-	public void eliminarTodasSegregada() throws ProyectoException {
-		List<Segregada> cuentas = obtenerSegregada();
-		
-		for (Segregada e : cuentas) {
-			Cuenta cuentaEntity = em.find(Cuenta.class, e.getIBAN());
-			em.remove(cuentaEntity);
+	public void eliminarTodasSegregada(UserApk user) throws ProyectoException {
+		UserApk userApkEntity = em.find(UserApk.class, user.getUser());
+		if(userApkEntity == null) {
+			throw new UserNoEncontradoException();
 		}
 		
-		for (Segregada e : cuentas) {
-			em.remove(e);
-		}
-		
+		if(user.isAdministrativo()) {
+			List<Segregada> cuentas = obtenerSegregada();
+			
+			for (Segregada e : cuentas) {
+				Cuenta cuentaEntity = em.find(Cuenta.class, e.getIBAN());
+				em.remove(cuentaEntity);
+			}
+			
+			for (Segregada e : cuentas) {
+				em.remove(e);
+			}	
+		} else {
+			throw new UserNoAdminException();
+		}		
 	}
 
 }

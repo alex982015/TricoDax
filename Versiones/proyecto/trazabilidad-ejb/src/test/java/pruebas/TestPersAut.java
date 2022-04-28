@@ -72,7 +72,11 @@ public class TestPersAut {
 			p.setFechaNac(nuevaFechaNac);
 			p.setFechaFin(nuevaFechaFin);
 			
-			gestionPersAut.actualizarPersAut(p);
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionPersAut.actualizarPersAut(u,p);
 
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al actualizar");
@@ -88,12 +92,39 @@ public class TestPersAut {
 			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
 			PersAut p = persAut.get(0);
 			p.setId(ID);
-			gestionPersAut.actualizarPersAut(p);
+			
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionPersAut.actualizarPersAut(u,p);
 			fail("Debería lanzar excepción de PersAut no encontrada");
 		} catch (PersAutNoEncontradaException e) {
 			// OK
 		} catch (ProyectoException e) {
 			fail("Debería lanzar excepción de PersAut no encontrada");
+		}
+	}
+	
+	@Requisitos({"RF7"})
+	@Test
+	public void testActualizarPersAutNoAdmin() {
+		final long ID = 3;
+		
+		try {
+			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
+			PersAut p = persAut.get(0);
+			
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(false);
+			
+			gestionPersAut.actualizarPersAut(u,p);
+			fail("Debería lanzar excepción de UserApk No Admin");
+		} catch (UserNoAdminException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Debería lanzar excepción de UserApk No Admin");
 		}
 	}
 	
@@ -109,7 +140,11 @@ public class TestPersAut {
 			
 			String t = "AUTORIZADO";
 			
-			gestionPersAut.anyadirAutorizadoAEmpresa(p, e, t);
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionPersAut.anyadirAutorizadoAEmpresa(u, p, e, t);
 
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al asociar persAut");
@@ -129,7 +164,11 @@ public class TestPersAut {
 			
 			String t = "AUTORIZADO";
 			
-			gestionPersAut.anyadirAutorizadoAEmpresa(p, e, t);
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionPersAut.anyadirAutorizadoAEmpresa(u, p, e, t);
 
 		} catch (PersAutNoEncontradaException e) {
 			// OK
@@ -151,9 +190,39 @@ public class TestPersAut {
 			
 			String t = "AUTORIZADO";
 			
-			gestionPersAut.anyadirAutorizadoAEmpresa(p, e, t);
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionPersAut.anyadirAutorizadoAEmpresa(u, p, e, t);
 
 		} catch (ClienteNoEncontradoException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al asociar persAut");
+		}
+	}
+	
+	@Requisitos({"RF6"})
+	@Test
+	public void testAsignarPersAutUserNoAdmin() {
+		try {
+			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
+			PersAut p = persAut.get(0);
+			
+			List<Empresa> empresa = gestionEmpresa.obtenerEmpresas();
+			Empresa e = empresa.get(0);
+			e.setID(10);
+			
+			String t = "AUTORIZADO";
+			
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(false);
+			
+			gestionPersAut.anyadirAutorizadoAEmpresa(u, p, e, t);
+
+		} catch (UserNoAdminException e) {
 			// OK
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al asociar persAut");
@@ -167,7 +236,11 @@ public class TestPersAut {
 			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
 			PersAut p = persAut.get(0);
 		
-			gestionPersAut.cerrarCuentaPersAut(p);
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionPersAut.cerrarCuentaPersAut(u,p);
 
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al cerrar persAut");
@@ -182,9 +255,34 @@ public class TestPersAut {
 			PersAut p = persAut.get(0);
 			p.setId(10);
 		
-			gestionPersAut.cerrarCuentaPersAut(p);
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionPersAut.cerrarCuentaPersAut(u,p);
 
 		} catch (ClienteNoEncontradoException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al cerrar persAut");
+		}
+	}
+	
+	@Requisitos({"RF8"})
+	@Test
+	public void testCerrarCuentaPersAutNoAdmin() {
+		try {
+			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
+			PersAut p = persAut.get(0);
+			p.setId(10);
+		
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(false);
+			
+			gestionPersAut.cerrarCuentaPersAut(u,p);
+
+		} catch (UserNoAdminException e) {
 			// OK
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al cerrar persAut");
@@ -251,7 +349,7 @@ public class TestPersAut {
 	
 	@Requisitos({"RF16"})
 	@Test
-	public void testBloquearCuentaUserApkNoAdministrativo() {
+	public void testBloquearCuentaUserApkNoAdmin() {
 		try {
 			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
 			PersAut p = persAut.get(0);
@@ -297,7 +395,11 @@ public class TestPersAut {
 			
 			String tipo = "Inicial";
 			
-			gestionPersAut.generarInforme(persAut1, ruta, tipo);
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionPersAut.generarInforme(u, persAut1, ruta, tipo);
 			
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
@@ -335,9 +437,57 @@ public class TestPersAut {
 			
 			String tipo = "Inicial";
 			
-			gestionPersAut.generarInforme(persAut1, ruta, tipo);
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionPersAut.generarInforme(u, persAut1, ruta, tipo);
 			
 		} catch (PersAutNoEncontradaException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
+		} catch (IOException e) {
+			fail("No debería lanzarse excepción");
+		}
+	}
+	
+	@Requisitos({"RF12"})
+	@Test
+	public void testGenerarInformePersAutNoAdmin() {
+		try {
+			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
+			PersAut persAut1 = persAut.get(0);
+			persAut1.setId(10);
+			
+			List<Empresa> empresa = gestionEmpresa.obtenerEmpresas();
+			Empresa empresa1 = empresa.get(0);
+			
+			List<Segregada> segregadas = gestionSegregada.obtenerSegregada();
+			List<CuentaFintech> cuentas = new ArrayList<>();
+			
+			for (Segregada s : segregadas) {
+				cuentas.add(s);
+			}
+			
+			empresa1.setCuentas(cuentas);
+			
+			Map<Empresa, String> m = persAut1.getAutoriz();
+			
+			m.put(empresa1, "AUTORIZADO");
+			persAut1.setAutoriz(m);
+			
+			String ruta = "C:\\Users\\Alex\\Desktop\\Reporte.csv";
+			
+			String tipo = "Inicial";
+			
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(false);
+			
+			gestionPersAut.generarInforme(u, persAut1, ruta, tipo);
+			
+		} catch (UserNoAdminException e) {
 			// OK
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
@@ -349,13 +499,52 @@ public class TestPersAut {
 	/******** TEST ADICIONALES *********/
 
 	@Test
-	public void testInsertarPersAut() {
+	public void testInsertarPersAut() throws ProyectoException {
 		final PersAut persAut = new PersAut (123, "Nombre1", "Apellidos1", "Direccion1", Date.valueOf("2000-12-12"), true, Date.valueOf("2022-04-01"), null, false);
 		
+		
+		List<UserApk> user = gestionUserApk.obtenerUser();
+		UserApk u = user.get(0);
+		u.setAdministrativo(true);
+		
 		try {
-			gestionPersAut.insertarPersAut(persAut);
+			gestionPersAut.insertarPersAut(u,persAut);
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al insertar"); 
+		}
+	}
+	
+	@Test
+	public void testInsertarPersAutYaExistente() throws ProyectoException {
+		List<PersAut> autorizados = gestionPersAut.obtenerPersAut();
+		PersAut p = autorizados.get(0);
+		
+		try {
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionPersAut.insertarPersAut(u,p);
 		} catch (PersAutExistenteException e) {
-			fail("Lanzó excepción al insertar");
+			// OK
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al insertar"); 
+		}
+	}
+	
+	@Test
+	public void testInsertarPersAutNoAdmin() throws ProyectoException {
+		List<PersAut> autorizados = gestionPersAut.obtenerPersAut();
+		PersAut p = autorizados.get(0);
+		
+		try {
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(false);
+			
+			gestionPersAut.insertarPersAut(u,p);
+		} catch (UserNoAdminException e) {
+			// OK
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al insertar"); 
 		}
@@ -376,7 +565,12 @@ public class TestPersAut {
 		try {
 			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
 			PersAut persAut1 = persAut.get(0);
-			gestionPersAut.eliminarPersAut(persAut1);
+			
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionPersAut.eliminarPersAut(u,persAut1);
 			
 			List<PersAut> p = gestionPersAut.obtenerPersAut();
 			assertEquals(2, p.size());
@@ -392,7 +586,11 @@ public class TestPersAut {
 			PersAut persAut1 = persAut.get(0);
 			persAut1.setId(3);
 			
-			gestionPersAut.eliminarPersAut(persAut1);
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionPersAut.eliminarPersAut(u,persAut1);
 			
 		} catch (PersAutNoEncontradaException e) {
 			// OK
@@ -402,12 +600,54 @@ public class TestPersAut {
 	}
 	
 	@Test
+	public void testEliminarPersAutNoAdmin() {
+		try {
+			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
+			PersAut persAut1 = persAut.get(0);
+			persAut1.setId(3);
+			
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(false);
+			
+			gestionPersAut.eliminarPersAut(u,persAut1);
+			
+		} catch (UserNoAdminException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Debería lanzar la excepción de PersAut no encontrada");
+		}
+	}
+	
+	@Test
 	public void testEliminarTodasPersAut() {
 		try {
-			gestionPersAut.eliminarTodasPersAut();
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionPersAut.eliminarTodasPersAut(u);
 			
 			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
 			assertEquals(0, persAut.size());
+		} catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
+		}
+	}
+	
+	@Test
+	public void testEliminarTodasPersAutNoAdmin() {
+		try {
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(false);
+			
+			gestionPersAut.eliminarTodasPersAut(u);
+			
+			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
+			assertEquals(0, persAut.size());
+		} catch (UserNoAdminException e) {
+			// OK
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
 		}

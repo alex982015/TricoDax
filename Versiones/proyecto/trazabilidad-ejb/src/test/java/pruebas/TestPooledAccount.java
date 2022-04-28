@@ -179,7 +179,12 @@ public class TestPooledAccount {
 		try {
 			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
 			PooledAccount cuenta1 = cuentas.get(0);
-			gestionPooledAccount.cerrarCuentaPooledAccount(cuenta1);
+			
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionPooledAccount.cerrarCuentaPooledAccount(u,cuenta1);
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
 		}
@@ -192,7 +197,12 @@ public class TestPooledAccount {
 			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
 			PooledAccount cuenta1 = cuentas.get(0);
 			cuenta1.setIBAN(1234);
-			gestionPooledAccount.cerrarCuentaPooledAccount(cuenta1);
+			
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionPooledAccount.cerrarCuentaPooledAccount(u,cuenta1);
 		} catch (CuentaNoEncontradoException e) {
 			// OK
 		} catch (ProyectoException e) {
@@ -206,8 +216,32 @@ public class TestPooledAccount {
 		try {
 			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
 			PooledAccount cuenta1 = cuentas.get(0);
-			gestionPooledAccount.cerrarCuentaPooledAccount(cuenta1);
+			
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionPooledAccount.cerrarCuentaPooledAccount(u,cuenta1);
 		} catch (CuentaConSaldoException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
+		}
+	}
+	
+	@Requisitos({"RF9"})
+	@Test
+	public void testCerrarPooledAccountNoAdmin() {
+		try {
+			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
+			PooledAccount cuenta1 = cuentas.get(0);
+			
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(false);
+			
+			gestionPooledAccount.cerrarCuentaPooledAccount(u,cuenta1);
+		} catch (UserNoAdminException e) {
 			// OK
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
@@ -448,7 +482,12 @@ public class TestPooledAccount {
 		try {
 			List<PooledAccount> cuenta = gestionPooledAccount.obtenerPooledAccount();
 			PooledAccount c = cuenta.get(0);
-			gestionPooledAccount.actualizarPooledAccount(c);
+			
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);	
+			
+			gestionPooledAccount.actualizarPooledAccount(u,c);
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al actualizar");
 		}
@@ -462,7 +501,12 @@ public class TestPooledAccount {
 			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
 			PooledAccount c = cuentas.get(0);
 			c.setIBAN(IBAN);
-			gestionPooledAccount.actualizarPooledAccount(c);
+			
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+	
+			gestionPooledAccount.actualizarPooledAccount(u,c);
 			fail("Debería lanzar excepción de PooledAccount no encontrado");
 		} catch (CuentaNoEncontradoException e) {
 			// OK
@@ -470,14 +514,40 @@ public class TestPooledAccount {
 			fail("Debería lanzar excepción de PooledAccount no encontrado");
 		}
 	}
-
 	
+	@Test
+	public void testActualizarPooledAccountNoAdmin() {
+		final long IBAN = 455833218;
+		
+		try {
+			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
+			PooledAccount c = cuentas.get(0);
+			c.setIBAN(IBAN);
+			
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(false);
+	
+			gestionPooledAccount.actualizarPooledAccount(u,c);
+			fail("Debería lanzar excepción de PooledAccount no encontrado");
+		} catch (UserNoAdminException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Debería lanzar excepción de PooledAccount no encontrado");
+		}
+	}
+
 	@Test
 	public void testEliminarPooledAccount() {
 		try {
 			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
 			PooledAccount cuenta1 = cuentas.get(0);
-			gestionPooledAccount.eliminarPooledAccount(cuenta1);
+			
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionPooledAccount.eliminarPooledAccount(u,cuenta1);
 			
 			List<PooledAccount> c = gestionPooledAccount.obtenerPooledAccount();
 			assertEquals(0, c.size());
@@ -492,7 +562,12 @@ public class TestPooledAccount {
 			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
 			PooledAccount cuenta1 = cuentas.get(0);
 			cuenta1.setIBAN(455833220);
-			gestionPooledAccount.eliminarPooledAccount(cuenta1);
+			
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionPooledAccount.eliminarPooledAccount(u,cuenta1);
 			fail("Debería lanzar la excepción de PooledAccount no encontrada");
 		} catch (CuentaNoEncontradoException e) {
 			// OK
@@ -502,11 +577,52 @@ public class TestPooledAccount {
 	}
 	
 	@Test
+	public void testEliminarPooledAccountNoAdmin() {
+		try {
+			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
+			PooledAccount cuenta1 = cuentas.get(0);
+			cuenta1.setIBAN(455833220);
+			
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(false);
+			
+			gestionPooledAccount.eliminarPooledAccount(u,cuenta1);
+			fail("Debería lanzar la excepción de PooledAccount no encontrada");
+		} catch (UserNoAdminException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Debería lanzar la excepción de PooledAccount no encontrada");
+		}
+	}
+	
+	@Test
 	public void testEliminarTodasPooledAccount() {
 		try {
-			gestionPooledAccount.eliminarTodasPooledAccount();
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionPooledAccount.eliminarTodasPooledAccount(u);
 			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
 			assertEquals(0, cuentas.size());
+		} catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
+		}
+	}
+	
+	@Test
+	public void testEliminarTodasPooledAccountNoAdmin() {
+		try {
+			List<UserApk> user = gestionUserApk.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(false);
+			
+			gestionPooledAccount.eliminarTodasPooledAccount(u);
+			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
+			assertEquals(0, cuentas.size());
+		} catch (UserNoAdminException e) {
+			// OK
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
 		}
