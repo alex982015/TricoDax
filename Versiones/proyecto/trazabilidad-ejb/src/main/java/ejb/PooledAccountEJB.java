@@ -7,6 +7,7 @@ import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -18,6 +19,7 @@ import exceptions.CuentaNoEncontradoException;
 import exceptions.CuentaRefNoCashException;
 import exceptions.CuentaRefNoVinculadaException;
 import exceptions.CuentaRefOrigenDestinoNoEncontrada;
+import exceptions.MismaMonedaException;
 import exceptions.ProyectoException;
 import exceptions.UserNoAdminException;
 import exceptions.UserNoEncontradoException;
@@ -35,7 +37,7 @@ public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledA
 	private EntityManager em;
     
 	@Override
-	public void insertarPooledAccount(UserApk user, PooledAccount pooled, List<CuentaRef> cuenta) throws UserNoEncontradoException, CuentaExistenteException, UserNoAdminException {
+	public void insertarPooledAccount(UserApk user, PooledAccount pooled, Map<CuentaRef, Double> cantidades) throws ProyectoException {
 		UserApk userApkEntity = em.find(UserApk.class, user.getUser());
 		
 		if(userApkEntity == null) {
@@ -48,22 +50,26 @@ public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledA
 			throw new CuentaExistenteException();
 		}
 		
+		Map<CuentaRef, Double> cuentasRef = pooled.getDepositEn();
+		
 		if(user.isAdministrativo()) {
-			
-			Map<CuentaRef, Double> deposit = new HashMap<CuentaRef, Double>();
-			
-			for(CuentaRef c : cuenta) {
+
+			for(CuentaRef c : cantidades.keySet()) {
 				CuentaRef account = em.find(CuentaRef.class, c.getIBAN());
 				
-				if(account != null) {
-					deposit.put(account, account.getSaldo());
+				if(!cuentasRef.keySet().contains(c)) {
+					if(account != null) {
+						cuentasRef.put(account, account.getSaldo());
+					} else {
+						cuentasRef.put(c, c.getSaldo());
+						em.persist(c);
+					}
 				} else {
-					deposit.put(c, c.getSaldo());
-					em.persist(c);
-				}	
+					throw new MismaMonedaException();
+				}
 			}
 			
-			pooled.setDepositEn(deposit);
+			pooled.setDepositEn(cuentasRef);
 			em.persist(pooled);
 		} else {
 			throw new UserNoAdminException();
@@ -162,28 +168,40 @@ public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledA
 			if ((origenEntity != null) && (destinoEntity != null)) {
 				if((cuentaEntity.getDepositEn().containsKey(origen)) && (cuentaEntity.getDepositEn().containsKey(destino))) {
 					if(origen.getSaldo() >= cantidad) {				
-						if(origen.getMoneda().getCambioEuro() == 1.0) {
-							origen.setSaldo(origen.getSaldo() - cantidad);
-							em.merge(origen);
-							destino.setSaldo(destino.getSaldo() + cantidad * (1 / destino.getMoneda().getCambioEuro()));
-							em.merge(destino);
+						
+						if (origen.getMoneda().getCambioEuro() == destino.getMoneda().getCambioEuro()) {
+							throw new MismaMonedaException();
 						} else {
-							origen.setSaldo(origen.getSaldo() - cantidad);
-							em.merge(origen);
-							destino.setSaldo(destino.getSaldo() + cantidad * destino.getMoneda().getCambioEuro());
-							em.merge(destino);
+							Map<CuentaRef, Double> depositEn = cuenta.getDepositEn();
+							
+							if(origen.getMoneda().getCambioEuro() == 1.0) {
+								origen.setSaldo(origen.getSaldo() - cantidad);
+								destino.setSaldo(destino.getSaldo() + cantidad * (1 / destino.getMoneda().getCambioEuro()));
+								
+							} else {
+								if(destino.getMoneda().getCambioEuro() != 1.0) {
+									origen.setSaldo(origen.getSaldo() - cantidad);
+									
+									double aEuro = cantidad * origen.getMoneda().getCambioEuro();
+									destino.setSaldo(destino.getSaldo() + (aEuro / destino.getMoneda().getCambioEuro()));
+									
+								} else {
+									origen.setSaldo(origen.getSaldo() - cantidad);
+									destino.setSaldo(destino.getSaldo() + cantidad * destino.getMoneda().getCambioEuro());
+								}
+							}
+							
+							depositEn.put(origen, origen.getSaldo());
+							depositEn.put(destino, destino.getSaldo());
+							
+							Trans transaccion = new Trans(cantidad, "Cambio Divisa", "0%", true, null, Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+							transaccion.setMonedaOrigen(origen.getMoneda());
+							transaccion.setMonedaDestino(destino.getMoneda());
+							transaccion.setCuenta(cuenta);
+							transaccion.setTransaccion(cuenta);
+						
+							em.persist(transaccion);
 						}
-						
-						Trans transaccion = new Trans(cantidad, "Cambio Divisa", "0%", true, null, Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-						transaccion.setCuenta(cuenta);
-						transaccion.setTransaccion(cuenta);
-						
-						List<Trans> t = cuenta.getTransacciones();
-						t.add(transaccion);
-						cuenta.setTransacciones(t);
-						em.persist(transaccion);
-						em.merge(cuenta);
-						
 					} else {
 						throw new CuentaRefNoCashException();
 					}
@@ -209,27 +227,40 @@ public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledA
 		if ((origenEntity != null) && (destinoEntity != null)) {
 			if((cuentaEntity.getDepositEn().containsKey(origen)) && (cuentaEntity.getDepositEn().containsKey(destino))) {
 				if(origen.getSaldo() >= cantidad) {				
-					if(origen.getMoneda().getCambioEuro() == 1.0) {
-						origen.setSaldo(origen.getSaldo() - cantidad);
-						em.merge(origen);
-						destino.setSaldo(destino.getSaldo() + cantidad * (1 / destino.getMoneda().getCambioEuro()));
-						em.merge(destino);
+					
+					if (origen.getMoneda().getCambioEuro() == destino.getMoneda().getCambioEuro()) {
+						throw new MismaMonedaException();
 					} else {
-						origen.setSaldo(origen.getSaldo() - cantidad);
-						em.merge(origen);
-						destino.setSaldo(destino.getSaldo() + cantidad * destino.getMoneda().getCambioEuro());
-						em.merge(destino);
+						Map<CuentaRef, Double> depositEn = cuenta.getDepositEn();
+						
+						if(origen.getMoneda().getCambioEuro() == 1.0) {
+							origen.setSaldo(origen.getSaldo() - cantidad);
+							destino.setSaldo(destino.getSaldo() + cantidad * (1 / destino.getMoneda().getCambioEuro()));
+							
+						} else {
+							if(destino.getMoneda().getCambioEuro() != 1.0) {
+								origen.setSaldo(origen.getSaldo() - cantidad);
+								
+								double aEuro = cantidad * origen.getMoneda().getCambioEuro();
+								destino.setSaldo(destino.getSaldo() + (aEuro / destino.getMoneda().getCambioEuro()));
+								
+							} else {
+								origen.setSaldo(origen.getSaldo() - cantidad);
+								destino.setSaldo(destino.getSaldo() + cantidad * destino.getMoneda().getCambioEuro());
+							}
+						}
+						
+						depositEn.put(origen, origen.getSaldo());
+						depositEn.put(destino, destino.getSaldo());
+						
+						Trans transaccion = new Trans(cantidad, "Cambio Divisa", "0%", true, null, Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+						transaccion.setMonedaOrigen(origen.getMoneda());
+						transaccion.setMonedaDestino(destino.getMoneda());
+						transaccion.setCuenta(cuenta);
+						transaccion.setTransaccion(cuenta);
+					
+						em.persist(transaccion);
 					}
-					
-					Trans transaccion = new Trans(cantidad, "Cambio Divisa", "0%", true, null, Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-					transaccion.setMonedaOrigen(origen.getMoneda());
-					transaccion.setMonedaDestino(destino.getMoneda());
-					
-					List<Trans> t = cuenta.getTransacciones();
-					t.add(transaccion);
-					cuenta.setTransacciones(t);
-					em.persist(transaccion);
-					em.merge(cuenta);
 				} else {
 					throw new CuentaRefNoCashException();
 				}

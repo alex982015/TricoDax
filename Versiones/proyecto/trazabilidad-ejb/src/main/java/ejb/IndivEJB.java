@@ -10,10 +10,13 @@ import exceptions.ClienteNoEncontradoException;
 import exceptions.CuentaSegregadaYaAsignadaException;
 import exceptions.NoBajaClienteException;
 import exceptions.ProyectoException;
+import exceptions.UserNoAdminException;
+import exceptions.UserNoEncontradoException;
 import jpa.Cliente;
 import jpa.CuentaFintech;
 import jpa.Indiv;
 import jpa.Segregada;
+import jpa.UserApk;
 
 @Stateless
 public class IndivEJB implements GestionIndiv {
@@ -22,14 +25,24 @@ public class IndivEJB implements GestionIndiv {
 	private EntityManager em;
 
 	@Override
-	public void insertarIndiv(Indiv indiv) throws ClienteExistenteException {
-		//Hace falta ver admin 
-		Indiv indivExistente = em.find(Indiv.class, indiv.getID());
-		if (indivExistente != null) {
-			throw new ClienteExistenteException();
+	public void insertarIndiv(UserApk user, Indiv indiv) throws ProyectoException {
+		
+		UserApk userExistente = em.find(UserApk.class, user.getUser());
+		if (userExistente == null) {
+			throw new UserNoEncontradoException();
 		}
 		
-		em.persist(indiv);
+		if(user.isAdministrativo()) {
+			Indiv indivExistente = em.find(Indiv.class, indiv.getID());
+			
+			if (indivExistente != null) {
+				throw new ClienteExistenteException();
+			}
+			
+			em.persist(indiv);
+		} else {
+			throw new UserNoAdminException();
+		}
 	}
 
 	@Override
@@ -39,90 +52,133 @@ public class IndivEJB implements GestionIndiv {
 	}
 
 	@Override
-	public void actualizarIndiv(Indiv indiv) throws ProyectoException {
-		Indiv indivEntity = em.find(Indiv.class, indiv.getID());
-		if (indivEntity == null) {
-			throw new ClienteNoEncontradoException();
+	public void actualizarIndiv(UserApk user, Indiv indiv) throws ProyectoException {
+		
+		UserApk userEntity = em.find(UserApk.class, user.getUser());
+		if (userEntity == null) {
+			throw new UserNoEncontradoException();
 		}
 		
-		indivEntity.setNombre(indiv.getNombre());
-		indivEntity.setApellido(indiv.getApellido());
-		indivEntity.setFechaNac(indiv.getFechaNac());
-		indivEntity.setCiudad(indiv.getCiudad());
-		indivEntity.setCodPostal(indiv.getCodPostal());
-		indivEntity.setFecha_Alta(indiv.getFecha_Alta());
-		indivEntity.setDireccion(indiv.getDireccion());
-		indivEntity.setIdent(indiv.getIdent());
-		indivEntity.setPais(indiv.getPais());
-		indivEntity.setTipo_cliente(indiv.getTipo_cliente());
-		indivEntity.setFecha_Baja(indiv.getFecha_Baja());
-		indivEntity.setUsuarioApk(indiv.getUsuarioApk());
-		
-		TypedQuery<Segregada> query = em.createQuery("SELECT s FROM Segregada s", Segregada.class);
-		
-		for(Segregada s : query.getResultList()) {
-			for(CuentaFintech c : indiv.getCuentas()) {
-				if(s.getIBAN() == c.getIBAN()) {
-					throw new CuentaSegregadaYaAsignadaException();
-				} else {
-					indivEntity.setCuentas(indiv.getCuentas());
+		if(user.isAdministrativo()) {
+			Indiv indivEntity = em.find(Indiv.class, indiv.getID());
+			if (indivEntity == null) {
+				throw new ClienteNoEncontradoException();
+			}
+			
+			indivEntity.setNombre(indiv.getNombre());
+			indivEntity.setApellido(indiv.getApellido());
+			indivEntity.setFechaNac(indiv.getFechaNac());
+			indivEntity.setCiudad(indiv.getCiudad());
+			indivEntity.setCodPostal(indiv.getCodPostal());
+			indivEntity.setFecha_Alta(indiv.getFecha_Alta());
+			indivEntity.setDireccion(indiv.getDireccion());
+			indivEntity.setIdent(indiv.getIdent());
+			indivEntity.setPais(indiv.getPais());
+			indivEntity.setTipo_cliente(indiv.getTipo_cliente());
+			indivEntity.setFecha_Baja(indiv.getFecha_Baja());
+			indivEntity.setUsuarioApk(indiv.getUsuarioApk());
+			
+			TypedQuery<Segregada> query = em.createQuery("SELECT s FROM Segregada s", Segregada.class);
+			
+			for(Segregada s : query.getResultList()) {
+				for(CuentaFintech c : indiv.getCuentas()) {
+					if(s.getIBAN() == c.getIBAN()) {
+						throw new CuentaSegregadaYaAsignadaException();
+					} else {
+						indivEntity.setCuentas(indiv.getCuentas());
+					}
 				}
 			}
+			
+			em.merge(indivEntity);
+		} else {
+			throw new UserNoAdminException();
 		}
-		
-		em.merge(indivEntity);
 	}
 	
 	@Override
-	public void cerrarCuentaIndiv(Indiv indiv) throws ProyectoException {
-		Indiv indivEntity = em.find(Indiv.class, indiv.getID());
+	public void cerrarCuentaIndiv(UserApk user, Indiv indiv) throws ProyectoException {
+		UserApk userEntity = em.find(UserApk.class, user.getUser());
 		
-		if (indivEntity == null) {
-			throw new ClienteNoEncontradoException();
+		if (userEntity == null) {
+			throw new UserNoEncontradoException();
 		}
 		
-		List<CuentaFintech> cuentasEmpresa = indivEntity.getCuentas();
-		boolean ok = false;
-		
-		for(CuentaFintech c : cuentasEmpresa) {
-			if(c.getEstado() == true) {
-				ok = true;
+		if(user.isAdministrativo()) {
+			Indiv indivEntity = em.find(Indiv.class, indiv.getID());
+			
+			if (indivEntity == null) {
+				throw new ClienteNoEncontradoException();
 			}
-		}
-		
-		if(!ok) {
-			indivEntity.setEstado(ok);
+			
+			List<CuentaFintech> cuentasEmpresa = indivEntity.getCuentas();
+			boolean ok = false;
+			
+			for(CuentaFintech c : cuentasEmpresa) {
+				if(c.getEstado() == true) {
+					ok = true;
+				}
+			}
+			
+			if(!ok) {
+				indivEntity.setEstado(ok);
+			} else {
+				throw new NoBajaClienteException();
+			}
+			
+			em.merge(indivEntity);
 		} else {
-			throw new NoBajaClienteException();
+			throw new UserNoAdminException();
 		}
-		
-		em.merge(indivEntity);
 	}
 
 	@Override
-	public void eliminarIndiv(Indiv indiv) throws ProyectoException {
-		Indiv indivEntity = em.find(Indiv.class, indiv.getID());
-		Cliente clienteEntity = em.find(Cliente.class, indiv.getID());
+	public void eliminarIndiv(UserApk user, Indiv indiv) throws ProyectoException {
 		
-		if ((indivEntity == null) && (clienteEntity == null)) {
-			throw new ClienteNoEncontradoException();
+		UserApk userEntity = em.find(UserApk.class, user.getUser());
+		
+		if (userEntity == null) {
+			throw new UserNoEncontradoException();
 		}
 		
-		em.remove(indivEntity);
-		em.remove(clienteEntity);
+		if(user.isAdministrativo()) {
+			
+			Indiv indivEntity = em.find(Indiv.class, indiv.getID());
+			
+			if (indivEntity == null) {
+				throw new ClienteNoEncontradoException();
+			}
+			
+			em.remove(indivEntity);
+
+		} else {
+			throw new UserNoAdminException();
+		}
 	}
 
 	@Override
-	public void eliminarTodosIndiv() throws ProyectoException {
-		List<Indiv> particulares = obtenerIndiv();
+	public void eliminarTodosIndiv(UserApk user) throws ProyectoException {
 		
-		for (Indiv i : particulares) {
-			Cliente clienteEntity = em.find(Cliente.class, i.getID());
-			em.remove(clienteEntity);
+		UserApk userEntity = em.find(UserApk.class, user.getUser());
+		
+		if (userEntity == null) {
+			throw new UserNoEncontradoException();
 		}
 		
-		for (Indiv i : particulares) {
-			em.remove(i);
+		if(user.isAdministrativo()) {
+			
+			List<Indiv> particulares = obtenerIndiv();
+			
+			for (Indiv i : particulares) {
+				Cliente clienteEntity = em.find(Cliente.class, i.getID());
+				em.remove(clienteEntity);
+			}
+			
+			for (Indiv i : particulares) {
+				em.remove(i);
+			}
+		} else {
+			throw new UserNoAdminException();
 		}
 	}
 	

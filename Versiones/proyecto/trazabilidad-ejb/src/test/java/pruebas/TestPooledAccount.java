@@ -4,7 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.naming.NamingException;
 import org.junit.Before;
 import org.junit.Test;
@@ -60,17 +63,17 @@ public class TestPooledAccount {
 		u.setAdministrativo(true);
 		
 		List<CuentaRef> cuentasRef = gestionCuentaRef.obtenerCuentasRef();
+		CuentaRef cuenta1 = cuentasRef.get(0);
+		CuentaRef cuenta2 = cuentasRef.get(1);
+		
+		Map<CuentaRef, Double> m = new HashMap<CuentaRef, Double>();
+		m.put(cuenta1, 2000.0);
+		m.put(cuenta2, 5000.0);
 		
 		try {
-			gestionPooledAccount.insertarPooledAccount(u, cuenta, cuentasRef);
+			gestionPooledAccount.insertarPooledAccount(u, cuenta, m);
 			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
 			assertEquals(2, cuentas.size());
-		} catch (CuentaExistenteException e) {
-			fail("Lanzó excepción al insertar");
-		} catch (UserNoEncontradoException e) {
-			fail("Lanzó excepción al insertar");
-		}  catch (UserNoAdminException e) {
-			fail("Lanzó excepción al insertar"); 
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al insertar"); 
 		}
@@ -84,11 +87,17 @@ public class TestPooledAccount {
 		
 		List<UserApk> user = gestionUserApk.obtenerUser();
 		UserApk u = user.get(0);
-		
+
 		List<CuentaRef> cuentasRef = gestionCuentaRef.obtenerCuentasRef();
+		CuentaRef cuenta1 = cuentasRef.get(0);
+		CuentaRef cuenta2 = cuentasRef.get(1);
 		
+		Map<CuentaRef, Double> m = new HashMap<CuentaRef, Double>();
+		m.put(cuenta1, 2000.0);
+		m.put(cuenta2, 5000.0);
+
 		try {
-			gestionPooledAccount.insertarPooledAccount(u, p, cuentasRef);
+			gestionPooledAccount.insertarPooledAccount(u, p, m);
 			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
 			assertEquals(2, cuentas.size());
 		} catch (CuentaExistenteException e) {
@@ -113,9 +122,15 @@ public class TestPooledAccount {
 		u.setUser("U");
 		
 		List<CuentaRef> cuentasRef = gestionCuentaRef.obtenerCuentasRef();
+		CuentaRef cuenta1 = cuentasRef.get(0);
+		CuentaRef cuenta2 = cuentasRef.get(1);
+		
+		Map<CuentaRef, Double> m = new HashMap<CuentaRef, Double>();
+		m.put(cuenta1, 2000.0);
+		m.put(cuenta2, 5000.0);
 		
 		try {
-			gestionPooledAccount.insertarPooledAccount(u, cuenta, cuentasRef);
+			gestionPooledAccount.insertarPooledAccount(u, cuenta, m);
 			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
 			assertEquals(2, cuentas.size());
 		} catch (UserNoEncontradoException e) {
@@ -138,11 +153,17 @@ public class TestPooledAccount {
 		List<UserApk> user = gestionUserApk.obtenerUser();
 		UserApk u = user.get(0);
 		u.setAdministrativo(false);
-		
+
 		List<CuentaRef> cuentasRef = gestionCuentaRef.obtenerCuentasRef();
+		CuentaRef cuenta1 = cuentasRef.get(0);
+		CuentaRef cuenta2 = cuentasRef.get(1);
+		
+		Map<CuentaRef, Double> m = new HashMap<CuentaRef, Double>();
+		m.put(cuenta1, 2000.0);
+		m.put(cuenta2, 5000.0);
 		
 		try {
-			gestionPooledAccount.insertarPooledAccount(u, cuenta, cuentasRef);
+			gestionPooledAccount.insertarPooledAccount(u, cuenta, m);
 			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
 			assertEquals(2, cuentas.size());
 		} catch (UserNoAdminException e) {
@@ -221,8 +242,12 @@ public class TestPooledAccount {
 			List<UserApk> user = gestionUserApk.obtenerUser();
 			UserApk u = user.get(0);
 			u.setAdministrativo(true);
+
+			Map<CuentaRef, Double> m = new HashMap<CuentaRef, Double>();
+			m.put(origen, 2000.0);
+			m.put(destino, 5000.0);
 			
-			gestionPooledAccount.insertarPooledAccount(u, cuenta, cuentas);
+			gestionPooledAccount.insertarPooledAccount(u, cuenta, m);
 			
 			gestionPooledAccount.cambiarDivisaPooledAccount(cuenta, origen, destino, 100.0);
 			
@@ -259,8 +284,12 @@ public class TestPooledAccount {
 			List<UserApk> user = gestionUserApk.obtenerUser();
 			UserApk u = user.get(0);
 			u.setAdministrativo(true);
+
+			Map<CuentaRef, Double> m = new HashMap<CuentaRef, Double>();
+			m.put(origen, 2000.0);
+			m.put(destino, 5000.0);
 			
-			gestionPooledAccount.insertarPooledAccount(u, cuenta, cuentas);
+			gestionPooledAccount.insertarPooledAccount(u, cuenta, m);
 			
 			gestionPooledAccount.cambiarDivisaPooledAccount(cuenta, origen, destino, 100.0);
 			
@@ -299,8 +328,12 @@ public class TestPooledAccount {
 			List<UserApk> user = gestionUserApk.obtenerUser();
 			UserApk u = user.get(0);
 			u.setAdministrativo(true);
+
+			Map<CuentaRef, Double> m = new HashMap<CuentaRef, Double>();
+			m.put(origen, 2000.0);
+			m.put(destino, 5000.0);
 			
-			gestionPooledAccount.insertarPooledAccount(u, cuenta, cuentas);
+			gestionPooledAccount.insertarPooledAccount(u, cuenta, m);
 			
 			gestionPooledAccount.cambiarDivisaPooledAccountAdministrativo(u, cuenta, origen, destino, 100.0);
 			
@@ -337,8 +370,12 @@ public class TestPooledAccount {
 			List<UserApk> user = gestionUserApk.obtenerUser();
 			UserApk u = user.get(0);
 			u.setAdministrativo(false);
+
+			Map<CuentaRef, Double> m = new HashMap<CuentaRef, Double>();
+			m.put(origen, 2000.0);
+			m.put(destino, 5000.0);
 			
-			gestionPooledAccount.insertarPooledAccount(u, cuenta, cuentas);
+			gestionPooledAccount.insertarPooledAccount(u, cuenta, m);
 			
 			gestionPooledAccount.cambiarDivisaPooledAccountAdministrativo(u, cuenta, origen, destino, 100.0);
 			
@@ -378,8 +415,12 @@ public class TestPooledAccount {
 			List<UserApk> user = gestionUserApk.obtenerUser();
 			UserApk u = user.get(0);
 			u.setAdministrativo(true);
+
+			Map<CuentaRef, Double> m = new HashMap<CuentaRef, Double>();
+			m.put(origen, 2000.0);
+			m.put(destino, 5000.0);
 			
-			gestionPooledAccount.insertarPooledAccount(u, cuenta, cuentas);
+			gestionPooledAccount.insertarPooledAccount(u, cuenta, m);
 			
 			gestionPooledAccount.cambiarDivisaPooledAccount(cuenta, origen, destino, 100.0);
 			

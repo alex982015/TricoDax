@@ -44,12 +44,12 @@ public class TestUserApk {
 
 	@Requisitos({"RF1"}) 
 	@Test
-	public void testcheckUserAdmin() {
+	public void testIniciarSesionUserAdmin() {
 		
 		try {
 			final UserApk user = new UserApk("USUARIO", "1234", true);
 			gestionUser.insertarUserAdmin(user);	
-			gestionUser.checkUserAdmin(user);
+			gestionUser.IniciarSesionUserAdmin(user);
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
 		}
@@ -57,12 +57,12 @@ public class TestUserApk {
 	
 	@Requisitos({"RF1"}) 
 	@Test
-	public void testcheckUserAdminNoEncontrado() {
+	public void testIniciarSesionUserAdminNoEncontrado() {
 		try {
 			List<UserApk> u = gestionUser.obtenerUser();
 			UserApk user = u.get(0);
 			user.setUser("example");
-			gestionUser.checkUserAdmin(user);
+			gestionUser.IniciarSesionUserAdmin(user);
 		} catch (UserNoEncontradoException e) {
 			// OK
 		} catch (ProyectoException e) {
@@ -72,11 +72,11 @@ public class TestUserApk {
 		
 	@Requisitos({"RF1"}) 
 	@Test
-	public void testcheckUserNoAdmin() {
+	public void testIniciarSesionNoAdmin() {
 		try {
 			List<UserApk> u = gestionUser.obtenerUser();
 			UserApk user = u.get(1);
-			gestionUser.checkUserAdmin(user);
+			gestionUser.IniciarSesionUserAdmin(user);
 		} catch (UserNoAdminException e) {
 			// OK
 		} catch (ProyectoException e) {
@@ -84,7 +84,67 @@ public class TestUserApk {
 		}
 	}
 	
+	@Requisitos({"RF1"}) 
+	@Test
+	public void testIniciarSesionAdminBadPassword() {
+		try {
+			List<UserApk> u = gestionUser.obtenerUser();
+			UserApk user = u.get(1);
+			gestionUser.IniciarSesionUserAdmin(user);
+		} catch (UserBadPasswordException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
+		}
+	}
+	
 	@Requisitos({"RF10"}) 
+	@Test
+	public void testIniciarSesion() throws ProyectoException {
+		List<UserApk> users = gestionUser.obtenerUser();
+		UserApk u = users.get(0);
+		
+		try {
+			gestionUser.iniciarSesion(u);
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al insertar"); 
+		}
+	}
+	
+	@Requisitos({"RF10"}) 
+	@Test
+	public void testIniciarSesionUserNoExistente() throws ProyectoException {
+		List<UserApk> users = gestionUser.obtenerUser();
+		UserApk u = users.get(0);
+		u.setUser("U");
+		
+		try {
+			gestionUser.iniciarSesion(u);
+		} catch (UserNoEncontradoException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al insertar"); 
+		}
+	}
+	
+	@Requisitos({"RF10"}) 
+	@Test
+	public void testIniciarSesionBadPassword() throws ProyectoException {
+		List<UserApk> users = gestionUser.obtenerUser();
+		UserApk u = users.get(0);
+		u.setPassword("Password");
+		
+		try {
+			gestionUser.iniciarSesion(u);
+		} catch (UserBadPasswordException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("Lanzó excepción al insertar"); 
+		}
+	}
+	
+	/******** TEST ADICIONALES *********/
+
 	@Test
 	public void testInsertarUserNoAdmin() throws ProyectoException {
 		final UserApk user = new UserApk("USUARIO", "1234", false);
@@ -102,17 +162,20 @@ public class TestUserApk {
 		}
 	}
 	
-	@Requisitos({"RF10"}) 
 	@Test
-	public void testInsertarUserIndividual() throws ProyectoException {
+	public void testInsertarUser() throws ProyectoException {
 		List<Indiv> particulares = gestionIndiv.obtenerIndiv();
 		Indiv i = particulares.get(0);
 		
+		List<PersAut> autorizados = gestionPersAut.obtenerPersAut();
+		PersAut p = autorizados.get(0);
+		
 		final UserApk user = new UserApk("USUARIO", "1234", false);
 		user.setPersonaIndividual(i);
+		user.setPersonaAutorizada(p);
 		
 		try {
-			gestionUser.insertarUserIndividual(user);
+			gestionUser.insertarUser(user);
 			List<UserApk> UserExistentes = gestionUser.obtenerUser();
 			assertEquals(5, UserExistentes.size());
 		} catch (ClienteExistenteException e) {
@@ -122,12 +185,10 @@ public class TestUserApk {
 		}
 	}
 	
-	@Requisitos({"RF10"}) 
 	@Test
-	public void testInsertarUserIndividualNoExistente() throws ProyectoException {
+	public void testInsertarUserYaExistente() throws ProyectoException {
 		List<Indiv> particulares = gestionIndiv.obtenerIndiv();
 		Indiv i = particulares.get(0);
-		i.setID(10);
 		
 		for(Indiv ind : particulares) {
 			System.out.println(ind.getID());
@@ -137,50 +198,32 @@ public class TestUserApk {
 		user.setPersonaIndividual(i);
 		
 		try {
-			gestionUser.insertarUserIndividual(user);
-			List<UserApk> UserExistentes = gestionUser.obtenerUser();
-			assertEquals(5, UserExistentes.size());
-		} catch (UserAsociadoNoExistenteException e) {
-			// OK
-		} catch (UserNoEncontradoException e) {
-			fail("Lanzó excepción al insertar");
-		} catch (ProyectoException e) {
-			fail("Lanzó excepción al insertar"); 
-		}
-	}
-	
-	@Requisitos({"RF10"}) 
-	@Test
-	public void testInsertarUserAutorizado() throws ProyectoException {
-		List<PersAut> autorizados = gestionPersAut.obtenerPersAut();
-		PersAut i = autorizados.get(0);
-		
-		final UserApk user = new UserApk("USUARIO", "1234", false);
-		user.setPersonaAutorizada(i);
-		
-		try {
-			gestionUser.insertarUserAutorizado(user);
+			gestionUser.insertarUser(user);
 			List<UserApk> UserExistentes = gestionUser.obtenerUser();
 			assertEquals(5, UserExistentes.size());
 		} catch (UserExistenteException e) {
+			// OK
+		} catch (UserNoEncontradoException e) {
 			fail("Lanzó excepción al insertar");
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al insertar"); 
 		}
 	}
 	
-	@Requisitos({"RF10"}) 
 	@Test
-	public void testInsertarUserAutorizadoNoExistente() throws ProyectoException {
-		List<PersAut> autorizados = gestionPersAut.obtenerPersAut();
-		PersAut i = autorizados.get(0);
-		i.setId(10);
+	public void testInsertarUserNoExistente() throws ProyectoException {
+		List<Indiv> particulares = gestionIndiv.obtenerIndiv();
+		Indiv i = particulares.get(0);
+		i.setID(10);
+		
+		for(Indiv ind : particulares) {
+			System.out.println(ind.getID());
+		}
 		
 		final UserApk user = new UserApk("USUARIO", "1234", false);
-		user.setPersonaAutorizada(i);
 		
 		try {
-			gestionUser.insertarUserAutorizado(user);
+			gestionUser.insertarUser(user);
 			List<UserApk> UserExistentes = gestionUser.obtenerUser();
 			assertEquals(5, UserExistentes.size());
 		} catch (UserAsociadoNoExistenteException e) {
@@ -191,8 +234,6 @@ public class TestUserApk {
 			fail("Lanzó excepción al insertar"); 
 		}
 	}
-
-	/******** TEST ADICIONALES *********/
 	
 	@Test
 	public void testInsertarUserAdmin() throws ProyectoException {
@@ -204,48 +245,6 @@ public class TestUserApk {
 			assertEquals(5, UserExistentes.size());
 		} catch (UserExistenteException e) {
 			fail("Lanzó excepción al insertar");
-		} catch (ProyectoException e) {
-			fail("Lanzó excepción al insertar"); 
-		}
-	}
-	
-	@Test
-	public void testIniciarSesion() throws ProyectoException {
-		List<UserApk> users = gestionUser.obtenerUser();
-		UserApk u = users.get(0);
-		
-		try {
-			gestionUser.iniciarSesion(u);
-		} catch (ProyectoException e) {
-			fail("Lanzó excepción al insertar"); 
-		}
-	}
-	
-	@Test
-	public void testIniciarSesionUserNoExistente() throws ProyectoException {
-		List<UserApk> users = gestionUser.obtenerUser();
-		UserApk u = users.get(0);
-		u.setUser("U");
-		
-		try {
-			gestionUser.iniciarSesion(u);
-		} catch (UserNoEncontradoException e) {
-			// OK
-		} catch (ProyectoException e) {
-			fail("Lanzó excepción al insertar"); 
-		}
-	}
-	
-	@Test
-	public void testIniciarSesionBadPassword() throws ProyectoException {
-		List<UserApk> users = gestionUser.obtenerUser();
-		UserApk u = users.get(0);
-		u.setPassword("Password");
-		
-		try {
-			gestionUser.iniciarSesion(u);
-		} catch (UserBadPasswordException e) {
-			// OK
 		} catch (ProyectoException e) {
 			fail("Lanzó excepción al insertar"); 
 		}

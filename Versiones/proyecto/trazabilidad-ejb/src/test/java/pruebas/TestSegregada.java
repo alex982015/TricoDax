@@ -53,6 +53,8 @@ public class TestSegregada {
 		cuenta.setClasificacion(true);
 		List<UserApk> users = gestionUserApk.obtenerUser();
 		UserApk user= users.get(0);
+		user.setAdministrativo(true);
+		
 		try {
 			gestionSegregada.insertarSegregada(user, cuenta);
 			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
@@ -71,10 +73,10 @@ public class TestSegregada {
 		Segregada s = segregadas.get(0);
 		List<UserApk> users = gestionUserApk.obtenerUser();
 		UserApk user= users.get(0);
+		user.setAdministrativo(true);
+		
 		try {
 			gestionSegregada.insertarSegregada(user, s);
-			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
-			assertEquals(3, cuentas.size());
 		} catch (CuentaExistenteException e) {
 			// OK
 		} catch (ProyectoException e) {

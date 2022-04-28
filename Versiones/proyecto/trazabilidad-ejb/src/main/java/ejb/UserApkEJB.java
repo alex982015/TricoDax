@@ -36,35 +36,43 @@ public class UserApkEJB implements GestionUserApk {
 	}
 	
     @Override
-	public void insertarUserIndividual(UserApk user) throws ProyectoException {
+	public void insertarUser(UserApk user) throws ProyectoException {
 		UserApk userExistente= em.find(UserApk.class, user.getUser());
 		if (userExistente != null) {
 			throw new UserExistenteException();
 		}
 		
-		Indiv indivExistente = em.find(Indiv.class, user.getPersonaIndividual().getID());
-	
-		if (indivExistente == null) {
+		if((user.getPersonaIndividual() != null) && (user.getPersonaAutorizada() != null)) {
+			Indiv indivExistente = em.find(Indiv.class, user.getPersonaIndividual().getID());
+			PersAut persAutExistente = em.find(PersAut.class, user.getPersonaAutorizada().getId());
+			
+			if ((indivExistente != null) && (persAutExistente != null)) {
+				em.persist(user);
+			} else {
+				throw new UserAsociadoNoExistenteException();
+			}
+			
+		}
+		else if(user.getPersonaIndividual() != null) {
+			Indiv indivExistente = em.find(Indiv.class, user.getPersonaIndividual().getID());
+			
+			if (indivExistente != null) {
+				em.persist(user);
+			} else {
+				throw new UserAsociadoNoExistenteException();
+			}
+			
+		} else if(user.getPersonaAutorizada() != null) {
+			PersAut persAutExistente = em.find(PersAut.class, user.getPersonaAutorizada().getId());
+		
+			if (persAutExistente != null) {
+				em.persist(user);
+			} else {
+				throw new UserAsociadoNoExistenteException();
+			}
+		} else {
 			throw new UserAsociadoNoExistenteException();
 		}
-		
-		em.persist(user);
-	}
-    
-    @Override
-	public void insertarUserAutorizado(UserApk user) throws ProyectoException {
-		UserApk userExistente= em.find(UserApk.class, user.getUser());
-		if (userExistente != null) {
-			throw new UserExistenteException();
-		}
-		
-		PersAut persAutExistente = em.find(PersAut.class, user.getPersonaAutorizada().getId());
-	
-		if (persAutExistente == null) {
-			throw new UserAsociadoNoExistenteException();
-		}
-		
-		em.persist(user);
 	}
 
     @Override
@@ -128,7 +136,7 @@ public class UserApkEJB implements GestionUserApk {
 	}
 
 	@Override
-	public boolean checkUserAdmin(UserApk user) throws ProyectoException {
+	public boolean IniciarSesionUserAdmin(UserApk user) throws ProyectoException {
 		UserApk userEntity = em.find(UserApk.class, user.getUser());
 		boolean ok = false;
 		
@@ -136,12 +144,16 @@ public class UserApkEJB implements GestionUserApk {
 			throw new UserNoEncontradoException();
 		}
 		
-		if(user.isAdministrativo()) {
-			ok = true;
+		if(user.getPassword().hashCode() == userEntity.getPassword().hashCode()) {
+			if(user.isAdministrativo()) {
+				ok = true;
+			} else {
+				throw new UserNoAdminException();
+			}
 		} else {
-			throw new UserNoAdminException();
+			throw new UserBadPasswordException();
 		}
 		
 		return ok;
-	}   
+	}
 }
