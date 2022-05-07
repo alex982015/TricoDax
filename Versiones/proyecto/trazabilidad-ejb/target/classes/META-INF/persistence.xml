@@ -5,7 +5,7 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
   <persistence-unit name="Trazabilidad" transaction-type="JTA">
     <jta-data-source>java:jboss/datasources/sii</jta-data-source>
-    <class>jpa.Cliente</class>
+    	<class>jpa.Cliente</class>
 		<class>jpa.Cuenta</class>
 		<class>jpa.CuentaFintech</class>
 		<class>jpa.CuentaRef</class>

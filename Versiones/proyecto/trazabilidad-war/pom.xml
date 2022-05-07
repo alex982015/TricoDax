@@ -21,7 +21,7 @@
 			<groupId>es.uma.informatica.sii</groupId>
 			<artifactId>trazabilidad-ejb</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-                        <scope>provided</scope>
+            <scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax</groupId>
@@ -29,11 +29,11 @@
 			<version>8.0</version>
 			<scope>provided</scope>
 		</dependency>
-              <dependency>
-                     <groupId>javax.servlet.jsp.jstl</groupId>
-                     <artifactId>jstl-api</artifactId>
-                     <version>1.2</version>
-                     <scope>provided</scope>
-              </dependency>
+  		<dependency>
+         	<groupId>javax.servlet.jsp.jstl</groupId>
+         	<artifactId>jstl-api</artifactId>
+        	<version>1.2</version>
+        	<scope>provided</scope>
+  		</dependency>
 	</dependencies>
 </project>

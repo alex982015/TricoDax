@@ -23,7 +23,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
 public class TrazabilidadIT {
-	private static final String UNIDAD_PERSISTENCIA_PRUEBAS = "TrazabilidadTets";
+	private static final String UNIDAD_PERSISTENCIA_PRUEBAS = "TrazabilidadIT";
 	private WebDriver driver;
 	private Map<String, Object> vars;
 	JavascriptExecutor js;
