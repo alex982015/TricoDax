@@ -5,24 +5,19 @@
 
 	<groupId>es.uma.informatica.sii</groupId>
 	<artifactId>trazabilidad</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.1-SNAPSHOT</version>
+
 	<packaging>pom</packaging>
-	<modules>
-		<module>trazabilidad-ejb</module>
-		<module>trazabilidad-jpa</module>
-	</modules>
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-	<dependencyManagement>
-        <dependencies>
-            <dependency>
-                    <groupId>javax</groupId>
-                    <artifactId>javaee-api</artifactId>
-                    <version>8.0</version>
-            </dependency>
-        </dependencies>
-  	</dependencyManagement>
+	<modules>
+		<module>trazabilidad-ejb</module>
+		<module>trazabilidad-jpa</module>
+		<module>trazabilidad-war</module>
+		<module>trazabilidad-ear</module>
+		<module>trazabilidad-tests</module>
+	</modules>
 </project>
