@@ -95,11 +95,15 @@ Respuestas de la tutoría:
 1-Creamos los extremos y los asignamos al Map (Método asignarPersAut).
 2-No, usamos un boolean block en ambos extremos.
 
-
 TUTORÍA(28/04/2022)
 
-1-Requisito 11, ¿Cómo se hace?
-2-¿Requisito 5 es correcto?
-3-¿Necesario UserApk Admin en Empresa e Indiv o sirve con el método de RF1?
+1-Requisito 11, ¿Cómo se hace? Sólo crear listas
+2-¿Requisito 5 es correcto? OK
+3-¿Necesario UserApk Admin en Empresa e Indiv o sirve con el método de RF1? Si, quitamos método de RF1 y usamos UserApk admin
+
+TUTORÍA(10/05/2022)
+
+1-Con JUnit son 162 test correcots pero con maven obtenemos los test duplicados, funcionando mal el 50%.
+2-Al cargar ear en wildfly obtenemos error en el acceso al recurso.
 
 Próximas tutorías...
