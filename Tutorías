@@ -103,7 +103,8 @@ TUTORÍA(28/04/2022)
 
 TUTORÍA(10/05/2022)
 
-1-Con JUnit son 162 test correcots pero con maven obtenemos los test duplicados, funcionando mal el 50%.
-2-Al cargar ear en wildfly obtenemos error en el acceso al recurso.
+1-Uso de @Local en las interfaces de los EJB
+2-Con JUnit son 162 test correcots pero con maven obtenemos los test duplicados, funcionando mal el 50%.
+3-Al cargar ear en wildfly obtenemos error en el acceso al recurso.
 
 Próximas tutorías...
