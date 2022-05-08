@@ -2,11 +2,15 @@ package ejb;
 
 import java.io.IOException;
 import java.util.List;
+
+import javax.ejb.Local;
+
 import exceptions.ProyectoException;
 import jpa.Empresa;
 import jpa.PersAut;
 import jpa.UserApk;
 
+@Local
 public interface GestionPersAut {
 	public void insertarPersAut(UserApk user, PersAut persAut) throws ProyectoException;
 	public List<PersAut> obtenerPersAut() throws ProyectoException;

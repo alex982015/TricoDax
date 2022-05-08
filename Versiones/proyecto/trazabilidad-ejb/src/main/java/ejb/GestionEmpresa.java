@@ -1,10 +1,14 @@
 package ejb;
 
 import java.util.List;
+
+import javax.ejb.Local;
+
 import exceptions.ProyectoException;
 import jpa.Empresa;
 import jpa.UserApk;
 
+@Local
 public interface GestionEmpresa {
 	public void insertarEmpresa(UserApk user, Empresa empresa) throws ProyectoException;
 	public List<Empresa> obtenerEmpresas() throws ProyectoException;

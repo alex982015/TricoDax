@@ -1,9 +1,13 @@
 package ejb;
 
 import java.util.List;
+
+import javax.ejb.Local;
+
 import exceptions.ProyectoException;
 import jpa.CuentaFintech;
 
+@Local
 public interface GestionCuentaFintech {
 	public void insertarCuentaFintech(CuentaFintech cuenta) throws ProyectoException;
 	public List<CuentaFintech> obtenerCuentasFintech() throws ProyectoException;

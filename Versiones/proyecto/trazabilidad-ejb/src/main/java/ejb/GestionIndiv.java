@@ -1,10 +1,14 @@
 package ejb;
 
 import java.util.List;
+
+import javax.ejb.Local;
+
 import exceptions.ProyectoException;
 import jpa.Indiv;
 import jpa.UserApk;
 
+@Local
 public interface GestionIndiv {
 	public void insertarIndiv(UserApk user, Indiv indiv) throws ProyectoException;
 	public List<Indiv> obtenerIndiv() throws ProyectoException;

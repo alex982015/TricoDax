@@ -3,11 +3,14 @@ package ejb;
 import java.util.List;
 import java.util.Map;
 
+import javax.ejb.Local;
+
 import exceptions.ProyectoException;
 import jpa.CuentaRef;
 import jpa.PooledAccount;
 import jpa.UserApk;
 
+@Local
 public interface GestionPooledAccount {
 	public void insertarPooledAccount(UserApk user, PooledAccount pooled, Map<CuentaRef, Double> cantidades) throws ProyectoException;
 	public List<PooledAccount> obtenerPooledAccount() throws ProyectoException;
