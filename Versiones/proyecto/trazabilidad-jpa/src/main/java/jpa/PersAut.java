@@ -20,7 +20,7 @@ public class PersAut implements Serializable {
 	@Id @GeneratedValue @Column(name="ID")
 	private long Id;
 	@Column(name="IDENT", nullable = false)
-	private long ident;
+	private String ident;
 	@Column(name="NOMBRE", nullable = false)
 	private String nombre;
 	@Column(name="APELLIDOS", nullable = false)
@@ -54,7 +54,7 @@ public class PersAut implements Serializable {
 	
 	}
 
-	public PersAut(long ident, String nombre, String apellidos, String direccion, boolean block) {
+	public PersAut(String ident, String nombre, String apellidos, String direccion, boolean block) {
 		
 		this.ident = ident;
 		this.nombre = nombre;
@@ -63,7 +63,7 @@ public class PersAut implements Serializable {
 		this.block = block;
 	}
 
-	public PersAut(long ident, String nombre, String apellidos, String direccion, Date fechaNac,
+	public PersAut(String ident, String nombre, String apellidos, String direccion, Date fechaNac,
 			boolean estado, Date fechaInicio, Date fechaFin, boolean block) {
 
 		this.ident = ident;
@@ -87,11 +87,11 @@ public class PersAut implements Serializable {
 		Id = id;
 	}
 	
-	public long getIdent() {
+	public String getIdent() {
 		return ident;
 	}
 
-	public void setIdent(long ident) {
+	public void setIdent(String ident) {
 		this.ident = ident;
 	}
 

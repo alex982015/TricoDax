@@ -54,7 +54,7 @@ public class TestPersAut {
 	@Requisitos({"RF7"})
 	@Test
 	public void testActualizarPersAut() {
-		final long nuevoIdent = 12342;
+		final String nuevoIdent = "12342";
 		final String nuevoNombre = "Nombre2";
 		final String nuevoApellido = "Apellidos2";
 		final String nuevaDireccion = "Direccion2";
@@ -499,7 +499,7 @@ public class TestPersAut {
 	@Requisitos({"RF ADICIONAL PERSAUT"})
 	@Test
 	public void testInsertarPersAut() throws ProyectoException {
-		final PersAut persAut = new PersAut (123, "Nombre1", "Apellidos1", "Direccion1", Date.valueOf("2000-12-12"), true, Date.valueOf("2022-04-01"), null, false);
+		final PersAut persAut = new PersAut ("123", "Nombre1", "Apellidos1", "Direccion1", Date.valueOf("2000-12-12"), true, Date.valueOf("2022-04-01"), null, false);
 		
 		
 		List<UserApk> user = gestionUserApk.obtenerUser();
