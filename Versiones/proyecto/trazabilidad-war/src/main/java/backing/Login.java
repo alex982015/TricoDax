@@ -6,7 +6,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import ejb.UserApkEJB;
+import ejb.GestionUserApk;
 import exceptions.*;
 import exceptions.ProyectoException;
 import exceptions.UserNoEncontradoException;
@@ -17,7 +17,7 @@ import jpa.UserApk;
 public class Login {
 	
 	@Inject
-	private UserApkEJB userApk;
+	private GestionUserApk userApk;
 	
 	private UserApk u;
 	
