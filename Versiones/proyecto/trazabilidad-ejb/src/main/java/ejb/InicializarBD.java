@@ -11,7 +11,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import jpa.Cuenta;
-import jpa.CuentaFintech;
 import jpa.CuentaRef;
 import jpa.Divisa;
 import jpa.Empresa;
@@ -141,19 +140,16 @@ public class InicializarBD {
 		
 		em.persist(pooledAccount1);
 		
-		Cuenta destino = new Cuenta();
-		destino.setIBAN("ES8400817251647192321264");
-		
 		Trans trans1 = new Trans(20, "Bizum", "2%", true, Date.valueOf("2022-02-01"), Date.valueOf("2022-03-01"));
 		trans1.setCuenta(segregada1);
 		trans1.setMonedaOrigen(divisa2);
-		trans1.setTransaccion(destino);
+		trans1.setTransaccion(pooledAccount1);
 		trans1.setMonedaDestino(divisa2);
 		trans1.setCantidad(200.0);
 		
 		em.persist(trans1);
 		
-		UserApk user1 = new UserApk("juan", "juan", true);
+		UserApk user1 = new UserApk("juan", "juan", false);
 		user1.setPersonaIndividual(indiv1);
 		
 		UserApk user2 = new UserApk("ana", "ana", false);
