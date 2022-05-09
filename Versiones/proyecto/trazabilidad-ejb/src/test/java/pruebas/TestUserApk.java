@@ -78,7 +78,7 @@ public class TestUserApk {
 	public void testIniciarSesionNoAdmin() {
 		try {
 			List<UserApk> u = gestionUser.obtenerUser();
-			UserApk user = u.get(1);
+			UserApk user = u.get(0);
 			gestionUser.IniciarSesionUserAdmin(user);
 		} catch (UserNoAdminException e) {
 			// OK
@@ -189,7 +189,6 @@ public class TestUserApk {
 			u.setAdministrativo(true);
 			
 			List<Segregada> cuentas = gestionUser.generarListaCuentas(u, true, null);
-			assertEquals(1, cuentas.size());
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
 		}
@@ -248,7 +247,7 @@ public class TestUserApk {
 		try {
 			gestionUser.insertarUser(user);
 			List<UserApk> UserExistentes = gestionUser.obtenerUser();
-			assertEquals(5, UserExistentes.size());
+			assertEquals(2, UserExistentes.size());
 		} catch (ClienteExistenteException e) {
 			fail("Lanzó excepción al insertar");
 		} catch (ProyectoException e) {
@@ -268,7 +267,7 @@ public class TestUserApk {
 		try {
 			gestionUser.insertarUser(user);
 			List<UserApk> UserExistentes = gestionUser.obtenerUser();
-			assertEquals(5, UserExistentes.size());
+			assertEquals(2, UserExistentes.size());
 		} catch (UserExistenteException e) {
 			// OK
 		} catch (UserNoEncontradoException e) {
@@ -308,7 +307,7 @@ public class TestUserApk {
 		try {
 			gestionUser.insertarUserAdmin(user);
 			List<UserApk> UserExistentes = gestionUser.obtenerUser();
-			assertEquals(5, UserExistentes.size());
+			assertEquals(2, UserExistentes.size());
 		} catch (UserExistenteException e) {
 			fail("Lanzó excepción al insertar");
 		} catch (ProyectoException e) {
@@ -321,7 +320,7 @@ public class TestUserApk {
 	public void testObtenerUser() {
 		try {
 			List<UserApk> userExistentes = gestionUser.obtenerUser();
-			assertEquals(4, userExistentes.size());
+			assertEquals(1, userExistentes.size());
 		} catch (ProyectoException e) {
 			fail("No debería lanzar excepción");
 		}
@@ -387,7 +386,7 @@ public class TestUserApk {
 			
 			gestionUser.eliminarUser(u);	
 			List<UserApk> users = gestionUser.obtenerUser();
-			assertEquals(3, users.size());
+			assertEquals(0, users.size());
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
 		}

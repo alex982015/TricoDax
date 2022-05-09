@@ -556,7 +556,7 @@ public class TestPersAut {
 	public void testObtenerPersAut() {
 		try {
 			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
-			assertEquals(3, persAut.size());
+			assertEquals(1, persAut.size());
 		} catch (ProyectoException e) {
 			fail("No debería lanzar excepción");
 		}
@@ -576,7 +576,7 @@ public class TestPersAut {
 			gestionPersAut.eliminarPersAut(u,persAut1);
 			
 			List<PersAut> p = gestionPersAut.obtenerPersAut();
-			assertEquals(2, p.size());
+			assertEquals(0, p.size());
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
 		}

@@ -361,7 +361,7 @@ public class TestEmpresa {
 	public void testCerrarCuentaEmpresa() {
 		try {
 			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
-			Empresa e = empresas.get(1);
+			Empresa e = empresas.get(0);
 		
 			List<UserApk> user = gestionUserApk.obtenerUser();
 			UserApk u = user.get(0);
@@ -443,7 +443,7 @@ public class TestEmpresa {
 	public void testObtenerEmpresas() {
 		try {
 			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
-			assertEquals(3, empresas.size());
+			assertEquals(1, empresas.size());
 		} catch (ProyectoException e) {
 			fail("No debería lanzar excepción");
 		}
@@ -543,7 +543,7 @@ public class TestEmpresa {
 			gestionEmpresa.eliminarEmpresa(u,empresa);
 			
 			List<Empresa> e = gestionEmpresa.obtenerEmpresas();
-			assertEquals(2, e.size());
+			assertEquals(0, e.size());
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
 		}

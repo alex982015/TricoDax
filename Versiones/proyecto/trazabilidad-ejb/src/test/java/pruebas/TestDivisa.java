@@ -93,7 +93,7 @@ public class TestDivisa {
 	public void testObtenerDivisas() {
 		try {
 			List<Divisa> divisas = gestionDivisa.obtenerDivisas();
-			assertEquals(4, divisas.size());
+			assertEquals(3, divisas.size());
 		} catch (ProyectoException e) {
 			fail("No debería lanzar excepción");
 		}
@@ -190,7 +190,7 @@ public class TestDivisa {
 			gestionDivisa.eliminarDivisa(u,divisa1);
 			
 			List<Divisa> d = gestionDivisa.obtenerDivisas();
-			assertEquals(3, d.size());
+			assertEquals(2, d.size());
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
 		}

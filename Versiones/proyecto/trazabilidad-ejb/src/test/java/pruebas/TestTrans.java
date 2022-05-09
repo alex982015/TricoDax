@@ -43,7 +43,7 @@ public class TestTrans {
 		try {
 			gestionTrans.insertarTrans(trans);
 			List<Trans> transExistentes = gestionTrans.obtenerTrans();
-			assertEquals(5, transExistentes.size());
+			assertEquals(2, transExistentes.size());
 		} catch (TransExistenteException e) {
 			fail("Lanzó excepción al insertar");
 		} catch (ProyectoException e) {
@@ -55,7 +55,7 @@ public class TestTrans {
 	public void testObtenerTrans() {
 		try {
 			List<Trans> transExistentes = gestionTrans.obtenerTrans();
-			assertEquals(4, transExistentes.size());
+			assertEquals(1, transExistentes.size());
 		} catch (ProyectoException e) {
 			fail("No debería lanzar excepción");
 		}
@@ -149,7 +149,7 @@ public class TestTrans {
 			gestionTrans.eliminarTrans(u, transExistente);
 			
 			List<Trans> t = gestionTrans.obtenerTrans();
-			assertEquals(3, t.size());
+			assertEquals(0, t.size());
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
 		}

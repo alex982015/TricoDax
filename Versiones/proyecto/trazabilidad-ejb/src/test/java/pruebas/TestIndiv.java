@@ -350,7 +350,7 @@ public class TestIndiv {
 	public void testCerrarCuentaIndiv() {
 		try {
 			List<Indiv> particulares = gestionIndiv.obtenerIndiv();
-			Indiv i = particulares.get(1);
+			Indiv i = particulares.get(0);
 			
 			List<UserApk> u = gestionUser.obtenerUser();
 			UserApk user = u.get(0);
@@ -432,7 +432,7 @@ public class TestIndiv {
 	public void testObtenerIndiv() {
 		try {
 			List<Indiv> particulares = gestionIndiv.obtenerIndiv();
-			assertEquals(3, particulares.size());
+			assertEquals(1, particulares.size());
 		} catch (ProyectoException e) {
 			fail("No debería lanzar excepción");
 		}
@@ -452,7 +452,7 @@ public class TestIndiv {
 			gestionIndiv.eliminarIndiv(user, i);
 			
 			List<Indiv> particularesB = gestionIndiv.obtenerIndiv();
-			assertEquals(2, particularesB.size());
+			assertEquals(0, particularesB.size());
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
 		}
