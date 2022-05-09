@@ -11,7 +11,16 @@
 </h:head>
 
 <h:body>
-       <h1><h:outputText value="#{saludo.saludo}"/></h1>
+       <h1>Ebury</h1>
+       <h:form id="entradaUserApk">
+       		Usuario:<br/>
+       		<h:inputText/><br/>
+       		Contraseña:<br/>
+       		<h:inputSecret/>
+       		<h:outputLabel value="Claves no coinciden"></h:outputLabel><br/>
+       		<h:outputLabel value="Usuario o clave incorrectos"></h:outputLabel><br/>
+       		<h:commandButton value="Acceder"></h:commandButton>
+       </h:form>
 </h:body>
 
 </html>
