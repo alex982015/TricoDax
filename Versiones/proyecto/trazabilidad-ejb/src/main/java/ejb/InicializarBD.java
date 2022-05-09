@@ -104,7 +104,7 @@ public class InicializarBD {
 		}
 		
 		CuentaFintech pooledAccount1 = new PooledAccount ();
-		pooledAccount1.setIBAN(455833400);
+		pooledAccount1.setIBAN("455833400");
 		pooledAccount1.setEstado(true);
 		pooledAccount1.setFechaApertura(Date.valueOf("2022-06-27"));
 		pooledAccount1.setClasificacion(true);
@@ -112,7 +112,7 @@ public class InicializarBD {
 		em.persist(pooledAccount1);
 		
 		CuentaFintech segregada1 = new Segregada (20.0);
-		segregada1.setIBAN(45583380);
+		segregada1.setIBAN("45583380");
 		segregada1.setEstado(false);
 		segregada1.setFechaApertura(Date.valueOf("2018-06-27"));
 		segregada1.setClasificacion(true);
@@ -120,7 +120,7 @@ public class InicializarBD {
 		em.persist(segregada1);
 		
 		CuentaFintech segregada2 = new Segregada (50.0);
-		segregada2.setIBAN(45367457);
+		segregada2.setIBAN("45367457");
 		segregada2.setEstado(true);
 		segregada2.setFechaApertura(Date.valueOf("2019-06-12"));
 		segregada2.setClasificacion(true);
@@ -137,10 +137,10 @@ public class InicializarBD {
 		}
 		
 		CuentaRef origen = new CuentaRef ("Santander",24,"España",2000.0,Date.valueOf("2022-06-26"),true);
-		origen.setIBAN(33334445);
+		origen.setIBAN("33334445");
 		
 		CuentaRef destino = new CuentaRef ("Madrid",56,"España",2000.0,Date.valueOf("2020-02-26"),true);
-		destino.setIBAN(25458764);
+		destino.setIBAN("25458764");
 		
 		for (CuentaRef cuenta: new CuentaRef [] {origen, destino}) {
 			em.persist(cuenta);

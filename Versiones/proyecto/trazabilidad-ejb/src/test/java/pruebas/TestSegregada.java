@@ -45,7 +45,7 @@ public class TestSegregada {
 	@Requisitos({"RF5"})
 	@Test
 	public void testInsertarSegregada() throws ProyectoException {
-		final long IBAN=455833699;
+		final String IBAN = "455833699";
 		final Segregada cuenta = new Segregada (21.0);
 		cuenta.setIBAN(IBAN);
 		cuenta.setEstado(true);
@@ -152,7 +152,7 @@ public class TestSegregada {
 		try {
 			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
 			Segregada cuenta1 = cuentas.get(0);
-			cuenta1.setIBAN(1234);
+			cuenta1.setIBAN("1234");
 			
 			List<UserApk> users = gestionUserApk.obtenerUser();
 			UserApk user= users.get(0);
@@ -269,7 +269,7 @@ public class TestSegregada {
 	@Requisitos({"RF ADICIONAL SEGREGADA"})
 	@Test
 	public void testActualizarSegregadaNoEncontrada() {
-		final long IBAN = 455833218;
+		final String IBAN = "455833218";
 		
 		try {
 			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
@@ -292,7 +292,7 @@ public class TestSegregada {
 	@Requisitos({"RF ADICIONAL SEGREGADA"})
 	@Test
 	public void testActualizarSegregadaUserNoEncontrado() {
-		final long IBAN = 455833218;
+		final String IBAN = "455833218";
 		
 		try {
 			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
@@ -339,7 +339,7 @@ public class TestSegregada {
 		try {
 			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
 			Segregada cuenta1 = cuentas.get(0);	
-			cuenta1.setIBAN(455833220);
+			cuenta1.setIBAN("455833220");
 			
 			List<UserApk> users = gestionUserApk.obtenerUser();
 			UserApk user= users.get(0);
@@ -361,7 +361,7 @@ public class TestSegregada {
 		try {
 			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
 			Segregada cuenta1 = cuentas.get(0);	
-			cuenta1.setIBAN(455833220);
+			cuenta1.setIBAN("455833220");
 			
 			List<UserApk> users = gestionUserApk.obtenerUser();
 			UserApk user= users.get(0);
@@ -383,7 +383,7 @@ public class TestSegregada {
 		try {
 			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
 			Segregada cuenta1 = cuentas.get(0);	
-			cuenta1.setIBAN(455833220);
+			cuenta1.setIBAN("455833220");
 			
 			List<UserApk> users = gestionUserApk.obtenerUser();
 			UserApk user= users.get(0);

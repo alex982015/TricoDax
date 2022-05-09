@@ -51,7 +51,7 @@ public class TestPooledAccount {
 	@Requisitos({"RF5"})
 	@Test
 	public void testInsertarPooledAccount() throws ProyectoException {	
-		final long IBAN=455833265;
+		final String IBAN = "455833265";
 		final PooledAccount cuenta = new PooledAccount ();
 		cuenta.setIBAN(IBAN);
 		cuenta.setEstado(true);
@@ -110,7 +110,7 @@ public class TestPooledAccount {
 	@Requisitos({"RF5"})
 	@Test
 	public void testInsertarPooledAccountUserApkNoExistente() throws ProyectoException {	
-		final long IBAN=455833265;
+		final String IBAN = "455833265";
 		final PooledAccount cuenta = new PooledAccount ();
 		cuenta.setIBAN(IBAN);
 		cuenta.setEstado(true);
@@ -143,7 +143,7 @@ public class TestPooledAccount {
 	@Requisitos({"RF5"})
 	@Test
 	public void testInsertarPooledAccountUserApkNoAdmin() throws ProyectoException {	
-		final long IBAN=455833265;
+		final String IBAN = "455833265";
 		final PooledAccount cuenta = new PooledAccount ();
 		cuenta.setIBAN(IBAN);
 		cuenta.setEstado(true);
@@ -196,7 +196,7 @@ public class TestPooledAccount {
 		try {
 			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
 			PooledAccount cuenta1 = cuentas.get(0);
-			cuenta1.setIBAN(1234);
+			cuenta1.setIBAN("1234");
 			
 			List<UserApk> user = gestionUserApk.obtenerUser();
 			UserApk u = user.get(0);
@@ -252,7 +252,7 @@ public class TestPooledAccount {
 	@Test
 	public void testCambioDivisaPooledAccount() throws ProyectoException {
 		try {
-			final long IBAN=455833265;
+			final String IBAN = "455833265";
 			final PooledAccount cuenta = new PooledAccount ();
 			cuenta.setIBAN(IBAN);
 			cuenta.setEstado(true);
@@ -294,7 +294,7 @@ public class TestPooledAccount {
 	@Test
 	public void testCambioDivisaPooledAccountNoExistente() throws ProyectoException {
 		try {
-			final long IBAN=14325254;
+			final String IBAN = "14325254";
 			final PooledAccount cuenta = new PooledAccount ();
 			cuenta.setIBAN(IBAN);
 			cuenta.setEstado(true);
@@ -338,7 +338,7 @@ public class TestPooledAccount {
 	@Test
 	public void testCambioDivisaPooledAccountAdministrativo() throws ProyectoException {
 		try {
-			final long IBAN=455833265;
+			final String IBAN = "455833265";
 			final PooledAccount cuenta = new PooledAccount ();
 			cuenta.setIBAN(IBAN);
 			cuenta.setEstado(true);
@@ -380,7 +380,7 @@ public class TestPooledAccount {
 	@Test
 	public void testCambioDivisaPooledAccountNoAdministrativo() throws ProyectoException {
 		try {
-			final long IBAN=455833265;
+			final String IBAN = "455833265";
 			final PooledAccount cuenta = new PooledAccount ();
 			cuenta.setIBAN(IBAN);
 			cuenta.setEstado(true);
@@ -424,7 +424,7 @@ public class TestPooledAccount {
 	@Test
 	public void testCambioDivisaPooledAccountSinSaldo() throws ProyectoException {
 		try {
-			final long IBAN=455833265;
+			final String IBAN = "455833265";
 			final PooledAccount cuenta = new PooledAccount ();
 			cuenta.setIBAN(IBAN);
 			cuenta.setEstado(true);
@@ -498,7 +498,7 @@ public class TestPooledAccount {
 	@Requisitos({"RF ADICIONAL POOLEDACCOUNT"})
 	@Test
 	public void testActualizarPooledAccountNoEncontrada() {
-		final long IBAN = 455833218;
+		final String IBAN = "455833218";
 		
 		try {
 			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
@@ -521,7 +521,7 @@ public class TestPooledAccount {
 	@Requisitos({"RF ADICIONAL POOLEDACCOUNT"})
 	@Test
 	public void testActualizarPooledAccountNoAdmin() {
-		final long IBAN = 455833218;
+		final String IBAN = "455833218";
 		
 		try {
 			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
@@ -567,7 +567,7 @@ public class TestPooledAccount {
 		try {
 			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
 			PooledAccount cuenta1 = cuentas.get(0);
-			cuenta1.setIBAN(455833220);
+			cuenta1.setIBAN("455833220");
 			
 			List<UserApk> user = gestionUserApk.obtenerUser();
 			UserApk u = user.get(0);
@@ -588,7 +588,7 @@ public class TestPooledAccount {
 		try {
 			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
 			PooledAccount cuenta1 = cuentas.get(0);
-			cuenta1.setIBAN(455833220);
+			cuenta1.setIBAN("455833220");
 			
 			List<UserApk> user = gestionUserApk.obtenerUser();
 			UserApk u = user.get(0);

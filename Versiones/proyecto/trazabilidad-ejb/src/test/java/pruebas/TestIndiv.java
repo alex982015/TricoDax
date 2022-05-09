@@ -130,7 +130,7 @@ public class TestIndiv {
 		final String nuevoPais = "España";
 		
 		CuentaFintech segregada = new Segregada (80.0);
-		segregada.setIBAN(45121357);
+		segregada.setIBAN("45121357");
 		segregada.setEstado(true);
 		segregada.setFechaApertura(Date.valueOf("2017-06-12"));
 		segregada.setClasificacion(true);
@@ -188,7 +188,7 @@ public class TestIndiv {
 		final String nuevoPais = "España";
 		
 		CuentaFintech segregada = new Segregada (80.0);
-		segregada.setIBAN(45121357);
+		segregada.setIBAN("45121357");
 		segregada.setEstado(true);
 		segregada.setFechaApertura(Date.valueOf("2017-06-12"));
 		segregada.setClasificacion(true);
@@ -246,7 +246,7 @@ public class TestIndiv {
 		final String nuevoPais = "España";
 		
 		CuentaFintech segregada = new Segregada (80.0);
-		segregada.setIBAN(45121357);
+		segregada.setIBAN("45121357");
 		segregada.setEstado(true);
 		segregada.setFechaApertura(Date.valueOf("2017-06-12"));
 		segregada.setClasificacion(true);

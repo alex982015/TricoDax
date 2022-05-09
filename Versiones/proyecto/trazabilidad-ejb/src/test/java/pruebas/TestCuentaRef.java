@@ -37,7 +37,7 @@ public class TestCuentaRef {
 	@Requisitos({"RF ADICIONAL CUENTAREF"})
 	@Test
 	public void testInsertarCuentaRef() throws ProyectoException {	
-		final long IBAN=455833220;
+		final String IBAN = "455833220";
 		final CuentaRef cuenta = new CuentaRef ("Santander",23,"España",2000.0,Date.valueOf("2022-06-26"),true);
 		cuenta.setIBAN(IBAN);
 		
@@ -55,7 +55,7 @@ public class TestCuentaRef {
 	@Requisitos({"RF ADICIONAL CUENTAREF"})
 	@Test
 	public void testInsertarCuentaRefNoAdmin() throws ProyectoException {	
-		final long IBAN=455833220;
+		final String IBAN = "455833220";
 		final CuentaRef cuenta = new CuentaRef ("Santander",23,"España",2000.0,Date.valueOf("2022-06-26"),true);
 		cuenta.setIBAN(IBAN);
 		
@@ -153,7 +153,7 @@ public class TestCuentaRef {
 	@Test
 	public void testActualizarCuentaRefNoEncontrada() {
 		
-		final long IBAN = 455833218;
+		final String IBAN = "455833218";
 		
 		try {
 			List<CuentaRef> cuentas = gestionCuentasRef.obtenerCuentasRef();
@@ -225,7 +225,7 @@ public class TestCuentaRef {
 			List<CuentaRef> cuentas = gestionCuentasRef.obtenerCuentasRef();
 			CuentaRef cuenta1 = cuentas.get(0);
 			
-			cuenta1.setIBAN(455833220);
+			cuenta1.setIBAN("455833220");
 			
 			List<UserApk> user = gestionUser.obtenerUser();
 			UserApk u = user.get(0);

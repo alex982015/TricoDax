@@ -23,7 +23,7 @@ public class Cuenta implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id @Column(name="IBAN")
-	private long IBAN;
+	private String IBAN;
 	@Column(name="SWIFT")
 	private String swift;
 	@OneToMany(mappedBy = "cuenta")
@@ -37,22 +37,22 @@ public class Cuenta implements Serializable {
 		
 	}
 	
-	public Cuenta(long iBAN) {
+	public Cuenta(String iBAN) {
 		IBAN = iBAN;
 	}
 
-	public Cuenta(long iBAN, String swift) {
+	public Cuenta(String iBAN, String swift) {
 		this.IBAN = iBAN;
 		this.swift = swift;
 	}
 
 /***************GETTERS AND SETTERS*******************************/
 
-	public long getIBAN() {
+	public String getIBAN() {
 		return IBAN;
 	}
 
-	public void setIBAN(long iBAN) {
+	public void setIBAN(String iBAN) {
 		IBAN = iBAN;
 	}
 

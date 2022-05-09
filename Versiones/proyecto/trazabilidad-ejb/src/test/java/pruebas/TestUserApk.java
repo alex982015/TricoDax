@@ -458,6 +458,8 @@ public class TestUserApk {
 			UserApk u = user.get(0);
 			u.setAdministrativo(true);
 			gestionUser.isAdminUserApk(u);
+		} catch (UserNoEncontradoException e) {
+			fail("No debería lanzarse excepción");
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
 		}
