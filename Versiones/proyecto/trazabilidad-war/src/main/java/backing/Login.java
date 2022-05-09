@@ -34,26 +34,26 @@ public class Login {
 	}
 	
 	public String acceder() throws ProyectoException {
+		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
 			userApk.buscarUserApk(u);
+			u.setAdministrativo(userApk.isAdminUserApk(u));
+			userApk.IniciarSesionUserAdmin(u);
 			return "menuAdmin.xhtml";
 		} catch(UserNoEncontradoException e) {
-			FacesMessage fm = new FacesMessage("Usuario no existente");
-            FacesContext.getCurrentInstance().addMessage("login:user", fm);
+		    ctx.addMessage("entradaUserApk", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no existe"));
 		} catch(UserNoAdminException e) {
 			try {
 				userApk.iniciarSesion(u);
 				return "menuUser.xhtml";
 			} catch(UserBadPasswordException p) {
-				FacesMessage fm = new FacesMessage("Contraseña incorrecta");
-	            FacesContext.getCurrentInstance().addMessage("login:pass", fm);
+			    ctx.addMessage("entradaUserApk", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario o contraseña incorrecta"));
 			}
 		} catch(UserBadPasswordException p) {
-			FacesMessage fm = new FacesMessage("Contraseña incorrecta");
-            FacesContext.getCurrentInstance().addMessage("login:pass", fm);
+			ctx.addMessage("entradaUserApk", new FacesMessage(FacesMessage.SEVERITY_WARN, "Contraseña Incorrecta", "Usuario o contraseña incorrecta"));
 		} catch(ProyectoException e) {
 			FacesMessage fm = new FacesMessage("Error: " + e);
-            FacesContext.getCurrentInstance().addMessage(null, fm);
+			ctx.addMessage(null, fm);
 		}
 		return null;
    }

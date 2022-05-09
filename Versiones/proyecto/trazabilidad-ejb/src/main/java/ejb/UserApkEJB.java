@@ -103,13 +103,29 @@ public class UserApkEJB implements GestionUserApk {
 		TypedQuery<UserApk> query = em.createQuery("SELECT u FROM UserApk u", UserApk.class);
 		return query.getResultList();
 	}
-
+	
 	@Override
 	public void buscarUserApk(UserApk user) throws ProyectoException {
 		UserApk userEntity = em.find(UserApk.class, user.getUser());
 		if (userEntity == null) {
 			throw new UserNoEncontradoException();
 		}
+	}
+	
+	@Override
+	public boolean isAdminUserApk(UserApk user) throws ProyectoException {
+		boolean ok = false;
+		UserApk userEntity = em.find(UserApk.class, user.getUser());
+		if (userEntity == null) {
+			throw new UserNoEncontradoException();
+		} else {
+			if(userEntity.isAdministrativo()) {
+				ok = true;
+			} else {
+				throw new UserNoAdminException();
+			}
+		} 
+		return ok;
 	}
 	
 	@Override

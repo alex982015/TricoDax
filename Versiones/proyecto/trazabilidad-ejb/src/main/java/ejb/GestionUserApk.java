@@ -15,6 +15,7 @@ public interface GestionUserApk {
 	public void insertarUserAdmin(UserApk user) throws ProyectoException;
 	public void insertarUser(UserApk user) throws ProyectoException;
 	public void buscarUserApk(UserApk user) throws ProyectoException;
+	public boolean isAdminUserApk(UserApk user) throws ProyectoException;
 	public boolean iniciarSesion(UserApk user) throws ProyectoException;
 	public List<UserApk> obtenerUser() throws ProyectoException;
 	public boolean IniciarSesionUserAdmin(UserApk user) throws ProyectoException;

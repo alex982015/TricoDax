@@ -13,12 +13,14 @@
 <h:body>
        <h1>Ebury</h1>
        <h:form id="entradaUserApk">
-       		Usuario:<br/>
-       		<h:inputText id="user" required="true" value="#{login.userApk.user}"/><br/>
-       		Contraseña:<br/>
+       		Usuario:<br/><br/>
+       		<h:inputText id="user" required="true" value="#{login.userApk.user}"/><br/><br/>
+       		Contraseña:<br/><br/>
        		<h:inputSecret id="pass" required="true" requiredMessage="Introduzca contraseña" value="#{login.userApk.password}"/>&nbsp;
-       		<h:message for="pass"/><br/>
-       		<h:commandButton action="#{login.acceder()}" value="Acceder"/>
+       		<h:message id = "password" for="pass"/><br/><br/>
+       		<h:commandButton action="#{login.acceder()}" value="Acceder" update=":messages"/>    
+       		&nbsp;
+       		<h:message for="entradaUserApk"/>
        </h:form>
 </h:body>
 
