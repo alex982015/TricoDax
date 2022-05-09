@@ -25,7 +25,7 @@ public class Cliente implements Serializable {
 	@Id @GeneratedValue @Column(name="ID")
 	private long ID;
 	@Column(name="IDENT", nullable = false) 
-	private long Ident;
+	private String Ident;
 	@Column(name="TIPOCLIENTE", nullable = false) 
 	private String tipoCliente;
 	@Column(name="ESTADO", nullable = false)
@@ -52,7 +52,7 @@ public class Cliente implements Serializable {
 		
 	}
 	
-	public Cliente(long ident, String tipo_cliente, boolean estado, Date fecha_Alta, String direccion,
+	public Cliente(String ident, String tipo_cliente, boolean estado, Date fecha_Alta, String direccion,
 			String ciudad, int codPostal, String pais) {
 
 		this.Ident = ident;
@@ -66,7 +66,7 @@ public class Cliente implements Serializable {
 		
 	}
 	
-	public Cliente(long ident, String tipo_cliente, boolean estado, Date fecha_Alta, Date fecha_Baja, String direccion,
+	public Cliente(String ident, String tipo_cliente, boolean estado, Date fecha_Alta, Date fecha_Baja, String direccion,
 			String ciudad, int codPostal, String pais) {
 
 		this.Ident = ident;
@@ -91,11 +91,11 @@ public class Cliente implements Serializable {
 		ID = iD;
 	}
 	
-	public long getIdent() {
+	public String getIdent() {
 		return Ident;
 	}
 
-	public void setIdent(long ident) {
+	public void setIdent(String ident) {
 		Ident = ident;
 	}
 

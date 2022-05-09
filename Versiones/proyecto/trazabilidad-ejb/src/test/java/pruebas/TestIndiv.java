@@ -49,7 +49,7 @@ public class TestIndiv {
 	@Test
 	public void testInsertarIndiv() throws ProyectoException {
 		final Indiv particular = new Indiv ("Nombre","Apellidos",Date.valueOf("1998-07-12"));
-		particular.setIdent(53636734);
+		particular.setIdent("53636734");
 		particular.setTipo_cliente("Indiv");
 		particular.setEstado(true);
 		particular.setFecha_Alta(Date.valueOf("2021-04-11"));
@@ -75,7 +75,7 @@ public class TestIndiv {
 	@Test
 	public void testInsertarIndivNoAdmin() throws ProyectoException {
 		final Indiv particular = new Indiv ("Nombre","Apellidos",Date.valueOf("1998-07-12"));
-		particular.setIdent(53636734);
+		particular.setIdent("53636734");
 		particular.setTipo_cliente("Indiv");
 		particular.setEstado(true);
 		particular.setFecha_Alta(Date.valueOf("2021-04-11"));
@@ -119,7 +119,7 @@ public class TestIndiv {
 	@Requisitos({"RF3"})
 	@Test
 	public void testActualizarIndiv() throws ProyectoException {
-		final long nuevaIdent = 1234L;
+		final String nuevaIdent = "1234L";
 		final String nuevoTipoCliente = "2020-01-01";
 		final boolean nuevoEstado = true;
 		final Date nuevaFechaAlta = Date.valueOf("2020-01-01");
@@ -177,7 +177,7 @@ public class TestIndiv {
 	@Requisitos({"RF3"})
 	@Test
 	public void testActualizarIndivNoAdmin() throws ProyectoException {
-		final long nuevaIdent = 1234L;
+		final String nuevaIdent = "1234L";
 		final String nuevoTipoCliente = "2020-01-01";
 		final boolean nuevoEstado = true;
 		final Date nuevaFechaAlta = Date.valueOf("2020-01-01");
@@ -235,7 +235,7 @@ public class TestIndiv {
 	@Requisitos({"RF3"})
 	@Test
 	public void testActualizarIndivNoExistente() throws ProyectoException {
-		final long nuevaIdent = 1234L;
+		final String nuevaIdent = "1234L";
 		final String nuevoTipoCliente = "2020-01-01";
 		final boolean nuevoEstado = true;
 		final Date nuevaFechaAlta = Date.valueOf("2020-01-01");
@@ -294,7 +294,7 @@ public class TestIndiv {
 	@Requisitos({"RF3"})
 	@Test
 	public void testActualizarIndivSegregadaAsociada() throws ProyectoException {
-		final long nuevaIdent = 1234L;
+		final String nuevaIdent = "1234L";
 		final String nuevoTipoCliente = "2020-01-01";
 		final boolean nuevoEstado = true;
 		final Date nuevaFechaAlta = Date.valueOf("2020-01-01");

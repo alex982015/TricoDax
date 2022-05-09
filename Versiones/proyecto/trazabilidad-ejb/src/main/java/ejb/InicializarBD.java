@@ -36,7 +36,7 @@ public class InicializarBD {
 		}
 		
 		Empresa empresa1 = new Empresa ("RazonSocial1 S.L.", false);
-		empresa1.setIdent(345345345);
+		empresa1.setIdent("345345345");
 		empresa1.setTipo_cliente("Empresa");
 		empresa1.setEstado(true);
 		empresa1.setFecha_Alta(Date.valueOf("2021-04-11"));
@@ -46,7 +46,7 @@ public class InicializarBD {
 		empresa1.setPais("Spain");
 		
 		Empresa empresa2 = new Empresa ("RazonSocial2 S.L.", false);
-		empresa2.setIdent(245235256);
+		empresa2.setIdent("245235256");
 		empresa2.setTipo_cliente("Empresa");
 		empresa2.setEstado(true);
 		empresa2.setFecha_Alta(Date.valueOf("2019-04-11"));
@@ -56,7 +56,7 @@ public class InicializarBD {
 		empresa2.setPais("Spain");
 		
 		Empresa empresa3 = new Empresa ("RazonSocial3 S.L.", false);
-		empresa3.setIdent(345345664);
+		empresa3.setIdent("345345664");
 		empresa3.setTipo_cliente("Empresa");
 		empresa3.setEstado(true);
 		empresa3.setFecha_Alta(Date.valueOf("2020-07-21"));
@@ -70,7 +70,7 @@ public class InicializarBD {
 		}
 		
 		Indiv indiv1 = new Indiv ("Nombre1","Apellido1",Date.valueOf("1998-05-23"));
-		indiv1.setIdent(634636364);
+		indiv1.setIdent("634636364");
 		indiv1.setTipo_cliente("Indiv");
 		indiv1.setEstado(true);
 		indiv1.setFecha_Alta(Date.valueOf("2020-08-25"));
@@ -80,7 +80,7 @@ public class InicializarBD {
 		indiv1.setPais("Spain");
 		
 		Indiv indiv2 = new Indiv ("Nombre2","Apellido2",Date.valueOf("1999-06-10"));
-		indiv2.setIdent(874747457);
+		indiv2.setIdent("874747457");
 		indiv2.setTipo_cliente("Indiv");
 		indiv2.setEstado(true);
 		indiv2.setFecha_Alta(Date.valueOf("2019-09-05"));
@@ -90,7 +90,7 @@ public class InicializarBD {
 		indiv2.setPais("España");
 		
 		Indiv indiv3 = new Indiv ("Nomrbe3","Apellido3",Date.valueOf("2000-05-14"));
-		indiv3.setIdent(45346346);
+		indiv3.setIdent("45346346");
 		indiv3.setTipo_cliente("Empresa");
 		indiv3.setEstado(true);
 		indiv3.setFecha_Alta(Date.valueOf("2018-03-21"));

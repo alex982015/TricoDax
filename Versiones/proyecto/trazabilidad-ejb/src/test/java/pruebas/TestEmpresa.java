@@ -50,7 +50,7 @@ public class TestEmpresa {
 	@Test
 	public void testInsertarEmpresa() throws ProyectoException {
 		final Empresa empresa = new Empresa ("RazonSocial S.L.", false);
-		empresa.setIdent(53636734);
+		empresa.setIdent("53636734");
 		empresa.setTipo_cliente("Indiv");
 		empresa.setEstado(true);
 		empresa.setFecha_Alta(Date.valueOf("2021-04-11"));
@@ -93,7 +93,7 @@ public class TestEmpresa {
 	@Test
 	public void testInsertarEmpresaNoAdmin() throws ProyectoException {
 		final Empresa empresa = new Empresa ("RazonSocial S.L.", false);
-		empresa.setIdent(53636734);
+		empresa.setIdent("53636734");
 		empresa.setTipo_cliente("Indiv");
 		empresa.setEstado(true);
 		empresa.setFecha_Alta(Date.valueOf("2021-04-11"));
@@ -119,7 +119,7 @@ public class TestEmpresa {
 	@Test
 	public void testInsertarEmpresaUserNoEncontrado() throws ProyectoException {
 		final Empresa empresa = new Empresa ("RazonSocial S.L.", false);
-		empresa.setIdent(53636734);
+		empresa.setIdent("53636734");
 		empresa.setTipo_cliente("Indiv");
 		empresa.setEstado(true);
 		empresa.setFecha_Alta(Date.valueOf("2021-04-11"));
@@ -146,7 +146,7 @@ public class TestEmpresa {
 	public void testActualizarEmpresa() throws ProyectoException {
 		List<CuentaFintech> cuentas = new ArrayList<CuentaFintech>();
 		
-		final long nuevaIdent = 1234L;
+		final String nuevaIdent = "1234L";
 		final String nuevoTipoCliente = "2020-01-01";
 		final boolean nuevoEstado = true;
 		final Date nuevaFechaAlta = Date.valueOf("2020-01-01");
@@ -192,7 +192,7 @@ public class TestEmpresa {
 	public void testActualizarEmpresaNoAdmin() throws ProyectoException {
 		List<CuentaFintech> cuentas = new ArrayList<CuentaFintech>();
 		
-		final long nuevaIdent = 1234L;
+		final String nuevaIdent = "1234L";
 		final String nuevoTipoCliente = "2020-01-01";
 		final boolean nuevoEstado = true;
 		final Date nuevaFechaAlta = Date.valueOf("2020-01-01");
@@ -240,7 +240,7 @@ public class TestEmpresa {
 	public void testActualizarEmpresaUserNoEncontrado() throws ProyectoException {
 		List<CuentaFintech> cuentas = new ArrayList<CuentaFintech>();
 		
-		final long nuevaIdent = 1234L;
+		final String nuevaIdent = "1234L";
 		final String nuevoTipoCliente = "2020-01-01";
 		final boolean nuevoEstado = true;
 		final Date nuevaFechaAlta = Date.valueOf("2020-01-01");
@@ -286,7 +286,7 @@ public class TestEmpresa {
 	@Requisitos({"RF3"})
 	@Test
 	public void testActualizarEmpresaSegregadaYaAsociada() throws ProyectoException {
-		final long nuevaIdent = 1234L;
+		final String nuevaIdent = "1234L";
 		final String nuevoTipoCliente = "2020-01-01";
 		final boolean nuevoEstado = true;
 		final Date nuevaFechaAlta = Date.valueOf("2020-01-01");

@@ -456,6 +456,7 @@ public class TestUserApk {
 		try {
 			List<UserApk> user = gestionUser.obtenerUser();
 			UserApk u = user.get(0);
+			u.setAdministrativo(true);
 			gestionUser.isAdminUserApk(u);
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
