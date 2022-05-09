@@ -105,6 +105,14 @@ public class UserApkEJB implements GestionUserApk {
 	}
 
 	@Override
+	public void buscarUserApk(UserApk user) throws ProyectoException {
+		UserApk userEntity = em.find(UserApk.class, user.getUser());
+		if (userEntity == null) {
+			throw new UserNoEncontradoException();
+		}
+	}
+	
+	@Override
 	public void actualizarUser(UserApk user) throws ProyectoException {
 		UserApk userEntity = em.find(UserApk.class, user.getUser());
 		if (userEntity == null) {

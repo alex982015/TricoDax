@@ -7,19 +7,18 @@
        xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
-       <title>Página de ejemplo</title>
+       <title>Inicio de sesión</title>
 </h:head>
 
 <h:body>
        <h1>Ebury</h1>
        <h:form id="entradaUserApk">
        		Usuario:<br/>
-       		<h:inputText/><br/>
+       		<h:inputText id="user" required="true" value="#{login.userApk.user}"/><br/>
        		Contraseña:<br/>
-       		<h:inputSecret/>
-       		<h:outputLabel value="Claves no coinciden"></h:outputLabel><br/>
-       		<h:outputLabel value="Usuario o clave incorrectos"></h:outputLabel><br/>
-       		<h:commandButton value="Acceder"></h:commandButton>
+       		<h:inputSecret id="pass" required="true" value="#{login.userApk.password}"/>&nbsp;
+       		<h:message for="pass"/><br/>
+       		<h:commandButton action="#{login.acceder()}" value="Acceder"/>
        </h:form>
 </h:body>
 

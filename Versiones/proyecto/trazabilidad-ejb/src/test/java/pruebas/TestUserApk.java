@@ -421,4 +421,32 @@ public class TestUserApk {
 			fail("No debería lanzarse excepción");
 		}
 	}
+	
+	@Requisitos({"RF ADICIONAL USERAPK"}) 
+	@Test
+	public void testBuscarUserApk() {
+		try {
+			List<UserApk> user = gestionUser.obtenerUser();
+			UserApk u = user.get(0);
+			gestionUser.buscarUserApk(u);
+		} catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
+		}
+	}
+	
+	@Requisitos({"RF ADICIONAL USERAPK"}) 
+	@Test
+	public void testBuscarUserApkNoEncontrado() {
+		try {
+			String user = "UserApk5";
+			List<UserApk> users = gestionUser.obtenerUser();
+			UserApk u = users.get(0);
+			u.setUser(user);
+			gestionUser.buscarUserApk(u);
+		} catch (UserNoEncontradoException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
+		}
+	}
 }
