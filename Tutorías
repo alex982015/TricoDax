@@ -105,6 +105,5 @@ TUTORÍA(10/05/2022)
 
 1-Uso de @Local en las interfaces de los EJB
 2-Con JUnit son 162 test correctos, pero con maven obtenemos el doble de test, funcionando mal el 50% de ellos.
-3-Al cargar módulo ear en wildfly obtenemos error en el acceso al recurso.
 
 Próximas tutorías...
