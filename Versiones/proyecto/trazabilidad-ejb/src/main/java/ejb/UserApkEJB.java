@@ -308,4 +308,32 @@ public class UserApkEJB implements GestionUserApk {
 			}
 		}
 	}
+
+	@Override
+	public boolean isAutorizado(UserApk user) throws ProyectoException {
+		boolean ok = false;
+		UserApk userEntity = em.find(UserApk.class, user.getUser());
+		if (userEntity == null) {
+			throw new UserNoEncontradoException();
+		} else {
+			if(userEntity.getPersonaAutorizada() != null) {
+				ok = true;
+			}
+		} 
+		return ok;
+	}
+
+	@Override
+	public boolean isIndividual(UserApk user) throws ProyectoException {
+		boolean ok = false;
+		UserApk userEntity = em.find(UserApk.class, user.getUser());
+		if (userEntity == null) {
+			throw new UserNoEncontradoException();
+		} else {
+			if(userEntity.getPersonaIndividual() != null) {
+				ok = true;
+			}
+		} 
+		return ok;
+	}
 }

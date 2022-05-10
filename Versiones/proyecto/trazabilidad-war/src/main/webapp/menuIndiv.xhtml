@@ -19,20 +19,21 @@
 			<h:outputLink value="index.xhtml">Cerrar sesión</h:outputLink>
 		</div>
 
-       <h:panelGrid id = "panel" columns = "3" border = "1"
+       <h:panelGrid id = "panel" columns = "2" border = "1"
             cellpadding = "10" cellspacing = "1">
             
             <f:facet name = "header">
-               <h:outputText value = "Menú principal"/>
+               <h:outputText value = "Menú principal Indiv"/>
             </f:facet>
             
-            <h:commandButton value="Clientes"></h:commandButton>
-       		<h:commandButton value="Cuentas"></h:commandButton>
-       		<h:commandButton value="Transacciones"></h:commandButton>
-       		<h:commandButton value="Generar Informe"></h:commandButton>
-       		<h:commandButton value="Acceder"></h:commandButton>
-       		<h:commandButton value="Acceder"></h:commandButton>
-       		
+            <h:outputLink value="Cuentas">
+            	<h:outputLabel value="Cuentas"/>
+           	</h:outputLink>
+      		
+      		<h:outputLink value="Transacciones">
+            	<h:outputLabel value="Transacciones"/>
+           	</h:outputLink>
+      		
          </h:panelGrid>
 </h:body>
 
