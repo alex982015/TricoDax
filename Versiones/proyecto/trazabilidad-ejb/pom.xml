@@ -70,6 +70,9 @@
                                <version>2.12.4</version>
                                <configuration>
                                        <skip>${skip.ejb.tests}</skip>
+                                       <excludes>
+                                       		<exclude>**/Test*.java</exclude>
+                                       </excludes>
                                </configuration>
                         </plugin>
 		</plugins>

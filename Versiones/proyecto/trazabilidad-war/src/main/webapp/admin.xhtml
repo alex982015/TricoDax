@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+       <title>Inicio de sesión admin</title>
+</h:head>
+
+<h:body>
+       <h1>Ebury</h1>
+       <h:form id="entradaUserApk">
+       		Usuario:<br/><br/>
+       		<h:inputText id="user" required="true" value="#{login.userApk.user}"/><br/><br/>
+       		Contraseña:<br/><br/>
+       		<h:inputSecret id="pass" required="true" requiredMessage="Introduzca contraseña" value="#{login.userApk.password}"/>&nbsp;
+       		<h:message id = "password" for="pass"/><br/><br/>
+       		<h:commandButton action="#{loginAdmin.acceder()}" value="Acceder" update=":messages"/>    
+       		&nbsp;
+       		<h:message for="entradaUserApk"/>
+       </h:form>
+</h:body>
+
+</html>
