@@ -32,12 +32,13 @@ public class Autorizado {
 	private Login login;
 	
 	private PersAut p;
-	private List<String> e;
-	private UserApk u;
+	private Empresa e;
+	
+	private List<Empresa> listaEmpresas;
 	
 	public Autorizado() {
 		p = new PersAut();
-		u = login.getUserApk();
+		e = new Empresa();
 	}
 	
 	public PersAut getPersAut() {
@@ -47,7 +48,7 @@ public class Autorizado {
 	public String crearAutoriz() throws ProyectoException {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
-			persAut.insertarPersAut(u, p);
+			persAut.insertarPersAut(login.getUserApk(), p);
 			return "menuAdmin.xhtml";
 		} catch(UserNoAdminException e) {
 		    ctx.addMessage("entradaAutoriz", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no admin"));
@@ -61,7 +62,7 @@ public class Autorizado {
 	public String editarAutoriz() throws ProyectoException {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
-			persAut.actualizarPersAut(u, p);
+			persAut.actualizarPersAut(login.getUserApk(), p);
 			return "menuAdmin.xhtml";
 		} catch(UserNoAdminException e) {
 		    ctx.addMessage("entradaAutoriz", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no admin"));
@@ -74,8 +75,12 @@ public class Autorizado {
 	
 	@PostConstruct
 	public void obtenerEmpresas() {
-		for (Empresa empresa : empresas.obtenerEmpresas()) {
-			e.add(empresa.getRazonSocial());
+		List<Empresa> lista = empresas.obtenerEmpresas();
+		for (Empresa empresa : lista) {
+			 Empresa e = new Empresa();
+             e.setID(empresa.getID());
+             e.setRazonSocial(empresa.getRazonSocial());
+             listaEmpresas.add(e);
 		}
 	}
 

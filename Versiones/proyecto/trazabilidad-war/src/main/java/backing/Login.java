@@ -38,7 +38,7 @@ public class Login implements Serializable {
 			userApk.buscarUserApk(u);
 			u.setAdministrativo(userApk.isAdminUserApk(u));
 			userApk.IniciarSesionUserAdmin(u);
-			return "editarPerfil.xhtml";
+			return "crearAutorizado.xhtml";
 		} catch(UserNoEncontradoException e) {
 		    ctx.addMessage("entradaUserApk", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no existe"));
 		} catch(UserNoAdminException e) {
