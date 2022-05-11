@@ -48,7 +48,7 @@ public class EmpresaEJB implements GestionEmpresa {
 	}
 
 	@Override
-	public List<Empresa> obtenerEmpresas() throws ProyectoException {
+	public List<Empresa> obtenerEmpresas() {
 		TypedQuery<Empresa> query = em.createQuery("SELECT e FROM Empresa e", Empresa.class);
 		return query.getResultList();
 	}

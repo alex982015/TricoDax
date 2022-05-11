@@ -441,12 +441,8 @@ public class TestEmpresa {
 	@Requisitos({"RF ADICIONAL EMPRESA"})
 	@Test
 	public void testObtenerEmpresas() {
-		try {
-			List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
-			assertEquals(1, empresas.size());
-		} catch (ProyectoException e) {
-			fail("No debería lanzar excepción");
-		}
+		List<Empresa> empresas = gestionEmpresa.obtenerEmpresas();
+		assertEquals(1, empresas.size());
 	}
 	
 	@Requisitos({"RF ADICIONAL EMPRESA"})

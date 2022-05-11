@@ -554,12 +554,8 @@ public class TestPersAut {
 	@Requisitos({"RF ADICIONAL PERSAUT"})
 	@Test
 	public void testObtenerPersAut() {
-		try {
-			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
-			assertEquals(1, persAut.size());
-		} catch (ProyectoException e) {
-			fail("No debería lanzar excepción");
-		}
+		List<PersAut> persAut = gestionPersAut.obtenerPersAut();
+		assertEquals(1, persAut.size());
 	}
 	
 	@Requisitos({"RF ADICIONAL PERSAUT"})

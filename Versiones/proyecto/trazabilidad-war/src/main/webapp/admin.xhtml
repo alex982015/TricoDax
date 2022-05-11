@@ -18,7 +18,7 @@
        		Contraseña:<br/><br/>
        		<h:inputSecret id="pass" required="true" requiredMessage="Introduzca contraseña" value="#{login.userApk.password}"/>&nbsp;
        		<h:message id = "password" for="pass"/><br/><br/>
-       		<h:commandButton action="#{loginAdmin.acceder()}" value="Acceder" update=":messages"/>    
+       		<h:commandButton action="#{login.acceder()}" value="Acceder" update=":messages"/>    
        		&nbsp;
        		<h:message for="entradaUserApk"/>
        </h:form>

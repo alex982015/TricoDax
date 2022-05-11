@@ -11,33 +11,25 @@
 </h:head>
 
 <h:body>
-		<div>
-			<h:outputLabel value="Bienvenido, "/>
-			<h:outputLink value="userProfile.xhtml">
-				<h:outputLabel value="#{login.userApk.user}"/>
-			</h:outputLink><br/>
-			<h:outputLink value="index.xhtml">Cerrar sesión</h:outputLink>
-		</div>
-
 	   <h1>Crear autorizado</h1>
        <h:form id="entradaAutoriz">
        		Nombre:<br/><br/>
-       		<h:inputText id="nombre" required="true" value="#{login.userApk.user}"/><br/><br/>
+       		<h:inputText id="nombre" required="true" value="#{autoriz.persAut.nombre}"/><br/><br/>
        		Apellidos:<br/><br/>
-       		<h:inputText id="apellidos" required="true" requiredMessage="Introduzca contraseña" value="#{login.userApk.password}"/>&nbsp;
+       		<h:inputText id="apellidos" required="true" value="#{autoriz.persAut.apellidos}"/>&nbsp;
        		Fecha de nacimiento:<br/><br/>
-       		<h:inputText id="date" required="true" value="#{login.userApk.user}"/><br/><br/>
+       		<h:inputText id="date" required="true" value="#{autoriz.persAut.fechaNac}"/><br/><br/>
        		Ident:<br/><br/>
-       		<h:inputText id="ident" required="true" value="#{login.userApk.user}"/><br/><br/>
+       		<h:inputText id="ident" required="true" value="#{autoriz.persAut.ident}"/><br/><br/>
        		Dirección:<br/><br/>
-       		<h:inputText id="ident" required="true" value="#{login.userApk.user}"/><br/><br/>
+       		<h:inputText id="direccion" required="true" value="#{autoriz.persAut.direccion}"/><br/><br/>
        		Vincular empresa:<br/><br/>
-       		<h:selectOneMenu value="#{bean.name}">
-    			<f:selectItems value="#{bean.names}" />
+       		<h:selectOneMenu value="#{autoriz.persAut.autoriz}">
+    			<f:selectItems value="#{autoriz.obtenerEmpresas()}" />
 			</h:selectOneMenu>
 
 			<br/><br/>
-       		<h:commandButton action="#aplicarCambios" value="Confirmar" update=":messages"/>    
+       		<h:commandButton action="#{autoriz.crearAutoriz()}" value="Confirmar" update=":messages"/>    
        		&nbsp;
        		<h:message for="entradaAutoriz"/>
        </h:form>

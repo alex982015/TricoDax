@@ -51,7 +51,7 @@ public class PersAutEJB implements GestionPersAut {
 	}
 
 	@Override
-	public List<PersAut> obtenerPersAut() throws ProyectoException {
+	public List<PersAut> obtenerPersAut() {
 		TypedQuery<PersAut> query = em.createQuery("SELECT p FROM PersAut p", PersAut.class);
 		return query.getResultList();
 		
