@@ -1,12 +1,21 @@
 package ejb;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+
+import exceptions.PersAutNoEncontradaException;
 import exceptions.ProyectoException;
 import exceptions.UserAsociadoNoExistenteException;
 import exceptions.UserBadPasswordException;
@@ -14,6 +23,7 @@ import exceptions.UserExistenteException;
 import exceptions.UserNoAdminException;
 import exceptions.UserNoEncontradoException;
 import jpa.Cliente;
+import jpa.CuentaFintech;
 import jpa.Empresa;
 import jpa.Indiv;
 import jpa.PersAut;
@@ -303,6 +313,119 @@ public class UserApkEJB implements GestionUserApk {
 					}
 				}
 				return querySegregada.getResultList();
+			} else {
+				throw new UserNoAdminException();
+			}
+		}
+	}
+	
+	@Override
+	public void generarInforme(UserApk user, PersAut persAut, String ruta, String tipo) throws ProyectoException, IOException {
+		UserApk userApkEntity = em.find(UserApk.class, user.getUser());
+		if (userApkEntity == null) {
+			throw new UserNoEncontradoException();
+		} else {
+			if(user.isAdministrativo()) {
+				PersAut persAutEntity = em.find(PersAut.class, persAut.getId());
+				
+				if (persAutEntity == null) {
+					throw new PersAutNoEncontradaException();
+				}
+				
+				Set<Empresa> cuentasAsociadas = persAut.getAutoriz().keySet();
+				FileWriter fw = new FileWriter(ruta);
+				
+				if(tipo.equals("Inicial")) {
+					try {
+						fw.append("IBAN, Apellidos, Nombre, Direccion, Ciudad, Codigo postal, Pais, Identificacion, Fecha de nacimiento");
+						fw.append("\n");
+						
+						for (Empresa e : cuentasAsociadas) {
+							if(e.isEstado()) {
+								for (CuentaFintech c : e.getCuentas()) {
+									LocalDate old = c.getFechaApertura().toInstant()
+										      .atZone(ZoneId.systemDefault())
+										      .toLocalDate();
+									long noOfYearsBetween = ChronoUnit.YEARS.between(old, LocalDate.now());
+									if(noOfYearsBetween <= 5) {
+										fw.append(String.valueOf(c.getIBAN()));
+										fw.append(", ");
+										fw.append(persAut.getApellidos());
+										fw.append(", ");
+										fw.append(persAut.getNombre());
+										fw.append(", ");
+										fw.append("\"" + persAut.getDireccion() + "\"");
+										fw.append(", ");
+										fw.append(e.getCiudad());
+										fw.append(", ");
+										fw.append(String.valueOf(e.getCodPostal()));
+										fw.append(", ");
+										fw.append(String.valueOf(e.getPais()));
+										fw.append(", ");
+										fw.append(String.valueOf(persAut.getIdent()));
+										fw.append(", ");
+										fw.append(String.valueOf(persAut.getFechaNac()));
+										fw.append("\n");
+									}
+								}
+							}
+						}
+					} catch(Exception ex) {
+						ex.printStackTrace();
+					} finally {
+						try {
+							fw.flush();
+							fw.close();
+						} catch(Exception ex) {
+							ex.printStackTrace();
+						}
+					}
+				} else if(tipo.equals("Semanal")) {
+					try {
+						fw.append("IBAN, Apellidos, Nombre, Direccion, Ciudad, Codigo postal, Pais, Identificacion, Fecha de nacimiento");
+						fw.append("\n");
+						
+						for (Empresa e : cuentasAsociadas) {
+							if(e.isEstado()) {
+								for (CuentaFintech c : e.getCuentas()) {
+									LocalDate old = c.getFechaApertura().toInstant()
+										      .atZone(ZoneId.systemDefault())
+										      .toLocalDate();
+									long noOfYearsBetween = ChronoUnit.YEARS.between(old, LocalDate.now());
+									if(c.getEstado() && (noOfYearsBetween <= 5)) {
+										fw.append(String.valueOf(c.getIBAN()));
+										fw.append(", ");
+										fw.append(persAut.getApellidos());
+										fw.append(", ");
+										fw.append(persAut.getNombre());
+										fw.append(", ");
+										fw.append(persAut.getDireccion());
+										fw.append(", ");
+										fw.append(e.getCiudad());
+										fw.append(", ");
+										fw.append(String.valueOf(e.getCodPostal()));
+										fw.append(", ");
+										fw.append(String.valueOf(e.getPais()));
+										fw.append(", ");
+										fw.append(String.valueOf(persAut.getIdent()));
+										fw.append(", ");
+										fw.append(String.valueOf(persAut.getFechaNac()));
+										fw.append("\n");
+									}
+								}
+							}
+						}
+					} catch(Exception ex) {
+						ex.printStackTrace();
+					} finally {
+						try {
+							fw.flush();
+							fw.close();
+						} catch(Exception ex) {
+							ex.printStackTrace();
+						}
+					}
+				}
 			} else {
 				throw new UserNoAdminException();
 			}

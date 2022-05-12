@@ -2,16 +2,25 @@ package pruebas;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+
+import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import javax.naming.NamingException;
 import org.junit.Before;
 import org.junit.Test;
+
+import ejb.GestionEmpresa;
 import ejb.GestionIndiv;
 import ejb.GestionPersAut;
+import ejb.GestionSegregada;
 import ejb.GestionUserApk;
 import es.uma.informatica.sii.anotaciones.Requisitos;
 import exceptions.ClienteExistenteException;
+import exceptions.PersAutNoEncontradaException;
 import exceptions.ProyectoException;
 import exceptions.UserAsociadoNoExistenteException;
 import exceptions.UserBadPasswordException;
@@ -19,6 +28,8 @@ import exceptions.UserExistenteException;
 import exceptions.UserNoAdminException;
 import exceptions.UserNoEncontradoException;
 import jpa.Cliente;
+import jpa.CuentaFintech;
+import jpa.Empresa;
 import jpa.Indiv;
 import jpa.PersAut;
 import jpa.Segregada;
@@ -29,9 +40,13 @@ public class TestUserApk {
 	private static final String USERAPK_EJB = "java:global/classes/UserApkEJB";
 	private static final String PERSAUT_EJB = "java:global/classes/PersAutEJB";
 	private static final String INDIV_EJB = "java:global/classes/IndivEJB";
+	private static final String EMPRESA_EJB = "java:global/classes/EmpresaEJB";
+	private static final String SEGREGADA_EJB = "java:global/classes/SegregadaEJB";
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "TrazabilidadTest";	
 
 	private GestionUserApk gestionUser;
+	private GestionEmpresa gestionEmpresa;
+	private GestionSegregada gestionSegregada;
 	private GestionIndiv gestionIndiv;
 	private GestionPersAut gestionPersAut;
 	
@@ -39,6 +54,8 @@ public class TestUserApk {
 	public void setup() throws NamingException  {
 		gestionUser = (GestionUserApk) SuiteTest.ctx.lookup(USERAPK_EJB);
 		gestionIndiv = (GestionIndiv) SuiteTest.ctx.lookup(INDIV_EJB);
+		gestionEmpresa = (GestionEmpresa) SuiteTest.ctx.lookup(EMPRESA_EJB);
+		gestionSegregada = (GestionSegregada) SuiteTest.ctx.lookup(SEGREGADA_EJB);
 		gestionPersAut = (GestionPersAut) SuiteTest.ctx.lookup(PERSAUT_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
@@ -187,8 +204,8 @@ public class TestUserApk {
 			List<UserApk> user = gestionUser.obtenerUser();
 			UserApk u = user.get(0);
 			u.setAdministrativo(true);
-			
 			List<Segregada> cuentas = gestionUser.generarListaCuentas(u, true, null);
+			assertEquals(0, cuentas.size());
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
 		}
@@ -211,6 +228,136 @@ public class TestUserApk {
 		}
 	}
 	
+	@Requisitos({"RF12"})
+	@Test
+	public void testGenerarInformePersAut() {
+		try {
+			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
+			PersAut persAut1 = persAut.get(0);
+			
+			List<Empresa> empresa = gestionEmpresa.obtenerEmpresas();
+			Empresa empresa1 = empresa.get(0);
+			
+			List<Segregada> segregadas = gestionSegregada.obtenerSegregada();
+			List<CuentaFintech> cuentas = new ArrayList<>();
+			
+			for (Segregada s : segregadas) {
+				cuentas.add(s);
+			}
+			
+			empresa1.setCuentas(cuentas);
+			
+			Map<Empresa, String> m = persAut1.getAutoriz();
+			
+			m.put(empresa1, "AUTORIZADO");
+			persAut1.setAutoriz(m);
+			
+			String ruta = System.getProperty("user.home").toString() + "\\Desktop\\Reporte.csv";
+			
+			String tipo = "Inicial";
+			
+			List<UserApk> user = gestionUser.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionUser.generarInforme(u, persAut1, ruta, tipo);
+			
+		} catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
+		} catch (IOException e) {
+			fail("No debería lanzarse excepción");
+		}
+	}
+	
+
+	@Requisitos({"RF12"})
+	@Test
+	public void testGenerarInformePersAutNoEncontrada() {
+		try {
+			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
+			PersAut persAut1 = persAut.get(0);
+			persAut1.setId(10);
+			
+			List<Empresa> empresa = gestionEmpresa.obtenerEmpresas();
+			Empresa empresa1 = empresa.get(0);
+			
+			List<Segregada> segregadas = gestionSegregada.obtenerSegregada();
+			List<CuentaFintech> cuentas = new ArrayList<>();
+			
+			for (Segregada s : segregadas) {
+				cuentas.add(s);
+			}
+			
+			empresa1.setCuentas(cuentas);
+			
+			Map<Empresa, String> m = persAut1.getAutoriz();
+			
+			m.put(empresa1, "AUTORIZADO");
+			persAut1.setAutoriz(m);
+			
+			String ruta = System.getProperty("user.home").toString() + "\\Desktop\\Reporte.csv";
+			
+			String tipo = "Inicial";
+			
+			List<UserApk> user = gestionUser.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(true);
+			
+			gestionUser.generarInforme(u, persAut1, ruta, tipo);
+			
+		} catch (PersAutNoEncontradaException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
+		} catch (IOException e) {
+			fail("No debería lanzarse excepción");
+		}
+	}
+	
+	@Requisitos({"RF12"})
+	@Test
+	public void testGenerarInformePersAutNoAdmin() {
+		try {
+			List<PersAut> persAut = gestionPersAut.obtenerPersAut();
+			PersAut persAut1 = persAut.get(0);
+			persAut1.setId(10);
+			
+			List<Empresa> empresa = gestionEmpresa.obtenerEmpresas();
+			Empresa empresa1 = empresa.get(0);
+			
+			List<Segregada> segregadas = gestionSegregada.obtenerSegregada();
+			List<CuentaFintech> cuentas = new ArrayList<>();
+			
+			for (Segregada s : segregadas) {
+				cuentas.add(s);
+			}
+			
+			empresa1.setCuentas(cuentas);
+			
+			Map<Empresa, String> m = persAut1.getAutoriz();
+			
+			m.put(empresa1, "AUTORIZADO");
+			persAut1.setAutoriz(m);
+			
+			String ruta = System.getProperty("user.home").toString() + "\\Desktop\\Reporte.csv";
+				
+			String tipo = "Inicial";
+			
+			List<UserApk> user = gestionUser.obtenerUser();
+			UserApk u = user.get(0);
+			u.setAdministrativo(false);
+			
+			gestionUser.generarInforme(u, persAut1, ruta, tipo);
+			
+		} catch (UserNoAdminException e) {
+			// OK
+		} catch (ProyectoException e) {
+			fail("No debería lanzarse excepción");
+		} catch (IOException e) {
+			fail("No debería lanzarse excepción");
+		}
+	}
+
 	/******** TEST ADICIONALES *********/
 
 	@Requisitos({"RF ADICIONAL USERAPK"})

@@ -20,5 +20,4 @@ public interface GestionPersAut {
 	public void anyadirAutorizadoAEmpresa(UserApk user, PersAut persAut, Empresa empresa, String tipo) throws ProyectoException;
 	public void eliminarPersAut(UserApk user, PersAut persAut) throws ProyectoException;
 	public void eliminarTodasPersAut(UserApk user) throws ProyectoException;
-	public void generarInforme(UserApk user, PersAut persAut, String ruta, String tipo) throws ProyectoException, IOException;
 }

@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+       <title>Informe Holanda:</title>
+</h:head>
+
+<h:body>
+       <h1>Informe Holanda</h1>
+       <h:form id="entradaHolanda">
+       		Indique tipo de informe Holanda:<br/><br/>
+       		<h:selectOneListbox required="true" value="#{informes.tipoInforme}"/>
+       			<f:selectItem itemValue="Inicial" itemLabel="Inicial" />
+       			<f:selectItem itemValue="Semanal" itemLabel="Semanal" />
+       		</h:selectOneListbox><br/><br/>
+       		
+       		Seleccione autorizado:<br/><br/>
+       		<h:selectOneListbox required="true" value="#{informes.autorizado}"/>
+       			<f:selectItems itemValue="#{informes.listaAutorizados}" var="i" itemLabel="i.ident" />
+       		</h:selectOneListbox><br/><br/>
+       		
+       		<h:commandButton action="#{informes.crearInformeHolanda()}" value="Descargar" update=":messages"/>    
+       		&nbsp;
+       		<h:message for="entradaHolanda"/>
+       		
+       </h:form>
+       
+</h:body>
+
+</html>
