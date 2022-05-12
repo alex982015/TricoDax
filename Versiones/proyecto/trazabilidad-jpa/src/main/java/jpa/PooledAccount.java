@@ -21,7 +21,7 @@ public class PooledAccount extends CuentaFintech implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name="DEPOSITEN",joinColumns = {@JoinColumn(name="IBANCUENTAREF")})
 	@MapKeyJoinColumn(name="IBANPOOLEDACCOUNT")
 	@Column(name="SALDO")

@@ -28,9 +28,13 @@ public class CuentasAdmin {
 	private Login login;
 	
 	private List<PooledAccount> listaPooled;
+
+	private PooledAccount pooled;
 	
 	private List<Segregada> listaSegregadas;
 
+	private Segregada segregada;
+	
 	public CuentasAdmin() {
 	
 	}
@@ -41,6 +45,22 @@ public class CuentasAdmin {
 	
 	public List<Segregada> getListaSegregada() {
 		return listaSegregadas;
+	}
+	
+	public PooledAccount getPooled() {
+		return pooled;
+	}
+	
+	public void setPooled(PooledAccount p) {
+		pooled = p;
+	}
+	
+	public Segregada getSegregada() {
+		return segregada;
+	}
+	
+	public void setSegregada(Segregada s) {
+		segregada = s;
 	}
 	
 	public String nuevaPooledAccount() throws ProyectoException {

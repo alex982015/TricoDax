@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
        xmlns:h="http://xmlns.jcp.org/jsf/html"
-       xmlns:f="http://xmlns.jcp.org/jsf/core">
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:p="http://primefaces.org/ui">
 <h:head>
        <title>Lista de cuentas</title>
 </h:head>
@@ -25,8 +26,12 @@
             <h:panelGrid id = "botoneraPooled" columns = "3" border = "1"
 			            cellpadding = "10" cellspacing = "1">
 			            
-  	       		<h:commandButton action="#{cuentasAdmin.nuevaPooledAccount()}" value="Nueva"/>    
-  	       		<h:commandButton action="#{cuentasAdmin.editarPooledAccount()}" value="Editar"/>    
+  	       		<h:commandButton value="Nueva">
+  	       			<h:outputLink value="nuevaPooled.xhtml"/>
+  	       		</h:commandButton>
+  	       		<h:commandButton value="Editar">
+  	       			<h:outputLink value="editarPooled.xhtml"/>
+  	       		</h:commandButton>
   	       		<h:commandButton value="Dar de baja"/>
   	       			            	
 	        </h:panelGrid>
@@ -34,19 +39,22 @@
 	        <h:panelGrid id = "botoneraSegregada" columns = "3" border = "1"
 	            cellpadding = "10" cellspacing = "1">
 	            
-  	       		<h:commandButton action="#{cuentasAdmin.nuevaSegregada()}" value="Nueva"/>    
-  	       		<h:commandButton action="#{cuentasAdmin.editarSegregada()}" value="Editar"/>    
-  	       		<h:commandButton value="Dar de baja"/>
+  	       		<h:commandButton value="Nueva">
+  	       			<h:outputLink value="nuevaSegregada.xhtml"/>
+  	       		</h:commandButton>
+  	       		<h:commandButton value="Editar">
+  	       			<h:outputLink value="editarSegregada.xhtml"/>
+  	       		</h:commandButton><h:commandButton value="Dar de baja"/>
   	       		   	
 	        </h:panelGrid>
-   
-			<h:dataTable id="pooled"
+	        
+	         <h:dataTable id="pooled"
 		             columnClasses="list-column-center,
 		             list-column-right, list-column-center,
 		             list-column-right" headerClass="list-header"
-		             rowClasses="list-row" styleClass="list-
-		             background" value="#{cuentas.listaPooled}" var="p">   
-
+		             rowClasses="list-row" border="1" styleClass="list-
+		             background" value="#{cuentasAdmin.listaPooled}" var="p">   
+		             
 					<h:column>
 				        <f:facet name="header">
 				            <h:outputText value="IBAN"/>
@@ -61,15 +69,22 @@
 				         </f:facet>
 				    </h:column>
 				    
+				    <h:column>
+				        <f:facet name="header">
+				            <h:outputText value="Estado"/>
+        			        <h:outputText value="#{p.estado}"/>
+				         </f:facet>
+				    </h:column>
+				    
 			</h:dataTable>
-			
+   			
 			<h:dataTable id="segregada"
 		             columnClasses="list-column-center,
 		             list-column-right, list-column-center,
 		             list-column-right" headerClass="list-header"
-		             rowClasses="list-row" styleClass="list-
-		             background" value="#{cuentas.listaSegregada}" var="s">   
-				    
+		             rowClasses="list-row" border="1" styleClass="list-
+		             background" value="#{cuentasAdmin.listaSegregada}" var="s">   
+		             
 					<h:column>
 				        <f:facet name="header">
 				            <h:outputText value="IBAN"/>
@@ -86,13 +101,19 @@
 				    
 				    <h:column>
 				        <f:facet name="header">
-				            <h:outputText value="Comisión"/>
+				            <h:outputText value="Comision"/>
         			        <h:outputText value="#{s.comision}"/>
 				         </f:facet>
 				    </h:column>
 				    
+				    <h:column>
+				        <f:facet name="header">
+				            <h:outputText value="Estado"/>
+        			        <h:outputText value="#{s.estado}"/>
+				         </f:facet>
+				    </h:column>
+				    
 			</h:dataTable>
-				
 		</h:panelGrid>
 </h:body>
 
