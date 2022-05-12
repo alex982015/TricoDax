@@ -44,7 +44,7 @@ public class SegregadaEJB extends CuentaFintechEJB implements GestionSegregada{
 	}
 
 	@Override
-	public List<Segregada> obtenerSegregada() throws ProyectoException {
+	public List<Segregada> obtenerSegregada() {
 		TypedQuery<Segregada> query = em.createQuery("SELECT c FROM Segregada c", Segregada.class);
 		return query.getResultList();
 	}

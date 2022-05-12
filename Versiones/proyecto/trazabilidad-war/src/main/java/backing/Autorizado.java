@@ -16,7 +16,6 @@ import exceptions.*;
 import exceptions.ProyectoException;
 import jpa.Empresa;
 import jpa.PersAut;
-import jpa.UserApk;
 
 @Named(value="autoriz")
 @RequestScoped
@@ -32,17 +31,19 @@ public class Autorizado {
 	private Login login;
 	
 	private PersAut p;
-	private Empresa e;
 	
 	private List<Empresa> listaEmpresas;
 	
 	public Autorizado() {
 		p = new PersAut();
-		e = new Empresa();
 	}
 	
 	public PersAut getPersAut() {
 		return p;
+	}
+	
+	public List<Empresa> getListaEmpresas() {
+		return listaEmpresas;
 	}
 	
 	public String crearAutoriz() throws ProyectoException {
@@ -74,14 +75,8 @@ public class Autorizado {
 	}
 	
 	@PostConstruct
-	public void obtenerEmpresas() {
-		List<Empresa> lista = empresas.obtenerEmpresas();
-		for (Empresa empresa : lista) {
-			 Empresa e = new Empresa();
-             e.setID(empresa.getID());
-             e.setRazonSocial(empresa.getRazonSocial());
-             listaEmpresas.add(e);
-		}
+	public void init() {
+		listaEmpresas = empresas.obtenerEmpresas();
 	}
 
 }

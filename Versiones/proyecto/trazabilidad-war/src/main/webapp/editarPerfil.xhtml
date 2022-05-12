@@ -15,15 +15,15 @@
 	   <h1>Editar perfil</h1>
        <h:form id="entradaPerfil">
        		Usuario:<br/><br/>
-       		<h:inputText id="nombre" required="true" disabled="true" value="#{login.userApk.user}"/><br/><br/>
+       		<h:inputText id="nombre" disabled="true" value="#{login.userApk.user}"/><br/><br/>
        		Contraseña:<br/><br/>
-       		<h:inputSecret id="pass"  class="form-control" required="true"/><br/><br/>
+       		<h:inputSecret id="pass" required="true" value="#{login.password}"/><br/><br/>
        		Confirmar contraseña:<br/><br/>
-       		<h:inputSecret id="pass2" class="form-control" required="true" value="login.userApk.password"/><br/><br/>
+       		<h:inputSecret id="pass2" required="true" value="#{login.userApk.password}"/><br/><br/>
 
-       		<h:commandButton action="#{login.editarPerfil()}" if="ok" value="Confirmar" update=":messages"/>
+       		<h:commandButton action="#{login.editarPerfil()}" value="Confirmar" update=":messages"/>
        		&nbsp;
-       		<h:message for="entradaPerfil"/>
+       		<h:message for="entradaPerfil" warnClass="color:red"/>
        </h:form>
 
 </h:body>

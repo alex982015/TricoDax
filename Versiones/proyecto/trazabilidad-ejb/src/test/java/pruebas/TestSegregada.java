@@ -240,12 +240,8 @@ public class TestSegregada {
 	@Requisitos({"RF ADICIONAL SEGREGADA"})
 	@Test
 	public void testObtenerSegregada() {
-		try {
-			List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
-			assertEquals(1, cuentas.size());
-		} catch (ProyectoException e) {
-			fail("No debería lanzar excepción");
-		}
+		List<Segregada> cuentas = gestionSegregada.obtenerSegregada();
+		assertEquals(1, cuentas.size());
 	}
 	
 	@Requisitos({"RF ADICIONAL SEGREGADA"})

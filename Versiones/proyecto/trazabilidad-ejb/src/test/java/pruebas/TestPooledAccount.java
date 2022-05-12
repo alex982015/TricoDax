@@ -470,12 +470,8 @@ public class TestPooledAccount {
 	@Requisitos({"RF ADICIONAL POOLEDACCOUNT"})
 	@Test
 	public void testObtenerPooledAccount() {
-		try {
-			List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
-			assertEquals(1, cuentas.size());
-		} catch (ProyectoException e) {
-			fail("No debería lanzar excepción");
-		}
+		List<PooledAccount> cuentas = gestionPooledAccount.obtenerPooledAccount();
+		assertEquals(1, cuentas.size());
 	}
 	
 	@Requisitos({"RF ADICIONAL POOLEDACCOUNT"})

@@ -74,7 +74,7 @@ public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledA
 	}
 
 	@Override
-	public List<PooledAccount> obtenerPooledAccount() throws ProyectoException {
+	public List<PooledAccount> obtenerPooledAccount() {
 		TypedQuery<PooledAccount> query = em.createQuery("SELECT c FROM PooledAccount c", PooledAccount.class);
 		return query.getResultList();
 	}
@@ -95,7 +95,7 @@ public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledA
 				
 				cuentaEntity.setSwift(cuenta.getSwift());
 				
-				em.merge(cuenta);	
+				em.merge(cuentaEntity);	
 			} else {
 				throw new UserNoAdminException();
 			}

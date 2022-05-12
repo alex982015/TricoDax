@@ -16,7 +16,7 @@
        		Nombre:<br/><br/>
        		<h:inputText id="nombre" required="true" value="#{autoriz.persAut.nombre}"/><br/><br/>
        		Apellidos:<br/><br/>
-       		<h:inputText id="apellidos" required="true" value="#{autoriz.persAut.apellidos}"/>&nbsp;
+       		<h:inputText id="apellidos" required="true" value="#{autoriz.persAut.apellidos}"/><br/><br/>
        		Fecha de nacimiento:<br/><br/>
        		<h:inputText id="date" required="true" value="#{autoriz.persAut.fechaNac}"/><br/><br/>
        		Ident:<br/><br/>
@@ -24,12 +24,12 @@
        		Dirección:<br/><br/>
        		<h:inputText id="direccion" required="true" value="#{autoriz.persAut.direccion}"/><br/><br/>
        		Vincular empresa:<br/><br/>
-       		<h:selectOneMenu value="#{autoriz.persAut.autoriz}">
-    			<f:selectItems value="#{autoriz.obtenerEmpresas()}" />
+       		<h:selectOneMenu>
+    			<f:selectItems value="#{autoriz.listaEmpresas}" itemValue="empresas" itemLabel="#{empresas.ID}"/>
 			</h:selectOneMenu>
 
 			<br/><br/>
-       		<h:commandButton action="#{autoriz.crearAutoriz()}" value="Confirmar" update=":messages"/>    
+       		<h:commandButton action="#{autorizado.crearAutoriz()}" value="Confirmar" update=":messages"/>    
        		&nbsp;
        		<h:message for="entradaAutoriz"/>
        </h:form>
