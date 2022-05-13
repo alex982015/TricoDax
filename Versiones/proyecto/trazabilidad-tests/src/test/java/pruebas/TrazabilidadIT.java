@@ -59,16 +59,16 @@ public class TrazabilidadIT {
 	}
 	@SuppressWarnings("deprecation")
 	@Test
-	public void inicio() {
+	public void inicioAdmin() {
 		driver.get(baseURL);
 		driver.manage().window().setSize(new Dimension(1280, 777));
-		driver.findElement(By.cssSelector("h1")).click();
-		driver.findElement(By.cssSelector("h1")).click();
+		driver.findElement(By.id("btnLogin")).click();
 		{
-			WebElement element = driver.findElement(By.cssSelector("h1"));
+			driver.findElement(By.id("user")).sendKeys("ponciano");
+			driver.findElement(By.id("password")).sendKeys("ponciano");
 			Actions builder = new Actions(driver);
-			builder.doubleClick(element).perform();
+			builder.click();
 		}
-		assertThat(driver.findElement(By.cssSelector("h1")).getText(), is("Hola mundo"));
+		assertThat(driver.getCurrentUrl(), is(baseURL+"/index.html"));
 	}
 }

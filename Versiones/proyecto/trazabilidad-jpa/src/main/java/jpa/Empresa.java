@@ -26,7 +26,7 @@ public class Empresa extends Cliente implements Serializable {
 	@Column(name="BLOQUEO", nullable = false)
 	private boolean block;
 
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name="AUTORIZ",joinColumns = {@JoinColumn(name="IDPERSAUT")})
 	@MapKeyJoinColumn(name="IDEMPRESA")
 	@Column(name="TIPO")
@@ -74,9 +74,7 @@ public class Empresa extends Cliente implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Empresa [ID=" + super.getID() + ", Ident=" + super.getIdent() + ", tipo_cliente=" + super.getTipo_cliente() + ", estado=" + super.isEstado()
-				+ ", Fecha_Alta=" + super.getFecha_Alta() + ", Fecha_Baja=" + super.getFecha_Baja() + ", Direccion=" + super.getDireccion() + ", Ciudad="
-				+ super.getCiudad() + ", CodPostal=" + super.getCodPostal() + ", Pais=" + super.getPais() + ", Razon_Social=" + razonSocial + ", Bloqueo="+ block + ", Autorizado="+ autoriz + "]";
+		return "Razon_Social=" + razonSocial +  ", ESTADO=" + super.isEstado() + "]";
 	}
 	
 }

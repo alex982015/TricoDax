@@ -1,0 +1,74 @@
+@font-face {
+  font-family: 'Roboto Slab';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/roboto-slab-v23-latin-regular.eot');
+  src: local(''),
+       url('fonts/roboto-slab-v23-latin-regular.eot?#iefix') format('embedded-opentype'), 
+       url('fonts/roboto-slab-v23-latin-regular.woff2') format('woff2'),
+       url('fonts/roboto-slab-v23-latin-regular.woff') format('woff'),
+       url('fonts/roboto-slab-v23-latin-regular.ttf') format('truetype'),
+       url('fonts/roboto-slab-v23-latin-regular.svg#RobotoSlab') format('svg');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/roboto-v30-latin-regular.eot');
+  src: local(''),
+       url('fonts/roboto-v30-latin-regular.eot?#iefix') format('embedded-opentype'),
+       url('fonts/roboto-v30-latin-regular.woff2') format('woff2'),
+       url('fonts/roboto-v30-latin-regular.woff') format('woff'),
+       url('fonts/roboto-v30-latin-regular.ttf') format('truetype'),
+       url('fonts/roboto-v30-latin-regular.svg#Roboto') format('svg');
+}
+
+@font-face {
+	font-family: 'RobotoLight';
+	src: url('./RobotoLight.eot');
+	src: local('RobotoLight'),
+	 url('fonts/RobotoLight.woff') format('woff'),
+	 url('fonts/RobotoLight.ttf') format('truetype');
+}
+
+.ebury {
+	margin: auto;
+	font-family: 'Roboto Slab';
+	font-style: normal;
+	font-weight: 400;
+	color: #094358;
+}
+
+.whatBorders {
+	font-family: sans-serif;
+	font-size: 16pt;
+	color: #50D2DC;
+}
+
+.r {
+	font-family: 'Roboto Slab';
+	font-size: 10pt;
+	color: #094358;
+}
+
+.txt {
+	font-family: 'RobotoLight';
+	font-family: 'light'
+	font-size: 10pt;
+}
+
+.button {
+	font-family: 'Roboto';
+	font-weight: regular;
+	font-size: 12pt;
+}
+
+.formLogin{
+	width: 300px;
+	margin: auto;
+	height: 120%;
+	padding-bottom: 30px;
+	border-style: groove;
+	background-color: #F5F5F5;
+}

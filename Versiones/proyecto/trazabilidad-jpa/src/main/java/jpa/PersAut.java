@@ -39,7 +39,7 @@ public class PersAut implements Serializable {
 	private boolean block;
 	
 	
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name="AUTORIZ",joinColumns = {@JoinColumn(name="IDEMPRESA")})
 	@MapKeyJoinColumn(name="IDPERSAUT")
 	@Column(name="TIPO")

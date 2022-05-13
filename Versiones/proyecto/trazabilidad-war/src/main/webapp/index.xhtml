@@ -7,21 +7,23 @@
        xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
+		<link rel="stylesheet" type="text/css" href="estilos.css"/>
        <title>Inicio de sesión</title>
 </h:head>
 
 <h:body>
-       <h1>Ebury</h1>
-       <h:form id="entradaUserApk">
-       		Usuario:<br/><br/>
-       		<h:inputText id="user" required="true" value="#{login.userApk.user}"/><br/><br/>
-       		Contraseña:<br/><br/>
-       		<h:inputSecret id="pass" required="true" requiredMessage="Introduzca contraseña" value="#{login.userApk.password}"/>&nbsp;
-       		<h:message id = "password" for="pass"/><br/><br/>
-       		<h:commandButton action="#{login.acceder()}" value="Acceder" update=":messages"/>    
-       		&nbsp;
-       		<h:message for="entradaUserApk"/>
-       </h:form>
+       <h1 class="ebury">Ebury<sup class="whatBorders"> What borders?<sup class="r"> ®</sup></sup></h1>
+         
+         <h:form class="formLogin" id="entradaUserApk" border="1">
+      		<p class="txt">Usuario:</p>
+      		<h:inputText class="txt" id="user" required="true" value="#{login.userApk.user}"/><br/><br/>
+      		<p class="txt">Contraseña:</p>
+      		<h:inputSecret class="txt" id="pass" required="true" requiredMessage="Introduzca contraseña" value="#{login.userApk.password}"/>&nbsp;
+      		<h:message class="error" id = "password" for="pass"/><br/><br/>
+      		<h:commandButton class="button" id="btnLogin" action="#{login.acceder()}" value="Acceder" update=":messages"/>&nbsp;
+      		<h:message class="error" id="loginMsg" for="entradaUserApk"/>
+    	</h:form>
+       
 </h:body>
 
 </html>

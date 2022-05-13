@@ -1,22 +1,28 @@
 package backing;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.annotation.ManagedProperty;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import ejb.GestionPooledAccount;
 import ejb.GestionSegregada;
+import exceptions.CuentaConSaldoException;
 import exceptions.ProyectoException;
+import exceptions.UserNoAdminException;
 import jpa.PooledAccount;
 import jpa.Segregada;
 
+@SuppressWarnings("serial")
 @Named(value="cuentasAdmin")
-@RequestScoped
-public class CuentasAdmin {
+@SessionScoped
+public class CuentasAdmin implements Serializable {
 	
 	@Inject
 	private GestionPooledAccount pooledAccount;
@@ -62,7 +68,28 @@ public class CuentasAdmin {
 	public void setSegregada(Segregada s) {
 		segregada = s;
 	}
+
+    public void addMessage(String summary, String detail) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
 	
+    public String nuevaPooledWeb() {
+		return "menuAdmin.xhtml";
+    }
+    
+    public String editarPooledWeb() {
+		return "editarPooled.xhtml";
+    }
+    
+    public String nuevaSegregadaWeb() {
+		return "nuevaSegregada.xhtml";
+    }
+    
+    public String editarSegregadaWeb() {
+		return "editarSegregada.xhtml";
+    }
+    
 	public String nuevaPooledAccount() throws ProyectoException {
 		/*FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
@@ -74,6 +101,40 @@ public class CuentasAdmin {
 			FacesMessage fm = new FacesMessage("Error: " + e);
 			ctx.addMessage(null, fm);
 		}*/
+		return null;
+   }
+	
+	public String bajaPooledAccount() throws ProyectoException {
+		FacesContext ctx = FacesContext.getCurrentInstance();
+		try {
+			pooledAccount.cerrarCuentaPooledAccount(login.getUserApk(), pooled);
+			addMessage("OK", "Operación completada");
+			return "listaCuentasAdmin.xhtml";
+		} catch(UserNoAdminException e) {
+		    ctx.addMessage("entradaBotoneraPooled", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Permiso denegado"));
+		} catch(CuentaConSaldoException e) {
+		    ctx.addMessage("entradaBotoneraPooled", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Cuenta con saldo"));
+		} catch(ProyectoException e) {
+			FacesMessage fm = new FacesMessage("Error: " + e);
+			ctx.addMessage(null, fm);
+		}
+		return null;
+   }
+	
+	public String bajaSegregada() throws ProyectoException {
+		FacesContext ctx = FacesContext.getCurrentInstance();
+		try {
+			segregadas.cerrarCuentaSegregada(login.getUserApk(), segregada);
+			addMessage("OK", "Operación completada");
+			return "listaCuentasAdmin.xhtml";
+		} catch(UserNoAdminException e) {
+		    ctx.addMessage("bajaSegregada", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Permiso denegado"));
+		} catch(CuentaConSaldoException e) {
+		    ctx.addMessage("bajaSegregada", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Cuenta con saldo"));
+		} catch(ProyectoException e) {
+			FacesMessage fm = new FacesMessage("Error: " + e);
+			ctx.addMessage(null, fm);
+		}
 		return null;
    }
 	

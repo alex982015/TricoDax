@@ -34,6 +34,8 @@ public class Autorizado {
 	
 	private List<Empresa> listaEmpresas;
 	
+	private Empresa e;
+	
 	public Autorizado() {
 		p = new PersAut();
 	}
@@ -44,6 +46,14 @@ public class Autorizado {
 	
 	public List<Empresa> getListaEmpresas() {
 		return listaEmpresas;
+	}
+	
+	public Empresa getE() {
+		return e;
+	}
+	
+	public void setE(Empresa empresa) {
+		e = empresa;
 	}
 	
 	public String crearAutoriz() throws ProyectoException {

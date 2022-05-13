@@ -36,7 +36,7 @@ public class CuentaRef extends Cuenta implements Serializable {
 	@Column(name="ESTADO")
 	private boolean estado;
 
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name="DEPOSITEN",joinColumns = {@JoinColumn(name="IBANPOOLEDACCOUNT")})
 	@MapKeyJoinColumn(name="IBANCUENTAREF")
 	@Column(name="SALDO")

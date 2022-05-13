@@ -4,27 +4,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
        xmlns:h="http://xmlns.jcp.org/jsf/html"
-       xmlns:f="http://xmlns.jcp.org/jsf/core">
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
        <title>Editar autorizado</title>
 </h:head>
 
 <h:body>
-		<div>
-			<h:outputLabel value="Bienvenido, "/>
-			<h:outputLink value="userProfile.xhtml">
-				<h:outputLabel value="#{login.userApk.user}"/>
-			</h:outputLink><br/>
-			<h:outputLink value="index.xhtml">Cerrar sesión</h:outputLink>
-		</div>
+
+	   <p:button value="Atrás" styleClass="ui-button-outlined ui-button-info">
+	   		<h:commandLink value="menuAdmin.xhtml"></h:commandLink>
+	   </p:button>
 
 	   <h1>Editar autorizado</h1>
        <h:form id="entradaAutoriz">
        		Nombre:<br/><br/>
        		<h:inputText id="nombre" required="true" value="#{autoriz.persAut.nombre}"/><br/><br/>
        		Apellidos:<br/><br/>
-       		<h:inputText id="apellidos" required="true" value="#{autoriz.persAut.nombre}"/>&nbsp;
+       		<h:inputText id="apellidos" required="true" value="#{autoriz.persAut.nombre}"/><br/><br/>
        		Fecha de nacimiento:<br/><br/>
        		<h:inputText id="date" required="true" value="#{autoriz.persAut.fechaNac}"/><br/><br/>
        		Ident:<br/><br/>
@@ -32,9 +30,9 @@
        		Dirección:<br/><br/>
        		<h:inputText id="direccion" required="true" value="#{autoriz.persAut.direccion}"/><br/><br/>
        		Vincular empresa:<br/><br/>
-			<h:selectOneMenu value="#{autoriz.persAut.autoriz}">
-    			<f:selectItems value="#{autoriz.obtenerEmpresas()}" />
-			</h:selectOneMenu>
+			<p:selectOneMenu id="empresa" value="#{autoriz.e}" required="true">
+	        	<f:selectItems  value="#{autoriz.listaEmpresas}"/>
+	        </p:selectOneMenu>
 
 			<br/><br/>
        		<h:commandButton action="#{autoriz.editarAutoriz()}" value="Confirmar" update=":messages"/>    
