@@ -7,11 +7,12 @@
        xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
+		<link rel="stylesheet" type="text/css" href="estilos.css"/>
        <title>Menú principal</title>
 </h:head>
 
 <h:body>
-		<div>
+		<div class="session">
 			<h:outputLabel value="Bienvenido, "/>
 			<h:outputLink value="userProfile.xhtml">
 				<h:outputLabel value="#{login.userApk.user}"/>
@@ -19,24 +20,27 @@
 			<h:outputLink value="index.xhtml">Cerrar sesión</h:outputLink>
 		</div>
 
-       <h:panelGrid id = "panel" columns = "3" border = "1"
-            cellpadding = "10" cellspacing = "1">
+       <h:panelGrid class="panel" id = "panel" columns = "3" cellpadding = "10" cellspacing = "1">
             
             <f:facet name = "header">
-               <h:outputText value = "Menú principal Indiv Autoriz"/>
+               <h:outputText value = "Menú principal"/>
             </f:facet>
             
-            <h:outputLink value="Cuentas">
-            	<h:outputLabel value="Cuentas"/>
-           	</h:outputLink>
+            <h:outputLink value="listaClientes.xhtml">
+    			<h2><h:graphicImage class="icon" value="images/clientes.png"/><br/>Clientes</h2>
+			</h:outputLink>
+			
+			<h:outputLink value="listaCuentas.xhtml">
+    			<h2><h:graphicImage class="icon" value="images/cuentas.png" /><br/>Cuentas</h2>
+			</h:outputLink>
       		
-      		<h:outputLink value="Transacciones">
-            	<h:outputLabel value="Transacciones"/>
-           	</h:outputLink>
-           	
-           	<h:outputLink value="Clientes">
-            	<h:outputLabel value="Clientes"/>
-           	</h:outputLink>
+            <h:outputLink value="listaTransacciones.xhtml">
+    			<h2><h:graphicImage class="icon" value="images/transacciones.png" /><br/>Transacciones</h2>
+			</h:outputLink>
+			
+			<h:outputLink value="listaCuentas.xhtml">
+    			<h2><h:graphicImage class="icon" value="images/cuentas.png" /><br/>Cuentas Personales</h2>
+			</h:outputLink>
        		
          </h:panelGrid>
 </h:body>

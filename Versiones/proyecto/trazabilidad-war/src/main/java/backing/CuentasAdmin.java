@@ -111,9 +111,9 @@ public class CuentasAdmin implements Serializable {
 			addMessage("OK", "Operación completada");
 			return "listaCuentasAdmin.xhtml";
 		} catch(UserNoAdminException e) {
-		    ctx.addMessage("entradaBotoneraPooled", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Permiso denegado"));
+		    ctx.addMessage("entradaBotoneraPooled", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "* Permiso denegado"));
 		} catch(CuentaConSaldoException e) {
-		    ctx.addMessage("entradaBotoneraPooled", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Cuenta con saldo"));
+		    ctx.addMessage("entradaBotoneraPooled", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "* Cuenta con saldo"));
 		} catch(ProyectoException e) {
 			FacesMessage fm = new FacesMessage("Error: " + e);
 			ctx.addMessage(null, fm);
@@ -128,9 +128,9 @@ public class CuentasAdmin implements Serializable {
 			addMessage("OK", "Operación completada");
 			return "listaCuentasAdmin.xhtml";
 		} catch(UserNoAdminException e) {
-		    ctx.addMessage("bajaSegregada", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Permiso denegado"));
+		    ctx.addMessage("bajaSegregada", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "* Permiso denegado"));
 		} catch(CuentaConSaldoException e) {
-		    ctx.addMessage("bajaSegregada", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Cuenta con saldo"));
+		    ctx.addMessage("bajaSegregada", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "* Cuenta con saldo"));
 		} catch(ProyectoException e) {
 			FacesMessage fm = new FacesMessage("Error: " + e);
 			ctx.addMessage(null, fm);

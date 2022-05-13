@@ -33,32 +33,35 @@
 }
 
 .ebury {
-	margin: auto;
+	text-align: center;
 	font-family: 'Roboto Slab';
 	font-style: normal;
 	font-weight: 400;
+	font-size: 50px;
 	color: #094358;
 }
 
 .whatBorders {
 	font-family: sans-serif;
-	font-size: 16pt;
-	color: #50D2DC;
+	font-size: 14pt;
+	color: #00BEF0;
 }
 
 .r {
 	font-family: 'Roboto Slab';
-	font-size: 10pt;
+	font-size: 12pt;
 	color: #094358;
 }
 
-.txt {
+.txtLogin {
+	margin-left: 40px;
 	font-family: 'RobotoLight';
 	font-family: 'light'
 	font-size: 10pt;
 }
 
 .button {
+	margin-left: 40px;
 	font-family: 'Roboto';
 	font-weight: regular;
 	font-size: 12pt;
@@ -68,7 +71,115 @@
 	width: 300px;
 	margin: auto;
 	height: 120%;
+	padding-top: 30px;
 	padding-bottom: 30px;
 	border-style: groove;
 	background-color: #F5F5F5;
+}
+
+.error {
+	margin-left: 40px;
+	font-family: 'Roboto';
+	font-weight: regular;
+	font-size: 12pt;
+	color: red
+}
+
+.session {
+	float: right;
+	font-family: 'Roboto';
+	font-weight: regular;
+	padding: 10px;
+}
+
+h2 {
+	text-decoration: none;
+	text-align: center;
+	font-family: 'Roboto';
+	font-weight: regular;
+	font-size: 16pt;
+	color: #094358;
+}
+
+.panel {
+	margin:auto;
+	margin-top: 20px;
+	width: 800px;
+	height: 500px;
+	text-align: center;
+	font-family: 'Roboto';
+	font-size: 30px;
+	border-style: groove;
+	color: #00BEF0;
+}
+
+.icon {
+	width: 70px;
+	height: 70px;
+}
+
+.formEditarPerfil {
+	margin: auto;
+	margin-top: 30px;
+	font-family: 'Roboto';
+	font-weight: regular;
+	border-style: groove;
+	padding-left: 10px;
+	width: 300px;
+	height: 350px;
+}
+
+.title {
+	text-align: center;
+	font-family: 'Roboto';
+	font-size: 30px;
+	color: #00BEF0;
+}
+
+.panelListas {
+	margin:auto;
+	margin-top: 20px;
+	text-align: center;
+	font-family: 'Roboto';
+	font-size: 30px;
+	border-style: groove;
+	color: #00BEF0;
+}
+
+.cuenta {
+	margin: auto;
+}
+
+.panelLectura {
+	margin:auto;
+	margin-top: 20px;
+	width: 800px;
+	height: 500px;
+	text-align: center;
+	font-family: 'Roboto';
+	font-size: 20px;
+	border-style: groove;
+	color: #094358;
+}
+
+.formEditarAutoriz {
+	margin: auto;
+	margin-top: 30px;
+	font-family: 'Roboto';
+	font-weight: regular;
+	border-style: groove;
+	padding-left: 10px;
+	width: 600px;
+	height: 620px;
+}
+
+.formCrearAutoriz {
+	margin: auto;
+	margin-top: 30px;
+	font-family: 'Roboto';
+	font-weight: regular;
+	border-style: groove;
+	padding-left: 10px;
+	width: 600px;
+	height: 620px;
 }

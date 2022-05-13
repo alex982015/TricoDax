@@ -7,23 +7,24 @@
        xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
+	   <link rel="stylesheet" type="text/css" href="estilos.css"/>
        <title>Editar perfil</title>
 </h:head>
 
 <h:body>
 
-	   <h1>Editar perfil</h1>
-       <h:form id="entradaPerfil">
-       		Usuario:<br/><br/>
-       		<h:inputText id="nombre" disabled="true" value="#{login.userApk.user}"/><br/><br/>
-       		Contraseña:<br/><br/>
-       		<h:inputSecret id="pass" required="true" value="#{login.password}"/><br/><br/>
-       		Confirmar contraseña:<br/><br/>
-       		<h:inputSecret id="pass2" required="true" value="#{login.userApk.password}"/><br/><br/>
+	   <h1 class="title">Editar perfil</h1>
+       <h:form class="formEditarPerfil" id="entradaPerfil">
+       		<p class="txtLogin">Usuario:</p>
+       		<h:inputText class="txtLogin" id="nombre" disabled="true" value="#{login.userApk.user}" style="width:200px"/><br/><br/>
+       		<p class="txtLogin">Contraseña:</p>
+       		<h:inputSecret class="txtLogin" id="pass" required="true" value="#{login.password}" style="width:200px"/><br/><br/>
+       		<p class="txtLogin">Confirmar contraseña:</p>
+       		<h:inputSecret class="txtLogin" id="pass2" required="true" value="#{login.userApk.password}" style="width:200px"/><br/><br/>
 
-       		<h:commandButton action="#{login.editarPerfil()}" value="Confirmar" update=":messages"/>
+       		<h:commandButton class="button" action="#{login.editarPerfil()}" value="Confirmar" update=":messages"/>
        		&nbsp;
-       		<h:message for="entradaPerfil" warnClass="color:red"/>
+       		<h:message class="error" for="entradaPerfil"/>
        </h:form>
 
 </h:body>

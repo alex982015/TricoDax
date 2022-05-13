@@ -62,7 +62,7 @@ public class Autorizado {
 			persAut.insertarPersAut(login.getUserApk(), p);
 			return "menuAdmin.xhtml";
 		} catch(UserNoAdminException e) {
-		    ctx.addMessage("entradaAutoriz", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no admin"));
+		    ctx.addMessage("entradaAutoriz", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "* Usuario no admin"));
 		} catch(ProyectoException e) {
 			FacesMessage fm = new FacesMessage("Error: " + e);
 			ctx.addMessage(null, fm);
@@ -76,7 +76,7 @@ public class Autorizado {
 			persAut.actualizarPersAut(login.getUserApk(), p);
 			return "menuAdmin.xhtml";
 		} catch(UserNoAdminException e) {
-		    ctx.addMessage("entradaAutoriz", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no admin"));
+		    ctx.addMessage("entradaAutoriz", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "* Usuario no admin"));
 		} catch(ProyectoException e) {
 			FacesMessage fm = new FacesMessage("Error: " + e);
 				ctx.addMessage(null, fm);

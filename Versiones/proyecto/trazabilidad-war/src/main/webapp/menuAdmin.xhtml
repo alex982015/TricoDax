@@ -7,48 +7,49 @@
        xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
-       <title>Menú principal</title>
+		<link rel="stylesheet" type="text/css" href="estilos.css"/>
+        <title>Menú principal</title>
 </h:head>
 
 <h:body>
-		<div>
+		<div class="session">
 			<h:outputLabel value="Bienvenido, "/>
-			<h:outputLink value="userProfile.xhtml">
+			<h:outputLink value="editarPerfil.xhtml">
 				<h:outputLabel value="#{login.userApk.user}"/>
 			</h:outputLink><br/>
 			<h:outputLink value="index.xhtml">Cerrar sesión</h:outputLink>
 		</div>
 
-       <h:panelGrid id = "panel" columns = "3" border = "1"
-            cellpadding = "10" cellspacing = "1">
+       <h:panelGrid class="panel" id = "panel" columns = "3" cellpadding = "30" cellspacing = "1">
             
             <f:facet name = "header">
-               <h:outputText value = "Menú principal Admin"/>
+               <h:outputText value = "Menú principal"/>
             </f:facet>
             
-            <h:outputLink value="Clientes">
-            	<h:outputLabel value="Clientes"/>
-           	</h:outputLink>
+            <h:outputLink value="listaClientesAdmin.xhtml">
+    			<h2><h:graphicImage class="icon" value="images/clientes.png"/><br/>Clientes</h2>
+			</h:outputLink>
+         
+            <h:outputLink value="listaAutorizadosAdmin.xhtml">
+    			<h2><h:graphicImage class="icon" value="images/autorizados.png" /><br/>Autorizados</h2>
+			</h:outputLink>
             
-            <h:outputLink value="Autorizados">
-            	<h:outputLabel value="Autorizados"/>
-           	</h:outputLink>
-            
-      		<h:outputLink value="Usuarios">
-            	<h:outputLabel value="Usuarios"/>
-           	</h:outputLink>
+      		<h:outputLink value="listaUsuariosAdmin.xhtml">
+    			<h2><h:graphicImage class="icon" value="images/usuarios.png" /><br/>Usuarios</h2>
+			</h:outputLink>
       		
       		<h:outputLink value="listaCuentasAdmin.xhtml">
-            	<h:outputLabel value="Cuentas"/>
-           	</h:outputLink>
+    			<h2><h:graphicImage class="icon" value="images/cuentas.png" /><br/>Cuentas</h2>
+			</h:outputLink>
       		
-      		<h:outputLink value="Generar Informe">
-            	<h:outputLabel value="Generar Informe"/>
-           	</h:outputLink>
+      		<h:outputLink value="generarInforme.xhtml">
+    			<h2><h:graphicImage class="icon" value="images/informes.png" /><br/>Generar Informe</h2>
+    			
+			</h:outputLink>
       		
-      		<h:outputLink value="Transacciones">
-            	<h:outputLabel value="Transacciones"/>
-           	</h:outputLink>
+      		<h:outputLink value="listaTransacciones.xhtml">
+    			<h2><h:graphicImage class="icon" value="images/transacciones.png" /><br/>Transacciones</h2>
+			</h:outputLink>
       		
          </h:panelGrid>
 </h:body>
