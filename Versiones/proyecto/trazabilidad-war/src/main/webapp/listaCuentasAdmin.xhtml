@@ -13,6 +13,14 @@
 
 <h:body>
 
+		<div class="session">
+			<h:outputLabel value="Bienvenido, "/>
+			<h:outputLink value="editarPerfil.xhtml">
+				<h:outputLabel value="#{login.userApk.user}"/>
+			</h:outputLink><br/>
+			<h:outputLink value="index.xhtml">Cerrar sesión</h:outputLink>
+		</div>
+
        <h:panelGrid class="panelListas" id = "panelListaCuentas" columns = "2" border = "1"
             cellpadding = "10" cellspacing = "1">
             
@@ -23,27 +31,38 @@
             <h:outputLabel>Pooled Account:</h:outputLabel>
             
             <h:outputLabel>Segregada:</h:outputLabel>
-            
+         
             <h:panelGrid  class="cuenta" columns = "3" cellpadding = "10" cellspacing = "1">   
-			  	<h:commandButton class="button" action="#{cuentasAdmin.nuevaPooledWeb()}" value="Nueva"/>
-  	       		<h:commandButton class="button" action="#{cuentasAdmin.editarPooledWeb()}" value="Editar"/>
-  	       		<h:commandButton class="button" action="#{cuentasAdmin.bajaPooledAccount()}" value="Dar de baja"/>
+			  	<h:button class="button" value="Nueva" outcome="#{cuentasAdmin.nuevaPooledWeb()}"/>
+  	       		<h:button class="button" value="Editar" outcome="#{cuentasAdmin.editarPooledWeb()}"/>
+ 
+			    <h:form if="bajaPooled">
+			        <p:growl id="message" showDetail="true"/>
+			
+			        <h:commandButton class="button" id="buttonPooled" value="Dar de baja" update="message" action="#{cuentasAdmin.bajaPooledAccount()}" onConfirmComplete="#{cuentasAdmin.reload}" />
+					<h:message class="error" for="bajaPooled"/>
+			    </h:form>
 	        </h:panelGrid>
 			
 	        <h:panelGrid class="cuenta" columns = "3" cellpadding = "10" cellspacing = "1">  
-            	<h:commandButton class="button" action="#{cuentasAdmin.nuevaSegregada()}" value="Nueva"/>
-	       		<h:commandButton class="button" action="#{cuentasAdmin.editarSegregada()}" value="Editar"/>
-				<h:commandButton class="button" action="#{cuentasAdmin.bajaSegregada}" value="Dar de baja"/>
+            	<h:button class="button" value="Nueva" outcome="#{cuentasAdmin.nuevaSegregadaWeb()}"/>
+	       		<h:button class="button" value="Editar" outcome="#{cuentasAdmin.editarSegregadaWeb()}"/>
+				<h:form id="bajaSegregada">
+    				<p:growl id="message" showDetail="true"/>
+    				
+    				<h:commandButton class="button" id="buttonSegregada" value="Dar de baja" update="message" action="#{cuentasAdmin.bajaSegregada()}" onConfirmComplete="#{cuentasAdmin.reload}" />
+					<h:message class="error" for="bajaSegregada"/>
+				</h:form>
 	        </h:panelGrid>
 	        
-	        <p:selectManyMenu id="pooled" value="#{cuentasAdmin.pooled}" required="true">
+	        <p:selectOneMenu id="pooled" value="#{cuentasAdmin.pooled}">
 	        	<f:selectItems  value="#{cuentasAdmin.listaPooled}"/>
-	        </p:selectManyMenu>
+	        </p:selectOneMenu>
 
    			
-			<p:selectManyMenu id="segregada" value="#{cuentasAdmin.segregada}" required="true">
+			<p:selectOneMenu id="segregada" value="#{cuentasAdmin.segregada}">
 	        	<f:selectItems  value="#{cuentasAdmin.listaSegregada}"/>
-	        </p:selectManyMenu>
+	        </p:selectOneMenu>
 		</h:panelGrid>
 </h:body>
 

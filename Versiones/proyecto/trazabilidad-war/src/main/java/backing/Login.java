@@ -86,16 +86,6 @@ public class Login implements Serializable {
 			    ctx.addMessage("entradaPerfil", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al editar perfil", "* Contraseñas no coinciden"));
 			}
 			return "menuAdmin.xhtml";
-		} catch(UserNoAdminException e) {
-			if(userApk.isAutorizado(u) && (userApk.isIndividual(u))) {
-				return "menuIndivAutoriz.xhtml";
-			} else if(userApk.isAutorizado(u)) {
-				return "menuAutoriz.xhtml";
-			} else if(userApk.isIndividual(u)) {
-				return "menuIndiv.xhtml";
-			} else {
-			    ctx.addMessage("entradaUserApk", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "* Usuario no vinculado"));
-			}
 		} catch(ProyectoException e) {
 			FacesMessage fm = new FacesMessage("* Error: " + e);
 			ctx.addMessage(null, fm);

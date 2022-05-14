@@ -1,5 +1,6 @@
 package backing;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -7,9 +8,11 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.annotation.ManagedProperty;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 
 import ejb.GestionPooledAccount;
 import ejb.GestionSegregada;
@@ -68,7 +71,7 @@ public class CuentasAdmin implements Serializable {
 	public void setSegregada(Segregada s) {
 		segregada = s;
 	}
-
+	
     public void addMessage(String summary, String detail) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
         FacesContext.getCurrentInstance().addMessage(null, message);
@@ -79,15 +82,15 @@ public class CuentasAdmin implements Serializable {
     }
     
     public String editarPooledWeb() {
-		return "editarPooled.xhtml";
+		return "menuAdmin.xhtml";
     }
     
     public String nuevaSegregadaWeb() {
-		return "nuevaSegregada.xhtml";
+		return "menuAdmin.xhtml";
     }
     
     public String editarSegregadaWeb() {
-		return "editarSegregada.xhtml";
+		return "menuAdmin.xhtml";
     }
     
 	public String nuevaPooledAccount() throws ProyectoException {
@@ -107,13 +110,17 @@ public class CuentasAdmin implements Serializable {
 	public String bajaPooledAccount() throws ProyectoException {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
-			pooledAccount.cerrarCuentaPooledAccount(login.getUserApk(), pooled);
-			addMessage("OK", "Operación completada");
-			return "listaCuentasAdmin.xhtml";
+			if(pooled != null) {
+				pooledAccount.cerrarCuentaPooledAccount(login.getUserApk(), pooled);
+				addMessage("OK", "Operación completada");
+				return "listaCuentasAdmin.xhtml";
+			} else {
+			    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Seleccione una cuenta"));
+			}
 		} catch(UserNoAdminException e) {
-		    ctx.addMessage("entradaBotoneraPooled", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "* Permiso denegado"));
+		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Permiso denegado"));
 		} catch(CuentaConSaldoException e) {
-		    ctx.addMessage("entradaBotoneraPooled", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "* Cuenta con saldo"));
+		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Cuenta con saldo"));
 		} catch(ProyectoException e) {
 			FacesMessage fm = new FacesMessage("Error: " + e);
 			ctx.addMessage(null, fm);
@@ -124,13 +131,17 @@ public class CuentasAdmin implements Serializable {
 	public String bajaSegregada() throws ProyectoException {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
-			segregadas.cerrarCuentaSegregada(login.getUserApk(), segregada);
-			addMessage("OK", "Operación completada");
-			return "listaCuentasAdmin.xhtml";
+			if(segregada != null) {
+				segregadas.cerrarCuentaSegregada(login.getUserApk(), segregada);
+				addMessage("OK", "Operación completada");
+				return "listaCuentasAdmin.xhtml";
+			} else {
+			    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Seleccione una cuenta"));
+			}
 		} catch(UserNoAdminException e) {
-		    ctx.addMessage("bajaSegregada", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "* Permiso denegado"));
+		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Permiso denegado"));
 		} catch(CuentaConSaldoException e) {
-		    ctx.addMessage("bajaSegregada", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "* Cuenta con saldo"));
+		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Cuenta con saldo"));
 		} catch(ProyectoException e) {
 			FacesMessage fm = new FacesMessage("Error: " + e);
 			ctx.addMessage(null, fm);
@@ -178,6 +189,11 @@ public class CuentasAdmin implements Serializable {
 				ctx.addMessage(null, fm);
 		}*/
 		return null;
+	}
+	
+	public void reload() throws IOException {
+	    ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+	    ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
 	}
 	
 	@PostConstruct
