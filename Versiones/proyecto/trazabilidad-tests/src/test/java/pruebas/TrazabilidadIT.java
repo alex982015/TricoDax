@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
 import org.junit.Before;
@@ -57,18 +58,20 @@ public class TrazabilidadIT {
 	public void tearDown() {
 		driver.quit();
 	}
+	
 	@SuppressWarnings("deprecation")
 	@Test
 	public void inicioAdmin() {
 		driver.get(baseURL);
 		driver.manage().window().setSize(new Dimension(1280, 777));
-		driver.findElement(By.id("btnLogin")).click();
+		driver.findElement(By.id("entradaUserApk:btnLogin")).click();
 		{
-			driver.findElement(By.id("user")).sendKeys("ponciano");
-			driver.findElement(By.id("password")).sendKeys("ponciano");
-			Actions builder = new Actions(driver);
-			builder.click();
+		    driver.findElement(By.id("entradaUserApk:user")).sendKeys("ponciano");
+		    driver.findElement(By.id("entradaUserApk:password")).sendKeys("ponciano");
+		    WebElement element = driver.findElement(By.id("entradaUserApk:btnLogin"));
+		    Actions builder = new Actions(driver);
+			builder.click(element).perform();
 		}
-		assertThat(driver.getCurrentUrl(), is(baseURL+"/index.html"));
+		assertThat(driver.getCurrentUrl(), is(baseURL+"menuAdmin.xhtml"));
 	}
 }
