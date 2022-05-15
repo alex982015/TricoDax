@@ -123,22 +123,6 @@ public class UserApkEJB implements GestionUserApk {
 	}
 	
 	@Override
-	public boolean isAdminUserApk(UserApk user) throws ProyectoException {
-		boolean ok = false;
-		UserApk userEntity = em.find(UserApk.class, user.getUser());
-		if (userEntity == null) {
-			throw new UserNoEncontradoException();
-		} else {
-			if(userEntity.isAdministrativo()) {
-				ok = true;
-			} else {
-				throw new UserNoAdminException();
-			}
-		} 
-		return ok;
-	}
-	
-	@Override
 	public void actualizarUser(UserApk user) throws ProyectoException {
 		UserApk userEntity = em.find(UserApk.class, user.getUser());
 		if (userEntity == null) {
@@ -183,7 +167,7 @@ public class UserApkEJB implements GestionUserApk {
 		}
 		
 		if(user.getPassword().hashCode() == userEntity.getPassword().hashCode()) {
-			if(user.isAdministrativo()) {
+			if(userEntity.isAdministrativo()) {
 				ok = true;
 			} else {
 				throw new UserNoAdminException();
@@ -433,30 +417,13 @@ public class UserApkEJB implements GestionUserApk {
 	}
 
 	@Override
-	public boolean isAutorizado(UserApk user) throws ProyectoException {
-		boolean ok = false;
-		UserApk userEntity = em.find(UserApk.class, user.getUser());
-		if (userEntity == null) {
-			throw new UserNoEncontradoException();
+	public UserApk getUser(String user) throws ProyectoException {
+		UserApk userApkEntity = em.find(UserApk.class, user);
+		
+		if(userApkEntity != null) {
+			return userApkEntity;
 		} else {
-			if(userEntity.getPersonaAutorizada() != null) {
-				ok = true;
-			}
-		} 
-		return ok;
-	}
-
-	@Override
-	public boolean isIndividual(UserApk user) throws ProyectoException {
-		boolean ok = false;
-		UserApk userEntity = em.find(UserApk.class, user.getUser());
-		if (userEntity == null) {
 			throw new UserNoEncontradoException();
-		} else {
-			if(userEntity.getPersonaIndividual() != null) {
-				ok = true;
-			}
-		} 
-		return ok;
+		}
 	}
 }

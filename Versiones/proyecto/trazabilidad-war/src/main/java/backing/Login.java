@@ -45,8 +45,6 @@ public class Login implements Serializable {
 	public String acceder() throws ProyectoException {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
-			userApk.buscarUserApk(u);
-			u.setAdministrativo(userApk.isAdminUserApk(u));
 			userApk.IniciarSesionUserAdmin(u);
 			return "menuAdmin.xhtml";
 		} catch(UserNoEncontradoException e) {
@@ -54,11 +52,11 @@ public class Login implements Serializable {
 		} catch(UserNoAdminException e) {
 			try {
 				userApk.iniciarSesion(u);
-				if(userApk.isAutorizado(u) && (userApk.isIndividual(u))) {
+				if((userApk.getUser(u.getUser()).getPersonaAutorizada() != null) && (userApk.getUser(u.getUser()).getPersonaIndividual() != null)) {
 					return "menuIndivAutoriz.xhtml";
-				} else if(userApk.isAutorizado(u)) {
+				} else if(userApk.getUser(u.getUser()).getPersonaAutorizada() != null) {
 					return "menuAutoriz.xhtml";
-				} else if(userApk.isIndividual(u)) {
+				} else if(userApk.getUser(u.getUser()).getPersonaIndividual() != null) {
 					return "menuIndiv.xhtml";
 				} else {
 				    ctx.addMessage("entradaUserApk", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "* Usuario no vinculado"));
@@ -78,14 +76,24 @@ public class Login implements Serializable {
 	public String editarPerfil() throws ProyectoException {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
-			userApk.buscarUserApk(u);
-			u.setAdministrativo(userApk.isAdminUserApk(u));
 			if(password.equals(u.getPassword())) {
 				userApk.actualizarUser(u);
 			} else {
 			    ctx.addMessage("entradaPerfil", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al editar perfil", "* Contraseñas no coinciden"));
 			}
-			return "menuAdmin.xhtml";
+
+			if(userApk.getUser(u.getUser()).isAdministrativo()) {
+				return "menuAdmin.xhtml";
+			} else if((userApk.getUser(u.getUser()).getPersonaAutorizada() != null) && (userApk.getUser(u.getUser()).getPersonaIndividual() != null)) {
+				return "menuIndivAutoriz.xhtml";
+			} else if(userApk.getUser(u.getUser()).getPersonaAutorizada() != null) {
+				return "menuAutoriz.xhtml";
+			} else if(userApk.getUser(u.getUser()).getPersonaIndividual() != null) {
+				return "menuIndiv.xhtml";
+			} else {
+			    ctx.addMessage("entradaUserApk", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "* Usuario no vinculado"));
+			}
+			
 		} catch(ProyectoException e) {
 			FacesMessage fm = new FacesMessage("* Error: " + e);
 			ctx.addMessage(null, fm);

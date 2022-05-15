@@ -595,34 +595,4 @@ public class TestUserApk {
 			fail("No debería lanzarse excepción");
 		}
 	}
-	
-	@Requisitos({"RF ADICIONAL USERAPK"}) 
-	@Test
-	public void testCheckAdmin() {
-		try {
-			List<UserApk> user = gestionUser.obtenerUser();
-			UserApk u = user.get(0);
-			u.setAdministrativo(true);
-			gestionUser.isAdminUserApk(u);
-		} catch (UserNoEncontradoException e) {
-			fail("No debería lanzarse excepción");
-		} catch (ProyectoException e) {
-			fail("No debería lanzarse excepción");
-		}
-	}
-	
-	@Requisitos({"RF ADICIONAL USERAPK"}) 
-	@Test
-	public void testCheckNoAdmin() {
-		try {
-			List<UserApk> user = gestionUser.obtenerUser();
-			UserApk u = user.get(0);
-			u.setAdministrativo(false);
-			gestionUser.isAdminUserApk(u);
-		} catch (UserNoAdminException e) {
-			// OK
-		} catch (ProyectoException e) {
-			fail("No debería lanzarse excepción");
-		}
-	}
 }

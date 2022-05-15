@@ -27,7 +27,7 @@ public class Indiv extends Cliente implements Serializable {
 	@Column(name="FECHANACIMIENTO") @Temporal(TemporalType.DATE)
 	private Date fechaNac;
 	
-	@OneToOne
+	@OneToOne (mappedBy="personaIndividual")
 	private UserApk usuarioApk;
 	
 /****************CONSTRUCTORES*************************************/

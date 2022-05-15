@@ -45,7 +45,7 @@ public class PersAut implements Serializable {
 	@Column(name="TIPO")
     private Map<Empresa, String> autoriz = new HashMap<>();
 	
-	@OneToOne
+	@OneToOne(mappedBy="personaAutorizada")
 	private UserApk usuarioAutApk;
 	
 /****************CONSTRUCTORES*************************************/

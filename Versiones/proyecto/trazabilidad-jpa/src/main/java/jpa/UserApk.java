@@ -24,10 +24,10 @@ public class UserApk implements Serializable {
 	@Column(name="ADMINISTRATIVO", nullable = false)
 	private boolean administrativo;
 	
-	@OneToOne (mappedBy="usuarioApk")
+	@OneToOne
 	private Indiv personaIndividual;
 	
-	@OneToOne (mappedBy="usuarioAutApk")
+	@OneToOne
 	private PersAut personaAutorizada;
 	
 /****************CONSTRUCTORES*************************************/
