@@ -94,13 +94,5 @@ public class CuentaFintech extends Cuenta implements Serializable {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	
-/******************STRING****************************************/
-	
-	@Override
-	public String toString() {
-		return "CuentaFintech [IBAN=" + super.getIBAN() + ", swift=" + super.getSwift() + ", estado=" + estado + ", fecha_Apertura=" + fechaApertura + ", fecha_Cierre="
-				+ fechaCierre + ", clasificacion=" + clasificacion + "]";
-	}
    
 }
