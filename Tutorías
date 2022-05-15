@@ -111,5 +111,6 @@ TUTORÍA(00/05/2022)
 1-Cómo seleccionar Pooled Account/Segregada en <selectOneMenu>.
 2-En los tests tenemos un error de interacción con los campos de texto.
 3-Cuando hacemos un return de un xhtml no aparece en la barra de navegacion.
+4-No aparecen mensajes de error en editarPerfil.xhtml.
 
 Próximas tutorías...
