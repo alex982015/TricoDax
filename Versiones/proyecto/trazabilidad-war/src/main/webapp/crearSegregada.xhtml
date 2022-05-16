@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+		<link rel="stylesheet" type="text/css" href="estilos.css"/>
+       <title>Crear Segregada</title>
+</h:head>
+
+<h:body>
+	   <h1 class="title">Crear Segregada</h1>
+       <h:form class="formCrearSegregada" id="entradaSegregada">
+       		<p class="txtLogin">IBAN:</p>
+       		<h:inputText class="txtLogin" id="iban" required="true" value="#{cuentasAdmin.segregada.IBAN}" style="width:200px"/><br/><br/>
+       		<p class="txtLogin">SWIFT:</p>
+       		<h:inputText class="txtLogin" id="swift" required="true" value="#{cuentasAdmin.segregada.swift}" style="width:200px"/><br/><br/>
+       		<p class="txtLogin">Comision:</p>
+       		<h:inputText class="txtLogin" id="comision" required="true" value="#{cuentasAdmin.segregada.comision}" style="width:200px"/><br/><br/>
+       		<p class="txtLogin">Vincular Cliente:</p>
+       		<p:selectOneMenu class="txtLogin" id="cliente" value="#{cuentasAdmin.seleccionCliente}" required="true">
+	        	<f:selectItems  value="#{cuentasAdmin.listaClientes}"/>
+	        </p:selectOneMenu>
+
+			<br/><br/>
+       		<h:commandButton class="button" action="#{cuentasAdmin.nuevaSegregada()}" value="Confirmar" update=":messages"/>    
+       		&nbsp;
+       		<h:message class="error" for="entradaSegregada"/>
+       </h:form>
+
+</h:body>
+
+</html>

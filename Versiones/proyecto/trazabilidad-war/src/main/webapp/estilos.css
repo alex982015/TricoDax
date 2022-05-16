@@ -227,3 +227,53 @@ h2 {
 	width: 600px;
 	height: 620px;
 }
+.formCrearIndiv{
+	margin: auto;
+	margin-top: 30px;
+	font-family: 'Roboto';
+	font-weight: regular;
+	border-style: groove;
+	padding-left: 10px;
+	width: 600px;
+	height: 620px;
+}
+.formEditarIndiv{
+	margin: auto;
+	margin-top: 30px;
+	font-family: 'Roboto';
+	font-weight: regular;
+	border-style: groove;
+	padding-left: 10px;
+	width: 600px;
+	height: 620px;
+}
+.formCrearSegregada{
+	margin: auto;
+	margin-top: 30px;
+	font-family: 'Roboto';
+	font-weight: regular;
+	border-style: groove;
+	padding-left: 10px;
+	width: 600px;
+	height: 620px;
+}
+.formEditarSegregada{
+	margin: auto;
+	margin-top: 30px;
+	font-family: 'Roboto';
+	font-weight: regular;
+	border-style: groove;
+	padding-left: 10px;
+	width: 600px;
+	height: 620px;
+}
+.panelLectura{
+	margin: auto;
+	margin-top: 30px;
+	font-family: 'Roboto';
+	font-weight: regular;
+	border-style: groove;
+	padding-left: 10px;
+	width: 600px;
+	height: 620px;
+}

@@ -2,6 +2,7 @@ package backing;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -14,11 +15,16 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 
+import ejb.GestionEmpresa;
+import ejb.GestionIndiv;
 import ejb.GestionPooledAccount;
 import ejb.GestionSegregada;
 import exceptions.CuentaConSaldoException;
 import exceptions.ProyectoException;
 import exceptions.UserNoAdminException;
+import jpa.Cliente;
+import jpa.Empresa;
+import jpa.Indiv;
 import jpa.PooledAccount;
 import jpa.Segregada;
 
@@ -33,6 +39,12 @@ public class CuentasAdmin implements Serializable {
 	@Inject
 	private GestionSegregada segregadas;
 	
+	@Inject
+	private GestionIndiv indivEJB;
+	
+	@Inject
+	private GestionEmpresa empresaEJB;
+	
 	@ManagedProperty(value="#{login}")
 	private Login login;
 	
@@ -41,8 +53,16 @@ public class CuentasAdmin implements Serializable {
 	private PooledAccount selectedPooled;
 	
 	private List<Segregada> listaSegregadas;
+	
+	private List<Indiv> listaIndiv;
+	
+	private List<Empresa> listaEmpresa;
+	
+	private List<Cliente> listaClientes;
 
 	private Segregada segregada;
+	
+	private Cliente seleccionCliente;
 	
 	public CuentasAdmin() {
 	
@@ -63,6 +83,37 @@ public class CuentasAdmin implements Serializable {
 	public void setSelectedPooled(PooledAccount p) {
 		selectedPooled = p;
 	}
+	
+	public List<Indiv> getListaIndiv(){
+		return listaIndiv;
+	}
+	
+	public List<Empresa> getListaEmpresa(){
+		return listaEmpresa;
+	}
+	
+	public void setListaIndiv(List<Indiv> i) {
+		listaIndiv =i;
+	}
+	
+	public void setListaEmpresa(List<Empresa> e) {
+		listaEmpresa=e;
+	}
+	public List<Cliente> getListaClientes(){
+		return listaClientes;
+	}
+	public void setListaClientes(List<Cliente> c) {
+		listaClientes=c;
+	}
+	
+	public Cliente getSeleccionCliente(){
+		return seleccionCliente;
+	}
+	
+	public void setSeleccionCliente(Cliente c) {
+		seleccionCliente=c;
+	}
+	
 	
 	public PooledAccount getPooledAccount(String iban) {
         if (iban == null){
@@ -212,7 +263,16 @@ public class CuentasAdmin implements Serializable {
 	public void init() {
 		listaPooled = pooledAccount.obtenerPooledAccount();
 		listaSegregadas = segregadas.obtenerSegregada();
+		listaIndiv= indivEJB.obtenerIndiv();
+		listaEmpresa= empresaEJB.obtenerEmpresas();
+		listaClientes=new ArrayList<Cliente>();
+		for(Indiv i: listaIndiv) {
+			listaClientes.add(i);
+		}
+		for(Empresa e: listaEmpresa) {
+			listaClientes.add(e);
+		}
+		 
 	}
-	
 
 }

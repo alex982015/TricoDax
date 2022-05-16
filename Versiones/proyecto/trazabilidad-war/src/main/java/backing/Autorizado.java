@@ -1,6 +1,8 @@
 package backing;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -27,7 +29,7 @@ public class Autorizado {
 	@Inject
 	private GestionEmpresa empresas;
 	
-	@ManagedProperty(value="#{login}")
+	@Inject
 	private Login login;
 	
 	private PersAut p;
@@ -82,6 +84,15 @@ public class Autorizado {
 				ctx.addMessage(null, fm);
 		}
 		return null;
+	}
+	//Pregunta: Porque no funsiona, si esta perfecto
+	public List<Empresa> misEmpresas() throws ProyectoException {
+		Map<Empresa,String> map= login.getUserApk().getPersonaAutorizada().getAutoriz();
+		List<Empresa> e = new ArrayList<Empresa>();
+		for(Empresa empresa: map.keySet()) {
+			e.add(empresa);
+		}
+		return e;
 	}
 	
 	@PostConstruct

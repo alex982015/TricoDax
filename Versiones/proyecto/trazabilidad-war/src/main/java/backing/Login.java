@@ -46,7 +46,7 @@ public class Login implements Serializable {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
 			userApk.IniciarSesionUserAdmin(u);
-			return "crearEmpresa.xhtml";
+			return "listaClientesAutorizados.xhtml";
 		} catch(UserNoEncontradoException e) {
 		    ctx.addMessage("entradaUserApk", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "* Usuario no existe"));
 		} catch(UserNoAdminException e) {
