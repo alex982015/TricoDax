@@ -430,12 +430,8 @@ public class TestIndiv {
 	@Requisitos({"RF ADICIONAL INDIV"})
 	@Test
 	public void testObtenerIndiv() {
-		try {
-			List<Indiv> particulares = gestionIndiv.obtenerIndiv();
-			assertEquals(1, particulares.size());
-		} catch (ProyectoException e) {
-			fail("No debería lanzar excepción");
-		}
+		List<Indiv> particulares = gestionIndiv.obtenerIndiv();
+		assertEquals(1, particulares.size());	
 	}
 	
 	@Requisitos({"RF ADICIONAL INDIV"})

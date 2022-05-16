@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+		<link rel="stylesheet" type="text/css" href="estilos.css"/>
+       <title>Editar usuario</title>
+</h:head>
+
+<h:body>
+	   <h1 class="title">Editar usuario</h1>
+       <h:form class="formEditarUsuario" id="entradaUsuario">
+       		<p class="txtLogin">Usuario:</p>
+       		<h:inputText class="txtLogin" id="user" disabled="true" value="#{usuarios.userApk.user}" style="width:200px"/><br/><br/>
+       		<p class="txtLogin">Contraseña:</p>
+       		<h:inputSecret class="txtLogin" id="pass" required="true" value="#{usuarios.password}" style="width:200px"/><br/><br/>
+       		<p class="txtLogin">Confirmar contraseña:</p>
+       		<h:inputSecret class="txtLogin" id="pass2" required="true" value="#{usuarios.userApk.password}" style="width:200px"/><br/><br/>
+       		<p class="txtLogin">Administrativo:</p>
+       		<p:selectBooleanButton onLabel="Si" offLabel="No" style="width:6rem"/>
+       		<p class="txtLogin">Vincular a autorizado:</p>
+       	<p:selectOneMenu class="txtLogin" id="autorizado" value="#{usuarios.persAut}" required="true">
+	        	<f:selectItems  value="#{usuarios.listaAutoriz}"/>
+	        </p:selectOneMenu>
+	        <p class="txtLogin">Vincular a individual:</p>
+			<p:selectOneMenu class="txtLogin" id="individual" value="#{usuarios.indiv}" required="true">
+	        	<f:selectItems  value="#{usuarios.listaIndiv}"/>
+	        </p:selectOneMenu>
+			
+			<br/><br/>
+       		<h:commandButton class="button" action="#{usuarios.editarUsuario()}" value="Aplicar Cambios" update=":messages"/>    
+       		&nbsp;
+       		<h:message class="error" for="entradaUsuario"/>
+       </h:form>
+
+</h:body>
+
+</html>

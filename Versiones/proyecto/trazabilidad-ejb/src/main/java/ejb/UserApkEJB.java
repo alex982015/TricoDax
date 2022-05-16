@@ -84,6 +84,8 @@ public class UserApkEJB implements GestionUserApk {
 				} else {
 					throw new UserAsociadoNoExistenteException();
 				}
+			} else if(user.isAdministrativo()) {
+				em.persist(user);	
 			} else {
 				throw new UserAsociadoNoExistenteException();
 			} 

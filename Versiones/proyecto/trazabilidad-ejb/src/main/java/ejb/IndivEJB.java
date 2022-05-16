@@ -46,7 +46,7 @@ public class IndivEJB implements GestionIndiv {
 	}
 
 	@Override
-	public List<Indiv> obtenerIndiv() throws ProyectoException {
+	public List<Indiv> obtenerIndiv(){
 		TypedQuery<Indiv> query = em.createQuery("SELECT i FROM Indiv i", Indiv.class);
 		return query.getResultList();
 	}

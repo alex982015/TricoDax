@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+		<link rel="stylesheet" type="text/css" href="estilos.css"/>
+       <title>Editar empresa</title>
+</h:head>
+
+<h:body>
+	   <h1 class="title">Editar empresa</h1>
+       <h:form class="formEditarEmpresa" id="entradaEmpresa">
+       		<p class="txtLogin">Razon Social:</p>
+       		<h:inputText class="txtLogin" id="razon" required="true" value="#{empresa.e.razonSocial}" style="width:200px"/><br/><br/>
+       		<p class="txtLogin">Ident:</p>
+       		<h:inputText class="txtLogin" id="ident" required="true" value="#{empresa.e.ident}" style="width:200px"/><br/><br/>
+       		<p class="txtLogin">Dirección:</p>
+       		<h:inputText class="txtLogin" id="direccion" required="true" value="#{empresa.e.direccion}" style="width:200px"/><br/><br/>
+       		<p class="txtLogin">Cuidad:</p>
+       		<h:inputText class="txtLogin" id="ciudad" required="true" value="#{empresa.e.ciudad}" style="width:200px"/><br/><br/>
+       		<p class="txtLogin">Código Postal:</p>
+       		<h:inputText class="txtLogin" id="cp" required="true" value="#{empresa.e.codPostal}" style="width:200px"/><br/><br/>
+       		<p class="txtLogin">Pais:</p>
+       		<h:inputText class="txtLogin" id="pais" required="true" value="#{empresa.e.pais}" style="width:200px"/><br/><br/>
+  
+			<br/><br/>
+       		<h:commandButton class="button" action="#{empresa.editarEmpresa()}" value="Aplicar Cambios" update=":messages"/>    
+       		&nbsp;
+       		<h:message class="error" for="entradaEmpresa"/>
+       </h:form>
+
+</h:body>
+
+</html>

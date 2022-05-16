@@ -183,3 +183,47 @@ h2 {
 	width: 600px;
 	height: 620px;
 }
+
+.formCrearEmpresa {
+	margin: auto;
+	margin-top: 30px;
+	font-family: 'Roboto';
+	font-weight: regular;
+	border-style: groove;
+	padding-left: 10px;
+	width: 600px;
+	height: 620px;
+}
+
+.formEditarEmpresa {
+	margin: auto;
+	margin-top: 30px;
+	font-family: 'Roboto';
+	font-weight: regular;
+	border-style: groove;
+	padding-left: 10px;
+	width: 600px;
+	height: 620px;
+}
+
+.formCrearUsuario {
+	margin: auto;
+	margin-top: 30px;
+	font-family: 'Roboto';
+	font-weight: regular;
+	border-style: groove;
+	padding-left: 10px;
+	width: 600px;
+	height: 620px;
+}
+
+.formEditarUsuario {
+	margin: auto;
+	margin-top: 30px;
+	font-family: 'Roboto';
+	font-weight: regular;
+	border-style: groove;
+	padding-left: 10px;
+	width: 600px;
+	height: 620px;
+}
