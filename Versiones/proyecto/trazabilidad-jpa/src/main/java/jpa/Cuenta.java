@@ -99,13 +99,4 @@ public class Cuenta implements Serializable {
 		return IBAN == other.IBAN;
 	}
 
-	
-/******************STRING****************************************/
-
-	@Override
-	public String toString() {
-		return "Cuenta [IBAN=" + IBAN + ", swift=" + swift + ", transacciones=" + transacciones
-				+ ", cuenta=" + cuenta + "]";
-	}
-
 }

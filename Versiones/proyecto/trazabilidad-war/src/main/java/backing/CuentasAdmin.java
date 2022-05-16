@@ -38,7 +38,7 @@ public class CuentasAdmin implements Serializable {
 	
 	private List<PooledAccount> listaPooled;
 
-	private PooledAccount pooled;
+	private PooledAccount selectedPooled;
 	
 	private List<Segregada> listaSegregadas;
 
@@ -56,13 +56,25 @@ public class CuentasAdmin implements Serializable {
 		return listaSegregadas;
 	}
 	
-	public PooledAccount getPooled() {
-		return pooled;
+	public PooledAccount getSelectedPooled() {
+		return selectedPooled;
 	}
 	
-	public void setPooled(PooledAccount p) {
-		pooled = p;
+	public void setSelectedPooled(PooledAccount p) {
+		selectedPooled = p;
 	}
+	
+	public PooledAccount getPooledAccount(String iban) {
+        if (iban == null){
+            throw new IllegalArgumentException("no id provided");
+        }
+        for (PooledAccount pooled : listaPooled){
+            if (iban.equals(pooled.getIBAN())){
+                return pooled;
+            }
+        }
+        return null;
+    }
 	
 	public Segregada getSegregada() {
 		return segregada;
@@ -110,8 +122,8 @@ public class CuentasAdmin implements Serializable {
 	public String bajaPooledAccount() throws ProyectoException {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
-			if(pooled != null) {
-				pooledAccount.cerrarCuentaPooledAccount(login.getUserApk(), pooled);
+			if(selectedPooled != null) {
+				pooledAccount.cerrarCuentaPooledAccount(login.getUserApk(), selectedPooled);
 				addMessage("OK", "Operación completada");
 				return "listaCuentasAdmin.xhtml";
 			} else {
