@@ -56,8 +56,16 @@ public class Informes implements Serializable {
 		return tipoInforme;
 	}
 	
+	public void setTipoInforme(String tipoInforme) {
+		this.tipoInforme = tipoInforme;
+	}
+	
 	public PersAut getAutorizado() {
 		return autorizado;
+	}
+	
+	public void setAutorizado(PersAut autorizado) {
+		this.autorizado = autorizado;
 	}
 
 	public List<PersAut> getListaAutorizados() {

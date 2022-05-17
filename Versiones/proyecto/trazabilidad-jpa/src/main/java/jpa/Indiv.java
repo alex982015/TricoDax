@@ -87,9 +87,7 @@ public class Indiv extends Cliente implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Indiv [ID=" + super.getID() + ", Ident=" + super.getIdent() + ", tipo_cliente=" + super.getTipo_cliente() + ", estado=" + super.isEstado()
-		+ ", Fecha_Alta=" + super.getFecha_Alta() + ", Fecha_Baja=" + super.getFecha_Baja() + ", Direccion=" + super.getDireccion() + ", Ciudad="
-		+ super.getCiudad() + ", CodPostal=" + super.getCodPostal() + ", Pais=" + super.getPais() +  ", nombre=" + nombre + ", apellido=" + apellido + ", fecha_Nacimiento=" + fechaNac +", usuarioAPK=" + usuarioApk + "]";
+		return "Ident=" + super.getIdent() + ", Tipo de cliente=" + super.getTipo_cliente() + ", Estado=" + super.isEstado();
 	}
    
 }

@@ -201,10 +201,7 @@ public class PersAut implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "PersAut [Id=" + Id + ", ident=" + ident + ", nombre=" + nombre + ", apellidos=" + apellidos
-				+ ", direccion=" + direccion + ", fechaNac=" + fechaNac + ", estado=" + estado + ", fechaInicio="
-				+ fechaInicio + ", fechaFin=" + fechaFin + ", Bloqueo=" + block + ", autoriz=" + autoriz + ", usuarioAutApk=" + usuarioAutApk
-				+ "]";
+		return "Ident=" + ident + ", Nombre=" + nombre + ", Apellidos=" + apellidos + ", Estado=" + estado;
 	}
 	
 }

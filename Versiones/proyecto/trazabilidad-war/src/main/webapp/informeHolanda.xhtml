@@ -7,24 +7,25 @@
        xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
+		<link rel="stylesheet" type="text/css" href="estilos.css"/>
        <title>Informe Holanda:</title>
 </h:head>
 
 <h:body>
-       <h1>Informe Holanda</h1>
-       <h:form id="entradaHolanda">
-       		Indique tipo de informe Holanda:<br/><br/>
-       		<h:selectOneListbox required="true" value="#{informes.tipoInforme}"/>
-       			<f:selectItem itemValue="Inicial" itemLabel="Inicial" />
-       			<f:selectItem itemValue="Semanal" itemLabel="Semanal" />
+       <h1 class="title">Informe Holanda</h1>
+       <h:form class="formHolanda" id="entradaHolanda">
+       		<p class="txtLogin">Indique tipo de informe Holanda:</p>
+       		<h:selectOneListbox class="txtLogin" required="true" value="#{informes.tipoInforme}">
+       			<f:selectItem itemValue="Inicial" itemLabel="Inicial"/>
+       			<f:selectItem itemValue="Semanal" itemLabel="Semanal"/>
        		</h:selectOneListbox><br/><br/>
        		
-       		Seleccione autorizado:<br/><br/>
-       		<h:selectOneListbox required="true" value="#{informes.autorizado}"/>
-       			<f:selectItems itemValue="#{informes.listaAutorizados}" var="i" itemLabel="i.ident" />
+       		<p class="txtLogin">Seleccione autorizado:</p>
+       		<h:selectOneListbox class="txtLogin" required="true" value="#{informes.autorizado}">
+       			<f:selectItems value="#{informes.listaAutorizados}" />
        		</h:selectOneListbox><br/><br/>
        		
-       		<h:commandButton action="#{informes.crearInformeHolanda()}" value="Descargar" update=":messages"/>    
+       		<h:commandButton class="button" action="#{informes.crearInformeHolanda()}" value="Descargar" update=":messages"/>    
        		&nbsp;
        		<h:message for="entradaHolanda"/>
        		

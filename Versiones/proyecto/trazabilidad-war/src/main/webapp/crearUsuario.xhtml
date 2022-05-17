@@ -22,7 +22,7 @@
        		<p class="txtLogin">Confirmar contraseña:</p>
        		<h:inputSecret class="txtLogin" id="pass2" required="true" value="#{usuarios.userApk.password}" style="width:200px"/><br/><br/>
        		<p class="txtLogin">Administrativo:</p>
-       		<p:selectBooleanButton onLabel="Si" offLabel="No" style="width:6rem"/>
+       		<p:selectBooleanButton class="txtLogin" onLabel="Si" offLabel="No" style="width:5rem; margin-left: 40px;"/>
        		<p class="txtLogin">Vincular a autorizado:</p>
        		<p:selectOneMenu class="txtLogin" id="autorizado" value="#{usuarios.persAut}" required="true">
 	        	<f:selectItems  value="#{usuarios.listaAutoriz}"/>

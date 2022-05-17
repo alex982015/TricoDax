@@ -13,7 +13,7 @@
 
 <h:body>        
 
-       <h:panelGrid class="panelLectura" id = "panel" columns = "2" border = "1"
+       <h:panelGrid class="panelClientesAutorizados" id = "panel" columns = "1" border = "1"
             cellpadding = "10" cellspacing = "1">
             
             <f:facet name = "header">
@@ -27,7 +27,7 @@
 		             list-column-right, list-column-center,
 		             list-column-right" headerClass="list-header"
 		             rowClasses="list-row" border="1" styleClass="list-
-		             background" value="#{Autoriz.misEmpresas()}" var="e">   
+		             background" value="#{autoriz.listaEmpresasAutoriz}" var="e">   
 
 					<h:column>
 				        <f:facet name="header">
@@ -45,9 +45,9 @@
 				    
 				    <h:column>
 				        <f:facet name="header">
-				            <h:outputText value="Fecha Alta"/>
+				            <h:outputText value="Estado"/>
 				         </f:facet>
-				             <h:outputText value="#{e.fechaAlta}"/>
+				             <h:outputText value="#{e.estado}"/>
 				    </h:column>
 			</h:dataTable>
 		</h:panelGrid>

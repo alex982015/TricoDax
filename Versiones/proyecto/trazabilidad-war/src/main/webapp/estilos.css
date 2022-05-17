@@ -150,11 +150,11 @@ h2 {
 	margin: auto;
 }
 
-.panelLectura {
+.panelClientesAutorizados {
 	margin:auto;
 	margin-top: 20px;
-	width: 800px;
-	height: 500px;
+	width: 700px;
+	height: 300px;
 	text-align: center;
 	font-family: 'Roboto';
 	font-size: 20px;
@@ -191,8 +191,8 @@ h2 {
 	font-weight: regular;
 	border-style: groove;
 	padding-left: 10px;
-	width: 600px;
-	height: 620px;
+	width: 380px;
+	height: 640px;
 }
 
 .formEditarEmpresa {
@@ -202,8 +202,8 @@ h2 {
 	font-weight: regular;
 	border-style: groove;
 	padding-left: 10px;
-	width: 600px;
-	height: 620px;
+	width: 380px;
+	height: 640px;
 }
 
 .formCrearUsuario {
@@ -213,7 +213,7 @@ h2 {
 	font-weight: regular;
 	border-style: groove;
 	padding-left: 10px;
-	width: 600px;
+	width: 650px;
 	height: 620px;
 }
 
@@ -224,7 +224,7 @@ h2 {
 	font-weight: regular;
 	border-style: groove;
 	padding-left: 10px;
-	width: 600px;
+	width: 650px;
 	height: 620px;
 }
 .formCrearIndiv{
@@ -234,8 +234,8 @@ h2 {
 	font-weight: regular;
 	border-style: groove;
 	padding-left: 10px;
-	width: 600px;
-	height: 620px;
+	width: 400px;
+	height: 780px;
 }
 .formEditarIndiv{
 	margin: auto;
@@ -244,8 +244,8 @@ h2 {
 	font-weight: regular;
 	border-style: groove;
 	padding-left: 10px;
-	width: 600px;
-	height: 620px;
+	width: 400px;
+	height: 780px;
 }
 .formCrearSegregada{
 	margin: auto;
@@ -254,8 +254,8 @@ h2 {
 	font-weight: regular;
 	border-style: groove;
 	padding-left: 10px;
-	width: 600px;
-	height: 620px;
+	width: 550px;
+	height: 480px;
 }
 .formEditarSegregada{
 	margin: auto;
@@ -264,8 +264,8 @@ h2 {
 	font-weight: regular;
 	border-style: groove;
 	padding-left: 10px;
-	width: 600px;
-	height: 620px;
+	width: 350px;
+	height: 400px;
 }
 .panelLectura{
 	margin: auto;
@@ -276,4 +276,15 @@ h2 {
 	padding-left: 10px;
 	width: 600px;
 	height: 620px;
+}
+
+.formHolanda{
+	margin: auto;
+	margin-top: 30px;
+	font-family: 'Roboto';
+	font-weight: regular;
+	border-style: groove;
+	padding-left: 10px;
+	width: 570px;
+	height: 240px;
 }

@@ -36,6 +36,8 @@ public class Autorizado {
 	
 	private List<Empresa> listaEmpresas;
 	
+	private List<Empresa> listaEmpresasAutoriz;
+	
 	private Empresa e;
 	
 	public Autorizado() {
@@ -56,6 +58,10 @@ public class Autorizado {
 	
 	public void setE(Empresa empresa) {
 		e = empresa;
+	}
+	
+	public List<Empresa> getListaEmpresasAutoriz() {
+		return listaEmpresasAutoriz;
 	}
 	
 	public String crearAutoriz() throws ProyectoException {
@@ -85,19 +91,18 @@ public class Autorizado {
 		}
 		return null;
 	}
-	//Pregunta: Porque no funsiona, si esta perfecto
-	public List<Empresa> misEmpresas() throws ProyectoException {
-		Map<Empresa,String> map= login.getUserApk().getPersonaAutorizada().getAutoriz();
-		List<Empresa> e = new ArrayList<Empresa>();
-		for(Empresa empresa: map.keySet()) {
-			e.add(empresa);
-		}
-		return e;
-	}
 	
 	@PostConstruct
 	public void init() {
 		listaEmpresas = empresas.obtenerEmpresas();
+		
+		if(login.getUserApk().getPersonaAutorizada() != null) {
+			Map<Empresa,String> map= login.getUserApk().getPersonaAutorizada().getAutoriz();
+			listaEmpresasAutoriz = new ArrayList<Empresa>();
+			for(Empresa empresa: map.keySet()) {
+				listaEmpresasAutoriz.add(empresa);
+			}
+		}
 	}
 
 }
