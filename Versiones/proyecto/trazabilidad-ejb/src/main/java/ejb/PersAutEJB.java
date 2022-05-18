@@ -1,13 +1,7 @@
 package ejb;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,7 +13,6 @@ import exceptions.PersAutYaAsignadaException;
 import exceptions.ProyectoException;
 import exceptions.UserNoAdminException;
 import exceptions.UserNoEncontradoException;
-import jpa.CuentaFintech;
 import jpa.Empresa;
 import jpa.PersAut;
 import jpa.UserApk;
@@ -190,6 +183,17 @@ public class PersAutEJB implements GestionPersAut {
 			} else {
 				throw new UserNoAdminException();
 			}
+		}
+	}
+
+	@Override
+	public PersAut obtenerPersAut(String persAut) throws ProyectoException {
+		PersAut persAutEntity = em.find(PersAut.class, persAut);
+		
+		if(persAutEntity == null) {
+			throw new PersAutNoEncontradaException();
+		} else {
+			return persAutEntity;
 		}
 	}
 	

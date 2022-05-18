@@ -16,19 +16,24 @@
 	   <h1 class="title">Editar empresa</h1>
        <h:form class="formEditarEmpresa" id="entradaEmpresa">
        		<p class="txtLogin">Razon Social:</p>
-       		<h:inputText class="txtLogin" id="razon" required="true" value="#{empresa.e.razonSocial}" style="width:200px"/><br/><br/>
+       		<h:inputText class="txtLogin" id="razon" required="true" requiredMessage="* Introduzca razón social" value="#{empresa.e.razonSocial}" style="width:200px"/><br/><br/>
+       		<h:message class="error" id ="razonMsg" for="razon"/><br/>
        		<p class="txtLogin">Ident:</p>
-       		<h:inputText class="txtLogin" id="ident" required="true" value="#{empresa.e.ident}" style="width:200px"/><br/><br/>
+       		<h:inputText class="txtLogin" id="ident" required="true" requiredMessage="* Introduzca ident" value="#{empresa.e.ident}" style="width:200px"/><br/><br/>
+       		<h:message class="error" id ="identMsg" for="ident"/><br/>
        		<p class="txtLogin">Dirección:</p>
-       		<h:inputText class="txtLogin" id="direccion" required="true" value="#{empresa.e.direccion}" style="width:200px"/><br/><br/>
+       		<h:inputText class="txtLogin" id="direccion" required="true" requiredMessage="* Introduzca dirección" value="#{empresa.e.direccion}" style="width:200px"/><br/><br/>
+       		<h:message class="error" id ="direccionMsg" for="direccion"/><br/>
        		<p class="txtLogin">Cuidad:</p>
-       		<h:inputText class="txtLogin" id="ciudad" required="true" value="#{empresa.e.ciudad}" style="width:200px"/><br/><br/>
+       		<h:inputText class="txtLogin" id="ciudad" required="true" requiredMessage="* Introduzca ciudad" value="#{empresa.e.ciudad}" style="width:200px"/><br/><br/>
+       		<h:message class="error" id ="ciudadMsg" for="ciudad"/><br/>
        		<p class="txtLogin">Código Postal:</p>
-       		<h:inputText class="txtLogin" id="cp" required="true" value="#{empresa.e.codPostal}" style="width:200px"/><br/><br/>
+       		<h:inputText class="txtLogin" id="cp" required="true" requiredMessage="* Introduzca código postal" value="#{empresa.e.codPostal}" style="width:200px"/><br/><br/>
+       		<h:message class="error" id ="cpMsg" for="cp"/><br/>
        		<p class="txtLogin">Pais:</p>
-       		<h:inputText class="txtLogin" id="pais" required="true" value="#{empresa.e.pais}" style="width:200px"/><br/><br/>
-  
-			<br/><br/>
+       		<h:inputText class="txtLogin" id="pais" required="true" requiredMessage="* Introduzca país" value="#{empresa.e.pais}" style="width:200px"/><br/><br/>
+       		<h:message class="error" id ="paisMsg" for="pais"/><br/>
+			
        		<h:commandButton class="button" action="#{empresa.editarEmpresa()}" value="Aplicar Cambios" update=":messages"/>    
        		&nbsp;
        		<h:message class="error" for="entradaEmpresa"/>

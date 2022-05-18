@@ -38,6 +38,9 @@ public class Usuarios implements Serializable {
 	private Indiv indiv;
 	private PersAut persAut;
 	
+	private String selectedIndiv;
+	private String selectedPersAut;
+	
 	private String password;
 	
 	public Usuarios() {
@@ -72,12 +75,20 @@ public class Usuarios implements Serializable {
 		this.listaAutoriz = listaAutoriz;
 	}
 	
-	public Indiv getIndiv() {
-		return indiv;
+	public String getSelectedIndiv() {
+		return selectedIndiv;
 	}
 	
-	public void setIndiv(Indiv indiv) {
-		this.indiv = indiv;
+	public void setSelectedIndiv(String indiv) {
+		selectedIndiv = indiv;
+	}
+	
+	public String getSelectedPersAut() {
+		return selectedPersAut;
+	}
+	
+	public void setSelectedPersAut(String persAut) {
+		selectedPersAut = persAut;
 	}
 	
 	public PersAut getPersAut() {
@@ -91,8 +102,10 @@ public class Usuarios implements Serializable {
 	public String crearUsuario() throws ProyectoException {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
-			u.setPersonaAutorizada(persAut);
+			indiv = indivEJB.obtenerIndiv(selectedIndiv);
 			u.setPersonaIndividual(indiv);
+			persAut = autorizEJB.obtenerPersAut(selectedPersAut);
+			u.setPersonaAutorizada(persAut);
 			userApk.insertarUser(u);
 			return "listaUsuarios.xhtml";
 		} catch(UserExistenteException e) {
