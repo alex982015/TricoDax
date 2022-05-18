@@ -42,7 +42,7 @@ public class CuentaFintechEJB implements GestionCuentaFintech {
 			throw new CuentaNoEncontradoException();
 		}
 		
-		cuentaEntity.setEstado(cuenta.getEstado());
+		cuentaEntity.setEstado(cuenta.isEstado());
 		cuentaEntity.setFechaApertura(cuenta.getFechaApertura());
 		cuentaEntity.setFechaCierre(cuenta.getFechaCierre());
 		cuentaEntity.setClasificacion(cuenta.isClasificacion());

@@ -135,7 +135,7 @@ public class EmpresaEJB implements GestionEmpresa {
 				boolean ok = false;
 				
 				for(CuentaFintech c : cuentasEmpresa) {
-					if(c.getEstado() == true) {
+					if(c.isEstado() == true) {
 						ok = true;
 					}
 				}

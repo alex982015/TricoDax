@@ -55,7 +55,7 @@ public class CuentaFintech extends Cuenta implements Serializable {
 
 /***************GETTERS AND SETTERS*******************************/
 
-	public boolean getEstado() {
+	public boolean isEstado() {
 		return estado;
 	}
 

@@ -378,7 +378,7 @@ public class UserApkEJB implements GestionUserApk {
 										      .atZone(ZoneId.systemDefault())
 										      .toLocalDate();
 									long noOfYearsBetween = ChronoUnit.YEARS.between(old, LocalDate.now());
-									if(c.getEstado() && (noOfYearsBetween <= 5)) {
+									if(c.isEstado() && (noOfYearsBetween <= 5)) {
 										fw.append(String.valueOf(c.getIBAN()));
 										fw.append(", ");
 										fw.append(persAut.getApellidos());

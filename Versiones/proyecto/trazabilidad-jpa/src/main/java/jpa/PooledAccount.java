@@ -48,7 +48,7 @@ public class PooledAccount extends CuentaFintech implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "IBAN=" + super.getIBAN() + ", SWIFT=" + super.getSwift() + ", ESTADO=" + super.getEstado();
+		return "IBAN=" + super.getIBAN() + ", SWIFT=" + super.getSwift() + ", ESTADO=" + super.isEstado();
 	}
 	 
 }

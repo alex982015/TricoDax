@@ -53,10 +53,14 @@ public class Login implements Serializable {
 			try {
 				userApk.iniciarSesion(u);
 				if((userApk.getUser(u.getUser()).getPersonaAutorizada() != null) && (userApk.getUser(u.getUser()).getPersonaIndividual() != null)) {
+					u.setPersonaAutorizada(userApk.getUser(u.getUser()).getPersonaAutorizada());
+					u.setPersonaIndividual(userApk.getUser(u.getUser()).getPersonaIndividual());
 					return "menuIndivAutoriz.xhtml";
 				} else if(userApk.getUser(u.getUser()).getPersonaAutorizada() != null) {
+					u.setPersonaAutorizada(userApk.getUser(u.getUser()).getPersonaAutorizada());
 					return "menuAutoriz.xhtml";
 				} else if(userApk.getUser(u.getUser()).getPersonaIndividual() != null) {
+					u.setPersonaIndividual(userApk.getUser(u.getUser()).getPersonaIndividual());
 					return "menuIndiv.xhtml";
 				} else {
 				    ctx.addMessage("entradaUserApk", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "* Usuario no vinculado"));
