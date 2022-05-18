@@ -103,13 +103,17 @@ public class InicializarBD {
 		segregada1.setIBAN("NL63ABNA6548268733");
 		segregada1.setCliente(empresa1);
 		segregada1.setReferenciada(ref);
+		segregada1.setSwift("Swift");
 		segregada1.setEstado(true);
+		segregada1.setComision(0);
 		segregada1.setFechaApertura(Date.valueOf("2018-06-27"));
 		segregada1.setClasificacion(true);
 		
 		Segregada segregada2 = new Segregada();
 		segregada2.setIBAN("FR5514508000502273293129K55");
 		segregada2.setCliente(empresa1);
+		segregada2.setSwift("Swift");
+		segregada2.setComision(0);
 		segregada2.setEstado(true);
 		segregada2.setFechaApertura(Date.valueOf("2019-06-12"));
 		segregada2.setClasificacion(true);
@@ -117,6 +121,8 @@ public class InicializarBD {
 		Segregada segregada3 = new Segregada();
 		segregada3.setIBAN("DE31500105179261215675");
 		segregada3.setCliente(empresa1);
+		segregada3.setSwift("Swift");
+		segregada3.setComision(0);
 		segregada3.setEstado(false);
 		segregada3.setFechaApertura(Date.valueOf("2021-09-01"));
 		segregada3.setClasificacion(true);
@@ -133,6 +139,7 @@ public class InicializarBD {
 		PooledAccount pooledAccount1 = new PooledAccount ();
 		pooledAccount1.setIBAN("ES8400817251647192321264");
 		pooledAccount1.setCliente(indiv1);
+		pooledAccount1.setSwift("Swift");
 		pooledAccount1.setDepositEn(null);
 		pooledAccount1.setEstado(true);
 		pooledAccount1.setFechaApertura(Date.valueOf("2022-06-27"));
