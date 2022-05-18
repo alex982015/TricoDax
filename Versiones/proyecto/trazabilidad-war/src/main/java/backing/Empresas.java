@@ -1,12 +1,10 @@
 package backing;
 
-
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
 import javax.enterprise.context.RequestScoped;
-import javax.faces.annotation.ManagedProperty;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -17,7 +15,6 @@ import ejb.GestionEmpresa;
 import exceptions.*;
 import exceptions.ProyectoException;
 import jpa.Empresa;
-
 
 @Named(value="empresa")
 @RequestScoped

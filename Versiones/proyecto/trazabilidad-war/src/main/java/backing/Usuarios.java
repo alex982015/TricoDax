@@ -25,11 +25,12 @@ public class Usuarios implements Serializable {
 	
 	@Inject
 	private GestionUserApk userApk;
+	
 	@Inject
 	private GestionIndiv indivEJB;
+	
 	@Inject 
 	private GestionPersAut autorizEJB;
-	
 	
 	private UserApk u;
 	private List<Indiv> listaIndiv;

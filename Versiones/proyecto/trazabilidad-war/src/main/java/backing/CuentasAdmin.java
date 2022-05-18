@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.annotation.ManagedProperty;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -45,7 +44,7 @@ public class CuentasAdmin implements Serializable {
 	@Inject
 	private GestionEmpresa empresaEJB;
 	
-	@ManagedProperty(value="#{login}")
+	@Inject
 	private Login login;
 	
 	private List<PooledAccount> listaPooled;
