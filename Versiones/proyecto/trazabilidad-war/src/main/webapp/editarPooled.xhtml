@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+       <title>Editar Pooled Account</title>
+</h:head>
+
+<!>Falta realizar el backing de esta página, he pensado en usar el backing de cuenta</!>
+
+<h:body>
+       <h1>Cuenta Pooled</h1>
+       <h:form id="entradaEditarPooled">
+       
+       		<p class="txtLogin">IBAN</p>
+       		<h:inputText class="txtLogin" id="IBAN" required="true" value="#{Cuentas.PooledAccount.IBAN}" style="width:200px"/><br/><br/>
+       		
+       		<p class="txtLogin">SWIFT</p>
+       		<h:inputText class="txtLogin" id="SWIFT" required="true" value="#{Cuentas.PooledAccount.SWIFT}" style="width:200px"/><br/><br/>
+
+			<br/><br/>
+       		<h:commandButton class="button" action="#{PooledAccount.editarPooledAccount()}" value="Crear cuenta" update=":messages"/>    
+       		&nbsp;
+       		<h:message for="entradaEditarPooled"/>
+       </h:form>
+</h:body>
+
+</html>

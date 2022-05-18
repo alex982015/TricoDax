@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:p="http://primefaces.org/ui">
+       
+<h:head>
+		<link rel="stylesheet" type="text/css" href="estilos.css"/>
+	    <title>Lista de transaccionesautorizados</title>
+</h:head>
+
+<h:body>
+	<h1 class="title">Mis transacciones</h1>
+	       <h:form class="formCrearTransaccion" id="entradaTrans">
+	       
+	       		<h:outputLink value="crearTransacciones.xhtml">Nuevo</h:outputLink>
+					
+					        <h5 style="margin-top:0">Lista Transacciones</h5>
+						        <p:dataTable var="Cliente" value="#{Transaccion.Trans.Listado()}" scrollable="true" scrollHeight="250">
+						            <p:column headerText="ID" footerText="ID">
+						                <h:outputText value="#{Transaccion.Trans.ID}"/>
+						            </p:column>
+						            <p:column headerText="Cantidad" footerText="Cantidad">
+						                <h:outputText value="#{Transaccion.Trans.Cantidad}"/>
+						            </p:column>
+						            <p:column headerText="Comision" footerText="Comision">
+						                <h:outputText value="#{Transaccion.Trans.comision}"/>
+						            </p:column>
+						            <p:column headerText="International" footerText="International">
+						                <h:outputText value="#{Transaccion.Trans.international}"/>
+						            </p:column>
+						            <p:column headerText="Fecha Ejecucion" footerText="Fecha Ejecucion">
+						                <h:outputText value="#{Transaccion.Trans.fechaEjecucion}"/>
+						            </p:column>
+						            <p:column headerText="Fecha Instruccion" footerText="Fecha Instruccion">
+						                <h:outputText value="#{Transaccion.Trans.fechaInstruccion}"/>
+						            </p:column>
+						        </p:dataTable>
+        			
+				
+	       		<h:message class="error" for="entradaTrans"/>
+	       </h:form>
+</h:body>
+
+</html>

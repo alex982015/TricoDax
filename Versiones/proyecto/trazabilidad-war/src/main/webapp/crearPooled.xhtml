@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:p="http://primefaces.org/ui">
+       
+<h:head>
+		<link rel="stylesheet" type="text/css" href="estilos.css"/>
+	    <title>Crear Pooled</title>
+</h:head>
+
+<h:body>
+	<h1 class="title">Crear Pooled</h1>
+	       <h:form class="formCrearPooled" id="crearPooled">
+
+ 				<p class="txtLogin">IBAN</p>
+       			<h:inputText class="txtLogin" id="IBAN" required="true" value="#{Cuentas.PooledAccount.IBAN}" style="width:200px"/><br/><br/>
+       		
+	       		<p class="txtLogin">SWIFT</p>
+	       		<h:inputText class="txtLogin" id="SWIFT" required="true" value="#{Cuentas.PooledAccount.SWIFT}" style="width:200px"/><br/><br/>
+       			
+       			<p class= "txtLogin">Tipo de Moneda</p>
+       			<p:selectManyMenu id="Tipo de Moneda" value="#{Cuentas.Divisa}"
+                            converter="#{MonedasConverter}"
+		                    var="Monedas" filter="true" filterMatchMode="contains" showCheckbox="true" styleClass="manymenu-advanced">
+		            <f:selectItems value="#{selectManyView.Divisa}" var="Monedas" itemLabel="#{Monedas.nombre}"
+		                            itemValue="#{country}"/>
+		            <p:column>
+		                <h:outputText value="#{Monedas.nombre}"/>
+		            </p:column>
+		        </p:selectManyMenu>
+       		
+		       	<p class="txtLogin">Vincular Cliente</p>
+			       	 <p:selectOneMenu id="option" value="#{Cuentas.Cliente.cuentas}">
+		                    <f:selectItem itemLabel="Elige una opción" itemValue=""/>
+		                    <f:selectItems itemLabel="Individual" itemValue="Individual"/>
+		                    <f:selectItems itemLabel="Empresa" itemValue="Empresa"/>
+		              </p:selectOneMenu>
+                	
+				<br/><br/>
+	       		<h:commandButton class="button" action="#{Cuentas.crearPooledAccount()}" value="Crear Pooled Account" update=":messages"/>    
+	       		&nbsp;
+	       		<h:message class="error" for="crearPooled"/>
+	       </h:form>
+</h:body>
+
+</html>
