@@ -1,12 +1,13 @@
 package backing;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -19,9 +20,10 @@ import exceptions.ProyectoException;
 import jpa.Empresa;
 import jpa.PersAut;
 
+@SuppressWarnings("serial")
 @Named(value="autoriz")
-@RequestScoped
-public class Autorizado {
+@SessionScoped
+public class Autorizado implements Serializable {
 	
 	@Inject
 	private GestionPersAut persAut;
@@ -38,7 +40,11 @@ public class Autorizado {
 	
 	private List<Empresa> listaEmpresasAutoriz;
 	
+	private List<PersAut> listaPersAut;
+	
 	private String selectedEmpresa;
+	
+	private String selectedAutorizado;
 	
 	private Map<Empresa, String> autoriz;
 	
@@ -56,6 +62,10 @@ public class Autorizado {
 		return listaEmpresas;
 	}
 	
+	public List<PersAut> getListaPersAut() {
+		return listaPersAut;
+	}
+	
 	public String getSelectedEmpresa() {
 		return selectedEmpresa;
 	}
@@ -64,8 +74,29 @@ public class Autorizado {
 		selectedEmpresa = empresa;
 	}
 	
+	public String getSelectedAutorizado() {
+		return selectedAutorizado;
+	}
+	
+	public void setSelectedAutorizado(String autorizado) {
+		selectedAutorizado = autorizado;
+	}
+	
 	public List<Empresa> getListaEmpresasAutoriz() {
 		return listaEmpresasAutoriz;
+	}
+	
+	public String nuevoAutorizWeb() {
+		return "crearAutorizado.xhtml";
+	}
+	
+	public String editarAutorizWeb() {
+		return "editarAutorizado.xhtml";
+	}
+	
+	public String eliminarAutorizWeb() {
+		//return "eliminarAutorizado.xhtml";
+		return null;
 	}
 	
 	public String crearAutoriz() throws ProyectoException {
@@ -112,6 +143,7 @@ public class Autorizado {
 	@PostConstruct
 	public void init() {
 		listaEmpresas = empresas.obtenerEmpresas();
+		listaPersAut = persAut.obtenerPersAut();
 		
 		if(login.getUserApk().getPersonaAutorizada() != null) {
 			Map<Empresa,String> map= login.getUserApk().getPersonaAutorizada().getAutoriz();

@@ -36,7 +36,7 @@
 			  	<h:button class="button" value="Nueva" outcome="#{cuentasAdmin.nuevaPooledWeb()}"/>
   	       		<h:button class="button" value="Editar" outcome="#{cuentasAdmin.editarPooledWeb()}"/>
  
-			    <h:form if="bajaPooled">
+			    <h:form id="bajaPooled">
 			        <p:growl id="message" showDetail="true"/>
 			
 			        <h:commandButton class="button" id="buttonPooled" value="Dar de baja" update="message" action="#{cuentasAdmin.bajaPooledAccount()}" />

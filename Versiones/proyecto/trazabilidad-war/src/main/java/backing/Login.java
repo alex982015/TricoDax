@@ -45,9 +45,9 @@ public class Login implements Serializable {
 	public String acceder() throws ProyectoException {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
-			userApk.IniciarSesionUserAdmin(u);
 			u.setAdministrativo(userApk.getUser(u.getUser()).isAdministrativo());
-			return "crearUsuario.xhtml";
+			userApk.IniciarSesionUserAdmin(u);
+			return "menuAdmin.xhtml";
 		} catch(UserNoEncontradoException e) {
 		    ctx.addMessage("entradaUserApk", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "* Usuario no existe"));
 		} catch(UserNoAdminException e) {

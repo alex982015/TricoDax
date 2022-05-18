@@ -1,11 +1,10 @@
 package backing;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -19,10 +18,9 @@ import exceptions.UserNoEncontradoException;
 import jpa.PersAut;
 import jpa.UserApk;
 
-@SuppressWarnings("serial")
 @Named(value="informes")
-@SessionScoped
-public class Informes implements Serializable {
+@RequestScoped
+public class Informes {
 	
 	@Inject
 	private GestionUserApk userApk;

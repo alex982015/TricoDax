@@ -12,20 +12,85 @@
 </h:head>
 
 <h:body>
-	<h:panelGrid class="panelListas" id = "panelListaCuentas" columns = "2" border = "1"
-            cellpadding = "10" cellspacing = "1">
+	<h:panelGrid class="panelTrans" id = "panelListaTrans" columns = "1" cellpadding = "10" cellspacing = "1">
 
             <f:facet name = "header">
                <h:outputText value = "Lista de transacciones"/>
             </f:facet>
          
-            <h:panelGrid  class="cuenta" columns = "3" cellpadding = "10" cellspacing = "1">   
-			  	<h:button class="button" value="Nueva" outcome="crearTransaccion.xhtml"/>
-	        </h:panelGrid>
+            <h:button class="buttonTrans" value="Nueva" outcome="crearTransaccion.xhtml"/>
 	        
-	        <p:selectOneMenu id="transacciones" value="#{transacciones.transaccion}">
-	        	<f:selectItems  value="#{transacciones.listaTrans}"/>
-	        </p:selectOneMenu>
+	        <h:dataTable id="trans"
+		             columnClasses="list-column-center,
+		             list-column-right, list-column-center,
+		             list-column-right" headerClass="list-header"
+		             rowClasses="list-row" border="1" styleClass="list-
+		             background" value="#{transaccion.listaTrans}" var="t">   
+
+					<h:column>
+				        <f:facet name="header">
+				            <h:outputText value="ID"/>
+				         </f:facet>
+			             <h:outputText value="#{t.ID}"/>    
+				    </h:column>
+				    
+   				    <h:column>
+				        <f:facet name="header">
+				            <h:outputText value="Cantidad"/>
+				         </f:facet>
+				         <h:outputText value="#{t.cantidad}"/>
+				    </h:column>
+				    
+				    <h:column>
+				        <f:facet name="header">
+				            <h:outputText value="Tipo"/>
+				         </f:facet>
+				         <h:outputText value="#{t.tipo}"/>
+				    </h:column>
+				    
+				    <h:column>
+				        <f:facet name="header">
+				            <h:outputText value="Fecha de instrucción"/>
+				         </f:facet>
+				         <h:outputText value="#{t.fechaInstruccion}"/>
+				    </h:column>
+				    
+				    <h:column>
+				        <f:facet name="header">
+				            <h:outputText value="Fecha de ejecución"/>
+				         </f:facet>
+				         <h:outputText value="#{t.fechaEjecucion}"/>
+				    </h:column>
+				    
+				    <h:column>
+				        <f:facet name="header">
+				            <h:outputText value="Cuenta de origen"/>
+				         </f:facet>
+				         <h:outputText value="#{t.cuenta.IBAN}"/>
+				    </h:column>
+				    
+				    <h:column>
+				        <f:facet name="header">
+				            <h:outputText value="Cuenta de destino"/>
+				         </f:facet>
+				         <h:outputText value="#{t.transaccion.IBAN}"/>
+				    </h:column>
+				    
+				    <h:column>
+				        <f:facet name="header">
+				            <h:outputText value="Moneda origen"/>
+				         </f:facet>
+				         <h:outputText value="#{t.monedaOrigen.nombre}"/>
+				    </h:column>
+				    
+				    <h:column>
+				        <f:facet name="header">
+				            <h:outputText value="Moneda destino"/>
+				         </f:facet>
+				         <h:outputText value="#{t.monedaDestino.nombre}"/>
+				    </h:column>
+				    
+			</h:dataTable>
    	</h:panelGrid> 
 </h:body>
 

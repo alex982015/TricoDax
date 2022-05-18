@@ -39,9 +39,9 @@ public class Trans implements Serializable {
 	private Divisa monedaDestino;
 
 	@ManyToOne
-	private Cuenta cuenta;
+	private CuentaFintech cuenta;
 	@ManyToOne
-	private Cuenta transaccion;
+	private CuentaFintech transaccion;
 
 /****************CONSTRUCTORES*************************************/
 	
@@ -140,19 +140,19 @@ public class Trans implements Serializable {
 		this.monedaDestino = monedaDestino;
 	}
 	
-	public Cuenta getCuenta() {
+	public CuentaFintech getCuenta() {
 		return cuenta;
 	}
 	
-	public void setCuenta(Cuenta cuenta) {
+	public void setCuenta(CuentaFintech cuenta) {
 		this.cuenta = cuenta;
 	}
 	
-	public Cuenta getTransaccion() {
+	public CuentaFintech getTransaccion() {
 		return transaccion;
 	}
 	
-	public void setTransaccion(Cuenta transaccion) {
+	public void setTransaccion(CuentaFintech transaccion) {
 		this.transaccion = transaccion;
 	}
 

@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:p="http://primefaces.org/ui">
+<h:head>
+	   <link rel="stylesheet" type="text/css" href="estilos.css"/>
+       <title>Lista de clientes</title>
+</h:head>
+
+<h:body>
+
+		<div class="session">
+			<h:outputLabel value="Bienvenido, "/>
+			<h:outputLink value="editarPerfil.xhtml">
+				<h:outputLabel value="#{login.userApk.user}"/>
+			</h:outputLink><br/>
+			<h:outputLink value="index.xhtml">Cerrar sesión</h:outputLink>
+		</div>
+
+       <h:panelGrid class="panelListas" id = "panelListaClientes" columns = "2" border = "1"
+            cellpadding = "10" cellspacing = "1">
+            
+            <f:facet name = "header">
+               <h:outputText value = "Lista de clientes"/>
+            </f:facet>
+            
+            <h:outputLabel>Empresa</h:outputLabel>
+            
+            <h:outputLabel>Particular</h:outputLabel>
+         
+            <h:panelGrid  class="empresa" columns = "4" cellpadding = "10" cellspacing = "1">   
+			  	<h:button class="button" value="Nueva" outcome="#{empresa.nuevaEmpresaWeb()}"/>
+  	       		<h:button class="button" value="Editar" outcome="#{empresa.editarEmpresaWeb()}"/>
+ 
+			    <h:form id="bloquearEmpresa">
+			        <p:growl id="message" showDetail="true"/>
+			
+			        <h:commandButton class="button" id="buttonBlockEmpresa" value="Bloquear" update=":message" action="#{empresa.bloquearEmpresa()}" />
+					<h:message class="error" for="bloquearEmpresa"/>
+			    </h:form>
+			    
+			    <h:form id="bajaEmpresa">
+			        <p:growl id="message" showDetail="true"/>
+			
+			        <h:commandButton class="button" id="buttonBajaEmpresa" value="Dar de baja" update=":message" action="#{empresa.bajaEmpresa()}" />
+					<h:message class="error" for="bajaEmpresa"/>
+			    </h:form>
+	        </h:panelGrid>
+			
+	        <h:panelGrid class="particular" columns = "3" cellpadding = "10" cellspacing = "1">  
+            	<h:button class="button" value="Nuevo" outcome="#{Indiv.nuevoParticularWeb()}"/>
+	       		<h:button class="button" value="Editar" outcome="#{Indiv.editarParticularWeb()}"/>
+
+				<h:form id="bajaParticular">
+    				<p:growl id="message" showDetail="true"/>
+    				
+    				<h:commandButton class="button" id="buttonParticular" value="Dar de baja" update="message" action="#{Indiv.bajaParticular()}"/>
+					<h:message class="error" for="bajaParticular"/>
+				</h:form>
+	        </h:panelGrid>
+	        
+	        <p:selectOneMenu id="empresa" value="#{empresa.selectedEmpresa}">
+	        	<f:selectItems id="selectEmpresa" value="#{empresa.listaEmpresas}" var="e" itemLabel="Ident: #{e.ident} Razón Social: #{e.razonSocial} Estado: #{e.estado}" itemValue="#{e.ID}"/>
+	        </p:selectOneMenu>
+	
+			<p:selectOneMenu id="particular" value="#{Indiv.selectedIndiv}">
+	        	<f:selectItems id="selectParticular" value="#{Indiv.listaIndiv}" var="p" itemLabel="Ident: #{p.ident} Nombre: #{p.nombre} Apellidos: #{p.apellido} Estado: #{p.estado}" itemValue="#{p.ID}"/>
+	        </p:selectOneMenu>
+		</h:panelGrid>
+</h:body>
+
+</html>

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
@@ -278,18 +279,48 @@ public class CuentasAdmin implements Serializable {
 	
 	@PostConstruct
 	public void init() {
-		listaPooled = pooledAccount.obtenerPooledAccount();
-		listaSegregadas = segregadas.obtenerSegregada();
-		listaIndiv= indivEJB.obtenerIndiv();
-		listaEmpresa= empresaEJB.obtenerEmpresas();
 		listaClientes=new ArrayList<Cliente>();
-		for(Indiv i: listaIndiv) {
-			listaClientes.add(i);
-		}
-		for(Empresa e: listaEmpresa) {
-			listaClientes.add(e);
-		}
-		 
+		
+		
+		if(login.getUserApk().isAdministrativo()) {
+			listaPooled = pooledAccount.obtenerPooledAccount();
+			listaSegregadas = segregadas.obtenerSegregada();
+			listaIndiv= indivEJB.obtenerIndiv();
+			listaEmpresa= empresaEJB.obtenerEmpresas();
+	
+			for(Indiv i: listaIndiv) {
+				listaClientes.add(i);
+			}
+			for(Empresa e: listaEmpresa) {
+				listaClientes.add(e);
+			}
+		} else if(login.getUserApk().getPersonaIndividual() != null) {
+			
+			for(PooledAccount p : pooledAccount.obtenerPooledAccount()) {
+				if(p.getCliente().equals(login.getUserApk().getPersonaIndividual())) {
+					listaPooled.add(p);
+				}
+			}
+			for(Segregada s : segregadas.obtenerSegregada()) {
+				if(s.getCliente().equals(login.getUserApk().getPersonaIndividual())) {
+					listaSegregadas.add(s);
+				}
+			}
+		}else {
+			Map<Empresa, String> aut = login.getUserApk().getPersonaAutorizada().getAutoriz();
+			for(Empresa e : aut.keySet()) {
+				for(PooledAccount p : pooledAccount.obtenerPooledAccount()) {
+					if(p.getCliente().equals(e)) {
+						listaPooled.add(p);
+					}
+				}
+				for(Segregada s : segregadas.obtenerSegregada()) {
+					if(s.getCliente().equals(e)) {
+						listaSegregadas.add(s);
+					}
+				}
+			}
+		} 
 	}
 
 }

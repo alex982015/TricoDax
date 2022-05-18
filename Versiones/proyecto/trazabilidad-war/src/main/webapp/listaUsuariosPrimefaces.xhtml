@@ -4,39 +4,34 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
        xmlns:h="http://xmlns.jcp.org/jsf/html"
-       xmlns:f="http://xmlns.jcp.org/jsf/core">
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 		<link rel="stylesheet" type="text/css" href="estilos.css"/>
        <title>Lista de Usuarios</title>
 </h:head>
 
-<!>El backing de lista de usuarios lo he puesto como usuario, y en opciones se escoge</!>
-<!>Todavía no lo tengo listo</!>
 <h:body>        
-
 	<h:form id="form">
 	    <div class="CRUD Usuarios">
 	        <p:growl id="messages" showDetail="true"/>
 	
 	        <p:toolbar>
 	            <p:toolbarGroup>
-	                <p:commandButton value="Nuevo" icon="pi pi-plus" actionListener="#{crudView.openNew}"
+	                <p:commandButton value="Nuevo" icon="pi pi-plus" action="#{usuarios.nuevoUsuarioWeb()}"
 	                                 update=":form:manage-product-content" oncomplete="PF('manageProductDialog').show()"
 	                                 styleClass="ui-button-success" style="margin-right: .5rem">
-	                    <p:resetInput target=":form:manage-product-content"/>
 	                </p:commandButton>
-	                <p:commandButton id="Boton-Borrar-Cliente" value="#{crudView.deleteButtonMessage}"
-	                                 icon="pi pi-trash" actionListener="#{crudView.deleteSelectedProducts}"
-	                                 styleClass="ui-button-danger" disabled="#{!crudView.hasSelectedProducts()}"
-	                                 update="@this">
-	                    <p:confirm header="Confirmación" message="¿Quieres borrar el usuario seleccionado?"
-	                               icon="pi pi-exclamation-triangle"/>
+	                
+					<p:commandButton value="Editar" icon="pi pi-plus" action="#{usuarios.editarUsuarioWeb()}"
+	                                 update=":form:manage-product-content" oncomplete="PF('manageProductDialog').show()"
+	                                 styleClass="ui-button-success" style="margin-right: .5rem">
 	                </p:commandButton>
-	            
+	            </p:toolbarGroup>
 	        </p:toolbar>
 	
-	        <p:dataTable id="dt-products" widgetVar="dtProducts" var="product" value="#{crudView.products}"
+	        <p:dataTable id="dt-products" widgetVar="dtUsers" var="user" value="#{usuarios.listaUsuarios}"
 	                     reflow="true" styleClass="products-table"
 	                     selection="#{crudView.selectedProducts}" rowKey="#{product.id}" paginator="true"
 	                     rows="10" rowSelectMode="add" paginatorPosition="bottom">

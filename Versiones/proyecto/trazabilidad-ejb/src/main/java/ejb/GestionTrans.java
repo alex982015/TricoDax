@@ -11,7 +11,7 @@ import jpa.UserApk;
 @Local
 public interface GestionTrans {
 	public void insertarTrans(Trans trans) throws ProyectoException;
-	public List<Trans> obtenerTrans() throws ProyectoException;
+	public List<Trans> obtenerTrans();
 	public void actualizarTrans(UserApk user, Trans trans) throws ProyectoException;
 	public void eliminarTrans(UserApk user, Trans trans) throws ProyectoException;
 	public void eliminarTodasTrans(UserApk user) throws ProyectoException;

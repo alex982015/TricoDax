@@ -53,12 +53,8 @@ public class TestTrans {
 	
 	@Test
 	public void testObtenerTrans() {
-		try {
-			List<Trans> transExistentes = gestionTrans.obtenerTrans();
-			assertEquals(1, transExistentes.size());
-		} catch (ProyectoException e) {
-			fail("No debería lanzar excepción");
-		}
+		List<Trans> transExistentes = gestionTrans.obtenerTrans();
+		assertEquals(1, transExistentes.size());	
 	}
 	
 	@Requisitos({"RF ADICIONAL TRANS"})

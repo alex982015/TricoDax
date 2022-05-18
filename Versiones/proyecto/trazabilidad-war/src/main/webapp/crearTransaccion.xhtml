@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:p="http://primefaces.org/ui">
+       
+<h:head>
+		<link rel="stylesheet" type="text/css" href="estilos.css"/>
+	    <title>Nueva Transacción</title>
+</h:head>
+
+<h:body>
+	<h1 class="title">Nueva Transacción</h1>
+	       <h:form class="formCrearTransaccion" id="entradaTrans">
+	       		<p class="txtLogin">Cantidad</p>
+       		 	<p:inputNumber class="txtLogin" id="cantidad" value="#{transaccion.t.cantidad}" />
+	       
+	       		<p class="txtLogin">Fecha Instruccion</p>
+       			<p:datePicker class="txtLogin" id="fechaInst" value="#{transaccion.t.fechaInstruccion}" inline="true"/>
+        		
+	       		<p class="txtLogin">Tipo</p>
+	       		 <p:selectOneMenu class="txtLogin" id="tipo" value="#{transaccion.t.tipo}">
+                    <f:selectItem itemLabel="Bizzum" itemValue="Bizzum"/>
+                    <f:selectItem itemLabel="Transaccion" itemValue="Transaccion"/>
+	            </p:selectOneMenu>
+                
+	       		<p class="txtLogin">Comisión</p>
+       			<p:inputText class="txtLogin" value="#{transaccion.t.comision}" />
+	       		
+	       		<p class="txtLogin">Internacional</p>
+       			<p:selectBooleanButton class="txtLogin" value="#{transaccion.t.international}" onLabel="Si" offLabel="No" style="width:6rem; margin-left: 40px;"/>
+	       		 
+	       		<p class="txtLogin">Cuenta Origen</p>
+	       		<p:selectOneMenu class="txtLogin" id="origen" value="#{transaccion.selectedOrigen}">
+                    <f:selectItems value="#{transaccion.listaOrigen}" var="t" itemLabel="IBAN: #{t.IBAN} Swift: #{t.swift} Estado: #{t.estado}" itemValue="#{t.IBAN}"/>
+                </p:selectOneMenu>
+                
+                <p class="txtLogin">Cuenta Destino</p>
+	       			<p:inputText class="txtLogin" id="cuentaDestino" value="#{transaccion.destino}" required="true" requiredMessage="* Introduzca cuenta de destino"/>
+        			<h:message class="error" for="cuentaDestino"/>
+				<br/><br/>
+	       		<h:commandButton class="button" action="#{transaccion.crearTransaccion()}" value="RealizarTransaccion" update=":messages"/>    
+	       		&nbsp;
+	       		<h:message class="error" for="entradaTrans"/>
+	       </h:form>
+</h:body>
+
+</html>

@@ -30,7 +30,7 @@ public class CuentaFintechEJB implements GestionCuentaFintech {
 	}
 
 	@Override
-	public List<CuentaFintech> obtenerCuentasFintech() throws ProyectoException {
+	public List<CuentaFintech> obtenerCuentasFintech() {
 		TypedQuery<CuentaFintech> query = em.createQuery("SELECT c FROM CuentaFintech c", CuentaFintech.class);
 		return query.getResultList();
 	}
@@ -77,6 +77,17 @@ public class CuentaFintechEJB implements GestionCuentaFintech {
 			em.remove(e);
 		}
 		
+	}
+
+	@Override
+	public CuentaFintech obtenerCuentasFintech(String c) throws ProyectoException {
+		CuentaFintech cuentaFintechEntity = em.find(CuentaFintech.class, c);
+		
+		if(cuentaFintechEntity == null) {
+			throw new CuentaNoEncontradoException();
+		} else {
+			return cuentaFintechEntity;
+		}
 	}
 
 }

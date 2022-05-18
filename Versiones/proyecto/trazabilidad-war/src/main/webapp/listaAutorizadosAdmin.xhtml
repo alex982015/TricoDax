@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:p="http://primefaces.org/ui">
+<h:head>
+	   <link rel="stylesheet" type="text/css" href="estilos.css"/>
+       <title>Lista de cuentas</title>
+</h:head>
+
+<h:body>
+
+		<div class="session">
+			<h:outputLabel value="Bienvenido, "/>
+			<h:outputLink value="editarPerfil.xhtml">
+				<h:outputLabel value="#{login.userApk.user}"/>
+			</h:outputLink><br/>
+			<h:outputLink value="index.xhtml">Cerrar sesión</h:outputLink>
+		</div>
+
+       <h:panelGrid class="panelListas" id = "panelListaAutorizados" columns = "1" border = "1"
+            cellpadding = "10" cellspacing = "1">
+            
+            <f:facet name = "header">
+               <h:outputText value = "Lista de cuentas"/>
+            </f:facet>
+            
+            <h:outputLabel>Autorizados</h:outputLabel>
+         
+            <h:panelGrid  class="cuenta" columns ="3" cellpadding = "10" cellspacing = "1">   
+			  	<h:button class="button" value="Nuevo" outcome="#{autoriz.nuevoAutorizWeb()}"/>
+  	       		<h:button class="button" value="Editar" outcome="#{autoriz.editarAutorizWeb()}"/>
+  	       		<h:button class="button" value="Eliminar autorizado" outcome="#{autoriz.eliminarAutorizWeb()}"/> 
+	        </h:panelGrid>
+			
+			<p:selectOneMenu id="autorizados" value="#{autoriz.selectedAutorizado}">
+	        	<f:selectItems id="selectAutoriz" value="#{autoriz.listaPersAut}" var="p" itemLabel="Ident: #{p.ident} Nombre: #{p.nombre} Apellidos: #{p.apellidos}" itemValue="#{p.id}"/>
+	        </p:selectOneMenu>
+		</h:panelGrid>
+</h:body>
+
+</html>

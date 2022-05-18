@@ -10,7 +10,8 @@ import jpa.CuentaFintech;
 @Local
 public interface GestionCuentaFintech {
 	public void insertarCuentaFintech(CuentaFintech cuenta) throws ProyectoException;
-	public List<CuentaFintech> obtenerCuentasFintech() throws ProyectoException;
+	public List<CuentaFintech> obtenerCuentasFintech();
+	public CuentaFintech obtenerCuentasFintech(String c) throws ProyectoException;
 	public void actualizarCuentaFintech(CuentaFintech cuenta) throws ProyectoException;
 	public void eliminarCuentaFintech(CuentaFintech cuenta) throws ProyectoException;
 	public void eliminarTodasCuentasFintech() throws ProyectoException;

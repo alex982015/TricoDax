@@ -234,8 +234,8 @@ h2 {
 	font-weight: regular;
 	border-style: groove;
 	padding-left: 10px;
-	width: 400px;
-	height: 780px;
+	width: 600px;
+	height: 1300px;
 }
 .formEditarIndiv{
 	margin: auto;
@@ -244,8 +244,8 @@ h2 {
 	font-weight: regular;
 	border-style: groove;
 	padding-left: 10px;
-	width: 400px;
-	height: 780px;
+	width: 600px;
+	height: 1300px;
 }
 .formCrearSegregada{
 	margin: auto;
@@ -287,4 +287,46 @@ h2 {
 	padding-left: 10px;
 	width: 570px;
 	height: 240px;
+}
+
+
+.formInformes {
+	margin:auto;
+	margin-top: 20px;
+	width: 500px;
+	height: 300px;
+	text-align: center;
+	font-family: 'Roboto';
+	font-size: 30px;
+	border-style: groove;
+	color: #00BEF0;
+}
+
+.panelInforme {
+	margin:auto;
+	margin-top: 20px;
+	width: 280px;
+	height: 250px;
+	text-align: center;
+	font-family: 'Roboto';
+	font-size: 30px;
+	color: #00BEF0;
+}
+
+.panelTrans {
+	margin:auto;
+	margin-top: 16px;
+	text-align: center;
+	font-family: 'Roboto';
+	font-size: 20px;
+	border-style: groove;
+	color: #094358;
+}
+
+.buttonTrans {
+	float: left;
+	margin-left: 40px;
+	font-family: 'Roboto';
+	font-weight: regular;
+	font-size: 12pt;
 }

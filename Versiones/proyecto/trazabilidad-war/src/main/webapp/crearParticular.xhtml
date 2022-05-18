@@ -17,21 +17,29 @@
        <h:form class="formCrearIndiv" id="entradaIndiv">
        		<p class="txtLogin">Nombre:</p>
        		<h:inputText class="txtLogin" id="nombre" required="true" value="#{Indiv.indiv.nombre}" style="width:200px"/><br/><br/>
+       		<h:message class="error" id ="nombreMsg" for="nombre"/><br/>
        		<p class="txtLogin">Apellidos:</p>
        		<h:inputText class="txtLogin" id="apellidos" required="true" value="#{Indiv.indiv.apellido}" style="width:200px"/><br/><br/>
+  	 	    <h:message class="error" id ="apellidosMsg" for="apellidos"/><br/>
        		<p class="txtLogin">Fecha de nacimiento:</p>
-       		<h:inputText class="txtLogin" id="date" required="true" value="#{Indiv.indiv.fechaNac}" style="width:200px"/><br/><br/>
+			<p:datePicker class="txtLogin" id="date" value="#{Indiv.indiv.fechaNac}" required="true" inline="true"/>
+			<h:message class="error" id ="dateMsg" for="date"/><br/>
        		<p class="txtLogin">Ident:</p>
        		<h:inputText class="txtLogin" id="ident" required="true" value="#{Indiv.indiv.ident}" style="width:200px"/><br/><br/>
+			<h:message class="error" id ="identMsg" for="ident"/><br/>
        		<p class="txtLogin">Dirección:</p>
        		<h:inputText class="txtLogin" id="direccion" required="true" value="#{Indiv.indiv.direccion}" style="width:200px"/><br/><br/>
+			<h:message class="error" id ="direccionMsg" for="direccion"/><br/>
 			<p class="txtLogin">Ciudad:</p>
        		<h:inputText class="txtLogin" id="ciudad" required="true" value="#{Indiv.indiv.ciudad}" style="width:200px"/><br/><br/>
+			<h:message class="error" id ="ciudadMsg" for="ciudad"/><br/>
 			<p class="txtLogin">Codigo postal:</p>
        		<h:inputText class="txtLogin" id="codigopostal" required="true" value="#{Indiv.indiv.codPostal}" style="width:200px"/><br/><br/>
+			<h:message class="error" id ="cpMsg" for="codigoPostal"/><br/>
 			<p class="txtLogin">Pais:</p>
        		<h:inputText class="txtLogin" id="pais" value="#{Indiv.indiv.pais}" required="true"/>
-
+			<h:message class="error" id ="paisMsg" for="pais"/><br/>
+       		
 			<br/><br/>
        		<h:commandButton class="button" action="#{Indiv.crearIndiv()}" value="Confirmar" update=":messages"/>    
        		&nbsp;

@@ -99,6 +99,14 @@ public class Usuarios implements Serializable {
 		this.persAut = persAut;
 	}
 	
+	public String nuevoUsuarioWeb() {
+		return "crearUsuario.xhtml";
+	}
+	
+	public String editarUsuarioWeb() {
+		return "editarUsuario.xhtml";
+	}
+	
 	public String crearUsuario() throws ProyectoException {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {

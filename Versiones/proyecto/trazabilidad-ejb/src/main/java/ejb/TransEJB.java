@@ -30,7 +30,7 @@ public class TransEJB implements GestionTrans{
 		}
 
 		@Override
-		public List<Trans> obtenerTrans() throws ProyectoException {
+		public List<Trans> obtenerTrans() {
 			TypedQuery<Trans> query = em.createQuery("SELECT t FROM Trans t", Trans.class);
 			return query.getResultList();
 		}
@@ -101,4 +101,5 @@ public class TransEJB implements GestionTrans{
 				}
 			}
 		}
+
 }
