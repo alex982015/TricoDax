@@ -106,11 +106,11 @@ TUTORÍA(10/05/2022)
 1-Uso de @Local en las interfaces de los EJB. SÍ.
 2-Con JUnit son 162 test correctos, pero con maven obtenemos el doble de test, funcionando mal el 50% de ellos. Usar propiedad en pom.
 
-TUTORÍA(00/05/2022)
+TUTORÍA(19/05/2022)
 
 1-Cómo seleccionar Pooled Account/Segregada en <selectOneMenu>.
 2-En los tests tenemos un error de interacción con los campos de texto.
 3-Cuando hacemos un return de un xhtml no aparece en la barra de navegacion.
-4-No aparecen mensajes de error en editarPerfil.xhtml.
+4-Arreglar depositEn
 
 Próximas tutorías...
