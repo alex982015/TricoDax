@@ -139,7 +139,7 @@ public class InicializarBD {
 		pooledAccount1.setIBAN("ES8400817251647192321264");
 		pooledAccount1.setCliente(indiv1);
 		pooledAccount1.setSwift("Swift");
-		pooledAccount1.setDepositEn(depositEn);
+		pooledAccount1.setDepositEn(null);
 		pooledAccount1.setEstado(true);
 		pooledAccount1.setFechaApertura(Date.valueOf("2022-06-27"));
 		pooledAccount1.setClasificacion(true);

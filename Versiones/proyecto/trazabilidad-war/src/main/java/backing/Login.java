@@ -52,11 +52,11 @@ public class Login implements Serializable {
 		} catch(UserNoAdminException e) {
 			try {
 				userApk.iniciarSesion(u);
-				if((!userApk.getUser(u.getUser()).getPersonaAutorizada().isBlock()) && (userApk.getUser(u.getUser()).getPersonaIndividual() != null)) {
+				if((userApk.getUser(u.getUser()).getPersonaAutorizada() != null) && (userApk.getUser(u.getUser()).getPersonaIndividual() != null)) {
 					u.setPersonaAutorizada(userApk.getUser(u.getUser()).getPersonaAutorizada());
 					u.setPersonaIndividual(userApk.getUser(u.getUser()).getPersonaIndividual());
 					return "menuIndivAutoriz.xhtml";
-				} else if(!userApk.getUser(u.getUser()).getPersonaAutorizada().isBlock()) {
+				} else if(userApk.getUser(u.getUser()).getPersonaAutorizada() != null) {
 					u.setPersonaAutorizada(userApk.getUser(u.getUser()).getPersonaAutorizada());
 					return "menuAutoriz.xhtml";
 				} else if(userApk.getUser(u.getUser()).getPersonaIndividual() != null) {
