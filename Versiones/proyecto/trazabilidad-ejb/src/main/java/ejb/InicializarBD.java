@@ -38,7 +38,7 @@ public class InicializarBD {
 		
 		Empresa empresa1 = new Empresa ("RazonSocial1 S.L.", false);
 		empresa1.setIdent("P3310693A");
-		empresa1.setTipo_cliente("Empresa");
+		empresa1.setTipoCliente("Empresa");
 		empresa1.setEstado(true);
 		empresa1.setFecha_Alta(Date.valueOf("2021-04-11"));
 		empresa1.setDireccion("Calle Ejemplo 231");
@@ -50,7 +50,7 @@ public class InicializarBD {
 		
 		Indiv indiv1 = new Indiv ("Nombre1","Apellido1",Date.valueOf("1998-05-23"));
 		indiv1.setIdent("63937528N");
-		indiv1.setTipo_cliente("Indiv");
+		indiv1.setTipoCliente("Indiv");
 		indiv1.setEstado(true);
 		indiv1.setFecha_Alta(Date.valueOf("2020-08-25"));
 		indiv1.setDireccion("Calle Ejemplo 223");
@@ -61,7 +61,7 @@ public class InicializarBD {
 		
 		PersAut persAut1 = new PersAut ("Y4001267V", "Nombre1", "Apellidos1", "Direccion1", Date.valueOf("2000-12-12"), true, Date.valueOf("2022-04-01"), null, false);
 		Map<Empresa, String> autoriz = new HashMap<>();
-		autoriz.put(empresa1, empresa1.getTipo_cliente());
+		autoriz.put(empresa1, empresa1.getTipoCliente());
 		persAut1.setAutoriz(autoriz);
 		
 		em.persist(persAut1);

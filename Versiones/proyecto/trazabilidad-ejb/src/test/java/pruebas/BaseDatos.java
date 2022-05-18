@@ -24,7 +24,7 @@ public class BaseDatos {
 			
 		Empresa empresa1 = new Empresa ("RazonSocial1 S.L.", false);
 		empresa1.setIdent("345345345");
-		empresa1.setTipo_cliente("Empresa");
+		empresa1.setTipoCliente("Empresa");
 		empresa1.setEstado(true);
 		empresa1.setFecha_Alta(Date.valueOf("2021-04-11"));
 		empresa1.setDireccion("Calle Ejemplo 231");
@@ -36,7 +36,7 @@ public class BaseDatos {
 		
 		Indiv indiv1 = new Indiv ("Nombre1","Apellido1",Date.valueOf("1998-05-23"));
 		indiv1.setIdent("634636364");
-		indiv1.setTipo_cliente("Indiv");
+		indiv1.setTipoCliente("Indiv");
 		indiv1.setEstado(true);
 		indiv1.setFecha_Alta(Date.valueOf("2020-08-25"));
 		indiv1.setDireccion("Calle Ejemplo 223");

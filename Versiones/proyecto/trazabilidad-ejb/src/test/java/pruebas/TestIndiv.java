@@ -50,7 +50,7 @@ public class TestIndiv {
 	public void testInsertarIndiv() throws ProyectoException {
 		final Indiv particular = new Indiv ("Nombre","Apellidos",Date.valueOf("1998-07-12"));
 		particular.setIdent("53636734");
-		particular.setTipo_cliente("Indiv");
+		particular.setTipoCliente("Indiv");
 		particular.setEstado(true);
 		particular.setFecha_Alta(Date.valueOf("2021-04-11"));
 		particular.setDireccion("Calle Ejemplo 231");
@@ -76,7 +76,7 @@ public class TestIndiv {
 	public void testInsertarIndivNoAdmin() throws ProyectoException {
 		final Indiv particular = new Indiv ("Nombre","Apellidos",Date.valueOf("1998-07-12"));
 		particular.setIdent("53636734");
-		particular.setTipo_cliente("Indiv");
+		particular.setTipoCliente("Indiv");
 		particular.setEstado(true);
 		particular.setFecha_Alta(Date.valueOf("2021-04-11"));
 		particular.setDireccion("Calle Ejemplo 231");
@@ -151,7 +151,7 @@ public class TestIndiv {
 			Indiv i = particulares.get(0);
 			
 			i.setIdent(nuevaIdent);
-			i.setTipo_cliente(nuevoTipoCliente);
+			i.setTipoCliente(nuevoTipoCliente);
 			i.setEstado(nuevoEstado);
 			i.setFecha_Alta(nuevaFechaAlta);
 			i.setFecha_Baja(nuevaFechaBaja);
@@ -209,7 +209,7 @@ public class TestIndiv {
 			Indiv i = particulares.get(0);
 			
 			i.setIdent(nuevaIdent);
-			i.setTipo_cliente(nuevoTipoCliente);
+			i.setTipoCliente(nuevoTipoCliente);
 			i.setEstado(nuevoEstado);
 			i.setFecha_Alta(nuevaFechaAlta);
 			i.setFecha_Baja(nuevaFechaBaja);
@@ -268,7 +268,7 @@ public class TestIndiv {
 			i.setID(10);
 			
 			i.setIdent(nuevaIdent);
-			i.setTipo_cliente(nuevoTipoCliente);
+			i.setTipoCliente(nuevoTipoCliente);
 			i.setEstado(nuevoEstado);
 			i.setFecha_Alta(nuevaFechaAlta);
 			i.setFecha_Baja(nuevaFechaBaja);
@@ -322,7 +322,7 @@ public class TestIndiv {
 			Indiv i = particulares.get(0);
 			
 			i.setIdent(nuevaIdent);
-			i.setTipo_cliente(nuevoTipoCliente);
+			i.setTipoCliente(nuevoTipoCliente);
 			i.setEstado(nuevoEstado);
 			i.setFecha_Alta(nuevaFechaAlta);
 			i.setFecha_Baja(nuevaFechaBaja);

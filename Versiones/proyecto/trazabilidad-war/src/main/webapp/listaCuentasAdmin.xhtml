@@ -39,7 +39,7 @@
 			    <h:form if="bajaPooled">
 			        <p:growl id="message" showDetail="true"/>
 			
-			        <h:commandButton class="button" id="buttonPooled" value="Dar de baja" update="message" action="result" />
+			        <h:commandButton class="button" id="buttonPooled" value="Dar de baja" update="message" action="#{cuentasAdmin.bajaPooledAccount()}" />
 					<h:message class="error" for="bajaPooled"/>
 			    </h:form>
 	        </h:panelGrid>
@@ -55,42 +55,12 @@
 				</h:form>
 	        </h:panelGrid>
 	        
-	        <p:selectOneMenu id="pooled" value="#{cuentasAdmin.selectedPooled}" converter="pooledConverter" var="p">
-	        	<f:selectItems  value="#{cuentasAdmin.listaPooled}"/>
-	        	
-		        	<p:column>
-	                	<h:outputText value="#{p.IBAN}" />
-	                </p:column>
-	
-	                <p:column >
-	                    <h:outputText value="#{p.swift}" />
-	                </p:column>
-	
-	                <p:column >
-	                    <h:outputText value="#{p.estado}" />
-	                </p:column>
-            
+	        <p:selectOneMenu id="pooled" value="#{cuentasAdmin.selectedPooled}">
+	        	<f:selectItems id="selectPooled" value="#{cuentasAdmin.listaPooled}" var="c" itemLabel="IBAN: #{c.IBAN} Swift: #{c.swift} Estado: #{c.estado}" itemValue="#{c.IBAN}"/>
 	        </p:selectOneMenu>
 	
 			<p:selectOneMenu id="segregada" value="#{cuentasAdmin.segregada}" var="s">
-	        	<f:selectItems  value="#{cuentasAdmin.listaSegregada}"/>
-	        	
-	        	<p:column>
-                	<h:outputText value="#{s.IBAN}" />
-                </p:column>
-
-                <p:column>
-                    <h:outputText value="#{s.swift}" />
-                </p:column>
-
-                <p:column>
-                    <h:outputText value="#{s.comision}" />
-                </p:column>
-                
-                <p:column>
-                    <h:outputText value="#{s.estado}" />
-                </p:column>
-            
+	        	<f:selectItems id="selectSegregada" value="#{cuentasAdmin.listaSegregada}" var="c" itemLabel="IBAN: #{c.IBAN} Swift: #{c.swift} Comisión: #{c.comision} Estado: #{c.estado}" itemValue="#{c.IBAN}"/>
 	        </p:selectOneMenu>
 		</h:panelGrid>
 </h:body>

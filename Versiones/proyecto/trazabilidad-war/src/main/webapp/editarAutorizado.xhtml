@@ -26,10 +26,9 @@
        		<p class="txtLogin">Dirección:</p>
        		<h:inputText class="txtLogin" id="direccion" required="true" value="#{autoriz.persAut.direccion}" style="width:200px"/><br/><br/>
        		<p class="txtLogin">Vincular empresa:</p>
-       		<p:selectOneMenu class="txtLogin" id="empresa" value="#{autoriz.e}" required="true">
-	        	<f:selectItems  value="#{autoriz.listaEmpresas}"/>
+			<p:selectOneMenu class="txtLogin" id="empresa" value="#{autoriz.selectedEmpresa}" required="true">
+	        	<f:selectItems id="selectEmpresa" value="#{autoriz.listaEmpresas}" var="e" itemLabel="Ident: #{e.ident} Razon Social: #{e.razonSocial} Estado: #{e.estado}" itemValue="#{e.ID}"/>
 	        </p:selectOneMenu>
-
 			<br/><br/>
        		<h:commandButton class="button" action="#{autoriz.editarAutoriz()}" value="Confirmar" update=":messages"/>    
        		&nbsp;

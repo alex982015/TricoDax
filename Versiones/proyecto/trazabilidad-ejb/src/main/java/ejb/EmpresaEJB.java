@@ -73,7 +73,7 @@ public class EmpresaEJB implements GestionEmpresa {
 				empresaEntity.setDireccion(empresa.getDireccion());
 				empresaEntity.setIdent(empresa.getIdent());
 				empresaEntity.setPais(empresa.getPais());
-				empresaEntity.setTipo_cliente(empresa.getTipo_cliente());
+				empresaEntity.setTipoCliente(empresa.getTipoCliente());
 				empresaEntity.setFecha_Baja(empresa.getFecha_Baja());
 				
 				empresaEntity.setRazonSocial(empresa.getRazonSocial());
@@ -196,6 +196,17 @@ public class EmpresaEJB implements GestionEmpresa {
 			} else {
 				throw new UserNoAdminException();
 			}
+		}
+	}
+
+	@Override
+	public Empresa obtenerEmpresa(String e) throws ProyectoException {
+		Empresa empresaEntity = em.find(Empresa.class, e);
+		
+		if(empresaEntity == null) {
+			throw new ClienteNoEncontradoException();
+		} else {
+			return empresaEntity;
 		}
 	}
 

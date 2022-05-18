@@ -309,4 +309,16 @@ public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledA
 			throw new CuentaRefOrigenDestinoNoEncontrada();
 		}
 	}
+
+	@Override
+	public PooledAccount obtenerPooledAccount(String pooled) throws ProyectoException {
+		PooledAccount pooledEntity = em.find(PooledAccount.class, pooled);
+		
+		if(pooledEntity == null) {
+			 throw new CuentaNoEncontradoException();
+		} else {
+			return pooledEntity;
+		}
+		
+	}
 }

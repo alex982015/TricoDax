@@ -22,8 +22,8 @@
        		<p class="txtLogin">Comision:</p>
        		<h:inputText class="txtLogin" id="comision" required="true" value="#{cuentasAdmin.segregada.comision}" style="width:200px"/><br/><br/>
        		<p class="txtLogin">Vincular Cliente:</p>
-       		<p:selectOneMenu class="txtLogin" id="cliente" value="#{cuentasAdmin.seleccionCliente}" required="true">
-	        	<f:selectItems  value="#{cuentasAdmin.listaClientes}"/>
+       		<p:selectOneMenu class="txtLogin" id="cliente" value="#{cuentasAdmin.selectedSegregada}" required="true">
+	        	<f:selectItems id="selectCliente" value="#{cuentasAdmin.listaClientes}" var="c" itemLabel="Ident: #{c.ident} Tipo de cliente: #{c.tipoCliente} Estado: #{c.estado}" itemValue="#{c.ID}"/>
 	        </p:selectOneMenu>
 
 			<br/><br/>

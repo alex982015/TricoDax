@@ -74,7 +74,7 @@ public class Empresa extends Cliente implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Ident=" + super.getIdent() + ", Tipo de cliente=" + super.getTipo_cliente() + " , Estado=" + super.isEstado() + "]";
+		return "Ident=" + super.getIdent() + ", Tipo de cliente=" + super.getTipoCliente() + " , Estado=" + super.isEstado() + "]";
 	}
 	
 }

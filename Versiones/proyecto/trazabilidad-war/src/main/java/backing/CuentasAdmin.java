@@ -49,9 +49,13 @@ public class CuentasAdmin implements Serializable {
 	
 	private List<PooledAccount> listaPooled;
 
-	private PooledAccount selectedPooled;
+	private String selectedPooled;
+	
+	private PooledAccount p;
 	
 	private List<Segregada> listaSegregadas;
+	
+	private String selectedSegregada;
 	
 	private List<Indiv> listaIndiv;
 	
@@ -75,12 +79,24 @@ public class CuentasAdmin implements Serializable {
 		return listaSegregadas;
 	}
 	
-	public PooledAccount getSelectedPooled() {
+	public String getSelectedPooled() {
 		return selectedPooled;
 	}
 	
-	public void setSelectedPooled(PooledAccount p) {
+	public void setSelectedPooled(String p) {
 		selectedPooled = p;
+	}
+	
+	public String getSelectedSegregada() {
+		return selectedSegregada;
+	}
+	
+	public void setSelectedSegregada(String s) {
+		selectedSegregada = s;
+	}
+	
+	public PooledAccount getP() {
+		return p;
 	}
 	
 	public List<Indiv> getListaIndiv(){
@@ -173,9 +189,11 @@ public class CuentasAdmin implements Serializable {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
 			if(selectedPooled != null) {
-				pooledAccount.cerrarCuentaPooledAccount(login.getUserApk(), selectedPooled);
-				addMessage("OK", "Operación completada");
-				return "listaCuentasAdmin.xhtml";
+				p = pooledAccount.obtenerPooledAccount(selectedPooled);
+				return "result.xhtml";
+				//pooledAccount.cerrarCuentaPooledAccount(login.getUserApk(), p);
+				//addMessage("OK", "Operación completada");
+				//return "listaCuentasAdmin.xhtml";
 			} else {
 			    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Seleccione una cuenta"));
 			}

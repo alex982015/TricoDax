@@ -14,6 +14,7 @@ import jpa.UserApk;
 public interface GestionPooledAccount {
 	public void insertarPooledAccount(UserApk user, PooledAccount pooled, Map<CuentaRef, Double> cantidades) throws ProyectoException;
 	public List<PooledAccount> obtenerPooledAccount();
+	public PooledAccount obtenerPooledAccount(String pooled) throws ProyectoException;
 	public void actualizarPooledAccount(UserApk user, PooledAccount cuenta) throws ProyectoException;
 	public void eliminarPooledAccount(UserApk user, PooledAccount cuenta) throws ProyectoException;
 	public void eliminarTodasPooledAccount(UserApk user) throws ProyectoException;

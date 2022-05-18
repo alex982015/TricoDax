@@ -51,7 +51,7 @@ public class TestEmpresa {
 	public void testInsertarEmpresa() throws ProyectoException {
 		final Empresa empresa = new Empresa ("RazonSocial S.L.", false);
 		empresa.setIdent("53636734");
-		empresa.setTipo_cliente("Indiv");
+		empresa.setTipoCliente("Indiv");
 		empresa.setEstado(true);
 		empresa.setFecha_Alta(Date.valueOf("2021-04-11"));
 		empresa.setDireccion("Calle Ejemplo 231");
@@ -94,7 +94,7 @@ public class TestEmpresa {
 	public void testInsertarEmpresaNoAdmin() throws ProyectoException {
 		final Empresa empresa = new Empresa ("RazonSocial S.L.", false);
 		empresa.setIdent("53636734");
-		empresa.setTipo_cliente("Indiv");
+		empresa.setTipoCliente("Indiv");
 		empresa.setEstado(true);
 		empresa.setFecha_Alta(Date.valueOf("2021-04-11"));
 		empresa.setDireccion("Calle Ejemplo 231");
@@ -120,7 +120,7 @@ public class TestEmpresa {
 	public void testInsertarEmpresaUserNoEncontrado() throws ProyectoException {
 		final Empresa empresa = new Empresa ("RazonSocial S.L.", false);
 		empresa.setIdent("53636734");
-		empresa.setTipo_cliente("Indiv");
+		empresa.setTipoCliente("Indiv");
 		empresa.setEstado(true);
 		empresa.setFecha_Alta(Date.valueOf("2021-04-11"));
 		empresa.setDireccion("Calle Ejemplo 231");
@@ -168,7 +168,7 @@ public class TestEmpresa {
 			Empresa e = empresas.get(0);
 			
 			e.setIdent(nuevaIdent);
-			e.setTipo_cliente(nuevoTipoCliente);
+			e.setTipoCliente(nuevoTipoCliente);
 			e.setEstado(nuevoEstado);
 			e.setFecha_Alta(nuevaFechaAlta);
 			e.setFecha_Baja(nuevaFechaBaja);
@@ -214,7 +214,7 @@ public class TestEmpresa {
 			Empresa e = empresas.get(0);
 			
 			e.setIdent(nuevaIdent);
-			e.setTipo_cliente(nuevoTipoCliente);
+			e.setTipoCliente(nuevoTipoCliente);
 			e.setEstado(nuevoEstado);
 			e.setFecha_Alta(nuevaFechaAlta);
 			e.setFecha_Baja(nuevaFechaBaja);
@@ -262,7 +262,7 @@ public class TestEmpresa {
 			Empresa e = empresas.get(0);
 			
 			e.setIdent(nuevaIdent);
-			e.setTipo_cliente(nuevoTipoCliente);
+			e.setTipoCliente(nuevoTipoCliente);
 			e.setEstado(nuevoEstado);
 			e.setFecha_Alta(nuevaFechaAlta);
 			e.setFecha_Baja(nuevaFechaBaja);
@@ -312,7 +312,7 @@ public class TestEmpresa {
 			Empresa e = empresas.get(0);
 			
 			e.setIdent(nuevaIdent);
-			e.setTipo_cliente(nuevoTipoCliente);
+			e.setTipoCliente(nuevoTipoCliente);
 			e.setEstado(nuevoEstado);
 			e.setFecha_Alta(nuevaFechaAlta);
 			e.setFecha_Baja(nuevaFechaBaja);

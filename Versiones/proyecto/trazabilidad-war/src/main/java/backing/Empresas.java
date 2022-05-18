@@ -49,7 +49,7 @@ public class Empresas {
 
 			Date date = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
 			e.setFecha_Alta(date);
-			e.setTipo_cliente("Empresa");
+			e.setTipoCliente("Empresa");
 			empresas.insertarEmpresa(login.getUserApk(), e);
 			return "menuAdmin.xhtml";
 		} catch(UserNoAdminException e) {

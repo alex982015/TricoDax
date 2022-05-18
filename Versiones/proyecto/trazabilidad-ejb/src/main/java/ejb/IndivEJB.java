@@ -73,7 +73,7 @@ public class IndivEJB implements GestionIndiv {
 				indivEntity.setDireccion(indiv.getDireccion());
 				indivEntity.setIdent(indiv.getIdent());
 				indivEntity.setPais(indiv.getPais());
-				indivEntity.setTipo_cliente(indiv.getTipo_cliente());
+				indivEntity.setTipoCliente(indiv.getTipoCliente());
 				indivEntity.setFecha_Baja(indiv.getFecha_Baja());
 				indivEntity.setUsuarioApk(indiv.getUsuarioApk());
 				

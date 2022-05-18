@@ -99,12 +99,12 @@ public class Cliente implements Serializable {
 		Ident = ident;
 	}
 
-	public String getTipo_cliente() {
+	public String getTipoCliente() {
 		return tipoCliente;
 	}
 
-	public void setTipo_cliente(String tipo_cliente) {
-		this.tipoCliente = tipo_cliente;
+	public void setTipoCliente(String tipoCliente) {
+		this.tipoCliente = tipoCliente;
 	}
 
 	public boolean isEstado() {
