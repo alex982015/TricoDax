@@ -33,14 +33,14 @@ public class Trans implements Serializable {
 	@Column(name="FECHAINSTRUCCION", nullable = false) @Temporal(TemporalType.DATE)
 	private Date fechaInstruccion;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Divisa monedaOrigen;
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Divisa monedaDestino;
 
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private CuentaFintech cuenta;
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private CuentaFintech transaccion;
 
 /****************CONSTRUCTORES*************************************/

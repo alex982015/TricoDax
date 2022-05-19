@@ -187,7 +187,7 @@ public class PersAutEJB implements GestionPersAut {
 	}
 
 	@Override
-	public PersAut obtenerPersAut(String persAut) throws ProyectoException {
+	public PersAut obtenerPersAut(Long persAut) throws ProyectoException {
 		PersAut persAutEntity = em.find(PersAut.class, persAut);
 		
 		if(persAutEntity == null) {

@@ -200,7 +200,7 @@ public class EmpresaEJB implements GestionEmpresa {
 	}
 
 	@Override
-	public Empresa obtenerEmpresa(String e) throws ProyectoException {
+	public Empresa obtenerEmpresa(Long e) throws ProyectoException {
 		Empresa empresaEntity = em.find(Empresa.class, e);
 		
 		if(empresaEntity == null) {

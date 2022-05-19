@@ -136,4 +136,15 @@ public class SegregadaEJB extends CuentaFintechEJB implements GestionSegregada{
 		}		
 	}
 
+	@Override
+	public Segregada obtenerSegregada(String s) throws ProyectoException {
+		Segregada segregadaEntity = em.find(Segregada.class, s);
+		
+		if(segregadaEntity == null) {
+			return null;
+		} else {
+			return segregadaEntity;
+		}
+	}
+
 }

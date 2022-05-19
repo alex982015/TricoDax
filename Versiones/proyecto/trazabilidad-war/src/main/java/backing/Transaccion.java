@@ -1,6 +1,7 @@
 package backing;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +13,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import ejb.GestionCuentaFintech;
 import ejb.GestionPooledAccount;
 import ejb.GestionSegregada;
 import ejb.GestionTrans;
@@ -37,8 +37,6 @@ public class Transaccion implements Serializable {
 	private GestionPooledAccount pooled;
 	@Inject
 	private GestionSegregada segregada;
-	@Inject
-	private GestionCuentaFintech fintech;
 
 /*---------------JPA-----------------------*/
 	
@@ -98,15 +96,24 @@ public class Transaccion implements Serializable {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
 			if(selectedOrigen != null) {
-				CuentaFintech d = new CuentaFintech();
+				CuentaFintech d = new CuentaFintech(true, Date.valueOf("2020-05-20"));
 				d.setIBAN(destino);
-				CuentaFintech o = fintech.obtenerCuentasFintech(selectedOrigen);
-				t.setCuenta(o);
+				
+				PooledAccount p = pooled.obtenerPooledAccount(selectedOrigen);
+				Segregada s = segregada.obtenerSegregada(selectedOrigen);
+				
+				if(p != null) {
+					t.setCuenta(p);
+				} else {
+					t.setCuenta(s);
+				}
+				
 				t.setTransaccion(d);
 				trans.insertarTrans(t);
+				init();
 				return "listaTransacciones.xhtml";
 			} else {
-				ctx.addMessage("entradaUserApk", new FacesMessage(FacesMessage.SEVERITY_WARN, "Contraseña Incorrecta", "* Contraseña incorrecta"));
+				ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al crear transaccion", "Seleccione cuenta de origen"));
 			}
 		} catch(ProyectoException e) {
 			FacesMessage fm = new FacesMessage("Error: " + e);

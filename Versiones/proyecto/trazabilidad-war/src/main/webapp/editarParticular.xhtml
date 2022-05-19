@@ -22,7 +22,7 @@
        		<h:inputText class="txtLogin" id="apellidos" required="true" value="#{Indiv.indiv.apellido}" style="width:200px"/><br/><br/>
   	 	    <h:message class="error" id ="apellidosMsg" for="apellidos"/><br/>
        		<p class="txtLogin">Fecha de nacimiento:</p>
-			<p:datePicker class="txtLogin" id="date" value="#{Indiv.indiv.fechaNac}" required="true" inline="true"/>
+			<p:datePicker class="txtLogin" id="date" value="#{Indiv.indiv.fechaNac}" yearNavigator="true" required="true" inline="true"/>
 			<h:message class="error" id ="dateMsg" for="date"/><br/>
        		<p class="txtLogin">Ident:</p>
        		<h:inputText class="txtLogin" id="ident" required="true" value="#{Indiv.indiv.ident}" style="width:200px"/><br/><br/>

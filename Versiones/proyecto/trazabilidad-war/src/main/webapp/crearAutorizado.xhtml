@@ -16,15 +16,15 @@
 	   <h1 class="title">Crear autorizado</h1>
        <h:form class="formCrearAutoriz" id="entradaAutoriz">
        		<p class="txtLogin">Nombre:</p>
-       		<h:inputText class="txtLogin" id="nombre" required="true" value="#{autoriz.persAut.nombre}" style="width:200px"/><br/><br/>
+       		<h:inputText class="txtLogin" id="nombre" required="true" value="#{autoriz.nuevoPersAut.nombre}" style="width:200px"/><br/><br/>
        		<p class="txtLogin">Apellidos:</p>
-       		<h:inputText class="txtLogin" id="apellidos" required="true" value="#{autoriz.persAut.apellidos}" style="width:200px"/><br/><br/>
+       		<h:inputText class="txtLogin" id="apellidos" required="true" value="#{autoriz.nuevoPersAut.apellidos}" style="width:200px"/><br/><br/>
        		<p class="txtLogin">Fecha de nacimiento:</p>
-       		<h:inputText class="txtLogin" id="date" required="true" value="#{autoriz.persAut.fechaNac}" style="width:200px"/><br/><br/>
-       		<p class="txtLogin">Ident:</p>
-       		<h:inputText class="txtLogin" id="ident" required="true" value="#{autoriz.persAut.ident}" style="width:200px"/><br/><br/>
+       		<p:datePicker class="txtLogin" id="date" value="#{autoriz.nuevoPersAut.fechaNac}" required="true" yearNavigator="true" inline="true"/>
+			<p class="txtLogin">Ident:</p>
+       		<h:inputText class="txtLogin" id="ident" required="true" value="#{autoriz.nuevoPersAut.ident}" style="width:200px"/><br/><br/>
        		<p class="txtLogin">Dirección:</p>
-       		<h:inputText class="txtLogin" id="direccion" required="true" value="#{autoriz.persAut.direccion}" style="width:200px"/><br/><br/>
+       		<h:inputText class="txtLogin" id="direccion" required="true" value="#{autoriz.nuevoPersAut.direccion}" style="width:200px"/><br/><br/>
        		<p class="txtLogin">Vincular empresa:</p>
        		<p:selectOneMenu class="txtLogin" id="empresa" value="#{autoriz.selectedEmpresa}" required="true">
 	        	<f:selectItems id="selectEmpresa" value="#{autoriz.listaEmpresas}" var="e" itemLabel="Ident: #{e.ident} Razon Social: #{e.razonSocial} Estado: #{e.estado}" itemValue="#{e.ID}"/>

@@ -28,17 +28,21 @@
                <h:outputText value = "Lista de cuentas"/>
             </f:facet>
             
-            <h:outputLabel>Autorizados</h:outputLabel>
-         
-            <h:panelGrid  class="cuenta" columns ="3" cellpadding = "10" cellspacing = "1">   
-			  	<h:button class="button" value="Nuevo" outcome="#{autoriz.nuevoAutorizWeb()}"/>
-  	       		<h:button class="button" value="Editar" outcome="#{autoriz.editarAutorizWeb()}"/>
-  	       		<h:button class="button" value="Eliminar autorizado" outcome="#{autoriz.eliminarAutorizWeb()}"/> 
-	        </h:panelGrid>
-			
-			<p:selectOneMenu id="autorizados" value="#{autoriz.selectedAutorizado}">
-	        	<f:selectItems id="selectAutoriz" value="#{autoriz.listaPersAut}" var="p" itemLabel="Ident: #{p.ident} Nombre: #{p.nombre} Apellidos: #{p.apellidos}" itemValue="#{p.id}"/>
-	        </p:selectOneMenu>
+            <h:form id="autorizados">
+	            <h:outputLabel>Autorizados</h:outputLabel>
+	         
+	         	<p:growl id="message" showDetail="true" />
+	         
+	            <h:panelGrid  class="cuenta" columns ="3" cellpadding = "10" cellspacing = "1">   
+				  	<h:button class="button" value="Nuevo" outcome="#{autoriz.nuevoAutorizWeb()}"/>
+	  	       		<h:commandButton class="button" value="Editar" update=":message" action="#{autoriz.editarAutorizWeb()}"/>
+	  	       		<h:commandButton class="button" value="Baja autorizado" update=":message" action="#{autoriz.bajaAutorizado()}"/> 
+		        </h:panelGrid>
+				
+				<p:selectOneMenu id="autorizados" value="#{autoriz.selectedAutorizado}">
+		        	<f:selectItems id="selectAutoriz" value="#{autoriz.listaPersAut}" var="p" itemLabel="Ident: #{p.ident} Nombre: #{p.nombre} Apellidos: #{p.apellidos} Estado: #{p.estado}" itemValue="#{p.id}"/>
+		        </p:selectOneMenu>
+            </h:form>
 		</h:panelGrid>
 </h:body>
 

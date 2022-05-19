@@ -84,7 +84,7 @@ public class InicializarBD {
 		
 		CuentaRef ref3 = new CuentaRef ("Madrid",56,"España",2000000.0,Date.valueOf("2020-02-26"),true);
 		ref3.setIBAN("ES7121007487367264321882");
-		ref3.setMoneda(divisa2);
+		ref3.setMoneda(divisa1);
 		
 		CuentaRef ref4 = new CuentaRef ("Madrid",56,"España",2000000.0,Date.valueOf("2020-02-26"),true);
 		ref4.setIBAN("VG88HBIJ4257959912673134");
@@ -92,9 +92,9 @@ public class InicializarBD {
 		
 		CuentaRef ref5 = new CuentaRef ("Madrid",56,"España",2000000.0,Date.valueOf("2020-02-26"),true);
 		ref5.setIBAN("GB79BARC20040134265953");
-		ref5.setMoneda(divisa2);
+		ref5.setMoneda(divisa3);
 		
-		for (CuentaRef cuentasRef: new CuentaRef [] {ref, ref2}) {
+		for (CuentaRef cuentasRef: new CuentaRef [] {ref, ref2, ref3, ref4, ref5}) {
 			em.persist(cuentasRef);
 		}
 		
@@ -139,7 +139,7 @@ public class InicializarBD {
 		pooledAccount1.setIBAN("ES8400817251647192321264");
 		pooledAccount1.setCliente(indiv1);
 		pooledAccount1.setSwift("Swift");
-		pooledAccount1.setDepositEn(null);
+		pooledAccount1.setDepositEn(depositEn);
 		pooledAccount1.setEstado(true);
 		pooledAccount1.setFechaApertura(Date.valueOf("2022-06-27"));
 		pooledAccount1.setClasificacion(true);

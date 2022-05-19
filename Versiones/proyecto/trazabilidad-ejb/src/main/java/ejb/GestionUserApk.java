@@ -19,7 +19,7 @@ public interface GestionUserApk {
 	public void buscarUserApk(UserApk user) throws ProyectoException;
 	public UserApk getUser(String user) throws ProyectoException;
 	public boolean iniciarSesion(UserApk user) throws ProyectoException;
-	public List<UserApk> obtenerUser() throws ProyectoException;
+	public List<UserApk> obtenerUser();
 	public boolean IniciarSesionUserAdmin(UserApk user) throws ProyectoException;
 	public void actualizarUser(UserApk user) throws ProyectoException;
 	public void eliminarUser(UserApk user) throws ProyectoException;

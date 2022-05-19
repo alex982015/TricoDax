@@ -315,7 +315,7 @@ public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledA
 		PooledAccount pooledEntity = em.find(PooledAccount.class, pooled);
 		
 		if(pooledEntity == null) {
-			 throw new CuentaNoEncontradoException();
+			 return null;
 		} else {
 			return pooledEntity;
 		}

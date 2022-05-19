@@ -20,7 +20,7 @@ public class TransEJB implements GestionTrans{
 	 private EntityManager em;
 	    
 	    @Override
-		public void insertarTrans(Trans trans) throws TransExistenteException {
+		public void insertarTrans(Trans trans) throws ProyectoException {
 			Trans transExistente = em.find(Trans.class, trans.getID());
 			if (transExistente != null) {
 				throw new TransExistenteException();

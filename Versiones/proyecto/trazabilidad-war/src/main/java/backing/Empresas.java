@@ -7,8 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -22,7 +21,7 @@ import jpa.Empresa;
 
 @SuppressWarnings("serial")
 @Named(value="empresa")
-@SessionScoped
+@ApplicationScoped
 public class Empresas implements Serializable {
 	
 	@Inject
@@ -33,16 +32,27 @@ public class Empresas implements Serializable {
 	
 	private Empresa e;
 	
+	private Empresa nuevaEmpresa;
+	
 	private String selectedEmpresa;
 	
 	private List<Empresa> listaEmpresas;
 	
 	public Empresas() {
 		e = new Empresa();
+		nuevaEmpresa = new Empresa();
 	}
 	
 	public Empresa getE() {
 		return e;
+	}
+	
+	public Empresa getNuevaEmpresa() {
+		return nuevaEmpresa;
+	}
+	
+	public void setNuevaEmpresa(Empresa empresa) {
+		nuevaEmpresa = empresa;
 	}
 	
 	public void setE(Empresa empresa) {
@@ -70,7 +80,21 @@ public class Empresas implements Serializable {
 	}
 	
 	public String editarEmpresaWeb() {
-		return "editarEmpresa.xhtml";
+		FacesContext ctx = FacesContext.getCurrentInstance();
+		try {
+			if(selectedEmpresa != null) {
+				e = empresas.obtenerEmpresa(Long.parseLong(selectedEmpresa));
+				return "editarEmpresa.xhtml";
+			} else {
+			    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Seleccione una cuenta"));
+			}
+		} catch(UserNoAdminException e) {
+		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no admin"));
+		} catch(ProyectoException e) {
+			FacesMessage fm = new FacesMessage("Error: " + e);
+			ctx.addMessage(null, fm);
+		}
+		return null;
 	}
 	
 	public void addMessage(String summary, String detail) {
@@ -82,10 +106,30 @@ public class Empresas implements Serializable {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
 			if(selectedEmpresa != null) {
-				e = empresas.obtenerEmpresa(selectedEmpresa);
-				e.setBlock(true);
-				empresas.actualizarEmpresa(login.getUserApk(), e);
+				e = empresas.obtenerEmpresa(Long.parseLong(selectedEmpresa));
+				empresas.bloquearCuentaEmpresa(login.getUserApk(), e, true);
 				init();
+				return null;
+			} else {
+			    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Seleccione una cuenta"));
+			}
+		} catch(UserNoAdminException e) {
+		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no admin"));
+		} catch(ProyectoException e) {
+			FacesMessage fm = new FacesMessage("Error: " + e);
+			ctx.addMessage(null, fm);
+		}
+		return null;
+	}
+	
+	public String desbloquearEmpresa() {
+		FacesContext ctx = FacesContext.getCurrentInstance();
+		try {
+			if(selectedEmpresa != null) {
+				e = empresas.obtenerEmpresa(Long.parseLong(selectedEmpresa));
+				empresas.bloquearCuentaEmpresa(login.getUserApk(), e, false);
+				init();
+				return null;
 			} else {
 			    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Seleccione una cuenta"));
 			}
@@ -102,13 +146,15 @@ public class Empresas implements Serializable {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
 			if(selectedEmpresa != null) {
-				e = empresas.obtenerEmpresa(selectedEmpresa);
-				e.setEstado(false);
-				empresas.actualizarEmpresa(login.getUserApk(), e);
+				e = empresas.obtenerEmpresa(Long.parseLong(selectedEmpresa));
+				empresas.cerrarCuentaEmpresa(login.getUserApk(), e);
 				init();
+				return null;
 			} else {
 			    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Seleccione una empresa"));
 			}
+		} catch(NoBajaClienteException e) {
+		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Cliente con cuentas activas"));	
 		} catch(UserNoAdminException e) {
 		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no admin"));
 		} catch(ProyectoException e) {
@@ -121,16 +167,16 @@ public class Empresas implements Serializable {
 	public String crearEmpresa() throws ProyectoException {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
-			e.setEstado(true);
+			nuevaEmpresa.setEstado(true);
 			ZoneId defaultZoneId = ZoneId.systemDefault();
 			LocalDate localDate = LocalDate.now();
 
 			Date date = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
-			e.setFecha_Alta(date);
-			e.setTipoCliente("Empresa");
-			empresas.insertarEmpresa(login.getUserApk(), e);
+			nuevaEmpresa.setFecha_Alta(date);
+			nuevaEmpresa.setTipoCliente("Empresa");
+			empresas.insertarEmpresa(login.getUserApk(), nuevaEmpresa);
 			init();
-			return "menuAdmin.xhtml";
+			return "listaClientesAdmin.xhtml";
 		} catch(UserNoAdminException e) {
 		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no admin"));
 		} catch(ProyectoException e) {
@@ -143,14 +189,9 @@ public class Empresas implements Serializable {
 	public String editarEmpresa() throws ProyectoException {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
-			if(selectedEmpresa != null) {
-				e = empresas.obtenerEmpresa(selectedEmpresa);
-				empresas.actualizarEmpresa(login.getUserApk(), e);
-				init();
-				return "menuAdmin.xhtml";
-			} else {
-			    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Seleccione una empresa"));	
-			}
+			empresas.actualizarEmpresa(login.getUserApk(), e);
+			init();
+			return "listaClientesAdmin.xhtml";
 		} catch(UserNoAdminException e) {
 		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no admin"));
 		} catch(ProyectoException e) {

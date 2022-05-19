@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -16,13 +16,12 @@ import javax.inject.Named;
 import ejb.GestionEmpresa;
 import ejb.GestionPersAut;
 import exceptions.*;
-import exceptions.ProyectoException;
 import jpa.Empresa;
 import jpa.PersAut;
 
 @SuppressWarnings("serial")
 @Named(value="autoriz")
-@SessionScoped
+@ApplicationScoped
 public class Autorizado implements Serializable {
 	
 	@Inject
@@ -35,6 +34,8 @@ public class Autorizado implements Serializable {
 	private Login login;
 	
 	private PersAut p;
+	
+	private PersAut nuevoPersAut;
 	
 	private List<Empresa> listaEmpresas;
 	
@@ -52,10 +53,19 @@ public class Autorizado implements Serializable {
 	
 	public Autorizado() {
 		p = new PersAut();
+		nuevoPersAut = new PersAut();
 	}
 	
 	public PersAut getPersAut() {
 		return p;
+	}
+	
+	public PersAut getNuevoPersAut() {
+		return nuevoPersAut;
+	}
+	
+	public void setNuevoPersAut(PersAut p) {
+		nuevoPersAut = p;
 	}
 	
 	public List<Empresa> getListaEmpresas() {
@@ -90,28 +100,39 @@ public class Autorizado implements Serializable {
 		return "crearAutorizado.xhtml";
 	}
 	
-	public String editarAutorizWeb() {
-		return "editarAutorizado.xhtml";
-	}
+	public void addMessage(String summary, String detail) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
 	
-	public String eliminarAutorizWeb() {
-		//return "eliminarAutorizado.xhtml";
+	public String editarAutorizWeb() {
+		FacesContext ctx = FacesContext.getCurrentInstance();
+		try {
+			if(selectedAutorizado != null) {
+				p = persAut.obtenerPersAut(Long.parseLong(selectedAutorizado));
+				return "editarAutorizado.xhtml";
+			} else {
+			    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Seleccione una cuenta"));
+			}
+		} catch(UserNoAdminException e) {
+		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no admin"));
+		} catch(ProyectoException e) {
+			FacesMessage fm = new FacesMessage("Error: " + e);
+			ctx.addMessage(null, fm);
+		}
 		return null;
 	}
 	
 	public String crearAutoriz() throws ProyectoException {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
-			if(selectedEmpresa != null) {
-				e = empresas.obtenerEmpresa(selectedEmpresa);
-				autoriz = new HashMap<>();
-				autoriz.put(e, selectedEmpresa);
-				p.setAutoriz(autoriz);
-				persAut.insertarPersAut(login.getUserApk(), p);
-				return "menuAdmin.xhtml";
-			} else {
-			    ctx.addMessage("entradaAutoriz", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al crear autorizado", "* Empresa no seleccionada"));
-			}
+			e = empresas.obtenerEmpresa(Long.parseLong(selectedEmpresa));
+			autoriz = new HashMap<Empresa, String>();
+			autoriz.put(e, selectedEmpresa);
+			nuevoPersAut.setAutoriz(autoriz);
+			persAut.insertarPersAut(login.getUserApk(), nuevoPersAut);
+			init();
+			return "listaAutorizadosAdmin.xhtml";
 		} catch(UserNoAdminException e) {
 		    ctx.addMessage("entradaAutoriz", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "* Usuario no admin"));
 		} catch(ProyectoException e) {
@@ -123,19 +144,43 @@ public class Autorizado implements Serializable {
 	
 	public String editarAutoriz() throws ProyectoException {
 		FacesContext ctx = FacesContext.getCurrentInstance();
-		if(selectedEmpresa != null) {
-			e = empresas.obtenerEmpresa(selectedEmpresa);
-			autoriz = p.getAutoriz();
-			if(!autoriz.containsKey(e)) {
-				autoriz.put(e, selectedEmpresa);
-				p.setAutoriz(autoriz);
-				persAut.actualizarPersAut(login.getUserApk(), p);
-				return "menuAdmin.xhtml";
-			} else {
-			    ctx.addMessage("entradaAutoriz", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al editar autorizado", "* Empresa ya vinculada"));		
+		autoriz = p.getAutoriz();
+		
+		try {
+			if(selectedEmpresa != null) {
+				e = empresas.obtenerEmpresa(Long.parseLong(selectedEmpresa));
+				persAut.anyadirAutorizadoAEmpresa(login.getUserApk(), p, e, "AUTORIZ");					
 			}
-		} else {
-		    ctx.addMessage("entradaAutoriz", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al crear autorizado", "* Empresa no seleccionada"));
+			persAut.actualizarPersAut(login.getUserApk(), p);
+			init();
+			return "listaAutorizadosAdmin.xhtml";
+		} catch(PersAutYaAsignadaException e) {
+		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al asignar autorizado", "Empresa ya asignada"));
+		} catch(UserNoAdminException e) {
+		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no admin"));
+		} catch(ProyectoException e) {
+			FacesMessage fm = new FacesMessage("Error: " + e);
+			ctx.addMessage(null, fm);
+		}
+		return null;
+	}
+	
+	public String bajaAutorizado() {
+		FacesContext ctx = FacesContext.getCurrentInstance();
+		try {
+			if(selectedAutorizado != null) {
+				p = persAut.obtenerPersAut(Long.parseLong(selectedAutorizado));
+				persAut.cerrarCuentaPersAut(login.getUserApk(), p);
+				init();
+				return null;
+			} else {
+			    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Seleccione un autorizado"));
+			}
+		} catch(UserNoAdminException e) {
+		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no admin"));
+		} catch(ProyectoException e) {
+			FacesMessage fm = new FacesMessage("Error: " + e);
+			ctx.addMessage(null, fm);
 		}
 		return null;
 	}

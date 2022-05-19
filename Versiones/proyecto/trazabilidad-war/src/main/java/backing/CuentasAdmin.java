@@ -1,19 +1,16 @@
 package backing;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
 
 import ejb.GestionEmpresa;
 import ejb.GestionIndiv;
@@ -30,7 +27,7 @@ import jpa.Segregada;
 
 @SuppressWarnings("serial")
 @Named(value="cuentasAdmin")
-@SessionScoped
+@ApplicationScoped
 public class CuentasAdmin implements Serializable {
 	
 	@Inject
@@ -39,8 +36,7 @@ public class CuentasAdmin implements Serializable {
 	@Inject
 	private GestionSegregada segregadas;
 	
-	@Inject
-	private GestionIndiv indivEJB;
+	@Inject GestionIndiv indivEJB;
 	
 	@Inject
 	private GestionEmpresa empresaEJB;
@@ -115,9 +111,11 @@ public class CuentasAdmin implements Serializable {
 	public void setListaEmpresa(List<Empresa> e) {
 		listaEmpresa=e;
 	}
+	
 	public List<Cliente> getListaClientes(){
 		return listaClientes;
 	}
+	
 	public void setListaClientes(List<Cliente> c) {
 		listaClientes=c;
 	}
@@ -129,19 +127,6 @@ public class CuentasAdmin implements Serializable {
 	public void setSeleccionCliente(Cliente c) {
 		seleccionCliente=c;
 	}
-	
-	
-	public PooledAccount getPooledAccount(String iban) {
-        if (iban == null){
-            throw new IllegalArgumentException("no id provided");
-        }
-        for (PooledAccount pooled : listaPooled){
-            if (iban.equals(pooled.getIBAN())){
-                return pooled;
-            }
-        }
-        return null;
-    }
 	
 	public Segregada getSegregada() {
 		return segregada;
@@ -161,28 +146,60 @@ public class CuentasAdmin implements Serializable {
     }
     
     public String editarPooledWeb() {
-		return "menuAdmin.xhtml";
-    }
-    
-    public String nuevaSegregadaWeb() {
-		return "menuAdmin.xhtml";
-    }
-    
-    public String editarSegregadaWeb() {
-		return "menuAdmin.xhtml";
-    }
-    
-	public String nuevaPooledAccount() throws ProyectoException {
-		/*FacesContext ctx = FacesContext.getCurrentInstance();
+    	FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
-			persAut.insertarPersAut(login.getUserApk(), p);
-			return "menuAdmin.xhtml";
+			if(selectedPooled != null) {
+				p = pooledAccount.obtenerPooledAccount(selectedPooled);
+				//return "editarPooled.xhtml";
+			} else {
+				ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Seleccione una cuenta"));
+			}
 		} catch(UserNoAdminException e) {
-		    ctx.addMessage("entradaAutoriz", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no admin"));
+		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Permiso denegado"));
+		} catch(CuentaConSaldoException e) {
+		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Cuenta con saldo"));
 		} catch(ProyectoException e) {
 			FacesMessage fm = new FacesMessage("Error: " + e);
 			ctx.addMessage(null, fm);
-		}*/
+		}
+		return null;
+    }
+    
+    public String nuevaSegregadaWeb() {
+		return "crearSegregada.xhtml";
+    }
+    
+    public String editarSegregadaWeb() {
+    	FacesContext ctx = FacesContext.getCurrentInstance();
+		try {
+			if(selectedSegregada != null) {
+				segregada = segregadas.obtenerSegregada(selectedSegregada);
+				return "editarSegregada.xhtml";
+			} else {
+				ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Seleccione una cuenta"));
+			}
+		} catch(UserNoAdminException e) {
+		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Permiso denegado"));
+		} catch(CuentaConSaldoException e) {
+		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Cuenta con saldo"));
+		} catch(ProyectoException e) {
+			FacesMessage fm = new FacesMessage("Error: " + e);
+			ctx.addMessage(null, fm);
+		}
+		return null;
+    }
+    
+	public String nuevaPooledAccount() throws ProyectoException {
+		FacesContext ctx = FacesContext.getCurrentInstance();
+		try {
+			pooledAccount.insertarPooledAccount(login.getUserApk(), p, null);
+			return "listaCuentasAdmin.xhtml";
+		} catch(UserNoAdminException e) {
+		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no admin"));
+		} catch(ProyectoException e) {
+			FacesMessage fm = new FacesMessage("Error: " + e);
+			ctx.addMessage(null, fm);
+		}
 		return null;
    }
 	
@@ -191,10 +208,10 @@ public class CuentasAdmin implements Serializable {
 		try {
 			if(selectedPooled != null) {
 				p = pooledAccount.obtenerPooledAccount(selectedPooled);
-				return "result.xhtml";
-				//pooledAccount.cerrarCuentaPooledAccount(login.getUserApk(), p);
-				//addMessage("OK", "Operación completada");
-				//return "listaCuentasAdmin.xhtml";
+				pooledAccount.cerrarCuentaPooledAccount(login.getUserApk(), p);
+				addMessage("OK", "Operación completada");
+				init();
+				return "listaCuentasAdmin.xhtml";
 			} else {
 			    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Seleccione una cuenta"));
 			}
@@ -212,9 +229,11 @@ public class CuentasAdmin implements Serializable {
 	public String bajaSegregada() throws ProyectoException {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
-			if(segregada != null) {
+			if(selectedSegregada != null) {
+				segregada = segregadas.obtenerSegregada(selectedSegregada);
 				segregadas.cerrarCuentaSegregada(login.getUserApk(), segregada);
 				addMessage("OK", "Operación completada");
+				init();
 				return "listaCuentasAdmin.xhtml";
 			} else {
 			    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Seleccione una cuenta"));
@@ -231,56 +250,52 @@ public class CuentasAdmin implements Serializable {
    }
 	
 	public String editarPooledAccount() throws ProyectoException {
-		/*FacesContext ctx = FacesContext.getCurrentInstance();
+		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
-			persAut.actualizarPersAut(login.getUserApk(), p);
-			return "menuAdmin.xhtml";
+			pooledAccount.actualizarPooledAccount(login.getUserApk(), p);
+			init();
+			return "listaCuentasAdmin.xhtml";
 		} catch(UserNoAdminException e) {
 		    ctx.addMessage("entradaAutoriz", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no admin"));
 		} catch(ProyectoException e) {
 			FacesMessage fm = new FacesMessage("Error: " + e);
 				ctx.addMessage(null, fm);
-		}*/
+		}
 		return null;
 	}
 	
 	public String nuevaSegregada() throws ProyectoException {
-		/*FacesContext ctx = FacesContext.getCurrentInstance();
+		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
-			persAut.insertarPersAut(login.getUserApk(), p);
-			return "menuAdmin.xhtml";
+			segregadas.insertarSegregada(login.getUserApk(), segregada);
+			return "listaCuentasAdmin.xhtml";
 		} catch(UserNoAdminException e) {
-		    ctx.addMessage("entradaAutoriz", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no admin"));
+		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no admin"));
 		} catch(ProyectoException e) {
 			FacesMessage fm = new FacesMessage("Error: " + e);
 			ctx.addMessage(null, fm);
-		}*/
+		}
 		return null;
    }
 	
 	public String editarSegregada() throws ProyectoException {
-		/*FacesContext ctx = FacesContext.getCurrentInstance();
+		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
-			persAut.actualizarPersAut(login.getUserApk(), p);
-			return "menuAdmin.xhtml";
+			segregadas.actualizarSegregada(login.getUserApk(), segregada);
+			init();
+			return "listaCuentasAdmin.xhtml";
 		} catch(UserNoAdminException e) {
 		    ctx.addMessage("entradaAutoriz", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no admin"));
 		} catch(ProyectoException e) {
 			FacesMessage fm = new FacesMessage("Error: " + e);
 				ctx.addMessage(null, fm);
-		}*/
+		}
 		return null;
-	}
-	
-	public void reload() throws IOException {
-	    ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-	    ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
 	}
 	
 	@PostConstruct
 	public void init() {
 		listaClientes=new ArrayList<Cliente>();
-		
 		
 		if(login.getUserApk().isAdministrativo()) {
 			listaPooled = pooledAccount.obtenerPooledAccount();

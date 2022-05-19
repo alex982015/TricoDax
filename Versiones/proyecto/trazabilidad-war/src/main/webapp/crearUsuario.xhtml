@@ -15,32 +15,33 @@
 <h:body>
 	   <h1 class="title">Crear usuario</h1>
        <h:form class="formCrearUsuario" id="entradaUsuario">
+        	<p:growl id="messages" showDetail="true" />
+       
        		<p class="txtLogin">Usuario:</p>
-       		<h:inputText class="txtLogin" id="user" required="true" requiredMessage="* Introduzca nombre de usuario" value="#{usuarios.userApk.user}" style="width:200px"/><br/><br/>
+       		<h:inputText class="txtLogin" id="user" required="true" requiredMessage="* Introduzca nombre de usuario" value="#{usuarios.nuevoUsuario.user}" style="width:200px"/><br/><br/>
 			<h:message class="error" id ="userMsg" for="user"/>
        		<p class="txtLogin">Contraseña:</p>
        		<h:inputSecret class="txtLogin" id="pass" required="true" requiredMessage="* Introduzca contraseña" value="#{usuarios.password}" style="width:200px"/><br/><br/>
        		<h:message class="error" id ="passMsg" for="pass"/>
        		<p class="txtLogin">Confirmar contraseña:</p>
-       		<h:inputSecret class="txtLogin" id="pass2" required="true" requiredMessage="* Introduzca contraseña nuevamente" value="#{usuarios.userApk.password}" style="width:200px"/><br/><br/>
+       		<h:inputSecret class="txtLogin" id="pass2" required="true" requiredMessage="* Introduzca contraseña nuevamente" value="#{usuarios.nuevoUsuario.password}" style="width:200px"/><br/><br/>
 			<h:message class="error" id ="pass2Msg" for="pass2"/>
        		<p class="txtLogin">Administrativo:</p>
-       		<p:selectBooleanButton class="txtLogin" value="#{usuarios.userApk.administrativo}" onLabel="Si" offLabel="No" style="width:5rem; margin-left: 40px;"/>
+       		<p:selectBooleanButton class="txtLogin" value="#{usuarios.nuevoUsuario.administrativo}" onLabel="Si" offLabel="No" style="width:5rem; margin-left: 40px;"/>
        		<p class="txtLogin">Vincular a autorizado:</p>
        		<p:selectOneMenu class="txtLogin" id="autorizado" value="#{usuarios.selectedPersAut}">
+	        	<f:selectItem id="emptyAutoriz" itemLabel="Seleccione un autorizado" itemValue=""/>
 	        	<f:selectItems value="#{usuarios.listaAutoriz}" var="a" itemLabel="Ident: #{a.ident} Nombre: #{a.nombre} Apellidos: #{a.apellidos}" itemValue="#{a.id}"/>
 	        </p:selectOneMenu>
 	        <p class="txtLogin">Vincular a individual:</p>
 			<p:selectOneMenu class="txtLogin" id="individual" value="#{usuarios.selectedIndiv}">
-	        	<f:selectItems value="#{usuarios.listaIndiv}" var="i" itemLabel="Ident: #{i.ident} Nombre: #{i.nombre} Apellidos: #{i.apellido}" itemValue="i.ID"/>
+	        	<f:selectItem id="emptyIndiv" itemLabel="Seleccione cuenta particular" itemValue=""/>
+	        	<f:selectItems value="#{usuarios.listaIndiv}" var="i" itemLabel="Ident: #{i.ident} Nombre: #{i.nombre} Apellidos: #{i.apellido}" itemValue="#{i.ID}"/>
 	        </p:selectOneMenu>
 			
 			<br/><br/>
-       		<h:commandButton class="button" action="#{usuarios.crearUsuario()}" value="Confirmar" update=":messages"/>    
-       		&nbsp;
-       		<h:message class="error" for="entradaUsuario"/>
+       		<h:commandButton class="button" action="#{usuarios.crearUsuario()}" value="Confirmar" update=":messages"/>
        </h:form>
-
 </h:body>
 
 </html>

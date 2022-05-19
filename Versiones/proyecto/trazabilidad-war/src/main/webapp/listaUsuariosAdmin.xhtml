@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:p="http://primefaces.org/ui">
+<h:head>
+	   <link rel="stylesheet" type="text/css" href="estilos.css"/>
+       <title>Lista de cuentas</title>
+</h:head>
+
+<h:body>
+       <h:panelGrid class="panelListas" id = "panelListaUsuarios" columns = "1" border = "1"
+            cellpadding = "10" cellspacing = "1">
+            
+            <f:facet name = "header">
+               <h:outputText value = "Lista de cuentas"/>
+            </f:facet>
+            
+            <h:form id="usuarios">
+	            <h:outputLabel>Usuarios</h:outputLabel>
+	         
+	         	<p:growl id="message" showDetail="true" />
+	         
+	            <h:panelGrid class="usuario" columns ="3" cellpadding = "10" cellspacing = "1">   
+				  	<h:button class="button" value="Nuevo" outcome="#{usuarios.nuevoUsuarioWeb()}"/>
+	  	       		<h:commandButton class="button" value="Editar" update=":message" action="#{usuarios.editarUsuarioWeb()}"/>
+		        </h:panelGrid>
+				
+				<p:selectOneMenu id="usuarios" value="#{usuarios.selectedUsuario}">
+		        	<f:selectItems id="selectAutoriz" value="#{usuarios.listaUsuarios}" var="u" itemLabel="User: #{u.user} Administrativo: #{u.administrativo} Individual: #{u.personaIndividual.ident} Autorizado: #{u.personaAutorizada.ident}" itemValue="#{u.user}"/>
+		        </p:selectOneMenu>
+            </h:form>
+		</h:panelGrid>
+</h:body>
+
+</html>

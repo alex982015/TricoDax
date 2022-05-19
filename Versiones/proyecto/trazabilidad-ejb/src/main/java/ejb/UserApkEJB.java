@@ -111,7 +111,7 @@ public class UserApkEJB implements GestionUserApk {
 	}
     
 	@Override
-	public List<UserApk> obtenerUser() throws ProyectoException {
+	public List<UserApk> obtenerUser() {
 		TypedQuery<UserApk> query = em.createQuery("SELECT u FROM UserApk u", UserApk.class);
 		return query.getResultList();
 	}
@@ -131,6 +131,7 @@ public class UserApkEJB implements GestionUserApk {
 			throw new UserNoEncontradoException();
 		}
 
+		userEntity.setAdministrativo(user.isAdministrativo());
 		userEntity.setPassword(user.getPassword());
 		userEntity.setPersonaAutorizada(user.getPersonaAutorizada());
 		userEntity.setPersonaIndividual(user.getPersonaIndividual());

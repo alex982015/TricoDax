@@ -465,12 +465,8 @@ public class TestUserApk {
 	@Requisitos({"RF ADICIONAL USERAPK"})
 	@Test
 	public void testObtenerUser() {
-		try {
-			List<UserApk> userExistentes = gestionUser.obtenerUser();
-			assertEquals(1, userExistentes.size());
-		} catch (ProyectoException e) {
-			fail("No debería lanzar excepción");
-		}
+		List<UserApk> userExistentes = gestionUser.obtenerUser();
+		assertEquals(1, userExistentes.size());
 	}
 	
 	@Requisitos({"RF ADICIONAL USERAPK"})

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -20,7 +20,7 @@ import jpa.UserApk;
 
 @SuppressWarnings("serial")
 @Named(value="usuarios")
-@SessionScoped
+@ApplicationScoped
 public class Usuarios implements Serializable {
 	
 	@Inject
@@ -35,20 +35,29 @@ public class Usuarios implements Serializable {
 	private UserApk u;
 	private List<Indiv> listaIndiv;
 	private List<PersAut> listaAutoriz;
+	private List<UserApk> listaUsuarios;
 	private Indiv indiv;
 	private PersAut persAut;
 	
+	private String selectedUsuario;
 	private String selectedIndiv;
 	private String selectedPersAut;
 	
 	private String password;
 	
+	private UserApk nuevoUsuario;
+	
 	public Usuarios() {
 		u = new UserApk();
+		nuevoUsuario = new UserApk();
 	}
 	
 	public UserApk getUserApk() {
 		return u;
+	}
+	
+	public void setUserApk(UserApk user) {
+		this.u = user;
 	}
 	
 	public String getPassword() {
@@ -57,6 +66,14 @@ public class Usuarios implements Serializable {
 	
 	public void setPassword(String p) {
 		password = p;
+	}
+	
+	public UserApk getNuevoUsuario() {
+		return nuevoUsuario;
+	}
+	
+	public void setNuevoUsuario(UserApk user) {
+		nuevoUsuario = user;
 	}
 	
 	public List<Indiv> getListaIndiv(){
@@ -73,6 +90,14 @@ public class Usuarios implements Serializable {
 	
 	public void setListaAutoriz(List<PersAut> listaAutoriz) {
 		this.listaAutoriz = listaAutoriz;
+	}
+	
+	public List<UserApk> getListaUsuarios(){
+		return listaUsuarios;
+	}
+	
+	public void setListaUsuarios(List<UserApk> listaUsuarios) {
+		this.listaUsuarios = listaUsuarios;
 	}
 	
 	public String getSelectedIndiv() {
@@ -99,27 +124,69 @@ public class Usuarios implements Serializable {
 		this.persAut = persAut;
 	}
 	
+	public String getSelectedUsuario() {
+		return selectedUsuario;
+	}
+	
+	public void setSelectedUsuario(String u) {
+		selectedUsuario = u;
+	}
+	
 	public String nuevoUsuarioWeb() {
 		return "crearUsuario.xhtml";
 	}
 	
 	public String editarUsuarioWeb() {
-		return "editarUsuario.xhtml";
+		FacesContext ctx = FacesContext.getCurrentInstance();
+		try {
+			if(selectedUsuario != null) {
+				u = userApk.getUser(selectedUsuario);
+				return "editarUsuario.xhtml";
+			} else {
+			    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al editar usuario", "Seleccione un usuario"));
+			}
+		} catch(UserNoAdminException e) {
+		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no admin"));
+		} catch(ProyectoException e) {
+			FacesMessage fm = new FacesMessage("Error: " + e);
+			ctx.addMessage(null, fm);
+		}
+		return null;
 	}
 	
 	public String crearUsuario() throws ProyectoException {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
-			indiv = indivEJB.obtenerIndiv(selectedIndiv);
-			u.setPersonaIndividual(indiv);
-			persAut = autorizEJB.obtenerPersAut(selectedPersAut);
-			u.setPersonaAutorizada(persAut);
-			userApk.insertarUser(u);
-			return "listaUsuarios.xhtml";
+			if(password.equals(nuevoUsuario.getPassword())) {
+				if(nuevoUsuario.isAdministrativo()) {
+					userApk.insertarUser(nuevoUsuario);
+				} else if((selectedPersAut != null) && (selectedIndiv != null)) {
+					persAut = autorizEJB.obtenerPersAut(Long.parseLong(selectedPersAut));
+					nuevoUsuario.setPersonaAutorizada(persAut);
+					indiv = indivEJB.obtenerIndiv(Long.parseLong(selectedIndiv));
+					nuevoUsuario.setPersonaIndividual(indiv);
+					userApk.insertarUser(nuevoUsuario);
+				}
+				else if(selectedPersAut != null) {
+					persAut = autorizEJB.obtenerPersAut(Long.parseLong(selectedPersAut));
+					nuevoUsuario.setPersonaAutorizada(persAut);
+					userApk.insertarUser(nuevoUsuario);
+				} else if(selectedIndiv != null) {
+					indiv = indivEJB.obtenerIndiv(Long.parseLong(selectedIndiv));
+					nuevoUsuario.setPersonaIndividual(indiv);
+					userApk.insertarUser(nuevoUsuario);
+				} else {
+				    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al crear usuario", "Usuario no vinculado"));	
+				}
+				init();
+				return "listaUsuariosAdmin.xhtml";
+			} else {
+			    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al crear usuario", "Contraseñas no coinciden"));	
+			}
 		} catch(UserExistenteException e) {
-		    ctx.addMessage("entradaUsuario", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al crear usuario", "* Usuario ya existe"));
+		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al crear usuario", "* Usuario ya existe"));
 		} catch(UserAsociadoNoExistenteException p) {
-			ctx.addMessage("entradaUsuario", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al crear usuario", "* Usuario no vinculado"));
+			ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al crear usuario", "* Usuario no vinculado"));
 		} catch(ProyectoException e) {
 			FacesMessage fm = new FacesMessage("* Error: " + e);
 			ctx.addMessage(null, fm);
@@ -131,13 +198,35 @@ public class Usuarios implements Serializable {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
 			if(password.equals(u.getPassword())) {
-				u.setPersonaAutorizada(persAut);
-				u.setPersonaIndividual(indiv);
-				userApk.actualizarUser(u);
+				if((!u.isAdministrativo() && (selectedPersAut == null) && (selectedIndiv == null))) {	
+				    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al crear usuario", "Usuario no vinculado"));	
+				} else {
+					
+					if((selectedPersAut != null) && (selectedIndiv != null)) {
+						persAut = autorizEJB.obtenerPersAut(Long.parseLong(selectedPersAut));
+						u.setPersonaAutorizada(persAut);
+						indiv = indivEJB.obtenerIndiv(Long.parseLong(selectedIndiv));
+						u.setPersonaIndividual(indiv);
+					}
+					
+					if(selectedPersAut != null) {
+						persAut = autorizEJB.obtenerPersAut(Long.parseLong(selectedPersAut));
+						u.setPersonaAutorizada(persAut);
+					} else {
+						u.setPersonaAutorizada(null);
+					}
+					
+					userApk.actualizarUser(u);
+					init();
+					return "listaUsuariosAdmin.xhtml";
+				}
 			} else {
-			    ctx.addMessage("entradaUsuario", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al editar perfil", "* Contraseñas no coinciden"));
+			    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al crear usuario", "Contraseñas no coinciden"));	
 			}
-			return "listaUsuarios.xhtml";
+		} catch(UserExistenteException e) {
+		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al crear usuario", "* Usuario ya existe"));
+		} catch(UserAsociadoNoExistenteException p) {
+			ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al crear usuario", "* Usuario no vinculado"));
 		} catch(ProyectoException e) {
 			FacesMessage fm = new FacesMessage("* Error: " + e);
 			ctx.addMessage(null, fm);
@@ -149,6 +238,7 @@ public class Usuarios implements Serializable {
 	public void init() {
 		listaIndiv = indivEJB.obtenerIndiv();
 		listaAutoriz = autorizEJB.obtenerPersAut();
+		listaUsuarios = userApk.obtenerUser();
 	}
 
 }

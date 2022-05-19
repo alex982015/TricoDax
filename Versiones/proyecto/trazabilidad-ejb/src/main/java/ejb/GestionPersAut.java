@@ -13,7 +13,7 @@ import jpa.UserApk;
 public interface GestionPersAut {
 	public void insertarPersAut(UserApk user, PersAut persAut) throws ProyectoException;
 	public List<PersAut> obtenerPersAut();
-	public PersAut obtenerPersAut(String persAut) throws ProyectoException;
+	public PersAut obtenerPersAut(Long persAut) throws ProyectoException;
 	public void actualizarPersAut(UserApk user, PersAut persAut) throws ProyectoException;
 	public void cerrarCuentaPersAut(UserApk user, PersAut persAut) throws ProyectoException;
 	public void bloquearCuentaPersAut(UserApk user, PersAut persAut, boolean tipoBloqueo) throws ProyectoException;

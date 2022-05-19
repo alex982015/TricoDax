@@ -19,7 +19,7 @@
 		<class>jpa.UserApk</class>
     <shared-cache-mode>NONE</shared-cache-mode>
     <properties>
-    	<property name="javax.persistence.schema-generation.database.action" value="create"/>
+    	<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
   </persistence-unit>
 </persistence>

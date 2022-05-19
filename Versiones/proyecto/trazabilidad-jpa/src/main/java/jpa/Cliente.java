@@ -43,7 +43,7 @@ public class Cliente implements Serializable {
 	@Column(name="PAIS", nullable = false) 
 	private String Pais;
 	
-	@OneToMany(mappedBy = "cliente")
+	@OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
 	private List<CuentaFintech> cuentas;
 
 /****************CONSTRUCTORES*************************************/
