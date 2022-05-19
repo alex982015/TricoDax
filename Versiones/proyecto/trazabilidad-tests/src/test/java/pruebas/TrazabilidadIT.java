@@ -23,6 +23,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
+import es.uma.informatica.sii.anotaciones.Requisitos;
+
 public class TrazabilidadIT {
 	private static final String UNIDAD_PERSISTENCIA_PRUEBAS = "TrazabilidadIT";
 	private WebDriver driver;
@@ -60,18 +62,38 @@ public class TrazabilidadIT {
 	}
 	
 	@SuppressWarnings("deprecation")
+	@Requisitos({"RF1"})
 	@Test
 	public void inicioAdmin() {
-		driver.get(baseURL);
-		driver.manage().window().setSize(new Dimension(1280, 777));
+		driver.get(baseURL+"admin.xhtml");
+		driver.findElement(By.id("entradaUserApk:user")).sendKeys("ponciano");
+		driver.findElement(By.id("entradaUserApk:pass")).sendKeys("ponciano");
 		driver.findElement(By.id("entradaUserApk:btnLogin")).click();
-		{
-		    driver.findElement(By.id("entradaUserApk:user")).sendKeys("ponciano");
-		    driver.findElement(By.id("entradaUserApk:password")).sendKeys("ponciano");
-		    WebElement element = driver.findElement(By.id("entradaUserApk:btnLogin"));
-		    Actions builder = new Actions(driver);
-			builder.click(element).perform();
-		}
-		assertThat(driver.getCurrentUrl(), is(baseURL+"menuAdmin.xhtml"));
+		assertThat(driver.findElement(By.id("userLabel")).getText(), is("ponciano"));
+		driver.close();
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Requisitos({"RF10"})
+	@Test
+	public void inicioIndividual() {
+		driver.get(baseURL+"index.xhtml");
+		driver.findElement(By.id("entradaUserApk:user")).sendKeys("juan");
+		driver.findElement(By.id("entradaUserApk:pass")).sendKeys("juan");
+		driver.findElement(By.id("entradaUserApk:btnLogin")).click();
+		assertThat(driver.findElement(By.id("userLabel")).getText(), is("juan"));
+		driver.close();
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Requisitos({"RF10"})
+	@Test
+	public void inicioAutorizado() {
+		driver.get(baseURL+"index.xhtml");
+		driver.findElement(By.id("entradaUserApk:user")).sendKeys("ana");
+		driver.findElement(By.id("entradaUserApk:pass")).sendKeys("ana");
+		driver.findElement(By.id("entradaUserApk:btnLogin")).click();
+		assertThat(driver.findElement(By.id("userLabel")).getText(), is("ana"));
+		driver.close();
 	}
 }

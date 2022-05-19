@@ -2,35 +2,52 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-       xmlns:h="http://xmlns.jcp.org/jsf/html"
-       xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-		<link rel="stylesheet" type="text/css" href="estilos.css"/>
-       <title>Informe Holanda:</title>
+	<link rel="stylesheet" type="text/css" href="estilos.css" />
+	<title>Informe Holanda:</title>
+	
+	<script type="text/javascript">
+	    //<![CDATA[
+	    function start() {
+	        PF('statusDialog').show();
+	    }
+	
+	    function stop() {
+	        PF('statusDialog').hide();
+	    }
+	    //]]>
+	</script>
 </h:head>
 
 <h:body>
-       <h1 class="title">Informe Holanda</h1>
-       <h:form class="formHolanda" id="entradaHolanda">
-       		<p class="txtLogin">Indique tipo de informe Holanda:</p>
-       		<h:selectOneListbox class="txtLogin" required="true" value="#{informes.tipoInforme}">
-       			<f:selectItem itemValue="Inicial" itemLabel="Inicial"/>
-       			<f:selectItem itemValue="Semanal" itemLabel="Semanal"/>
-       		</h:selectOneListbox><br/><br/>
-       		
-       		<p class="txtLogin">Seleccione autorizado:</p>
-       		<h:selectOneListbox class="txtLogin" required="true" value="#{informes.autorizado}">
-       			<f:selectItems value="#{informes.listaAutorizados}" />
-       		</h:selectOneListbox><br/><br/>
-       		
-       		<h:commandButton class="button" action="#{informes.crearInformeHolanda()}" value="Descargar" update=":messages"/>    
-       		&nbsp;
-       		<h:message for="entradaHolanda"/>
-       		
-       </h:form>
-       
+	<h1 class="title">Informe Holanda</h1>
+	<h:form class="formHolanda" id="entradaHolanda">
+		<p class="txtLogin">Indique tipo de informe Holanda:</p>
+		<h:selectOneMenu class="txtLogin" required="true"
+			value="#{informes.tipoInforme}">
+			<f:selectItem itemValue="Inicial" itemLabel="Inicial" />
+			<f:selectItem itemValue="Semanal" itemLabel="Semanal" />
+		</h:selectOneMenu>
+		<br />
+		<br />
+
+		<p class="txtLogin">Seleccione autorizado:</p>
+		<p:selectOneMenu class="txtLogin" required="true"
+			value="#{informes.selectedAutorizado}">
+			<f:selectItems value="#{informes.listaAutorizados}" />
+		</p:selectOneMenu>
+		<br />
+		<br />
+
+		<p:commandButton value="" icon="pi pi-arrow-down" styleClass="ui-button-outlined">
+            <p:fileDownload value="#{informes.file}" update=":messages"/>
+        </p:commandButton>
+	</h:form>
 </h:body>
 
 </html>

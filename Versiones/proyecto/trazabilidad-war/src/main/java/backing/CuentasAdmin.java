@@ -1,7 +1,10 @@
 package backing;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +15,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import ejb.GestionDivisa;
 import ejb.GestionEmpresa;
 import ejb.GestionIndiv;
 import ejb.GestionPooledAccount;
@@ -20,6 +24,7 @@ import exceptions.CuentaConSaldoException;
 import exceptions.ProyectoException;
 import exceptions.UserNoAdminException;
 import jpa.Cliente;
+import jpa.Divisa;
 import jpa.Empresa;
 import jpa.Indiv;
 import jpa.PooledAccount;
@@ -35,8 +40,12 @@ public class CuentasAdmin implements Serializable {
 	
 	@Inject
 	private GestionSegregada segregadas;
+
+	@Inject 
+	private GestionDivisa divisaEJB;
 	
-	@Inject GestionIndiv indivEJB;
+	@Inject 
+	private GestionIndiv indivEJB;
 	
 	@Inject
 	private GestionEmpresa empresaEJB;
@@ -50,9 +59,13 @@ public class CuentasAdmin implements Serializable {
 	
 	private PooledAccount p;
 	
+	private List<Divisa> listaMonedas;
+	
 	private List<Segregada> listaSegregadas;
 	
 	private String selectedSegregada;
+	
+	private List<String> selectedDivisas;
 	
 	private List<Indiv> listaIndiv;
 	
@@ -60,12 +73,51 @@ public class CuentasAdmin implements Serializable {
 	
 	private List<Cliente> listaClientes;
 
+	private String selectedCliente;
+	
 	private Segregada segregada;
+	
+	private PooledAccount nuevaPooled;
+	
+	private Segregada nuevaSegregada;
 	
 	private Cliente seleccionCliente;
 	
 	public CuentasAdmin() {
+		nuevaPooled = new PooledAccount();
+		nuevaSegregada = new Segregada();
+	}
 	
+	public PooledAccount getNuevaPooled() {
+		return nuevaPooled;
+	}
+	
+	public void setNuevaPooled(PooledAccount p) {
+		nuevaPooled = p;
+	}
+	
+	public Segregada getNuevaSegregada() {
+		return nuevaSegregada;
+	}
+	
+	public void setNuevaSegregada(Segregada s) {
+		nuevaSegregada = s;
+	}
+	
+	public String getSelectedCliente() {
+		return selectedCliente;
+	}
+	
+	public void setSelectedCliente(String c) {
+		selectedCliente = c;
+	}
+	
+	public List<String> getSelectedDivisas() {
+		return selectedDivisas;
+	}
+	
+	public void setSelectedDivisas(List<String> divisas) {
+		selectedDivisas = divisas;
 	}
 	
 	public List<PooledAccount> getListaPooled() {
@@ -82,6 +134,14 @@ public class CuentasAdmin implements Serializable {
 	
 	public void setSelectedPooled(String p) {
 		selectedPooled = p;
+	}
+	
+	public List<Divisa> getListaMonedas() {
+		return listaMonedas;
+	}
+	
+	public void setListaMonedas(List<Divisa> lista) {
+		listaMonedas = lista;
 	}
 	
 	public String getSelectedSegregada() {
@@ -142,7 +202,7 @@ public class CuentasAdmin implements Serializable {
     }
 	
     public String nuevaPooledWeb() {
-		return "menuAdmin.xhtml";
+		return "crearPooled.xhtml";
     }
     
     public String editarPooledWeb() {
@@ -150,7 +210,7 @@ public class CuentasAdmin implements Serializable {
 		try {
 			if(selectedPooled != null) {
 				p = pooledAccount.obtenerPooledAccount(selectedPooled);
-				//return "editarPooled.xhtml";
+				return "editarPooled.xhtml";
 			} else {
 				ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Seleccione una cuenta"));
 			}
@@ -209,7 +269,6 @@ public class CuentasAdmin implements Serializable {
 			if(selectedPooled != null) {
 				p = pooledAccount.obtenerPooledAccount(selectedPooled);
 				pooledAccount.cerrarCuentaPooledAccount(login.getUserApk(), p);
-				addMessage("OK", "Operación completada");
 				init();
 				return "listaCuentasAdmin.xhtml";
 			} else {
@@ -232,7 +291,6 @@ public class CuentasAdmin implements Serializable {
 			if(selectedSegregada != null) {
 				segregada = segregadas.obtenerSegregada(selectedSegregada);
 				segregadas.cerrarCuentaSegregada(login.getUserApk(), segregada);
-				addMessage("OK", "Operación completada");
 				init();
 				return "listaCuentasAdmin.xhtml";
 			} else {
@@ -264,10 +322,26 @@ public class CuentasAdmin implements Serializable {
 		return null;
 	}
 	
-	public String nuevaSegregada() throws ProyectoException {
+	public String crearSegregada() throws ProyectoException {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
-			segregadas.insertarSegregada(login.getUserApk(), segregada);
+			ZoneId defaultZoneId = ZoneId.systemDefault();
+	        LocalDate localDate = LocalDate.of(2016, 8, 19);
+	        Date date = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
+	        
+	        Empresa empresa = empresaEJB.obtenerEmpresa(Long.parseLong(selectedCliente));
+	        Indiv indiv = indivEJB.obtenerIndiv(Long.parseLong(selectedCliente));
+	        
+	        if(empresa != null) {
+				nuevaSegregada.setCliente(empresa);
+	        } else {
+				nuevaSegregada.setCliente(indiv);
+	        }
+		    nuevaSegregada.setFechaApertura(date);
+			nuevaSegregada.setEstado(true);
+			segregadas.insertarSegregada(login.getUserApk(), nuevaSegregada);
+				
+			init();
 			return "listaCuentasAdmin.xhtml";
 		} catch(UserNoAdminException e) {
 		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no admin"));
@@ -285,7 +359,7 @@ public class CuentasAdmin implements Serializable {
 			init();
 			return "listaCuentasAdmin.xhtml";
 		} catch(UserNoAdminException e) {
-		    ctx.addMessage("entradaAutoriz", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no admin"));
+		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no admin"));
 		} catch(ProyectoException e) {
 			FacesMessage fm = new FacesMessage("Error: " + e);
 				ctx.addMessage(null, fm);
@@ -295,7 +369,8 @@ public class CuentasAdmin implements Serializable {
 	
 	@PostConstruct
 	public void init() {
-		listaClientes=new ArrayList<Cliente>();
+		listaMonedas = divisaEJB.obtenerDivisas();
+		listaClientes = new ArrayList<Cliente>();
 		
 		if(login.getUserApk().isAdministrativo()) {
 			listaPooled = pooledAccount.obtenerPooledAccount();

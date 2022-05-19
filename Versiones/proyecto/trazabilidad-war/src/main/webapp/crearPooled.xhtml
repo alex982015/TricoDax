@@ -15,36 +15,27 @@
 <h:body>
 	<h1 class="title">Crear Pooled</h1>
 	       <h:form class="formCrearPooled" id="crearPooled">
+        		<p:growl id="messages" showDetail="true" />
 
  				<p class="txtLogin">IBAN</p>
-       			<h:inputText class="txtLogin" id="IBAN" required="true" value="#{Cuentas.PooledAccount.IBAN}" style="width:200px"/><br/><br/>
+       			<h:inputText class="txtLogin" id="IBAN" required="true" value="#{cuentasAdmin.nuevaPooled.IBAN}" style="width:200px"/><br/><br/>
        		
 	       		<p class="txtLogin">SWIFT</p>
-	       		<h:inputText class="txtLogin" id="SWIFT" required="true" value="#{Cuentas.PooledAccount.SWIFT}" style="width:200px"/><br/><br/>
+	       		<h:inputText class="txtLogin" id="SWIFT" required="true" value="#{cuentasAdmin.nuevaPooled.swift}" style="width:200px"/><br/><br/>
        			
-       			<p class= "txtLogin">Tipo de Moneda</p>
-       			<p:selectManyMenu id="Tipo de Moneda" value="#{Cuentas.Divisa}"
-                            converter="#{MonedasConverter}"
-		                    var="Monedas" filter="true" filterMatchMode="contains" showCheckbox="true" styleClass="manymenu-advanced">
-		            <f:selectItems value="#{selectManyView.Divisa}" var="Monedas" itemLabel="#{Monedas.nombre}"
-		                            itemValue="#{country}"/>
-		            <p:column>
-		                <h:outputText value="#{Monedas.nombre}"/>
-		            </p:column>
+       			<p class="txtLogin">Tipo de Moneda</p>
+       			<p:selectManyMenu id="monedas" value="#{cuentasAdmin.selectedDivisas}" style="margin-left=40px;width=300px;"
+		                    showCheckbox="true">
+		            <f:selectItems value="#{cuentasAdmin.listaMonedas}" var="m" itemLabel="#{m.nombre}" itemValue="#{m.abreviatura}"/>
 		        </p:selectManyMenu>
        		
 		       	<p class="txtLogin">Vincular Cliente</p>
-			       	 <p:selectOneMenu id="option" value="#{Cuentas.Cliente.cuentas}">
-		                    <f:selectItem itemLabel="Elige una opción" itemValue=""/>
-		                    <f:selectItems itemLabel="Individual" itemValue="Individual"/>
-		                    <f:selectItems itemLabel="Empresa" itemValue="Empresa"/>
-		              </p:selectOneMenu>
+		       	<p:selectOneMenu class="txtLogin" id="cliente" value="#{cuentasAdmin.selectedCliente}">
+	                   <f:selectItems value="#{cuentasAdmin.listaClientes}" var="c" itemLabel="Ident: #{c.ident} Tipo de cliente: #{c.tipoCliente} Estado: #{c.estado}" itemValue="#{c.ID}"/>
+	             </p:selectOneMenu>
                 	
 				<br/><br/>
-	       		<h:commandButton class="button" action="#{Cuentas.crearPooledAccount()}" value="Crear Pooled Account" update=":messages"/>    
-	       		&nbsp;
-	       		<h:message class="error" for="crearPooled"/>
+	       		<h:commandButton class="button" action="#{cuentasAdmin.nuevaPooledAccount()}" value="Crear Pooled Account" update=":messages"/>
 	       </h:form>
-</h:body>
-
+	</h:body>
 </html>

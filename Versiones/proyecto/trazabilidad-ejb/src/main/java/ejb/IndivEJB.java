@@ -185,12 +185,7 @@ public class IndivEJB implements GestionIndiv {
 	@Override
 	public Indiv obtenerIndiv(Long indiv) throws ProyectoException {
 		Indiv indivEntity = em.find(Indiv.class, indiv);
-		
-		if(indivEntity == null) {
-			throw new ClienteNoEncontradoException();
-		} else {
-			return indivEntity;
-		}
+		return indivEntity;
 	}
 	
 }

@@ -91,12 +91,8 @@ public class TestDivisa {
 	@Requisitos({"RF ADICIONAL DIVISA"})
 	@Test
 	public void testObtenerDivisas() {
-		try {
-			List<Divisa> divisas = gestionDivisa.obtenerDivisas();
-			assertEquals(3, divisas.size());
-		} catch (ProyectoException e) {
-			fail("No debería lanzar excepción");
-		}
+		List<Divisa> divisas = gestionDivisa.obtenerDivisas();
+		assertEquals(3, divisas.size());
 	}
 	
 	@Requisitos({"RF ADICIONAL DIVISA"})

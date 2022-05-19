@@ -41,7 +41,7 @@ public class DivisaEJB implements GestionDivisa {
 	}
 
 	@Override
-	public List<Divisa> obtenerDivisas() throws ProyectoException {
+	public List<Divisa> obtenerDivisas() {
 		TypedQuery<Divisa> query = em.createQuery("SELECT d FROM Divisa d", Divisa.class);
 		return query.getResultList();
 	}

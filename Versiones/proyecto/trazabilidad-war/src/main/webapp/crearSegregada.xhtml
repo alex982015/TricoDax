@@ -15,21 +15,21 @@
 <h:body>
 	   <h1 class="title">Crear Segregada</h1>
        <h:form class="formCrearSegregada" id="entradaSegregada">
+   			<p:growl id="message" showDetail="true" />
+       		
        		<p class="txtLogin">IBAN:</p>
-       		<h:inputText class="txtLogin" id="iban" required="true" value="#{cuentasAdmin.segregada.IBAN}" style="width:200px"/><br/><br/>
+       		<h:inputText class="txtLogin" id="iban" required="true" value="#{cuentasAdmin.nuevaSegregada.IBAN}" style="width:200px"/><br/><br/>
        		<p class="txtLogin">SWIFT:</p>
-       		<h:inputText class="txtLogin" id="swift" required="true" value="#{cuentasAdmin.segregada.swift}" style="width:200px"/><br/><br/>
+       		<h:inputText class="txtLogin" id="swift" required="true" value="#{cuentasAdmin.nuevaSegregada.swift}" style="width:200px"/><br/><br/>
        		<p class="txtLogin">Comision:</p>
-       		<h:inputText class="txtLogin" id="comision" required="true" value="#{cuentasAdmin.segregada.comision}" style="width:200px"/><br/><br/>
+       		<h:inputText class="txtLogin" id="comision" required="true" value="#{cuentasAdmin.nuevaSegregada.comision}" style="width:200px"/><br/><br/>
        		<p class="txtLogin">Vincular Cliente:</p>
-       		<p:selectOneMenu class="txtLogin" id="cliente" value="#{cuentasAdmin.selectedSegregada}" required="true">
+       		<p:selectOneMenu class="txtLogin" id="cliente" value="#{cuentasAdmin.selectedCliente}" required="true">
 	        	<f:selectItems id="selectCliente" value="#{cuentasAdmin.listaClientes}" var="c" itemLabel="Ident: #{c.ident} Tipo de cliente: #{c.tipoCliente} Estado: #{c.estado}" itemValue="#{c.ID}"/>
 	        </p:selectOneMenu>
 
 			<br/><br/>
-       		<h:commandButton class="button" action="#{cuentasAdmin.nuevaSegregada()}" value="Confirmar" update=":messages"/>    
-       		&nbsp;
-       		<h:message class="error" for="entradaSegregada"/>
+       		<h:commandButton class="button" action="#{cuentasAdmin.crearSegregada()}" value="Confirmar" update=":messages"/>
        </h:form>
 
 </h:body>

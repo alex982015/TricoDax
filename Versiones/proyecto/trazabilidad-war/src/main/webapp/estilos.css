@@ -257,6 +257,7 @@ h2 {
 	width: 550px;
 	height: 480px;
 }
+
 .formEditarSegregada{
 	margin: auto;
 	margin-top: 30px;
@@ -329,4 +330,26 @@ h2 {
 	font-family: 'Roboto';
 	font-weight: regular;
 	font-size: 12pt;
+}
+
+.formCrearPooled{
+	margin: auto;
+	margin-top: 30px;
+	font-family: 'Roboto';
+	font-weight: regular;
+	border-style: groove;
+	padding-left: 10px;
+	width: 550px;
+	height: 520px;
+}
+
+.formEditarPooled{
+	margin: auto;
+	margin-top: 30px;
+	font-family: 'Roboto';
+	font-weight: regular;
+	border-style: groove;
+	padding-left: 10px;
+	width: 350px;
+	height: 350px;
 }

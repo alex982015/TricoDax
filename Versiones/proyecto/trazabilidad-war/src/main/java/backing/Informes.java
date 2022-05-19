@@ -35,6 +35,8 @@ public class Informes {
 	
 	private String tipoInforme;
 	
+	private String selectedAutorizado;
+	
 	private List<PersAut> listaAutorizados;
 	
 	private PersAut autorizado;
@@ -57,6 +59,14 @@ public class Informes {
 		this.tipoInforme = tipoInforme;
 	}
 	
+	public String getSelectedAutorizado() {
+		return selectedAutorizado;
+	}
+	
+	public void setSelectedAutorizado(String selectedAutorizado) {
+		this.selectedAutorizado = selectedAutorizado;
+	}
+	
 	public PersAut getAutorizado() {
 		return autorizado;
 	}
@@ -72,7 +82,11 @@ public class Informes {
 	public String crearInformeHolanda() throws ProyectoException {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
-			userApk.generarInforme(login.getUserApk(), autorizado, ruta, tipoInforme);
+			if(selectedAutorizado != null) {
+				
+			} else {
+				userApk.generarInforme(login.getUserApk(), autorizado, ruta, tipoInforme);
+			}
 		} catch(UserNoEncontradoException e) {
 		    ctx.addMessage("entradaHolanda", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error de escritura", "Usuario no existe"));
 		} catch(UserNoAdminException e) {

@@ -17,7 +17,6 @@ import ejb.GestionPooledAccount;
 import ejb.GestionSegregada;
 import ejb.GestionTrans;
 import exceptions.ProyectoException;
-import jpa.Cuenta;
 import jpa.CuentaFintech;
 import jpa.Empresa;
 import jpa.PooledAccount;
@@ -99,6 +98,7 @@ public class Transaccion implements Serializable {
 				CuentaFintech d = new CuentaFintech(true, Date.valueOf("2020-05-20"));
 				d.setIBAN(destino);
 				
+				//Duplicate entry IBAN
 				PooledAccount p = pooled.obtenerPooledAccount(selectedOrigen);
 				Segregada s = segregada.obtenerSegregada(selectedOrigen);
 				

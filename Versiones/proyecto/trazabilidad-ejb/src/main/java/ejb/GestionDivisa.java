@@ -11,7 +11,7 @@ import jpa.UserApk;
 @Local
 public interface GestionDivisa {
 	public void insertarDivisa(UserApk user, Divisa divisa) throws ProyectoException;
-	public List<Divisa> obtenerDivisas() throws ProyectoException;
+	public List<Divisa> obtenerDivisas();
 	public void actualizarDivisa(UserApk user, Divisa divisa) throws ProyectoException;
 	public void eliminarDivisa(UserApk user, Divisa divisa) throws ProyectoException;
 	public void eliminarTodasDivisas(UserApk user) throws ProyectoException;
