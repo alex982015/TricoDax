@@ -74,14 +74,89 @@ public class TrazabilidadIT {
 	}
 	
 	@SuppressWarnings("deprecation")
-	@Requisitos({"RF10"})
+	@Requisitos({"RF2"})
 	@Test
-	public void inicioIndividual() {
-		driver.get(baseURL+"index.xhtml");
-		driver.findElement(By.id("entradaUserApk:user")).sendKeys("juan");
-		driver.findElement(By.id("entradaUserApk:pass")).sendKeys("juan");
+	public void altaCliente() {
+		driver.get(baseURL+"admin.xhtml");
+		driver.findElement(By.id("entradaUserApk:user")).sendKeys("ponciano");
+		driver.findElement(By.id("entradaUserApk:pass")).sendKeys("ponciano");
 		driver.findElement(By.id("entradaUserApk:btnLogin")).click();
-		assertThat(driver.findElement(By.id("userLabel")).getText(), is("juan"));
+		driver.findElement(By.id("listaClientes")).click();
+		driver.findElement(By.id("empresas:nuevaEmpresa")).click();
+		driver.findElement(By.id("entradaEmpresa:razon")).sendKeys("RazonSocial 1234");
+		driver.findElement(By.id("entradaEmpresa:ident")).sendKeys("131243244D");
+		driver.findElement(By.id("entradaEmpresa:direccion")).sendKeys("Calle Sostola 123");
+		driver.findElement(By.id("entradaEmpresa:ciudad")).sendKeys("Malaga");
+		driver.findElement(By.id("entradaEmpresa:cp")).sendKeys("29007");
+		driver.findElement(By.id("entradaEmpresa:pais")).sendKeys("Irlanda");
+		driver.findElement(By.id("entradaEmpresa:btnConfirm")).click();
+		assertThat(driver.findElement(By.id("clientList")).getText(), is("Lista de clientes"));
+		driver.close();
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Requisitos({"RF3"})
+	@Test
+	public void editarCliente() {
+		driver.get(baseURL+"admin.xhtml");
+		driver.findElement(By.id("entradaUserApk:user")).sendKeys("ponciano");
+		driver.findElement(By.id("entradaUserApk:pass")).sendKeys("ponciano");
+		driver.findElement(By.id("entradaUserApk:btnLogin")).click();
+		driver.findElement(By.id("listaClientes")).click();
+		driver.findElement(By.id("empresas:editarEmpresa")).click();
+		driver.findElement(By.id("entradaEmpresa:razon")).sendKeys("RazonSocial 2341");
+		driver.findElement(By.id("entradaEmpresa:btnConfirm")).click();
+		assertThat(driver.findElement(By.id("clientList")).getText(), is("Lista de clientes"));
+		driver.close();
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Requisitos({"RF4"})
+	@Test
+	public void bajaCliente() {
+		driver.get(baseURL+"admin.xhtml");
+		driver.findElement(By.id("entradaUserApk:user")).sendKeys("ponciano");
+		driver.findElement(By.id("entradaUserApk:pass")).sendKeys("ponciano");
+		driver.findElement(By.id("entradaUserApk:btnLogin")).click();
+		driver.findElement(By.id("listaClientes")).click();
+		driver.findElement(By.id("empresas:buttonBajaEmpresa")).click();
+		assertThat(driver.findElement(By.id("clientList")).getText(), is("Lista de clientes"));
+		driver.close();
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Requisitos({"RF6"})
+	@Test
+	public void addAutorizado() {
+		driver.get(baseURL+"admin.xhtml");
+		driver.findElement(By.id("entradaUserApk:user")).sendKeys("ponciano");
+		driver.findElement(By.id("entradaUserApk:pass")).sendKeys("ponciano");
+		driver.findElement(By.id("entradaUserApk:btnLogin")).click();
+		driver.findElement(By.id("listaAutorizados")).click();
+		driver.findElement(By.id("autorizados:nuevo")).click();
+		driver.findElement(By.id("entradaAutoriz:nombre")).sendKeys("Ismael");
+		driver.findElement(By.id("entradaAutoriz:apellidos")).sendKeys("Apellido");
+		driver.findElement(By.id("entradaAutoriz:ident")).sendKeys("23423");
+		driver.findElement(By.id("entradaAutoriz:direccion")).sendKeys("Calle error 404");
+		driver.findElement(By.id("entradaAutoriz:btnConfirm")).click();
+		assertThat(driver.findElement(By.id("autorizList")).getText(), is("Lista de Autorizados"));
+		driver.close();
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Requisitos({"RF7"})
+	@Test
+	public void editarAutorizado() {
+		driver.get(baseURL+"admin.xhtml");
+		driver.findElement(By.id("entradaUserApk:user")).sendKeys("ponciano");
+		driver.findElement(By.id("entradaUserApk:pass")).sendKeys("ponciano");
+		driver.findElement(By.id("entradaUserApk:btnLogin")).click();
+		driver.findElement(By.id("listaAutorizados")).click();
+		driver.findElement(By.id("autorizados:editar")).click();
+		driver.findElement(By.id("entradaAutoriz:apellidos")).sendKeys("");
+		driver.findElement(By.id("entradaAutoriz:apellidos")).sendKeys("Gutiérrez");
+		driver.findElement(By.id("entradaAutoriz:btnConfirm")).click();
+		assertThat(driver.findElement(By.id("autorizList")).getText(), is("Lista de Autorizados"));
 		driver.close();
 	}
 	

@@ -27,6 +27,8 @@
 <h:body>
 	<h1 class="title">Informe Holanda</h1>
 	<h:form class="formHolanda" id="entradaHolanda">
+		<p:growl id="message" showDetail="true" />
+	
 		<p class="txtLogin">Indique tipo de informe Holanda:</p>
 		<h:selectOneMenu class="txtLogin" required="true"
 			value="#{informes.tipoInforme}">
@@ -39,13 +41,13 @@
 		<p class="txtLogin">Seleccione autorizado:</p>
 		<p:selectOneMenu class="txtLogin" required="true"
 			value="#{informes.selectedAutorizado}">
-			<f:selectItems value="#{informes.listaAutorizados}" />
+			<f:selectItems value="#{informes.listaAutorizados}" var="a" itemLabel="Ident: #{a.ident} Nombre: #{a.nombre} Apellidos: #{a.apellidos} Estado: #{a.estado}" itemValue="#{a.id}"/>
 		</p:selectOneMenu>
 		<br />
 		<br />
 
-		<p:commandButton value="" icon="pi pi-arrow-down" styleClass="ui-button-outlined">
-            <p:fileDownload value="#{informes.file}" update=":messages"/>
+		<p:commandButton value="Descargar" update=":message" icon="pi pi-arrow-down" styleClass="ui-button-outlined" ajax="false">
+            <p:fileDownload value="#{informes.crearInformeAlemania()}"/>
         </p:commandButton>
 	</h:form>
 </h:body>

@@ -10,11 +10,13 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
+
 import ejb.GestionPersAut;
 import ejb.GestionUserApk;
 import exceptions.*;
 import exceptions.ProyectoException;
-import exceptions.UserNoEncontradoException;
 import jpa.PersAut;
 import jpa.UserApk;
 
@@ -30,8 +32,8 @@ public class Informes {
 	
 	@Inject
 	private Login login;
-	
-	private UserApk u;
+		
+	private StreamedContent file;
 	
 	private String tipoInforme;
 	
@@ -41,15 +43,13 @@ public class Informes {
 	
 	private PersAut autorizado;
 	
-	private String ruta = System.getProperty("user.home").toString() + "\\Desktop\\Reporte.csv";
-	
 	public Informes() {
-		u = new UserApk();
+		
 	}
 	
-	public UserApk getUserApk() {
-		return u;
-	}
+	public StreamedContent getFile() {
+        return file;
+    }
 	
 	public String getTipoInforme() {
 		return tipoInforme;
@@ -79,20 +79,23 @@ public class Informes {
 		return listaAutorizados;
 	}
 	
-	public String crearInformeHolanda() throws ProyectoException {
+	public StreamedContent crearInformeAlemania() throws ProyectoException {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
-			if(selectedAutorizado != null) {
-				
-			} else {
-				userApk.generarInforme(login.getUserApk(), autorizado, ruta, tipoInforme);
-			}
-		} catch(UserNoEncontradoException e) {
-		    ctx.addMessage("entradaHolanda", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error de escritura", "Usuario no existe"));
+			autorizado = persAut.obtenerPersAut(Long.parseLong(selectedAutorizado));
+			userApk.generarInforme(login.getUserApk(), autorizado, tipoInforme);
+			
+			file = DefaultStreamedContent.builder()
+	                .name("alemania.png")
+	                .contentType("image/png")
+	                .stream(() -> FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream("images/alemania.png"))
+	                .build();
+			
+			return file;
 		} catch(UserNoAdminException e) {
-			ctx.addMessage("entradaHolanda", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error de escritura", "Permiso denegado"));	
+			ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error de escritura", "Permiso denegado"));	
 		} catch(IOException p) {
-			ctx.addMessage("entradaHolanda", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error de escritura", "Permiso denegado"));
+			ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error de escritura", "Permiso denegado"));
 		} catch(ProyectoException e) {
 			FacesMessage fm = new FacesMessage("Error: " + e);
 			ctx.addMessage(null, fm);

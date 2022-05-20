@@ -16,7 +16,7 @@
 		border="1" cellpadding="10" cellspacing="1">
 
 		<f:facet name="header">
-			<h:outputText value="Lista de clientes" />
+			<h:outputText id="clientList" value="Lista de clientes" />
 		</f:facet>
 
 		<h:form id="empresas">
@@ -24,9 +24,9 @@
 
 			<h:panelGrid class="empresa" columns="6" cellpadding="10"
 				cellspacing="1">
-				<h:button class="button" value="Nueva"
+				<h:button id="nuevaEmpresa" class="button" value="Nueva"
 					outcome="#{empresa.nuevaEmpresaWeb()}" />
-				<h:commandButton class="button" value="Editar"
+				<h:commandButton id="editarEmpresa" class="button" value="Editar"
 					action="#{empresa.editarEmpresaWeb()}" />
 
 				<p:growl id="message" showDetail="true" />
@@ -63,10 +63,10 @@
 					action="#{Indiv.editarParticularWeb()}" />
 
 				<h:form id="bajaParticular">
-					<p:growl id="message" showDetail="true" />
+					<p:growl id="message2" showDetail="true" />
 
 					<h:commandButton class="button" id="buttonParticular"
-						value="Dar de baja" update="message"
+						value="Dar de baja" update=":message2"
 						action="#{Indiv.bajaParticular()}" />
 					<h:message class="error" for="bajaParticular" />
 				</h:form>

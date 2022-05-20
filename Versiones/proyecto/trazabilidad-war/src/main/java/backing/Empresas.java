@@ -108,6 +108,7 @@ public class Empresas implements Serializable {
 			if(selectedEmpresa != null) {
 				e = empresas.obtenerEmpresa(Long.parseLong(selectedEmpresa));
 				empresas.bloquearCuentaEmpresa(login.getUserApk(), e, true);
+				addMessage("Bloquear Empresa", "Empresa bloqueada correctamente");
 				init();
 				return null;
 			} else {
@@ -128,6 +129,7 @@ public class Empresas implements Serializable {
 			if(selectedEmpresa != null) {
 				e = empresas.obtenerEmpresa(Long.parseLong(selectedEmpresa));
 				empresas.bloquearCuentaEmpresa(login.getUserApk(), e, false);
+				addMessage("Desbloquear Empresa", "Empresa desbloqueada correctamente");
 				init();
 				return null;
 			} else {
@@ -148,6 +150,7 @@ public class Empresas implements Serializable {
 			if(selectedEmpresa != null) {
 				e = empresas.obtenerEmpresa(Long.parseLong(selectedEmpresa));
 				empresas.cerrarCuentaEmpresa(login.getUserApk(), e);
+				addMessage("Baja Empresa", "Empresa dada de baja correctamente");
 				init();
 				return null;
 			} else {

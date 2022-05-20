@@ -252,15 +252,13 @@ public class TestUserApk {
 			m.put(empresa1, "AUTORIZADO");
 			persAut1.setAutoriz(m);
 			
-			String ruta = System.getProperty("user.home").toString() + "\\Desktop\\Reporte.csv";
-			
 			String tipo = "Inicial";
 			
 			List<UserApk> user = gestionUser.obtenerUser();
 			UserApk u = user.get(0);
 			u.setAdministrativo(true);
 			
-			gestionUser.generarInforme(u, persAut1, ruta, tipo);
+			gestionUser.generarInforme(u, persAut1, tipo);
 			
 		} catch (ProyectoException e) {
 			fail("No debería lanzarse excepción");
@@ -295,15 +293,13 @@ public class TestUserApk {
 			m.put(empresa1, "AUTORIZADO");
 			persAut1.setAutoriz(m);
 			
-			String ruta = System.getProperty("user.home").toString() + "\\Desktop\\Reporte.csv";
-			
 			String tipo = "Inicial";
 			
 			List<UserApk> user = gestionUser.obtenerUser();
 			UserApk u = user.get(0);
 			u.setAdministrativo(true);
 			
-			gestionUser.generarInforme(u, persAut1, ruta, tipo);
+			gestionUser.generarInforme(u, persAut1, tipo);
 			
 		} catch (PersAutNoEncontradaException e) {
 			// OK
@@ -339,15 +335,13 @@ public class TestUserApk {
 			m.put(empresa1, "AUTORIZADO");
 			persAut1.setAutoriz(m);
 			
-			String ruta = System.getProperty("user.home").toString() + "\\Desktop\\Reporte.csv";
-				
 			String tipo = "Inicial";
 			
 			List<UserApk> user = gestionUser.obtenerUser();
 			UserApk u = user.get(0);
 			u.setAdministrativo(false);
 			
-			gestionUser.generarInforme(u, persAut1, ruta, tipo);
+			gestionUser.generarInforme(u, persAut1, tipo);
 			
 		} catch (UserNoAdminException e) {
 			// OK

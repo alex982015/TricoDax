@@ -307,7 +307,7 @@ public class UserApkEJB implements GestionUserApk {
 	}
 	
 	@Override
-	public void generarInforme(UserApk user, PersAut persAut, String ruta, String tipo) throws ProyectoException, IOException {
+	public void generarInforme(UserApk user, PersAut persAut, String tipo) throws ProyectoException, IOException {
 		UserApk userApkEntity = em.find(UserApk.class, user.getUser());
 		if (userApkEntity == null) {
 			throw new UserNoEncontradoException();
@@ -320,7 +320,7 @@ public class UserApkEJB implements GestionUserApk {
 				}
 				
 				Set<Empresa> cuentasAsociadas = persAut.getAutoriz().keySet();
-				FileWriter fw = new FileWriter(ruta);
+				FileWriter fw = new FileWriter("../informe.csv");
 				
 				if(tipo.equals("Inicial")) {
 					try {

@@ -94,12 +94,19 @@ public class Particular implements Serializable {
 		return null;
 	}
 	
+	public void addMessage(String summary, String detail) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+	
 	public String bajaParticular() {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
 			if(selectedIndiv != null) {
 				indiv = Indiv.obtenerIndiv(Long.parseLong(selectedIndiv));
 				Indiv.cerrarCuentaIndiv(login.getUserApk(), indiv);
+				init();
+				addMessage("Baja particular", "Particular dado de baja correctamente");
 			} else {
 			    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Seleccione un particular"));
 			}

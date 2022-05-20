@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
        xmlns:h="http://xmlns.jcp.org/jsf/html"
-       xmlns:f="http://xmlns.jcp.org/jsf/core">
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	   <link rel="stylesheet" type="text/css" href="estilos.css"/>
@@ -14,6 +15,9 @@
 <h:body>
 
 	   <h1 class="title">Editar perfil</h1>
+       <p:growl id="message" showDetail="true" />
+	   
+	   
        <h:form class="formEditarPerfil" id="entradaPerfil">
        		<p class="txtLogin">Usuario:</p>
        		<h:inputText class="txtLogin" id="nombre" disabled="true" value="#{login.userApk.user}" style="width:200px"/><br/><br/>
@@ -23,8 +27,6 @@
        		<h:inputSecret class="txtLogin" id="pass2" required="true" value="#{login.userApk.password}" style="width:200px"/><br/><br/>
 
        		<h:commandButton class="button" action="#{login.editarPerfil()}" value="Confirmar" update=":messages"/>
-       		&nbsp;
-       		<h:message class="error" for="entradaPerfil"/>
        </h:form>
 
 </h:body>

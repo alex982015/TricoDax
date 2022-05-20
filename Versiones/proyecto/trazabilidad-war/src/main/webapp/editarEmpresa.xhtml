@@ -34,7 +34,7 @@
        		<h:inputText class="txtLogin" id="pais" required="true" requiredMessage="* Introduzca país" value="#{empresa.e.pais}" style="width:200px"/><br/><br/>
        		<h:message class="error" id ="paisMsg" for="pais"/><br/>
 			
-       		<h:commandButton class="button" action="#{empresa.editarEmpresa()}" value="Aplicar Cambios" update=":messages"/>    
+       		<h:commandButton id="btnConfirm" class="button" action="#{empresa.editarEmpresa()}" value="Aplicar Cambios" update=":messages"/>    
        		&nbsp;
        		<h:message class="error" for="entradaEmpresa"/>
        </h:form>

@@ -33,7 +33,7 @@
 	        	<f:selectItems id="selectEmpresa" value="#{autoriz.listaEmpresas}" var="e" itemLabel="Ident: #{e.ident} Razon Social: #{e.razonSocial} Estado: #{e.estado}" itemValue="#{e.ID}"/>
 	        </p:selectOneMenu>
 			<br/><br/>
-       		<h:commandButton class="button" action="#{autoriz.editarAutoriz()}" value="Confirmar" update=":messages"/>    
+       		<h:commandButton id="btnConfirm" class="button" action="#{autoriz.editarAutoriz()}" value="Confirmar" update=":messages"/>    
        		&nbsp;
        		<h:message for="entradaAutoriz"/>
        </h:form>

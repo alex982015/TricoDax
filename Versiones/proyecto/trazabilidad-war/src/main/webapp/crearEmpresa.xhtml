@@ -33,7 +33,7 @@
        		<p class="txtLogin">Pais:</p>
        		<h:inputText class="txtLogin" id="pais" required="true" requiredMessage="* Introduzca país" value="#{empresa.nuevaEmpresa.pais}" style="width:200px"/><br/><br/>
        		<h:message class="error" id ="paisMsg" for="pais"/><br/>     	
-       		<h:commandButton class="button" action="#{empresa.crearEmpresa()}" value="Confirmar" update=":messages"/>    
+       		<h:commandButton id="btnConfirm" class="button" action="#{empresa.crearEmpresa()}" value="Confirmar" update=":messages"/>    
        		&nbsp;
        		<h:messages class="error" for="entradaEmpresa"/>
        </h:form>

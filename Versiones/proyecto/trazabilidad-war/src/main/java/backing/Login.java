@@ -83,22 +83,22 @@ public class Login implements Serializable {
 		try {
 			if(password.equals(u.getPassword())) {
 				userApk.actualizarUser(u);
+				
+				if(userApk.getUser(u.getUser()).isAdministrativo()) {
+					return "menuAdmin.xhtml";
+				} else if((userApk.getUser(u.getUser()).getPersonaAutorizada() != null) && (userApk.getUser(u.getUser()).getPersonaIndividual() != null)) {
+					return "menuIndivAutoriz.xhtml";
+				} else if(userApk.getUser(u.getUser()).getPersonaAutorizada() != null) {
+					return "menuAutoriz.xhtml";
+				} else if(userApk.getUser(u.getUser()).getPersonaIndividual() != null) {
+					return "menuIndiv.xhtml";
+				} else {
+				    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no vinculado"));
+				}
+				
 			} else {
-			    ctx.addMessage("entradaPerfil", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al editar perfil", "* Contraseñas no coinciden"));
+			    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al editar perfil", "Contraseñas no coinciden"));
 			}
-
-			if(userApk.getUser(u.getUser()).isAdministrativo()) {
-				return "menuAdmin.xhtml";
-			} else if((userApk.getUser(u.getUser()).getPersonaAutorizada() != null) && (userApk.getUser(u.getUser()).getPersonaIndividual() != null)) {
-				return "menuIndivAutoriz.xhtml";
-			} else if(userApk.getUser(u.getUser()).getPersonaAutorizada() != null) {
-				return "menuAutoriz.xhtml";
-			} else if(userApk.getUser(u.getUser()).getPersonaIndividual() != null) {
-				return "menuIndiv.xhtml";
-			} else {
-			    ctx.addMessage("entradaUserApk", new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "* Usuario no vinculado"));
-			}
-			
 		} catch(ProyectoException e) {
 			FacesMessage fm = new FacesMessage("* Error: " + e);
 			ctx.addMessage(null, fm);

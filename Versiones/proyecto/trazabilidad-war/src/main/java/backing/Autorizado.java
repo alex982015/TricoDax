@@ -1,6 +1,7 @@
 package backing;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -61,6 +62,7 @@ public class Autorizado implements Serializable {
 	}
 	
 	public PersAut getNuevoPersAut() {
+		nuevoPersAut.setFechaNac(Date.valueOf("2022-05-01"));
 		return nuevoPersAut;
 	}
 	

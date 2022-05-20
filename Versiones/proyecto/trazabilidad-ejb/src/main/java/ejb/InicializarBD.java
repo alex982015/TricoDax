@@ -36,6 +36,18 @@ public class InicializarBD {
 			return;
 		}
 		
+		Empresa empresa2 = new Empresa ("RazonSocial2 S.L.", false);
+		empresa2.setIdent("Q4234234A");
+		empresa2.setTipoCliente("Empresa");
+		empresa2.setEstado(true);
+		empresa2.setFecha_Alta(Date.valueOf("2018-04-11"));
+		empresa2.setDireccion("Calle Ejemplo 123");
+		empresa2.setCiudad("Las Palmas");
+		empresa2.setCodPostal(42351);
+		empresa2.setPais("Spain");
+		
+		em.persist(empresa2);
+		
 		Empresa empresa1 = new Empresa ("RazonSocial1 S.L.", false);
 		empresa1.setIdent("P3310693A");
 		empresa1.setTipoCliente("Empresa");
