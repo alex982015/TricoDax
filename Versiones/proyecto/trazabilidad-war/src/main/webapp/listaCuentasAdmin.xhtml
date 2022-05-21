@@ -16,7 +16,7 @@
 		border="1" cellpadding="10" cellspacing="1">
 
 		<f:facet name="header">
-			<h:outputText value="Lista de cuentas" />
+			<h:outputText id="accountList" value="Lista de cuentas" />
 		</f:facet>
 
 		<h:form id="pooled">
@@ -24,14 +24,14 @@
 
 			<h:panelGrid class="cuenta" columns="4" cellpadding="10"
 				cellspacing="1">
-				<h:button class="button" value="Nueva"
+				<h:button class="button" id="nueva" value="Nueva"
 					outcome="#{cuentasAdmin.nuevaPooledWeb()}" />
 				<h:commandButton class="button" value="Editar"
 					action="#{cuentasAdmin.editarPooledWeb()}" />
 
 				<p:growl id="message" showDetail="true" />
 
-				<h:commandButton id="buttonPooled" value="Dar de baja"
+				<h:commandButton id="buttonPooled" class="button" value="Dar de baja"
 					update=":message" action="#{cuentasAdmin.bajaPooledAccount}" />
 				<h:message class="error" for="bajaPooled" />
 

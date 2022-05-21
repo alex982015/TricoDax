@@ -125,6 +125,24 @@ public class TrazabilidadIT {
 	}
 	
 	@SuppressWarnings("deprecation")
+	@Requisitos({"RF5"})
+	@Test
+	public void altaCuenta() {
+		driver.get(baseURL+"admin.xhtml");
+		driver.findElement(By.id("entradaUserApk:user")).sendKeys("ponciano");
+		driver.findElement(By.id("entradaUserApk:pass")).sendKeys("ponciano");
+		driver.findElement(By.id("entradaUserApk:btnLogin")).click();
+		driver.findElement(By.id("listaCuentas")).click();
+		driver.findElement(By.id("pooled:nueva")).click();
+		driver.findElement(By.id("crearPooled:IBAN")).sendKeys("ES23523345235235");
+		driver.findElement(By.id("crearPooled:SWIFT")).sendKeys("Swift");
+		driver.findElement(By.id("crearPooled:euros")).sendKeys("2000");
+		driver.findElement(By.id("crearPooled:btnConfirm")).click();
+		assertThat(driver.findElement(By.id("accountList")).getText(), is("Lista de cuentas"));
+		driver.close();
+	}
+	
+	@SuppressWarnings("deprecation")
 	@Requisitos({"RF6"})
 	@Test
 	public void addAutorizado() {

@@ -75,12 +75,8 @@ public class TestCuentaRef {
 	@Requisitos({"RF ADICIONAL CUENTAREF"})
 	@Test
 	public void testObtenerCuentasRef() {
-		try {
-			List<CuentaRef> cuentas = gestionCuentasRef.obtenerCuentasRef();
-			assertEquals(2, cuentas.size());
-		} catch (ProyectoException e) {
-			fail("No debería lanzar excepción");
-		}
+		List<CuentaRef> cuentas = gestionCuentasRef.obtenerCuentasRef();
+		assertEquals(2, cuentas.size());
 	}
 	
 	@Requisitos({"RF ADICIONAL CUENTAREF"})

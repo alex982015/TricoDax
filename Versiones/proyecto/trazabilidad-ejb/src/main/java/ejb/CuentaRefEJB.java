@@ -40,7 +40,7 @@ public class CuentaRefEJB implements GestionCuentaRef {
 	}
 
 	@Override
-	public List<CuentaRef> obtenerCuentasRef() throws ProyectoException {
+	public List<CuentaRef> obtenerCuentasRef() {
 		TypedQuery<CuentaRef> query = em.createQuery("SELECT c FROM CuentaRef c", CuentaRef.class);
 		return query.getResultList();
 	}
@@ -112,5 +112,11 @@ public class CuentaRefEJB implements GestionCuentaRef {
 				throw new UserNoAdminException();
 			}
 		}	
+	}
+
+	@Override
+	public CuentaRef obtenerCuentasRef(String abreb) {
+		CuentaRef c = em.find(CuentaRef.class, abreb);
+		return c;
 	}
 }

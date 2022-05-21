@@ -125,6 +125,7 @@ public class InicializarBD {
 		segregada2.setCliente(empresa1);
 		segregada2.setSwift("Swift");
 		segregada2.setComision(0);
+		segregada2.setReferenciada(ref);
 		segregada2.setEstado(true);
 		segregada2.setFechaApertura(Date.valueOf("2019-06-12"));
 		segregada2.setClasificacion(true);

@@ -245,7 +245,7 @@ h2 {
 	border-style: groove;
 	padding-left: 10px;
 	width: 600px;
-	height: 1300px;
+	height: 1360px;
 }
 .formCrearSegregada{
 	margin: auto;
@@ -255,7 +255,7 @@ h2 {
 	border-style: groove;
 	padding-left: 10px;
 	width: 550px;
-	height: 480px;
+	height: 650px;
 }
 
 .formEditarSegregada{
@@ -339,7 +339,7 @@ h2 {
 	font-weight: regular;
 	border-style: groove;
 	padding-left: 10px;
-	width: 550px;
+	width: 700px;
 	height: 520px;
 }
 
@@ -352,4 +352,20 @@ h2 {
 	padding-left: 10px;
 	width: 350px;
 	height: 350px;
+}
+
+.panelDivisas {
+	margin:auto;
+	font-size: 10pt;
+	height: 100px;
+	text-align: center;
+	font-family: 'RobotoLight';
+	font-family: 'light';
+	border-style: groove;
+}
+
+.txtDivisa {
+	font-family: 'RobotoLight';
+	font-family: 'light'
+	font-size: 10pt;
 }

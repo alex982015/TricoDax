@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import ejb.GestionCuentaRef;
 import ejb.GestionDivisa;
 import ejb.GestionEmpresa;
 import ejb.GestionIndiv;
@@ -24,6 +26,7 @@ import exceptions.CuentaConSaldoException;
 import exceptions.ProyectoException;
 import exceptions.UserNoAdminException;
 import jpa.Cliente;
+import jpa.CuentaRef;
 import jpa.Divisa;
 import jpa.Empresa;
 import jpa.Indiv;
@@ -51,6 +54,9 @@ public class CuentasAdmin implements Serializable {
 	private GestionEmpresa empresaEJB;
 	
 	@Inject
+	private GestionCuentaRef cuentaRefEJB;
+	
+	@Inject
 	private Login login;
 	
 	private List<PooledAccount> listaPooled;
@@ -66,6 +72,8 @@ public class CuentasAdmin implements Serializable {
 	private String selectedSegregada;
 	
 	private List<String> selectedDivisas;
+	
+	private String selectedDivisa;
 	
 	private List<Indiv> listaIndiv;
 	
@@ -83,7 +91,17 @@ public class CuentasAdmin implements Serializable {
 	
 	private Cliente seleccionCliente;
 	
+	private String euros;
+	
+	private String dolares;
+	
+	private String libras;
+	
+	private String cantidad;
+	
 	public CuentasAdmin() {
+		p = new PooledAccount();
+		segregada = new Segregada();
 		nuevaPooled = new PooledAccount();
 		nuevaSegregada = new Segregada();
 	}
@@ -118,6 +136,14 @@ public class CuentasAdmin implements Serializable {
 	
 	public void setSelectedDivisas(List<String> divisas) {
 		selectedDivisas = divisas;
+	}
+	
+	public String getSelectedDivisa() {
+		return selectedDivisa;
+	}
+	
+	public void setSelectedDivisa(String divisa) {
+		selectedDivisa = divisa;
 	}
 	
 	public List<PooledAccount> getListaPooled() {
@@ -196,6 +222,38 @@ public class CuentasAdmin implements Serializable {
 		segregada = s;
 	}
 	
+	public String getEuros() {
+		return euros;
+	}
+	
+	public void setEuros(String e) {
+		euros = e;
+	}
+	
+	public String getDolares() {
+		return dolares;
+	}
+	
+	public void setDolares(String d) {
+		dolares = d;
+	}
+	
+	public String getLibras() {
+		return libras;
+	}
+	
+	public void setLibras(String l) {
+		libras = l;
+	}
+	
+	public String getCantidad() {
+		return cantidad;
+	}
+	
+	public void setCantidad(String c) {
+		cantidad = c;
+	}
+	
     public void addMessage(String summary, String detail) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
         FacesContext.getCurrentInstance().addMessage(null, message);
@@ -252,8 +310,58 @@ public class CuentasAdmin implements Serializable {
 	public String nuevaPooledAccount() throws ProyectoException {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
-			pooledAccount.insertarPooledAccount(login.getUserApk(), p, null);
-			return "listaCuentasAdmin.xhtml";
+			if(pooledAccount.obtenerPooledAccount(nuevaPooled.getIBAN()) == null) {
+					Map<CuentaRef, Double> depositEnNueva = new HashMap<CuentaRef, Double>();
+					Map<CuentaRef, Double> depositEn = new HashMap<CuentaRef, Double>();
+					
+					if(!euros.equals("")) {
+						for(CuentaRef c : cuentaRefEJB.obtenerCuentasRef()) {
+							if(c.getMoneda().getAbreviatura().equals("EUR")) {
+								depositEn.put(c, c.getSaldo() + Double.parseDouble(euros));
+							}
+						}
+					}
+					
+					if(!dolares.equals("")) {
+						for(CuentaRef c : cuentaRefEJB.obtenerCuentasRef()) {
+							if(c.getMoneda().getAbreviatura().equals("USD")) {
+								depositEn.put(c, c.getSaldo() + Double.parseDouble(dolares));
+							}
+						}
+						
+					}
+					
+					if(!libras.equals("")) {
+						for(CuentaRef c : cuentaRefEJB.obtenerCuentasRef()) {
+							if(c.getMoneda().getAbreviatura().equals("GBP")) {
+								depositEn.put(c, c.getSaldo() + Double.parseDouble(libras));
+							}
+						}			
+					}
+					
+					Empresa e = empresaEJB.obtenerEmpresa(Long.parseLong(selectedCliente));
+					Indiv i = indivEJB.obtenerIndiv(Long.parseLong(selectedCliente));
+					
+					if(e != null) {
+						nuevaPooled.setCliente(e);
+					} else {
+						nuevaPooled.setCliente(i);
+					}
+					
+					nuevaPooled.setDepositEn(depositEnNueva);
+					
+					ZoneId defaultZoneId = ZoneId.systemDefault();
+			        LocalDate localDate = LocalDate.of(2016, 8, 19);
+			        Date date = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
+					
+					nuevaPooled.setFechaApertura(date);
+					nuevaPooled.setEstado(true);
+					pooledAccount.insertarPooledAccount(login.getUserApk(), nuevaPooled, depositEn);
+					init();
+					return "listaCuentasAdmin.xhtml";
+				} else {
+				    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al crear pooled", "Cuenta ya registrada"));
+				}
 		} catch(UserNoAdminException e) {
 		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no admin"));
 		} catch(ProyectoException e) {
@@ -268,9 +376,15 @@ public class CuentasAdmin implements Serializable {
 		try {
 			if(selectedPooled != null) {
 				p = pooledAccount.obtenerPooledAccount(selectedPooled);
-				pooledAccount.cerrarCuentaPooledAccount(login.getUserApk(), p);
-				init();
-				return "listaCuentasAdmin.xhtml";
+
+
+				if(p.isEstado()) {
+					pooledAccount.cerrarCuentaPooledAccount(login.getUserApk(), p);
+					init();
+					return "listaCuentasAdmin.xhtml";
+				} else {
+				    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Cuenta ya cerrada"));
+				}
 			} else {
 			    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Seleccione una cuenta"));
 			}
@@ -290,9 +404,14 @@ public class CuentasAdmin implements Serializable {
 		try {
 			if(selectedSegregada != null) {
 				segregada = segregadas.obtenerSegregada(selectedSegregada);
-				segregadas.cerrarCuentaSegregada(login.getUserApk(), segregada);
-				init();
-				return "listaCuentasAdmin.xhtml";
+
+				if(segregada.isEstado()) {
+					segregadas.cerrarCuentaSegregada(login.getUserApk(), segregada);
+					init();
+					return "listaCuentasAdmin.xhtml";
+				} else {
+				    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Cuenta ya cerrada"));
+				}
 			} else {
 			    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Seleccione una cuenta"));
 			}
@@ -325,24 +444,41 @@ public class CuentasAdmin implements Serializable {
 	public String crearSegregada() throws ProyectoException {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
-			ZoneId defaultZoneId = ZoneId.systemDefault();
-	        LocalDate localDate = LocalDate.of(2016, 8, 19);
-	        Date date = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
-	        
-	        Empresa empresa = empresaEJB.obtenerEmpresa(Long.parseLong(selectedCliente));
-	        Indiv indiv = indivEJB.obtenerIndiv(Long.parseLong(selectedCliente));
-	        
-	        if(empresa != null) {
-				nuevaSegregada.setCliente(empresa);
-	        } else {
-				nuevaSegregada.setCliente(indiv);
-	        }
-		    nuevaSegregada.setFechaApertura(date);
-			nuevaSegregada.setEstado(true);
-			segregadas.insertarSegregada(login.getUserApk(), nuevaSegregada);
-				
-			init();
-			return "listaCuentasAdmin.xhtml";
+			if(!cantidad.equals("")) {
+				if(segregadas.obtenerSegregada(nuevaSegregada.getIBAN()) == null) {
+					ZoneId defaultZoneId = ZoneId.systemDefault();
+			        LocalDate localDate = LocalDate.of(2016, 8, 19);
+			        Date date = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
+			        
+			        Empresa empresa = empresaEJB.obtenerEmpresa(Long.parseLong(selectedCliente));
+			        Indiv indiv = indivEJB.obtenerIndiv(Long.parseLong(selectedCliente));
+			        
+			        List<CuentaRef> cuentas = cuentaRefEJB.obtenerCuentasRef();
+			        
+			        for(CuentaRef c : cuentas) {
+			        	if(c.getMoneda().getAbreviatura().equals(selectedDivisa)) {
+			        		c.setSaldo(c.getSaldo() + Double.parseDouble(cantidad));
+			        		nuevaSegregada.setReferenciada(c);
+			        	}
+			        }
+			        
+			        if(empresa != null) {
+						nuevaSegregada.setCliente(empresa);
+			        } else {
+						nuevaSegregada.setCliente(indiv);
+			        }
+				    nuevaSegregada.setFechaApertura(date);
+					nuevaSegregada.setEstado(true);
+					segregadas.insertarSegregada(login.getUserApk(), nuevaSegregada);
+						
+					init();
+					return "listaCuentasAdmin.xhtml";
+				} else {
+				    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al crear segregada", "Cuenta ya registrada"));
+				}
+			} else {
+			    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al crear segregada", "Introduzca cantidad"));
+			}
 		} catch(UserNoAdminException e) {
 		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no admin"));
 		} catch(ProyectoException e) {

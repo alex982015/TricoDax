@@ -26,12 +26,6 @@ public class BaseDatos {
 		
 		em.getTransaction().begin();
 		
-Divisa comprobacion = em.find(Divisa.class, "EUR");
-		
-		if(comprobacion != null) {
-			return;
-		}
-		
 		Empresa empresa2 = new Empresa ("RazonSocial2 S.L.", false);
 		empresa2.setIdent("Q4234234A");
 		empresa2.setTipoCliente("Empresa");
@@ -120,6 +114,7 @@ Divisa comprobacion = em.find(Divisa.class, "EUR");
 		segregada2.setIBAN("FR5514508000502273293129K55");
 		segregada2.setCliente(empresa1);
 		segregada2.setSwift("Swift");
+		segregada1.setReferenciada(ref);
 		segregada2.setComision(0);
 		segregada2.setEstado(true);
 		segregada2.setFechaApertura(Date.valueOf("2019-06-12"));
