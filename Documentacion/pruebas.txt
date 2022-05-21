@@ -1,0 +1,55 @@
+@SuppressWarnings("deprecation")
+@Requisitos({"RF8"})
+@Test
+public void bajaAutorizado() {
+		driver.get(baseURL+"admin.xhtml");
+		driver.findElement(By.id("entradaUserApk:user")).sendKeys("ponciano");
+		driver.findElement(By.id("entradaUserApk:pass")).sendKeys("ponciano");
+		driver.findElement(By.id("entradaUserApk:btnLogin")).click();
+		driver.findElement(By.id("listaAutorizados")).click();
+		driver.findElement(By.id("autorizados:bajaAut")).click();
+		assertThat(driver.findElement(By.id("autorizList")).getText(), is("Lista de Autorizados"));
+		driver.close();
+	}
+//Pendiente de revisión, para esta cree una pooled account con todo a cero
+@SuppressWarnings("deprecation")
+@Requisitos({"RF9"})
+@Test
+public void eliminarCuenta() {
+			driver.get(baseURL+"admin.xhtml");
+			driver.findElement(By.id("entradaUserApk:user")).sendKeys("ponciano");
+			driver.findElement(By.id("entradaUserApk:pass")).sendKeys("ponciano");
+			driver.findElement(By.id("entradaUserApk:btnLogin")).click();
+			driver.findElement(By.id("listaCuentas")).click();
+			driver.findElement(By.id("pooled:buttonPooled")).click();
+			assertThat(driver.findElement(By.id("listaCuentas")).getText(), is("Lista de cuentas"));
+			driver.close();
+		}
+@SuppressWarnings("deprecation")
+	@Requisitos({"RF11"})
+	@Test
+	public void generarInformeHolanda() {
+		driver.get(baseURL+"admin.xhtml");
+		driver.findElement(By.id("entradaUserApk:user")).sendKeys("ponciano");
+		driver.findElement(By.id("entradaUserApk:pass")).sendKeys("ponciano");
+		driver.findElement(By.id("entradaUserApk:btnLogin")).click();
+		driver.findElement(By.id("listaInformes")).click();
+		//falta xhtml de Holanda y el de alemania hay que cambiarle el nombre porque tiene puesto holanda xd
+		
+	}
+
+@SuppressWarnings("deprecation")
+	@Requisitos({"RF12"})
+	@Test
+	public void generarInformeAlemania() {
+		driver.get(baseURL+"admin.xhtml");
+		driver.findElement(By.id("entradaUserApk:user")).sendKeys("ponciano");
+		driver.findElement(By.id("entradaUserApk:pass")).sendKeys("ponciano");
+		driver.findElement(By.id("entradaUserApk:btnLogin")).click();
+		driver.findElement(By.id("listaInformes")).click();
+		driver.findElement(By.id("entradaInformes:informeAlemania")).click();
+		driver.findElement(By.id("entradaHolanda:descargarInforme")).click();
+		assertThat(driver.findElement(By.id("listaInformes")).getText(), is("Generar Informes"));
+		driver.close();
+
+	}
