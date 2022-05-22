@@ -13,7 +13,12 @@
 </h:head>
 
 <h:body>
+	   <h:outputLink value="listaClientesAdmin.xhtml">
+    			<h2><h:graphicImage class="backIcon" value="images/back.png"/></h2>
+		</h:outputLink>
+		
 	   <h1 class="title">Crear empresa</h1>
+	   
        <h:form class="formCrearEmpresa" id="entradaEmpresa">
        		<p class="txtLogin">Razon Social:</p>
        		<h:inputText class="txtLogin" id="razon" required="true" requiredMessage="* Introduzca razón social" value="#{empresa.nuevaEmpresa.razonSocial}" style="width:200px"/><br/><br/>

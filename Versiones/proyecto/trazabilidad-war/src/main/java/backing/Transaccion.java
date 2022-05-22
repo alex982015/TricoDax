@@ -1,7 +1,6 @@
 package backing;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -13,14 +12,14 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import ejb.GestionDivisa;
 import ejb.GestionPooledAccount;
-import ejb.GestionSegregada;
 import ejb.GestionTrans;
 import exceptions.ProyectoException;
-import jpa.CuentaFintech;
+import jpa.CuentaRef;
+import jpa.Divisa;
 import jpa.Empresa;
 import jpa.PooledAccount;
-import jpa.Segregada;
 import jpa.Trans;
 
 @SuppressWarnings("serial")
@@ -35,15 +34,20 @@ public class Transaccion implements Serializable {
 	@Inject
 	private GestionPooledAccount pooled;
 	@Inject
-	private GestionSegregada segregada;
+	private GestionDivisa divisas;
+	
 
 /*---------------JPA-----------------------*/
 	
 	private Trans t;
 	private String destino;
-	private List<CuentaFintech> listaOrigen;
+	private List<PooledAccount> listaPooled;	
 	private List<Trans> listaTrans;
+	private List<Divisa> listaMonedas;
+	private String selectedPooled;
 	private String selectedOrigen;
+	private String selectedDestino;
+	private String cantidad;
 	
 	@Inject
 	private Login login;
@@ -67,12 +71,12 @@ public class Transaccion implements Serializable {
 		this.destino=destino;
 	}
 	
-	public List<CuentaFintech> getListaOrigen(){
-		return listaOrigen;
+	public List<PooledAccount> getListaPooled(){
+		return listaPooled;
 	}
 	
-	public void setListaOrigen(List<CuentaFintech> origen){
-		listaOrigen = origen;
+	public void setListaPooled(List<PooledAccount> pooled){
+		listaPooled = pooled;
 	}
 	
 	public List<Trans> getListaTrans() {
@@ -83,37 +87,74 @@ public class Transaccion implements Serializable {
 		listaTrans = lista;
 	}
 	
+	public List<Divisa> getListaMonedas() {
+		return listaMonedas;
+	}
+	
+	public void setListaMonedas(List<Divisa> lista) {
+		listaMonedas = lista;
+	}
+	
+	public String getSelectedPooled() {
+		return selectedPooled;
+	}
+	
+	public void setSelectedPooled(String p) {
+		selectedPooled = p;
+	}
+	
 	public String getSelectedOrigen() {
 		return selectedOrigen;
 	}
 	
-	public void setSelectedOrigen(String t) {
-		selectedOrigen = t;
+	public void setSelectedOrigen(String o) {
+		selectedOrigen = o;
+	}
+	
+	public String getSelectedDestino() {
+		return selectedDestino;
+	}
+	
+	public void setSelectedDestino(String d) {
+		selectedDestino = d;
+	}
+	
+	public String getCantidad() {
+		return cantidad;
+	}
+	
+	public void setCantidad(String c) {
+		cantidad = c;
 	}
 	
 	public String crearTransaccion() throws ProyectoException {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
-			if(selectedOrigen != null) {
-				CuentaFintech d = new CuentaFintech(true, Date.valueOf("2020-05-20"));
-				d.setIBAN(destino);
+			if(!selectedOrigen.equals(selectedDestino)) {
+				PooledAccount p = pooled.obtenerPooledAccount(selectedPooled);
 				
-				//Duplicate entry IBAN
-				PooledAccount p = pooled.obtenerPooledAccount(selectedOrigen);
-				Segregada s = segregada.obtenerSegregada(selectedOrigen);
+				CuentaRef origen = null;
+				CuentaRef destino = null;
 				
-				if(p != null) {
-					t.setCuenta(p);
-				} else {
-					t.setCuenta(s);
+				for(CuentaRef c : p.getDepositEn().keySet()) {
+					if(c.getMoneda().getAbreviatura().equals(selectedOrigen)) {
+						origen = c;
+					}
+					
+					if(c.getMoneda().getAbreviatura().equals(selectedDestino)) {
+						destino = c;
+					}
 				}
 				
-				t.setTransaccion(d);
-				trans.insertarTrans(t);
-				init();
-				return "listaTransacciones.xhtml";
+				if((origen != null) && (destino != null)) {
+					pooled.cambiarDivisaPooledAccountAdministrativo(login.getUserApk(), p, origen, destino, Double.parseDouble(cantidad));
+					init();
+					return "listaTransacciones.xhtml";
+				} else {
+					ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al crear transaccion", "Divisa no vinculada a la pooled"));
+				}
 			} else {
-				ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al crear transaccion", "Seleccione cuenta de origen"));
+				ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al crear transaccion", "Seleccione diferentes divisas"));
 			}
 		} catch(ProyectoException e) {
 			FacesMessage fm = new FacesMessage("Error: " + e);
@@ -122,25 +163,23 @@ public class Transaccion implements Serializable {
 		return null;
 	}
 	
+	public void addMessage(String summary, String detail) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+	
 	@PostConstruct
 	public void init() {
-		listaOrigen = new ArrayList<CuentaFintech>();
 		listaTrans= new ArrayList<Trans>();
-		
+		listaPooled = pooled.obtenerPooledAccount();
+		listaMonedas = divisas.obtenerDivisas();
+				
 		if(login.getUserApk().isAdministrativo()) {
 			listaTrans = trans.obtenerTrans();
-			
-			for(PooledAccount p : pooled.obtenerPooledAccount()) {
-					listaOrigen.add(p);
-			}
-			for(Segregada s : segregada.obtenerSegregada()) {
-					listaOrigen.add(s);
-			}
 		} else if(login.getUserApk().getPersonaIndividual() != null) {
 			
 			for(PooledAccount p : pooled.obtenerPooledAccount()) {
 				if(p.getCliente().equals(login.getUserApk().getPersonaIndividual())) {
-					listaOrigen.add(p);
 					
 					for(Trans t : trans.obtenerTrans()) {
 						if(t.getCuenta().getIBAN().equals(p.getIBAN())) {
@@ -149,33 +188,12 @@ public class Transaccion implements Serializable {
 					}
 				}
 			}
-			
-			for(Segregada s : segregada.obtenerSegregada()) {
-				if(s.getCliente().equals(login.getUserApk().getPersonaIndividual())) {
-					listaOrigen.add(s);
-					
-					for(Trans t : trans.obtenerTrans()) {
-						if(t.getCuenta().getIBAN().equals(s.getIBAN())) {
-							listaTrans.add(t);
-						}
-					}
-				}
-			}
-			
 		}else {
 			Map<Empresa, String> aut = login.getUserApk().getPersonaAutorizada().getAutoriz();
 			for(Trans t : trans.obtenerTrans()) {
 				for(Empresa em : aut.keySet()) {
 					for(PooledAccount p : pooled.obtenerPooledAccount()) {
 						if(p.getCliente().equals(em)) {
-							listaOrigen.add(p);
-							listaTrans.add(t);
-						}
-					}
-					
-					for(Segregada s : segregada.obtenerSegregada()) {
-						if(s.getCliente().equals(em)) {
-							listaOrigen.add(s);
 							listaTrans.add(t);
 						}
 					}

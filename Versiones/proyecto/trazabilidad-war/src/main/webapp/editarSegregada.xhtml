@@ -13,7 +13,12 @@
 </h:head>
 
 <h:body>
+	  <h:outputLink value="listaCuentasAdmin.xhtml">
+    		<h2><h:graphicImage class="backIcon" value="images/back.png"/></h2>
+	  </h:outputLink>
+	  
 	  <h1 class="title">Editar Segregada</h1>
+	  
        <h:form class="formEditarSegregada" id="entradaSegregada">
        		<p class="txtLogin">IBAN:</p>
        		<h:inputText class="txtLogin" id="iban" disabled="true" value="#{cuentasAdmin.segregada.IBAN}" style="width:200px"/><br/><br/>

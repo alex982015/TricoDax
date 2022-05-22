@@ -13,44 +13,49 @@
 </h:head>
 
 <h:body>
+	<h:outputLink value="listaCuentasAdmin.xhtml">
+   		<h2><h:graphicImage class="backIcon" value="images/back.png"/></h2>
+	</h:outputLink>
+	
 	<h1 class="title">Crear Pooled</h1>
-	       <h:form class="formCrearPooled" id="crearPooled">
-        		<p:growl id="messages" showDetail="true" />
+		
+       <h:form class="formCrearPooled" id="crearPooled">
+       		<p:growl id="messages" showDetail="true" />
 
- 				<p class="txtLogin">IBAN</p>
-       			<h:inputText class="txtLogin" id="IBAN" required="true" value="#{cuentasAdmin.nuevaPooled.IBAN}" style="width:200px"/><br/><br/>
-       		
-	       		<p class="txtLogin">SWIFT</p>
-	       		<h:inputText class="txtLogin" id="SWIFT" value="#{cuentasAdmin.nuevaPooled.swift}" style="width:200px"/><br/><br/>
-       			
-       			<p class="txtLogin">Cantidades:</p>
-		       	
-		       	<h:panelGrid class="panelDivisas" id = "panelDivisas" columns = "3" cellpadding = "5" cellspacing = "1" border="1">
-		       			
-		       			<h:column>
-		       				<p class="txtDivisa">Euros:</p>
-		       				<p:inputText class="txtDivisa" id="euros" value="#{cuentasAdmin.euros}"/><br/><br/>
-		       			</h:column>
-		       			
-		       			<h:column>
-		       				<p class="txtDivisa">Dólares:</p>
-		       				<p:inputText class="txtDivisa" id="dolares" value="#{cuentasAdmin.dolares}"/><br/><br/>
-		       			</h:column>
-		       			
-		       			<h:column>
-		       				<p class="txtDivisa">Libras:</p>
-		       				<p:inputText class="txtDivisa" id="libras" value="#{cuentasAdmin.libras}"/><br/><br/>
-		       			</h:column>
-		    
-		       	</h:panelGrid>
-		    
-		       	<p class="txtLogin">Vincular Cliente</p>
-		       	<p:selectOneMenu class="txtLogin" id="cliente" value="#{cuentasAdmin.selectedCliente}">
-	                   <f:selectItems value="#{cuentasAdmin.listaClientes}" var="c" itemLabel="Ident: #{c.ident} Tipo de cliente: #{c.tipoCliente} Estado: #{c.estado}" itemValue="#{c.ID}"/>
-	             </p:selectOneMenu>
-                	
-				<br/><br/>
-	       		<h:commandButton id="btnConfirm" class="button" action="#{cuentasAdmin.nuevaPooledAccount()}" value="Crear Pooled Account" update=":messages"/>
-	       </h:form>
+				<p class="txtLogin">IBAN</p>
+      			<h:inputText class="txtLogin" id="IBAN" required="true" value="#{cuentasAdmin.nuevaPooled.IBAN}" style="width:200px"/><br/><br/>
+      		
+       		<p class="txtLogin">SWIFT</p>
+       		<h:inputText class="txtLogin" id="SWIFT" value="#{cuentasAdmin.nuevaPooled.swift}" style="width:200px"/><br/><br/>
+      			
+      			<p class="txtLogin">Cantidades:</p>
+	       	
+	       	<h:panelGrid class="panelDivisas" id = "panelDivisas" columns = "3" cellpadding = "5" cellspacing = "1" border="1">
+	       			
+	       			<h:column>
+	       				<p class="txtDivisa">Euros:</p>
+	       				<p:inputText class="txtDivisa" id="euros" value="#{cuentasAdmin.euros}"/><br/><br/>
+	       			</h:column>
+	       			
+	       			<h:column>
+	       				<p class="txtDivisa">Dólares:</p>
+	       				<p:inputText class="txtDivisa" id="dolares" value="#{cuentasAdmin.dolares}"/><br/><br/>
+	       			</h:column>
+	       			
+	       			<h:column>
+	       				<p class="txtDivisa">Libras:</p>
+	       				<p:inputText class="txtDivisa" id="libras" value="#{cuentasAdmin.libras}"/><br/><br/>
+	       			</h:column>
+	    
+	       	</h:panelGrid>
+	    
+	       	<p class="txtLogin">Vincular Cliente</p>
+	       	<p:selectOneMenu class="txtLogin" id="cliente" value="#{cuentasAdmin.selectedCliente}">
+                   <f:selectItems value="#{cuentasAdmin.listaClientes}" var="c" itemLabel="Ident: #{c.ident} Tipo de cliente: #{c.tipoCliente} Estado: #{c.estado}" itemValue="#{c.ID}"/>
+             </p:selectOneMenu>
+               	
+			<br/><br/>
+       		<h:commandButton id="btnConfirm" class="button" action="#{cuentasAdmin.nuevaPooledAccount()}" value="Crear Pooled Account" update=":messages"/>
+       </h:form>
 	</h:body>
 </html>

@@ -12,6 +12,11 @@
 </h:head>
 
 <h:body>
+
+	<h:outputLink value="menuAdmin.xhtml">
+    	<h2><h:graphicImage class="backIcon" value="images/back.png"/></h2>
+	</h:outputLink>
+	
 	<h:panelGrid class="panelListas" id="panelListaCuentas" columns="2"
 		border="1" cellpadding="10" cellspacing="1">
 
@@ -29,10 +34,10 @@
 				<h:commandButton class="button" value="Editar"
 					action="#{cuentasAdmin.editarPooledWeb()}" />
 
-				<p:growl id="message" showDetail="true" />
+				<p:growl id="messagePooled" showDetail="true" />
 
 				<h:commandButton id="buttonBaja" class="button" value="Dar de baja"
-					update=":message" action="#{cuentasAdmin.bajaPooledAccount}" />
+					update=":messagePooled" action="#{cuentasAdmin.bajaPooledAccount}" />
 				<h:message class="error" for="bajaPooled" />
 
 			</h:panelGrid>
@@ -51,7 +56,7 @@
 
 			<h:panelGrid class="cuenta" columns="4" cellpadding="10"
 				cellspacing="1">
-				<h:button class="button" value="Nueva"
+				<h:button id="new" class="button" value="Nueva"
 					outcome="#{cuentasAdmin.nuevaSegregadaWeb()}" />
 				<h:commandButton class="button" value="Editar"
 					action="#{cuentasAdmin.editarSegregadaWeb()}" />

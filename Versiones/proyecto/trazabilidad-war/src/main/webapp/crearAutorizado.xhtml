@@ -13,7 +13,12 @@
 </h:head>
 
 <h:body>
+	   <h:outputLink value="listaAutorizadosAdmin.xhtml">
+    			<h2><h:graphicImage class="backIcon" value="images/back.png"/></h2>
+		</h:outputLink>
+		
 	   <h1 class="title">Crear autorizado</h1>
+	   
        <h:form class="formCrearAutoriz" id="entradaAutoriz">
        		<p class="txtLogin">Nombre:</p>
        		<h:inputText class="txtLogin" id="nombre" required="true" value="#{autoriz.nuevoPersAut.nombre}" style="width:200px"/><br/><br/>

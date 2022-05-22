@@ -130,9 +130,9 @@ public class TrazabilidadIT {
 		driver.findElement(By.id("entradaUserApk:btnLogin")).click();
 		driver.findElement(By.id("listaCuentas")).click();
 		driver.findElement(By.id("pooled:nueva")).click();
-		driver.findElement(By.id("crearPooled:IBAN")).sendKeys("ES23523345235235");
+		driver.findElement(By.id("crearPooled:IBAN")).sendKeys("ES23564565235235");
 		driver.findElement(By.id("crearPooled:SWIFT")).sendKeys("Swift");
-		driver.findElement(By.id("crearPooled:euros")).sendKeys("2000");
+		driver.findElement(By.id("crearPooled:euros")).sendKeys("0.02");
 		driver.findElement(By.id("crearPooled:btnConfirm")).click();
 		assertThat(driver.findElement(By.id("accountList")).getText(), is("Lista de cuentas"));
 		driver.close();
@@ -186,20 +186,6 @@ public class TrazabilidadIT {
 		driver.findElement(By.id("autorizados:baja")).click();
 		driver.findElement(By.id("entradaBajaAutoriz:btnConfirm")).click();
 		assertThat(driver.findElement(By.id("autorizList")).getText(), is("Lista de Autorizados"));
-		driver.close();
-	}
-	
-	@SuppressWarnings("deprecation")
-	@Requisitos({"RF9"})
-	@Test
-	public void cierreCuenta() {
-		driver.get(baseURL+"admin.xhtml");
-		driver.findElement(By.id("entradaUserApk:user")).sendKeys("ponciano");
-		driver.findElement(By.id("entradaUserApk:pass")).sendKeys("ponciano");
-		driver.findElement(By.id("entradaUserApk:btnLogin")).click();
-		driver.findElement(By.id("listaCuentas")).click();
-		driver.findElement(By.id("pooled:buttonBaja")).click();
-		assertThat(driver.findElement(By.id("accountList")).getText(), is("Lista de cuentas"));
 		driver.close();
 	}
 	

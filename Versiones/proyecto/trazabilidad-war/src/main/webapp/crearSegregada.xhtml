@@ -13,7 +13,12 @@
 </h:head>
 
 <h:body>
+	   <h:outputLink value="listaCuentasAdmin.xhtml">
+    		<h2><h:graphicImage class="backIcon" value="images/back.png"/></h2>
+		</h:outputLink>
+		
 	   <h1 class="title">Crear Segregada</h1>
+	   
        <h:form class="formCrearSegregada" id="entradaSegregada">
    			<p:growl id="message" showDetail="true" />
        		
@@ -28,14 +33,14 @@
                    <f:selectItems value="#{cuentasAdmin.listaMonedas}" var="m" itemLabel="#{m.nombre}" itemValue="#{m.abreviatura}"/>
              </p:selectOneMenu>
 			<p class="txtLogin">Cantidad:</p>
-			<p:inputNumber class="txtLogin" id="cantidad" value="#{cuentasAdmin.cantidad}"/><br/><br/>
+			<p:inputText class="txtLogin" id="cantidad" value="#{cuentasAdmin.cantidad}"/><br/><br/>
        		<p class="txtLogin">Vincular Cliente:</p>
        		<p:selectOneMenu class="txtLogin" id="cliente" value="#{cuentasAdmin.selectedCliente}" required="true">
 	        	<f:selectItems id="selectCliente" value="#{cuentasAdmin.listaClientes}" var="c" itemLabel="Ident: #{c.ident} Tipo de cliente: #{c.tipoCliente} Estado: #{c.estado}" itemValue="#{c.ID}"/>
 	        </p:selectOneMenu>
 
 			<br/><br/>
-       		<h:commandButton class="button" action="#{cuentasAdmin.crearSegregada()}" value="Confirmar" update=":messages"/>
+       		<h:commandButton id="btnConfirm" class="button" action="#{cuentasAdmin.crearSegregada()}" value="Confirmar" update=":messages"/>
        </h:form>
 
 </h:body>

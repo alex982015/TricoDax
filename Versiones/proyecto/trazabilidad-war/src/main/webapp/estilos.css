@@ -118,6 +118,14 @@ h2 {
 	height: 70px;
 }
 
+.backIcon {
+	float: left;
+	margin-left: 30px;
+	margin-bottom: 30px;
+	width: 30px;
+	height: 30px;
+}
+
 .formEditarPerfil {
 	margin: auto;
 	margin-top: 30px;
@@ -192,7 +200,7 @@ h2 {
 	border-style: groove;
 	padding-left: 10px;
 	width: 380px;
-	height: 830px;
+	height: 750px;
 }
 
 .formEditarEmpresa {
@@ -379,4 +387,15 @@ h2 {
 	padding-left: 10px;
 	width: 600px;
 	height: 400px;
+}
+
+.formCrearTransaccion{
+	margin: auto;
+	margin-top: 30px;
+	font-family: 'Roboto';
+	font-weight: regular;
+	border-style: groove;
+	padding-left: 10px;
+	width: 550px;
+	height: 1000px;
 }
