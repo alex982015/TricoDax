@@ -68,6 +68,7 @@ public class PersAutEJB implements GestionPersAut {
 				persAutEntity.setDireccion(persAut.getDireccion());
 				persAutEntity.setFechaNac(persAut.getFechaNac());
 				persAutEntity.setFechaFin(persAut.getFechaFin());
+				persAutEntity.setAutoriz(persAut.getAutoriz());
 			
 				em.merge(persAutEntity);
 			} else {

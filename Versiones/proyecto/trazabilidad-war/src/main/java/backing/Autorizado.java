@@ -102,6 +102,30 @@ public class Autorizado implements Serializable {
 		return "crearAutorizado.xhtml";
 	}
 	
+	public String bajaAutorizWeb() {
+		FacesContext ctx = FacesContext.getCurrentInstance();
+		try {
+			if(selectedAutorizado != null) {
+				p = persAut.obtenerPersAut(Long.parseLong(selectedAutorizado));
+				listaEmpresasAutoriz = new ArrayList<Empresa>();
+				
+				for(Empresa e : p.getAutoriz().keySet()) {
+					listaEmpresasAutoriz.add(e);
+				}
+				
+				return "bajaAutorizado.xhtml";
+			} else {
+			    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Seleccione un autorizado"));
+			}
+		} catch(UserNoAdminException e) {
+		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no admin"));
+		} catch(ProyectoException e) {
+			FacesMessage fm = new FacesMessage("Error: " + e);
+			ctx.addMessage(null, fm);
+		}
+		return null;
+	}
+	
 	public void addMessage(String summary, String detail) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
         FacesContext.getCurrentInstance().addMessage(null, message);
@@ -170,13 +194,14 @@ public class Autorizado implements Serializable {
 	public String bajaAutorizado() {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
-			if(selectedAutorizado != null) {
-				p = persAut.obtenerPersAut(Long.parseLong(selectedAutorizado));
-				persAut.cerrarCuentaPersAut(login.getUserApk(), p);
+			if(selectedEmpresa != null) {
+				Empresa e = empresas.obtenerEmpresa(Long.parseLong(selectedEmpresa));
+				p.getAutoriz().remove(e);
+				persAut.actualizarPersAut(login.getUserApk(), p);
 				init();
-				return null;
+				return "listaAutorizadosAdmin.xhtml";
 			} else {
-			    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Seleccione un autorizado"));
+			    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al desvincular empresa", "Seleccione empresa"));
 			}
 		} catch(UserNoAdminException e) {
 		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no admin"));

@@ -28,7 +28,7 @@
 	            <h:panelGrid  class="cuenta" columns ="3" cellpadding = "10" cellspacing = "1">   
 				  	<h:button id="nuevo" class="button" value="Nuevo" outcome="#{autoriz.nuevoAutorizWeb()}"/>
 	  	       		<h:commandButton id="editar" class="button" value="Editar" update=":message" action="#{autoriz.editarAutorizWeb()}"/>
-	  	       		<h:commandButton class="button" value="Baja autorizado" update=":message" action="#{autoriz.bajaAutorizado()}"/> 
+	  	       		<h:commandButton id="baja" class="button" value="Baja autorizado" update=":message" action="#{autoriz.bajaAutorizWeb()}"/> 
 		        </h:panelGrid>
 				
 				<p:selectOneMenu id="autorizados" value="#{autoriz.selectedAutorizado}">

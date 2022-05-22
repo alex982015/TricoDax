@@ -3,6 +3,7 @@ package ejb;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -165,11 +166,11 @@ public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledA
 					throw new CuentaNoEncontradoException();
 				}
 				
-				Set<CuentaRef> cuentasAsociadas = cuentaEntity.getDepositEn().keySet();
+				Collection<Double> cuentasAsociadas = cuentaEntity.getDepositEn().values();
 				boolean ok = false;
 				
-				for (CuentaRef c : cuentasAsociadas) {
-					if(c.getSaldo() > 0) {
+				for (Double saldo : cuentasAsociadas) {
+					if(saldo > 0) {
 						ok = true;
 					}
 				}

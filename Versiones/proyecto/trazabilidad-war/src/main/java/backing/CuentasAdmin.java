@@ -317,7 +317,7 @@ public class CuentasAdmin implements Serializable {
 					if(!euros.equals("")) {
 						for(CuentaRef c : cuentaRefEJB.obtenerCuentasRef()) {
 							if(c.getMoneda().getAbreviatura().equals("EUR")) {
-								depositEn.put(c, c.getSaldo() + Double.parseDouble(euros));
+								depositEn.put(c, Double.parseDouble(euros));
 							}
 						}
 					}
@@ -325,7 +325,7 @@ public class CuentasAdmin implements Serializable {
 					if(!dolares.equals("")) {
 						for(CuentaRef c : cuentaRefEJB.obtenerCuentasRef()) {
 							if(c.getMoneda().getAbreviatura().equals("USD")) {
-								depositEn.put(c, c.getSaldo() + Double.parseDouble(dolares));
+								depositEn.put(c, Double.parseDouble(dolares));
 							}
 						}
 						
@@ -334,7 +334,7 @@ public class CuentasAdmin implements Serializable {
 					if(!libras.equals("")) {
 						for(CuentaRef c : cuentaRefEJB.obtenerCuentasRef()) {
 							if(c.getMoneda().getAbreviatura().equals("GBP")) {
-								depositEn.put(c, c.getSaldo() + Double.parseDouble(libras));
+								depositEn.put(c, Double.parseDouble(libras));
 							}
 						}			
 					}
@@ -376,7 +376,6 @@ public class CuentasAdmin implements Serializable {
 		try {
 			if(selectedPooled != null) {
 				p = pooledAccount.obtenerPooledAccount(selectedPooled);
-
 
 				if(p.isEstado()) {
 					pooledAccount.cerrarCuentaPooledAccount(login.getUserApk(), p);

@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+		<link rel="stylesheet" type="text/css" href="estilos.css"/>
+       <title>Editar Particular</title>
+</h:head>
+
+<h:body>
+	   <h1 class="title">Editar Particular</h1>
+       <h:form class="formBajaAutoriz" id="entradaBajaAutoriz">
+       		<p:growl id="message" showDetail="true" />
+       		
+       		<p class="txtLogin">Nombre:</p>
+       		<h:inputText class="txtLogin" id="nombre" disabled="true" value="#{autoriz.persAut.nombre}" style="width:200px"/><br/><br/>
+       		<h:message class="error" id ="nombreMsg" for="nombre"/><br/>
+       		<p class="txtLogin">Apellidos:</p>
+       		<h:inputText class="txtLogin" id="apellidos" disabled="true" value="#{autoriz.persAut.apellidos}" style="width:200px"/><br/><br/>
+  	 	    <h:message class="error" id ="apellidosMsg" for="apellidos"/><br/>
+       		<p class="txtLogin">Seleccione empresa a desvincular:</p>
+       		<p:selectOneMenu class="txtLogin" id="empresa" value="#{autoriz.selectedEmpresa}">
+     		   	<f:selectItems id="selectEmpresa" value="#{autoriz.listaEmpresasAutoriz}" var="e" itemLabel="Ident: #{e.ident} Razon Social: #{e.razonSocial} Estado: #{e.estado}" itemValue="#{e.ID}"/>
+	        </p:selectOneMenu>
+       		
+       		<br/><br/>
+       		<h:commandButton id="btnConfirm" class="button" action="#{autoriz.bajaAutorizado()}" value="Confirmar" update=":message"/>
+       </h:form>
+
+</h:body>
+
+</html>
