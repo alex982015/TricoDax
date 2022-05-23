@@ -9,44 +9,94 @@
 
 <h:head>
 	<link rel="stylesheet" type="text/css" href="estilos.css" />
-	<title>Lista de transaccionesautorizados</title>
+	<title>Mis transacciones</title>
 </h:head>
 
 <h:body>
-	<h:outputLink value="menuAdmin.xhtml">
+	<h:outputLink value="menuIndiv.xhtml">
     	<h2><h:graphicImage class="backIcon" value="images/back.png"/></h2>
 	</h:outputLink>
 	
 	<h1 class="title">Mis transacciones</h1>
 
-	<h:form class="formCrearTransaccion" id="entradaTrans">
+	<h:panelGrid class="panelTrans" id = "panelListaTrans" columns = "1" cellpadding = "10" cellspacing = "1">
 
-		<h:outputLink value="crearTransacciones.xhtml">Nuevo</h:outputLink>
+      	<f:facet name = "header">
+      		<h:outputText value = "Lista de transacciones"/>
+		</f:facet>
 
-		<h5 style="margin-top: 0">Lista Transacciones</h5>
-		<p:dataTable var="Cliente" value="#{Transaccion.Trans.Listado()}"
-			scrollable="true" scrollHeight="250">
-			<p:column headerText="ID" footerText="ID">
-				<h:outputText value="#{Transaccion.Trans.ID}" />
-			</p:column>
-			<p:column headerText="Cantidad" footerText="Cantidad">
-				<h:outputText value="#{Transaccion.Trans.Cantidad}" />
-			</p:column>
-			<p:column headerText="Comision" footerText="Comision">
-				<h:outputText value="#{Transaccion.Trans.comision}" />
-			</p:column>
-			<p:column headerText="International" footerText="International">
-				<h:outputText value="#{Transaccion.Trans.international}" />
-			</p:column>
-			<p:column headerText="Fecha Ejecucion" footerText="Fecha Ejecucion">
-				<h:outputText value="#{Transaccion.Trans.fechaEjecucion}" />
-			</p:column>
-			<p:column headerText="Fecha Instruccion"
-				footerText="Fecha Instruccion">
-				<h:outputText value="#{Transaccion.Trans.fechaInstruccion}" />
-			</p:column>
-		</p:dataTable>
-	</h:form>
+		<h:dataTable id="trans"
+	             columnClasses="list-column-center,
+	             list-column-right, list-column-center,
+	             list-column-right" headerClass="list-header"
+	             rowClasses="list-row" border="1" styleClass="list-
+	             background" value="#{transaccion.listaTrans}" var="t">   
+
+				<h:column>
+			        <f:facet name="header">
+			            <h:outputText value="ID"/>
+			         </f:facet>
+		             <h:outputText value="#{t.ID}"/>    
+			    </h:column>
+			    
+  				    <h:column>
+			        <f:facet name="header">
+			            <h:outputText value="Cantidad"/>
+			         </f:facet>
+			         <h:outputText value="#{t.cantidad}"/>
+			    </h:column>
+			    
+			    <h:column>
+			        <f:facet name="header">
+			            <h:outputText value="Tipo"/>
+			         </f:facet>
+			         <h:outputText value="#{t.tipo}"/>
+			    </h:column>
+			    
+			    <h:column>
+			        <f:facet name="header">
+			            <h:outputText value="Fecha de instrucción"/>
+			         </f:facet>
+			         <h:outputText value="#{t.fechaInstruccion}"/>
+			    </h:column>
+			    
+			    <h:column>
+			        <f:facet name="header">
+			            <h:outputText value="Fecha de ejecución"/>
+			         </f:facet>
+			         <h:outputText value="#{t.fechaEjecucion}"/>
+			    </h:column>
+			    
+			    <h:column>
+			        <f:facet name="header">
+			            <h:outputText value="Cuenta de origen"/>
+			         </f:facet>
+			         <h:outputText value="#{t.cuenta.IBAN}"/>
+			    </h:column>
+			    
+			    <h:column>
+			        <f:facet name="header">
+			            <h:outputText value="Cuenta de destino"/>
+			         </f:facet>
+			         <h:outputText value="#{t.transaccion.IBAN}"/>
+			    </h:column>
+			    
+			    <h:column>
+			        <f:facet name="header">
+			            <h:outputText value="Moneda origen"/>
+			         </f:facet>
+			         <h:outputText value="#{t.monedaOrigen.nombre}"/>
+			    </h:column>
+			    
+			    <h:column>
+			        <f:facet name="header">
+			            <h:outputText value="Moneda destino"/>
+			         </f:facet>
+			         <h:outputText value="#{t.monedaDestino.nombre}"/>
+			    </h:column>
+			    
+		</h:dataTable>
+	</h:panelGrid>
 </h:body>
 
 </html>

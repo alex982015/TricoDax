@@ -19,6 +19,7 @@ import exceptions.ProyectoException;
 import jpa.CuentaRef;
 import jpa.Divisa;
 import jpa.Empresa;
+import jpa.Indiv;
 import jpa.PooledAccount;
 import jpa.Trans;
 
@@ -127,34 +128,78 @@ public class Transaccion implements Serializable {
 		cantidad = c;
 	}
 	
-	public String crearTransaccion() throws ProyectoException {
+	public String crearTransaccionAdmin() throws ProyectoException {
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		try {
-			if(!selectedOrigen.equals(selectedDestino)) {
-				PooledAccount p = pooled.obtenerPooledAccount(selectedPooled);
-				
-				CuentaRef origen = null;
-				CuentaRef destino = null;
-				
-				for(CuentaRef c : p.getDepositEn().keySet()) {
-					if(c.getMoneda().getAbreviatura().equals(selectedOrigen)) {
-						origen = c;
+			if(selectedPooled != null) {
+				if(!selectedOrigen.equals(selectedDestino)) {
+					PooledAccount p = pooled.obtenerPooledAccount(selectedPooled);
+					
+					CuentaRef origen = null;
+					CuentaRef destino = null;
+					
+					for(CuentaRef c : p.getDepositEn().keySet()) {
+						if(c.getMoneda().getAbreviatura().equals(selectedOrigen)) {
+							origen = c;
+						}
+						
+						if(c.getMoneda().getAbreviatura().equals(selectedDestino)) {
+							destino = c;
+						}
 					}
 					
-					if(c.getMoneda().getAbreviatura().equals(selectedDestino)) {
-						destino = c;
+					if((origen != null) && (destino != null)) {
+						pooled.cambiarDivisaPooledAccountAdministrativo(login.getUserApk(), p, origen, destino, Double.parseDouble(cantidad));
+						init();
+						return "listaTransaccionesAdmin.xhtml";
+					} else {
+						ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al crear transaccion", "Divisa no vinculada a la pooled"));
 					}
-				}
-				
-				if((origen != null) && (destino != null)) {
-					pooled.cambiarDivisaPooledAccountAdministrativo(login.getUserApk(), p, origen, destino, Double.parseDouble(cantidad));
-					init();
-					return "listaTransacciones.xhtml";
 				} else {
-					ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al crear transaccion", "Divisa no vinculada a la pooled"));
+					ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al crear transaccion", "Seleccione diferentes divisas"));
 				}
 			} else {
-				ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al crear transaccion", "Seleccione diferentes divisas"));
+				ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al crear transaccion", "Seleccione una cuenta pooled"));				
+			}
+		} catch(ProyectoException e) {
+			FacesMessage fm = new FacesMessage("Error: " + e);
+			ctx.addMessage(null, fm);
+		}
+		return null;
+	}
+	
+	public String crearTransaccionAutoriz() throws ProyectoException {
+		FacesContext ctx = FacesContext.getCurrentInstance();
+		try {
+			if(selectedPooled != null) {
+				if(!selectedOrigen.equals(selectedDestino)) {
+					PooledAccount p = pooled.obtenerPooledAccount(selectedPooled);
+					
+					CuentaRef origen = null;
+					CuentaRef destino = null;
+					
+					for(CuentaRef c : p.getDepositEn().keySet()) {
+						if(c.getMoneda().getAbreviatura().equals(selectedOrigen)) {
+							origen = c;
+						}
+						
+						if(c.getMoneda().getAbreviatura().equals(selectedDestino)) {
+							destino = c;
+						}
+					}
+					
+					if((origen != null) && (destino != null)) {
+						pooled.cambiarDivisaPooledAccount(p, origen, destino, Double.parseDouble(cantidad));
+						init();
+						return "listaTransaccionesAutoriz.xhtml";
+					} else {
+						ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al crear transaccion", "Divisa no vinculada a la pooled"));
+					}
+				} else {
+					ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al crear transaccion", "Seleccione diferentes divisas"));
+				}
+			} else {
+				ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al crear transaccion", "Seleccione cuenta pooled"));				
 			}
 		} catch(ProyectoException e) {
 			FacesMessage fm = new FacesMessage("Error: " + e);
@@ -171,31 +216,34 @@ public class Transaccion implements Serializable {
 	@PostConstruct
 	public void init() {
 		listaTrans= new ArrayList<Trans>();
-		listaPooled = pooled.obtenerPooledAccount();
 		listaMonedas = divisas.obtenerDivisas();
+		listaPooled = new ArrayList<PooledAccount>();
 				
 		if(login.getUserApk().isAdministrativo()) {
 			listaTrans = trans.obtenerTrans();
+			listaPooled = pooled.obtenerPooledAccount();
 		} else if(login.getUserApk().getPersonaIndividual() != null) {
 			
-			for(PooledAccount p : pooled.obtenerPooledAccount()) {
-				if(p.getCliente().equals(login.getUserApk().getPersonaIndividual())) {
-					
-					for(Trans t : trans.obtenerTrans()) {
-						if(t.getCuenta().getIBAN().equals(p.getIBAN())) {
-							listaTrans.add(t);
-						}
-					}
+			Indiv i = login.getUserApk().getPersonaIndividual();
+			
+			for(Trans t : trans.obtenerTrans()) {
+				if(t.getCuenta().getCliente().equals(i)) {
+					listaTrans.add(t);
 				}
 			}
+			
 		}else {
 			Map<Empresa, String> aut = login.getUserApk().getPersonaAutorizada().getAutoriz();
-			for(Trans t : trans.obtenerTrans()) {
-				for(Empresa em : aut.keySet()) {
-					for(PooledAccount p : pooled.obtenerPooledAccount()) {
-						if(p.getCliente().equals(em)) {
-							listaTrans.add(t);
-						}
+			for(Empresa em : aut.keySet()) {
+				for(Trans t : trans.obtenerTrans()) {
+					if(t.getCuenta().getCliente().equals(em)) {
+						listaTrans.add(t);
+					}
+				}
+				
+				for(PooledAccount p : pooled.obtenerPooledAccount()) {
+					if(p.getCliente().equals(em)) {
+						listaPooled.add(p);
 					}
 				}
 			}

@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:p="http://primefaces.org/ui">
+<h:head>
+	   <link rel="stylesheet" type="text/css" href="estilos.css"/>
+       <title>Lista de transacciones</title>
+</h:head>
+
+<h:body>
+	<h:outputLink value="menuAdmin.xhtml">
+		<h2><h:graphicImage class="backIcon" value="images/back.png"/></h2>
+	</h:outputLink>
+	
+	<br/>
+	
+	<h:panelGrid class="panelTrans" id = "panelListaTrans" columns = "1" cellpadding = "10" cellspacing = "1">
+
+            <f:facet name = "header">
+               <h:outputText value = "Lista de transacciones"/>
+            </f:facet>
+         
+            <h:button class="buttonTrans" value="Nueva" outcome="crearTransaccionAdmin.xhtml"/>
+	        
+	        <h:dataTable id="trans"
+		             columnClasses="list-column-center,
+		             list-column-right, list-column-center,
+		             list-column-right" headerClass="list-header"
+		             rowClasses="list-row" border="1" styleClass="list-
+		             background" value="#{transaccion.listaTrans}" var="t">   
+
+					<h:column>
+				        <f:facet name="header">
+				            <h:outputText value="ID"/>
+				         </f:facet>
+			             <h:outputText value="#{t.ID}"/>    
+				    </h:column>
+				    
+   				    <h:column>
+				        <f:facet name="header">
+				            <h:outputText value="Cantidad"/>
+				         </f:facet>
+				         <h:outputText value="#{t.cantidad}"/>
+				    </h:column>
+				    
+				    <h:column>
+				        <f:facet name="header">
+				            <h:outputText value="Tipo"/>
+				         </f:facet>
+				         <h:outputText value="#{t.tipo}"/>
+				    </h:column>
+				    
+				    <h:column>
+				        <f:facet name="header">
+				            <h:outputText value="Fecha de instrucción"/>
+				         </f:facet>
+				         <h:outputText value="#{t.fechaInstruccion}"/>
+				    </h:column>
+				    
+				    <h:column>
+				        <f:facet name="header">
+				            <h:outputText value="Fecha de ejecución"/>
+				         </f:facet>
+				         <h:outputText value="#{t.fechaEjecucion}"/>
+				    </h:column>
+				    
+				    <h:column>
+				        <f:facet name="header">
+				            <h:outputText value="Cuenta de origen"/>
+				         </f:facet>
+				         <h:outputText value="#{t.cuenta.IBAN}"/>
+				    </h:column>
+				    
+				    <h:column>
+				        <f:facet name="header">
+				            <h:outputText value="Cuenta de destino"/>
+				         </f:facet>
+				         <h:outputText value="#{t.transaccion.IBAN}"/>
+				    </h:column>
+				    
+				    <h:column>
+				        <f:facet name="header">
+				            <h:outputText value="Moneda origen"/>
+				         </f:facet>
+				         <h:outputText value="#{t.monedaOrigen.nombre}"/>
+				    </h:column>
+				    
+				    <h:column>
+				        <f:facet name="header">
+				            <h:outputText value="Moneda destino"/>
+				         </f:facet>
+				         <h:outputText value="#{t.monedaDestino.nombre}"/>
+				    </h:column>
+				    
+			</h:dataTable>
+   	</h:panelGrid> 
+</h:body>
+
+</html>

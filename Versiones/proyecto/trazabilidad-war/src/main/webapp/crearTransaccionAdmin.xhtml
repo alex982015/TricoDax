@@ -13,8 +13,8 @@
 </h:head>
 
 <h:body>
-	<h:outputLink value="listaTransacciones.xhtml">
-    	<h2><h:graphicImage class="backIcon" value="images/back.png"/></h2>
+	<h:outputLink value="listaTransaccionesAdmin.xhtml">
+		<h2><h:graphicImage class="backIcon" value="images/back.png"/></h2>
 	</h:outputLink>
 	
 	<h1 class="title">Nueva transacción</h1>
@@ -53,7 +53,7 @@
 		</p:selectOneMenu>
 
 		<br/><br/>
-    	<h:commandButton class="button" action="#{transaccion.crearTransaccion()}" value="Confirmar" update=":messages"/>
+    	<h:commandButton class="button" action="#{transaccion.crearTransaccionAdmin()}" value="Confirmar" update=":messages"/>
 	</h:form>
 </h:body>
 

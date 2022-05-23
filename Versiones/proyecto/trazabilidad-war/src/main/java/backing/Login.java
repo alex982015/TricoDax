@@ -86,8 +86,6 @@ public class Login implements Serializable {
 				
 				if(userApk.getUser(u.getUser()).isAdministrativo()) {
 					return "menuAdmin.xhtml";
-				} else if((userApk.getUser(u.getUser()).getPersonaAutorizada() != null) && (userApk.getUser(u.getUser()).getPersonaIndividual() != null)) {
-					return "menuIndivAutoriz.xhtml";
 				} else if(userApk.getUser(u.getUser()).getPersonaAutorizada() != null) {
 					return "menuAutoriz.xhtml";
 				} else if(userApk.getUser(u.getUser()).getPersonaIndividual() != null) {

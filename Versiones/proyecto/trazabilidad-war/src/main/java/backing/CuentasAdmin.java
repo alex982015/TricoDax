@@ -506,6 +506,8 @@ public class CuentasAdmin implements Serializable {
 	public void init() {
 		listaMonedas = divisaEJB.obtenerDivisas();
 		listaClientes = new ArrayList<Cliente>();
+		listaPooled = new ArrayList<PooledAccount>();
+		listaSegregadas = new ArrayList<Segregada>();
 		
 		if(login.getUserApk().isAdministrativo()) {
 			listaPooled = pooledAccount.obtenerPooledAccount();
@@ -521,24 +523,28 @@ public class CuentasAdmin implements Serializable {
 			}
 		} else if(login.getUserApk().getPersonaIndividual() != null) {
 			
+			Indiv i = login.getUserApk().getPersonaIndividual();
+			
 			for(PooledAccount p : pooledAccount.obtenerPooledAccount()) {
-				if(p.getCliente().equals(login.getUserApk().getPersonaIndividual())) {
+				if(p.getCliente().equals(i)) {
 					listaPooled.add(p);
 				}
 			}
 			for(Segregada s : segregadas.obtenerSegregada()) {
-				if(s.getCliente().equals(login.getUserApk().getPersonaIndividual())) {
+				if(s.getCliente().equals(i)) {
 					listaSegregadas.add(s);
 				}
 			}
 		}else {
 			Map<Empresa, String> aut = login.getUserApk().getPersonaAutorizada().getAutoriz();
 			for(Empresa e : aut.keySet()) {
+
 				for(PooledAccount p : pooledAccount.obtenerPooledAccount()) {
 					if(p.getCliente().equals(e)) {
 						listaPooled.add(p);
 					}
 				}
+				
 				for(Segregada s : segregadas.obtenerSegregada()) {
 					if(s.getCliente().equals(e)) {
 						listaSegregadas.add(s);

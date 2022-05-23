@@ -15,7 +15,6 @@ import exceptions.CuentaExistenteException;
 import exceptions.CuentaNoEncontradoException;
 import exceptions.CuentaRefNoCashException;
 import exceptions.CuentaRefNoVinculadaException;
-import exceptions.CuentaRefOrigenDestinoNoEncontrada;
 import exceptions.MismaMonedaException;
 import exceptions.PooledConCuentaRefYaAsociadaException;
 import exceptions.ProyectoException;
@@ -245,56 +244,43 @@ public class PooledAccountEJB extends CuentaFintechEJB implements GestionPooledA
 			throw new CuentaNoEncontradoException();
 		}
 		
-		CuentaRef origenEntity = em.find(CuentaRef.class, origen.getIBAN());
-		CuentaRef destinoEntity = em.find(CuentaRef.class, destino.getIBAN());		
-		
-		if ((origenEntity != null) && (destinoEntity != null)) {
-			if((cuentaEntity.getDepositEn().containsKey(origen)) && (cuentaEntity.getDepositEn().containsKey(destino))) {
-				if(origen.getSaldo() >= cantidad) {				
-					
-					if (origen.getMoneda().getCambioEuro() == destino.getMoneda().getCambioEuro()) {
-						throw new MismaMonedaException();
-					} else {
-						Map<CuentaRef, Double> depositEn = cuenta.getDepositEn();
-						
-						if(origen.getMoneda().getCambioEuro() == 1.0) {
-							origen.setSaldo(origen.getSaldo() - cantidad);
-							destino.setSaldo(destino.getSaldo() + cantidad * (1 / destino.getMoneda().getCambioEuro()));
-							
-						} else {
-							if(destino.getMoneda().getCambioEuro() != 1.0) {
-								origen.setSaldo(origen.getSaldo() - cantidad);
-								
-								double aEuro = cantidad * origen.getMoneda().getCambioEuro();
-								destino.setSaldo(destino.getSaldo() + (aEuro / destino.getMoneda().getCambioEuro()));
-								
-							} else {
-								origen.setSaldo(origen.getSaldo() - cantidad);
-								destino.setSaldo(destino.getSaldo() + cantidad * destino.getMoneda().getCambioEuro());
-							}
-						}
-						
-						depositEn.put(origen, origen.getSaldo());
-						depositEn.put(destino, destino.getSaldo());
-						
-						Trans transaccion = new Trans(cantidad, "Cambio Divisa", "0%", true, null, Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-						transaccion.setMonedaOrigen(origen.getMoneda());
-						transaccion.setMonedaDestino(destino.getMoneda());
-						transaccion.setCuenta(cuenta);
-						transaccion.setTransaccion(cuenta);
-					
-						em.persist(transaccion);
-					}
-				} else {
-					throw new CuentaRefNoCashException();
-				}
+		if(origen.getSaldo() >= cantidad) {							
+			if (origen.getMoneda().getCambioEuro() == destino.getMoneda().getCambioEuro()) {
+				throw new MismaMonedaException();
 			} else {
-				throw new CuentaRefNoVinculadaException();
+				Map<CuentaRef, Double> depositEn = cuenta.getDepositEn();
+				
+				if(origen.getMoneda().getCambioEuro() == 1.0) {
+					origen.setSaldo(origen.getSaldo() - cantidad);
+					destino.setSaldo(destino.getSaldo() + cantidad * (1 / destino.getMoneda().getCambioEuro()));
+				} else {
+					if(destino.getMoneda().getCambioEuro() != 1.0) {
+						origen.setSaldo(origen.getSaldo() - cantidad);
+						
+						double aEuro = cantidad * origen.getMoneda().getCambioEuro();
+						destino.setSaldo(destino.getSaldo() + (aEuro / destino.getMoneda().getCambioEuro()));
+					} else {
+						origen.setSaldo(origen.getSaldo() - cantidad);
+						destino.setSaldo(destino.getSaldo() + cantidad * destino.getMoneda().getCambioEuro());
+					}
+				}
+				
+				depositEn.put(origen, origen.getSaldo());
+				depositEn.put(destino, destino.getSaldo());
+				
+				Trans transaccion = new Trans(cantidad, "Cambio Divisa", "0%", true, null, Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+				transaccion.setMonedaOrigen(origen.getMoneda());
+				transaccion.setMonedaDestino(destino.getMoneda());
+				transaccion.setCuenta(cuenta);
+				transaccion.setTransaccion(cuenta);
+			
+				em.persist(transaccion);
 			}
 		} else {
-			throw new CuentaRefOrigenDestinoNoEncontrada();
+			throw new CuentaRefNoCashException();
 		}
-	}
+		
+	}	
 
 	@Override
 	public PooledAccount obtenerPooledAccount(String pooled) throws ProyectoException {
