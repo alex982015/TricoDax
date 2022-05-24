@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+		<link rel="stylesheet" type="text/css" href="estilos.css"/>
+       <title>Lista de cuentas</title>
+</h:head>
+
+<h:body>        
+
+		<h:outputLink value="generarInformes.xhtml">
+    			<h2><h:graphicImage class="backIcon" value="images/back.png"/></h2>
+		</h:outputLink>
+
+       <h:panelGrid class="panelLectura" id = "panel" columns = "2" border = "1"
+            cellpadding = "10" cellspacing = "1">
+            
+            <f:facet name = "header">
+               <h:outputText value = "Informe Holanda"/>
+            </f:facet>
+            
+            <h:outputLabel>Clientes</h:outputLabel>
+            
+            <h:outputLabel>Segregada</h:outputLabel>
+            
+			<h:dataTable id="clientes"
+		             columnClasses="list-column-center,
+		             list-column-right, list-column-center,
+		             list-column-right" headerClass="list-header"
+		             rowClasses="list-row" border="1" styleClass="list-
+		             background" value="#{informes.listaClientes}" var="p">   
+
+					<form id="filtroCliente">
+						<h:panelGrid class="empresa" columns="6" cellpadding="10" cellspacing="1">
+							<h:inputText id="nombre" class="txtLogin" value="#{informes.nombre}"/>
+							<h:inputText id="apellido" class="txtLogin" value="#{informes.apellido}"/>
+							<p:datePicker id="fechaAlta" value="#{informes.fechaAlta}" locale="es" monthNavigator="true"/>						
+							<p:datePicker id="fechaBaja" value="#{informes.fechaBaja}" locale="es" monthNavigator="true"/>						
+							<h:commandButton id="filtroClientes" class="button" value="Filtrar"
+							action="#{informes.filtrarClientes()}" />
+	  					</h:panelGrid>
+  					</form>
+
+					<h:column>
+				        <f:facet name="header">
+				            <h:outputText value="IBAN"/>
+				         </f:facet>
+			             <h:outputText value="#{p.IBAN}"/>    
+				    </h:column>
+				    
+   				    <h:column>
+				        <f:facet name="header">
+				            <h:outputText value="Swift"/>
+				         </f:facet>
+				         <h:outputText value="#{p.swift}"/>
+				    </h:column>
+				    
+				    <h:column>
+				        <f:facet name="header">
+				            <h:outputText value="Estado"/>
+				         </f:facet>
+				         <h:outputText value="#{p.estado}"/>
+				    </h:column>
+				    
+			</h:dataTable>
+			
+			<h:dataTable id="segregada"
+		             columnClasses="list-column-center,
+		             list-column-right, list-column-center,
+		             list-column-right" headerClass="list-header"
+		             rowClasses="list-row" border="1" styleClass="list-
+		             background" value="#{cuentas.listaSegregada}" var="s">   
+				    
+					<h:column>
+				        <f:facet name="header">
+				            <h:outputText value="IBAN"/>
+				         </f:facet>
+			             <h:outputText value="#{s.IBAN}"/>    
+				    </h:column>
+				    
+   				    <h:column>
+				        <f:facet name="header">
+				            <h:outputText value="Swift"/>
+				         </f:facet>
+				         <h:outputText value="#{s.swift}"/>
+				    </h:column>
+				    
+				    <h:column>
+				        <f:facet name="header">
+				            <h:outputText value="Comisión"/>
+				         </f:facet>
+				         <h:outputText value="#{s.comision}"/>
+				    </h:column>
+				    
+				    <h:column>
+				        <f:facet name="header">
+				            <h:outputText value="Estado"/>
+				         </f:facet>
+				         <h:outputText value="#{s.estado}"/>
+				    </h:column>
+			</h:dataTable>
+				
+		</h:panelGrid>
+</h:body>
+
+</html>
