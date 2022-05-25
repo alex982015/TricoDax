@@ -1,12 +1,22 @@
 package backing;
 
+import java.io.ByteArrayInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -20,7 +30,8 @@ import org.primefaces.model.StreamedContent;
 import ejb.GestionPersAut;
 import ejb.GestionUserApk;
 import exceptions.*;
-import exceptions.ProyectoException;
+import jpa.CuentaFintech;
+import jpa.Empresa;
 import jpa.Indiv;
 import jpa.PersAut;
 import jpa.Segregada;
@@ -148,31 +159,104 @@ public class Informes {
 		fechaBaja = f;
 	}
 	
-	public StreamedContent crearInformeAlemania() throws ProyectoException {
-		FacesContext ctx = FacesContext.getCurrentInstance();
-		try {
-			autorizado = persAut.obtenerPersAut(Long.parseLong(selectedAutorizado));
-			userApk.generarInforme(login.getUserApk(), autorizado, tipoInforme);
+	public void crearInformeAlemania() throws IOException, ProyectoException {
+	    FacesContext fc = FacesContext.getCurrentInstance();
+	    ExternalContext ec = fc.getExternalContext();
+
+	    ec.responseReset();
+	    ec.setResponseContentType("text/csv");
+	    ec.setResponseHeader("Content-Disposition", "attachment; filename=\"informe.csv\"");
+
+	    OutputStream output = ec.getResponseOutputStream();
+	   
+	    if(selectedAutorizado != null) {
+	    	PersAut autorizado = persAut.obtenerPersAut(Long.parseLong(selectedAutorizado));
+	    	Set<Empresa> cuentasAsociadas = autorizado.getAutoriz().keySet();
 			
-			file = DefaultStreamedContent.builder()
-	                .name("informe.csv")
-	                .contentType("text/csv")
-	                .stream(() -> FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream("../../../../informe.csv"))
-	                .build();
-			
-			return file;
-		} catch(UserNoAdminException e) {
-			ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error de escritura", "Permiso denegado"));	
-		} catch(IOException p) {
-			ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error de escritura", "Permiso denegado"));
-		} catch(ProyectoException e) {
-			FacesMessage fm = new FacesMessage("Error: " + e);
-			ctx.addMessage(null, fm);
-		}
-		return null;
+			if(tipoInforme.equals("Inicial")) {
+				try {
+					output.write("IBAN,Apellidos,Nombre,Direccion,Ciudad,Codigo Postal,Pais,Identificacion,Fecha de nacimiento\n".getBytes());
+					
+					for (Empresa e : cuentasAsociadas) {
+						if(e.isEstado()) {
+							for (CuentaFintech c : e.getCuentas()) {
+								LocalDate old = Instant.ofEpochMilli(c.getFechaApertura().getTime())
+							      .atZone(ZoneId.systemDefault())
+							      .toLocalDate();
+								long noOfYearsBetween = ChronoUnit.YEARS.between(old, LocalDate.now());
+								if(noOfYearsBetween <= 5) {
+									String line = new String(String.valueOf(c.getIBAN()) + " "
+											+ autorizado.getApellidos() + " "
+											+ autorizado.getNombre() + " " + "\"" 
+											+ autorizado.getDireccion() + "\"" + " "
+											+ e.getCiudad() +" "
+											+ String.valueOf(e.getCodPostal()) + " "
+											+ String.valueOf(e.getPais()) + " "
+											+ String.valueOf(autorizado.getIdent()) + " "
+											+ String.valueOf(autorizado.getFechaNac()) + "\n");
+									output.write(line.getBytes());
+								}
+							}
+						}
+					}
+				} catch(Exception ex) {
+					ex.printStackTrace();
+				} finally {
+					try {
+						output.flush();
+						output.close();
+					} catch(Exception ex) {
+						ex.printStackTrace();
+					}
+				}
+			} else if(tipoInforme.equals("Semanal")) {
+				try {
+					output.write("IBAN,Apellidos,Nombre,Direccion,Ciudad,Codigo Postal,Pais,Identificacion,Fecha de nacimiento\n".getBytes());
+					
+					for (Empresa e : cuentasAsociadas) {
+						if(e.isEstado()) {
+							for (CuentaFintech c : e.getCuentas()) {
+								LocalDate old = c.getFechaApertura().toInstant()
+									      .atZone(ZoneId.systemDefault())
+									      .toLocalDate();
+								long noOfYearsBetween = ChronoUnit.YEARS.between(old, LocalDate.now());
+								if(c.isEstado() && (noOfYearsBetween <= 5)) {
+									String line = new String(String.valueOf(c.getIBAN()) + " "
+											+ autorizado.getApellidos() + " "
+											+ autorizado.getNombre() + " " + "\"" 
+											+ autorizado.getDireccion() + "\"" + " "
+											+ e.getCiudad() +" "
+											+ String.valueOf(e.getCodPostal()) + " "
+											+ String.valueOf(e.getPais()) + " "
+											+ String.valueOf(autorizado.getIdent()) + " "
+											+ String.valueOf(autorizado.getFechaNac()) + "\n");
+									output.write(line.getBytes());
+								}
+							}
+						}
+					}
+				} catch(Exception ex) {
+					ex.printStackTrace();
+				} finally {
+					try {
+						output.flush();
+						output.close();
+					} catch(Exception ex) {
+						ex.printStackTrace();
+					}
+				}
+			}
+	    } else {
+		    fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al crear informe", "Seleccione un autorizado"));
+	    }
+	   
+	    fc.responseComplete();
 	}
 	
-	
+	public void addMessage(String summary, String detail) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
 	
 	/*public String filtrarClientes() {
 		Response r = uri.path(CLIENTS).request()

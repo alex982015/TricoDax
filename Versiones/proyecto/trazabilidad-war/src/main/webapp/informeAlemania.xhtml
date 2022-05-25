@@ -9,19 +9,7 @@
 
 <h:head>
 	<link rel="stylesheet" type="text/css" href="estilos.css" />
-	<title>Informe Holanda:</title>
-	
-	<script type="text/javascript">
-	    //<![CDATA[
-	    function start() {
-	        PF('statusDialog').show();
-	    }
-	
-	    function stop() {
-	        PF('statusDialog').hide();
-	    }
-	    //]]>
-	</script>
+	<title>Informe Alemania:</title>
 </h:head>
 
 <h:body>
@@ -29,27 +17,27 @@
    		<h2><h:graphicImage class="backIcon" value="images/back.png"/></h2>
 	</h:outputLink>
 	
-	<h1 class="title">Informe Holanda</h1>
+	<h1 class="title">Informe Alemania</h1>
 	
-	<h:form class="formHolanda" id="entradaHolanda">
+	<h:form class="formAlemania" id="entradaAlemania">
 		<p:growl id="message" showDetail="true" />
 	
-		<p class="txtLogin">Indique tipo de informe Holanda:</p>
-		<h:selectOneMenu class="txtLogin" required="true"
+		<p class="txtLogin">Indique tipo de informe Alemania:</p>
+		<p:selectOneMenu class="txtLogin" required="true"
 			value="#{informes.tipoInforme}">
 			<f:selectItem itemValue="Inicial" itemLabel="Inicial" />
 			<f:selectItem itemValue="Semanal" itemLabel="Semanal" />
-		</h:selectOneMenu>
-		<br />
-		<br />
+		</p:selectOneMenu>
+		<br/>
+		<br/>
 
 		<p class="txtLogin">Seleccione autorizado:</p>
 		<p:selectOneMenu class="txtLogin" required="true"
 			value="#{informes.selectedAutorizado}">
 			<f:selectItems value="#{informes.listaAutorizados}" var="a" itemLabel="Ident: #{a.ident} Nombre: #{a.nombre} Apellidos: #{a.apellidos} Estado: #{a.estado}" itemValue="#{a.id}"/>
 		</p:selectOneMenu>
-		<br />
-		<br />
+		<br/>
+		<br/>
 
 		<p:commandButton value="Descargar" update=":message" icon="pi pi-arrow-down" styleClass="ui-button-outlined" ajax="false">
             <p:fileDownload value="#{informes.crearInformeAlemania()}"/>
