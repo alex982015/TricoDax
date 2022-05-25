@@ -27,7 +27,9 @@ import javax.ws.rs.core.Response;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
+import ejb.GestionIndiv;
 import ejb.GestionPersAut;
+import ejb.GestionSegregada;
 import ejb.GestionUserApk;
 import exceptions.*;
 import jpa.CuentaFintech;
@@ -47,9 +49,13 @@ public class Informes {
 	private GestionPersAut persAut;
 	
 	@Inject
+	private GestionIndiv indiv;
+	
+	@Inject
+	private GestionSegregada segregadas;
+	
+	@Inject
 	private Login login;
-		
-	private StreamedContent file;
 	
 	private String tipoInforme;
 	
@@ -71,6 +77,10 @@ public class Informes {
 	
 	private Date fechaBaja;
 	
+	private String iban;
+	
+	private String estado;
+	
 	private static final String STATUS = "api/proyecto/healthcheck";
 	private static final String CLIENTS = "api/proyecto/clients";
 	private static final String ACCOUNTS = "api/proyecto/products";
@@ -78,10 +88,6 @@ public class Informes {
 	public Informes() {
 		
 	}
-	
-	public StreamedContent getFile() {
-        return file;
-    }
 	
 	public String getTipoInforme() {
 		return tipoInforme;
@@ -157,6 +163,22 @@ public class Informes {
 	
 	public void setFechaBaja(Date f) {
 		fechaBaja = f;
+	}
+	
+	public String getIban() {
+		return iban;
+	}
+	
+	public void setIban(String i) {
+		iban = i;
+	}
+	
+	public String getEstado() {
+		return estado;
+	}
+	
+	public void setEstado(String e) {
+		estado = e;
 	}
 	
 	public void crearInformeAlemania() throws IOException, ProyectoException {
@@ -258,17 +280,18 @@ public class Informes {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 	
-	/*public String filtrarClientes() {
-		Response r = uri.path(CLIENTS).request()
+	public String filtrarClientes() {
+		/*Response r = uri.path(CLIENTS).request()
 				.accept(MediaType.APPLICATION_JSON)
 				.header("User-auth", login.getUserApk().getUser() + ":" + login.getUserApk().getPassword())
-				.buildPost(Entity.json("")).invoke();
+				.buildPost(Entity.json("")).invoke();*/
 		return null;
-	}*/
+	}
 
 	@PostConstruct
 	public void init() {
 		listaAutorizados = persAut.obtenerPersAut();
-		
+		listaIndiv = indiv.obtenerIndiv();
+		listaSegregada = segregadas.obtenerSegregada();
 	}
 }

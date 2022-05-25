@@ -276,6 +276,7 @@ h2 {
 	width: 350px;
 	height: 400px;
 }
+
 .panelLectura{
 	margin: auto;
 	margin-top: 30px;
@@ -285,6 +286,16 @@ h2 {
 	padding-left: 10px;
 	width: 600px;
 	height: 620px;
+}
+
+.panelLectura2 {
+	margin: auto;
+	margin-top: 30px;
+	font-family: 'Roboto';
+	font-weight: regular;
+	border-style: groove;
+	padding-left: 10px;
+	width: 1000px;
 }
 
 .formAlemania{
@@ -398,4 +409,12 @@ h2 {
 	padding-left: 10px;
 	width: 550px;
 	height: 1000px;
+}
+
+.tableCliente {
+	margin: auto;
+}
+
+.tableSegregada {
+	margin: auto;
 }
