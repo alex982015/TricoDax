@@ -1,9 +1,6 @@
 package backing;
 
-import java.io.ByteArrayInputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -20,17 +17,10 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
 
 import ejb.GestionIndiv;
 import ejb.GestionPersAut;
 import ejb.GestionSegregada;
-import ejb.GestionUserApk;
 import exceptions.*;
 import jpa.CuentaFintech;
 import jpa.Empresa;
@@ -43,9 +33,6 @@ import jpa.Segregada;
 public class Informes {
 	
 	@Inject
-	private GestionUserApk userApk;
-	
-	@Inject
 	private GestionPersAut persAut;
 	
 	@Inject
@@ -53,9 +40,6 @@ public class Informes {
 	
 	@Inject
 	private GestionSegregada segregadas;
-	
-	@Inject
-	private Login login;
 	
 	private String tipoInforme;
 	
@@ -80,10 +64,6 @@ public class Informes {
 	private String iban;
 	
 	private String estado;
-	
-	private static final String STATUS = "api/proyecto/healthcheck";
-	private static final String CLIENTS = "api/proyecto/clients";
-	private static final String ACCOUNTS = "api/proyecto/products";
 	
 	public Informes() {
 		
@@ -279,14 +259,6 @@ public class Informes {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
-	
-	public String filtrarClientes() {
-		/*Response r = uri.path(CLIENTS).request()
-				.accept(MediaType.APPLICATION_JSON)
-				.header("User-auth", login.getUserApk().getUser() + ":" + login.getUserApk().getPassword())
-				.buildPost(Entity.json("")).invoke();*/
-		return null;
-	}
 
 	@PostConstruct
 	public void init() {

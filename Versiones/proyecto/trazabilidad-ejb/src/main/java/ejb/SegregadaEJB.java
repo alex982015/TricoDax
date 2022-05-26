@@ -1,10 +1,12 @@
 package ejb;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+
 import exceptions.CuentaConSaldoException;
 import exceptions.CuentaExistenteException;
 import exceptions.CuentaNoEncontradoException;
@@ -14,6 +16,7 @@ import exceptions.UserNoEncontradoException;
 import jpa.Cuenta;
 import jpa.Segregada;
 import jpa.UserApk;
+import modelo.searchParameters;
 
 @Stateless
 public class SegregadaEJB extends CuentaFintechEJB implements GestionSegregada{
@@ -147,4 +150,26 @@ public class SegregadaEJB extends CuentaFintechEJB implements GestionSegregada{
 		}
 	}
 
+	@Override
+		public List<Segregada> obtenerSegregada(searchParameters parametros) throws ProyectoException {
+			StringBuilder sb = new StringBuilder();
+			List<Segregada> lista = new ArrayList<Segregada>();
+			
+			if(String.valueOf(parametros.isStatus()) != null) {
+				sb.append("SELECT s FROM Segregada s, CuentaFintech c WHERE s.IBAN = c.IBAN AND c.estado=:estado");
+				
+				if(parametros.getProductNumber() != null) {
+					lista.add(obtenerSegregada(parametros.getProductNumber().toString()));
+					return lista;
+				} else {
+					TypedQuery<Segregada> query = em.createQuery(sb.toString(), Segregada.class);
+					query.setParameter("estado", String.valueOf(parametros.isStatus()));
+					
+					return query.getResultList();
+				}
+			} else {
+				lista = obtenerSegregada();
+				return lista;
+			}
+		}
 }

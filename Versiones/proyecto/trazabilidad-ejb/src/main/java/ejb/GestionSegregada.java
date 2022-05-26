@@ -7,6 +7,7 @@ import javax.ejb.Local;
 import exceptions.ProyectoException;
 import jpa.Segregada;
 import jpa.UserApk;
+import modelo.searchParameters;
 
 @Local
 public interface GestionSegregada {
@@ -17,4 +18,5 @@ public interface GestionSegregada {
 	public void cerrarCuentaSegregada(UserApk user, Segregada cuenta) throws ProyectoException;
 	public void eliminarSegregada(UserApk user, Segregada cuenta) throws ProyectoException;
 	public void eliminarTodasSegregada(UserApk user) throws ProyectoException;
+	public List<Segregada> obtenerSegregada(searchParameters parameters) throws ProyectoException;
 }
