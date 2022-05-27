@@ -155,7 +155,7 @@ public class SegregadaEJB extends CuentaFintechEJB implements GestionSegregada{
 			StringBuilder sb = new StringBuilder();
 			List<Segregada> lista = new ArrayList<Segregada>();
 			
-			if(String.valueOf(parametros.isStatus()) != null) {
+			if(parametros.getStatus() != null) {
 				sb.append("SELECT s FROM Segregada s, CuentaFintech c WHERE s.IBAN = c.IBAN AND c.estado=:estado");
 				
 				if(parametros.getProductNumber() != null) {
@@ -163,7 +163,7 @@ public class SegregadaEJB extends CuentaFintechEJB implements GestionSegregada{
 					return lista;
 				} else {
 					TypedQuery<Segregada> query = em.createQuery(sb.toString(), Segregada.class);
-					query.setParameter("estado", String.valueOf(parametros.isStatus()));
+					query.setParameter("estado", String.valueOf(parametros.getStatus()));
 					
 					return query.getResultList();
 				}

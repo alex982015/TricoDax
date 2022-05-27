@@ -5,13 +5,13 @@ import java.util.Date;
 public class searchParameters {
 	/** FIRST FILTER **/
 	
-	private NombreCompleto name;
+	private Name name;
 	private Date startPeriod;
 	private Date endPeriod;
 	
 	/** SECOND FILTER **/
 	
-	private boolean status;
+	private String status;
 	private String productNumber;
 	
 	/** CONSTRUCTORS **/
@@ -20,24 +20,24 @@ public class searchParameters {
 		
 	}
 	
-	public searchParameters(NombreCompleto name, Date startPeriod, Date endPeriod) {
+	public searchParameters(Name name, Date startPeriod, Date endPeriod) {
 		this.name = name;
 		this.startPeriod = startPeriod;
 		this.endPeriod = endPeriod;
 	}
 	
-	public searchParameters(boolean status, String productNumber) {
+	public searchParameters(String status, String productNumber) {
 		this.status = status;
 		this.productNumber = productNumber;
 	}
 	
 	/** GETTERS | SETTERS **/
 
-	public NombreCompleto getName() {
+	public Name getName() {
 		return name;
 	}
 
-	public void setName(NombreCompleto name) {
+	public void setName(Name name) {
 		this.name = name;
 	}
 
@@ -57,11 +57,11 @@ public class searchParameters {
 		this.endPeriod = endPeriod;
 	}
 
-	public boolean isStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
