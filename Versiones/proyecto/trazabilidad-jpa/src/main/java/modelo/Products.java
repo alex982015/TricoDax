@@ -11,6 +11,10 @@ public class Products {
 	private Date endDate;
 	private String relationship;
 	
+	public Products() {
+		
+	}
+	
 	public Products(AccountHolder accountHolder, String productNumber, boolean status, Date startDate, Date endDate) {
 		this.accountHolder = accountHolder;
 		this.productNumber = productNumber;

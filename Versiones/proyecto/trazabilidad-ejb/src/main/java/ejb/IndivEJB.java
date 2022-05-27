@@ -207,8 +207,8 @@ public class IndivEJB implements GestionIndiv {
 				
 				TypedQuery<Indiv> query = em.createQuery(sb.toString(), Indiv.class);
 				query.setParameter("apellido", parametros.getName().getLastName());
-				query.setParameter("fechaAlta", parametros.getStartPeriod().toString());
-				query.setParameter("fechaBaja", parametros.getEndPeriod().toString());
+				query.setParameter("fechaAlta", parametros.getStartPeriod());
+				query.setParameter("fechaBaja", parametros.getEndPeriod());
 				
 				return query.getResultList();
 			} else {

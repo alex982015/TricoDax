@@ -1,30 +1,21 @@
 package rest;
 
-import java.io.ObjectInputFilter.Status;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.json.Json;
-import javax.json.JsonObject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import org.primefaces.shaded.json.JSONObject;
-
-import backing.Login;
 import ejb.GestionCuentaFintech;
 import ejb.GestionEmpresa;
 import ejb.GestionIndiv;
@@ -127,7 +118,13 @@ public class ServicioREST {
 	@Produces ({MediaType.APPLICATION_JSON})
 	public List<Products> buscarCuentas(searchParameters parameters) throws ProyectoException  {
 		
-		List<Segregada> lista = segregadas.obtenerSegregada();
+		parameters.setStatus("true");
+		parameters.setProductNumber(null);
+		System.out.println("***************************");
+		System.out.println(parameters.getStatus());
+		System.out.println("***************************");
+		
+		List<Segregada> lista = segregadas.obtenerSegregada(parameters);
 		List<Products> res = new ArrayList<Products>();
 		
 		Indiv i = new Indiv();

@@ -163,7 +163,7 @@ public class SegregadaEJB extends CuentaFintechEJB implements GestionSegregada{
 					return lista;
 				} else {
 					TypedQuery<Segregada> query = em.createQuery(sb.toString(), Segregada.class);
-					query.setParameter("estado", String.valueOf(parametros.getStatus()));
+					query.setParameter("estado", Boolean.parseBoolean(parametros.getStatus()));
 					
 					return query.getResultList();
 				}

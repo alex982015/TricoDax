@@ -187,14 +187,14 @@ public class Informes {
 							      .toLocalDate();
 								long noOfYearsBetween = ChronoUnit.YEARS.between(old, LocalDate.now());
 								if(noOfYearsBetween <= 5) {
-									String line = new String(String.valueOf(c.getIBAN()) + " "
-											+ autorizado.getApellidos() + " "
-											+ autorizado.getNombre() + " " + "\"" 
-											+ autorizado.getDireccion() + "\"" + " "
-											+ e.getCiudad() +" "
-											+ String.valueOf(e.getCodPostal()) + " "
-											+ String.valueOf(e.getPais()) + " "
-											+ String.valueOf(autorizado.getIdent()) + " "
+									String line = new String(String.valueOf(c.getIBAN()) + ", "
+											+ autorizado.getApellidos() + ", "
+											+ autorizado.getNombre() + ", " + "\"" 
+											+ autorizado.getDireccion() + "\"" + ", "
+											+ e.getCiudad() +", "
+											+ String.valueOf(e.getCodPostal()) + ", "
+											+ String.valueOf(e.getPais()) + ", "
+											+ String.valueOf(autorizado.getIdent()) + ", "
 											+ String.valueOf(autorizado.getFechaNac()) + "\n");
 									output.write(line.getBytes());
 								}
@@ -218,19 +218,19 @@ public class Informes {
 					for (Empresa e : cuentasAsociadas) {
 						if(e.isEstado()) {
 							for (CuentaFintech c : e.getCuentas()) {
-								LocalDate old = c.getFechaApertura().toInstant()
+								LocalDate old = Instant.ofEpochMilli(c.getFechaApertura().getTime())
 									      .atZone(ZoneId.systemDefault())
 									      .toLocalDate();
 								long noOfYearsBetween = ChronoUnit.YEARS.between(old, LocalDate.now());
 								if(c.isEstado() && (noOfYearsBetween <= 5)) {
-									String line = new String(String.valueOf(c.getIBAN()) + " "
-											+ autorizado.getApellidos() + " "
-											+ autorizado.getNombre() + " " + "\"" 
-											+ autorizado.getDireccion() + "\"" + " "
-											+ e.getCiudad() +" "
-											+ String.valueOf(e.getCodPostal()) + " "
-											+ String.valueOf(e.getPais()) + " "
-											+ String.valueOf(autorizado.getIdent()) + " "
+									String line = new String(String.valueOf(c.getIBAN()) + ", "
+											+ autorizado.getApellidos() + ", "
+											+ autorizado.getNombre() + ", " + "\"" 
+											+ autorizado.getDireccion() + "\"" + ", "
+											+ e.getCiudad() +", "
+											+ String.valueOf(e.getCodPostal()) + ", "
+											+ String.valueOf(e.getPais()) + ", "
+											+ String.valueOf(autorizado.getIdent()) + ", "
 											+ String.valueOf(autorizado.getFechaNac()) + "\n");
 									output.write(line.getBytes());
 								}
