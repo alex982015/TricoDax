@@ -212,6 +212,48 @@ public class Autorizado implements Serializable {
 		return null;
 	}
 	
+	public String bloquearAutoriz() {
+		FacesContext ctx = FacesContext.getCurrentInstance();
+		try {
+			if(selectedAutorizado != null) {
+				p = persAut.obtenerPersAut(Long.parseLong(selectedAutorizado));
+				persAut.bloquearCuentaPersAut(login.getUserApk(), p, true);
+				addMessage("Bloquear Autorizado", "Autorizado bloqueado correctamente");
+				init();
+				return null;
+			} else {
+			    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Seleccione una cuenta"));
+			}
+		} catch(UserNoAdminException e) {
+		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no admin"));
+		} catch(ProyectoException e) {
+			FacesMessage fm = new FacesMessage("Error: " + e);
+			ctx.addMessage(null, fm);
+		}
+		return null;
+	}
+	
+	public String desbloquearAutoriz() {
+		FacesContext ctx = FacesContext.getCurrentInstance();
+		try {
+			if(selectedAutorizado != null) {
+				p = persAut.obtenerPersAut(Long.parseLong(selectedAutorizado));
+				persAut.bloquearCuentaPersAut(login.getUserApk(), p, false);
+				addMessage("Desbloquear Autorizado", "Autorizado desbloqueado correctamente");
+				init();
+				return null;
+			} else {
+			    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al cerrar cuenta", "Seleccione una cuenta"));
+			}
+		} catch(UserNoAdminException e) {
+		    ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Usuario no admin"));
+		} catch(ProyectoException e) {
+			FacesMessage fm = new FacesMessage("Error: " + e);
+			ctx.addMessage(null, fm);
+		}
+		return null;
+	}
+	
 	@PostConstruct
 	public void init() {
 		listaEmpresas = empresas.obtenerEmpresas();

@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import exceptions.BadParameterException;
 import exceptions.ClienteExistenteException;
 import exceptions.ClienteNoEncontradoException;
 import exceptions.CuentaSegregadaYaAsignadaException;
@@ -19,7 +18,6 @@ import jpa.CuentaFintech;
 import jpa.Indiv;
 import jpa.Segregada;
 import jpa.UserApk;
-import modelo.searchParameters;
 
 @Stateless
 public class IndivEJB implements GestionIndiv {
@@ -189,35 +187,6 @@ public class IndivEJB implements GestionIndiv {
 	public Indiv obtenerIndiv(Long indiv) throws ProyectoException {
 		Indiv indivEntity = em.find(Indiv.class, indiv);
 		return indivEntity;
-	}
-
-	@Override
-	public List<Indiv> obtenerIndiv(searchParameters parametros) throws ProyectoException {
-		StringBuilder sb = new StringBuilder();
-		
-		if(parametros.getName().getLastName() != null) {
-			sb.append("SELECT i FROM Indiv i, Cliente c WHERE i.ID = c.ID AND i.apellido=:apellido");
-			
-			if(parametros.getStartPeriod() != null) {
-				sb.append(" AND c.fechaAlta=:fechaAlta");
-				
-				if(parametros.getEndPeriod() != null) {
-					sb.append(" AND c.fechaBaja=:fechaBaja");
-				}
-				
-				TypedQuery<Indiv> query = em.createQuery(sb.toString(), Indiv.class);
-				query.setParameter("apellido", parametros.getName().getLastName());
-				query.setParameter("fechaAlta", parametros.getStartPeriod());
-				query.setParameter("fechaBaja", parametros.getEndPeriod());
-				
-				return query.getResultList();
-			} else {
-				throw new BadParameterException("PERIODO NECESARIO");
-			}
-			
-		} else {
-			throw new BadParameterException("APELLIDO NECESARIO");
-		}
 	}
 	
 }

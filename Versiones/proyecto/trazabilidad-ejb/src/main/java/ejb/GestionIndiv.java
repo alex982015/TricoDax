@@ -7,7 +7,6 @@ import javax.ejb.Local;
 import exceptions.ProyectoException;
 import jpa.Indiv;
 import jpa.UserApk;
-import modelo.searchParameters;
 
 @Local
 public interface GestionIndiv {
@@ -18,5 +17,4 @@ public interface GestionIndiv {
 	public void cerrarCuentaIndiv(UserApk user, Indiv indiv) throws ProyectoException;
 	public void eliminarIndiv(UserApk user, Indiv indiv) throws ProyectoException;
 	public void eliminarTodosIndiv(UserApk user) throws ProyectoException;
-	public List<Indiv> obtenerIndiv(searchParameters parametros) throws ProyectoException;
 }

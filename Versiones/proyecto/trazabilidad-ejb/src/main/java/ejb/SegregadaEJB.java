@@ -149,27 +149,5 @@ public class SegregadaEJB extends CuentaFintechEJB implements GestionSegregada{
 			return segregadaEntity;
 		}
 	}
-
-	@Override
-		public List<Segregada> obtenerSegregada(searchParameters parametros) throws ProyectoException {
-			StringBuilder sb = new StringBuilder();
-			List<Segregada> lista = new ArrayList<Segregada>();
-			
-			if(parametros.getStatus() != null) {
-				sb.append("SELECT s FROM Segregada s, CuentaFintech c WHERE s.IBAN = c.IBAN AND c.estado=:estado");
-				
-				if(parametros.getProductNumber() != null) {
-					lista.add(obtenerSegregada(parametros.getProductNumber().toString()));
-					return lista;
-				} else {
-					TypedQuery<Segregada> query = em.createQuery(sb.toString(), Segregada.class);
-					query.setParameter("estado", Boolean.parseBoolean(parametros.getStatus()));
-					
-					return query.getResultList();
-				}
-			} else {
-				lista = obtenerSegregada();
-				return lista;
-			}
-		}
+	
 }

@@ -1,13 +1,12 @@
 package modelo;
 
-import java.util.Date;
 
 public class searchParameters {
 	/** FIRST FILTER **/
 	
 	private Name name;
-	private Date startPeriod;
-	private Date endPeriod;
+	private String startPeriod;
+	private String endPeriod;
 	
 	/** SECOND FILTER **/
 	
@@ -20,17 +19,6 @@ public class searchParameters {
 		
 	}
 	
-	public searchParameters(Name name, Date startPeriod, Date endPeriod) {
-		this.name = name;
-		this.startPeriod = startPeriod;
-		this.endPeriod = endPeriod;
-	}
-	
-	public searchParameters(String status, String productNumber) {
-		this.status = status;
-		this.productNumber = productNumber;
-	}
-	
 	/** GETTERS | SETTERS **/
 
 	public Name getName() {
@@ -41,19 +29,19 @@ public class searchParameters {
 		this.name = name;
 	}
 
-	public Date getStartPeriod() {
+	public String getStartPeriod() {
 		return startPeriod;
 	}
 
-	public void setStartPeriod(Date startPeriod) {
+	public void setStartPeriod(String startPeriod) {
 		this.startPeriod = startPeriod;
 	}
 
-	public Date getEndPeriod() {
+	public String getEndPeriod() {
 		return endPeriod;
 	}
 
-	public void setEndPeriod(Date endPeriod) {
+	public void setEndPeriod(String endPeriod) {
 		this.endPeriod = endPeriod;
 	}
 

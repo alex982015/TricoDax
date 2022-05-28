@@ -11,7 +11,6 @@ import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
@@ -31,7 +30,7 @@ import modelo.Address;
 import modelo.Individual;
 import modelo.Name;
 import modelo.Products;
-import modelo.searchParameters;
+import modelo.Query;
 
 @Path("")
 public class ServicioREST {
@@ -64,15 +63,67 @@ public class ServicioREST {
 	@POST
 	@Consumes ({MediaType.APPLICATION_JSON})
 	@Produces ({MediaType.APPLICATION_JSON})
-	public List<Individual> buscarClientes(searchParameters parametros) throws ProyectoException {
+	public List<Individual> buscarClientes(Query parameters) throws ProyectoException {
 		
 		List<CuentaFintech> lista = cuentasFintech.obtenerCuentasFintech();
+		List<CuentaFintech> filter = new ArrayList<CuentaFintech>();
 		List<Individual> res = new ArrayList<Individual>();
 		
 		Name n;
 		Address a;
 		
+		
 		for(CuentaFintech c : lista) {
+			Indiv i = indiv.obtenerIndiv(c.getCliente().getID());
+			Empresa e = empresas.obtenerEmpresa(c.getCliente().getID());
+			
+			if(i != null) {
+				if(parameters.getSearchParameters().getName().getFirstName().equals("") &&
+						(parameters.getSearchParameters().getName().getLastName().equals("") &&
+						(parameters.getSearchParameters().getStartPeriod().equals("") &&
+						(parameters.getSearchParameters().getEndPeriod().equals(""))))) {
+					filter = cuentasFintech.obtenerCuentasFintech();
+				} else if(!parameters.getSearchParameters().getName().getFirstName().equals("")) {
+					if(parameters.getSearchParameters().getName().getFirstName().equals(i.getNombre())) {
+						filter.add(c);
+					}	
+				} else if(!parameters.getSearchParameters().getName().getLastName().equals("")) {
+					if(parameters.getSearchParameters().getName().getLastName().equals(i.getApellido())) {
+						filter.add(c);
+					}
+				} else if(!parameters.getSearchParameters().getStartPeriod().equals("")) {
+					if(String.valueOf(c.getFechaApertura()).equals(parameters.getSearchParameters().getStartPeriod())) {
+						filter.add(c);
+					}
+				} else if(!parameters.getSearchParameters().getEndPeriod().equals("")) {
+					if(String.valueOf(c.getFechaCierre()).equals(parameters.getSearchParameters().getEndPeriod())) {
+						filter.add(c);
+					}
+				}
+			} else {
+				if(parameters.getSearchParameters().getName().getFirstName().equals("") &&
+						(parameters.getSearchParameters().getName().getLastName().equals("") &&
+						(parameters.getSearchParameters().getStartPeriod().equals("") &&
+						(parameters.getSearchParameters().getEndPeriod().equals(""))))) {
+					filter = cuentasFintech.obtenerCuentasFintech();
+				} else if(!parameters.getSearchParameters().getName().getFirstName().equals("")) {
+					if(parameters.getSearchParameters().getName().getFirstName().equals(e.getRazonSocial())) {
+						filter.add(c);
+					}	
+				} else if(!parameters.getSearchParameters().getStartPeriod().equals("")) {
+					if(String.valueOf(c.getFechaApertura()).equals(parameters.getSearchParameters().getStartPeriod())) {
+						filter.add(c);
+					}
+				} else if(!parameters.getSearchParameters().getEndPeriod().equals("")) {
+					if(String.valueOf(c.getFechaCierre()).equals(parameters.getSearchParameters().getEndPeriod())) {
+						filter.add(c);
+					}
+				}
+			}	
+		}
+	
+		
+		for(CuentaFintech c : filter) {
 			Indiv i = indiv.obtenerIndiv(c.getCliente().getID());
 			Empresa e = empresas.obtenerEmpresa(c.getCliente().getID());
 			
@@ -116,15 +167,10 @@ public class ServicioREST {
 	@POST
 	@Consumes ({MediaType.APPLICATION_JSON})
 	@Produces ({MediaType.APPLICATION_JSON})
-	public List<Products> buscarCuentas(searchParameters parameters) throws ProyectoException  {
-		
-		parameters.setStatus("true");
-		parameters.setProductNumber(null);
-		System.out.println("***************************");
-		System.out.println(parameters.getStatus());
-		System.out.println("***************************");
-		
-		List<Segregada> lista = segregadas.obtenerSegregada(parameters);
+	public List<Products> buscarCuentas(Query parameters) throws ProyectoException  {
+
+		List<CuentaFintech> fintech = cuentasFintech.obtenerCuentasFintech();
+		List<Segregada> lista = new ArrayList<Segregada>();
 		List<Products> res = new ArrayList<Products>();
 		
 		Indiv i = new Indiv();
@@ -134,7 +180,27 @@ public class ServicioREST {
 		Address a;
 		AccountHolder account;
 		
+		for(CuentaFintech c : fintech) {
+			Segregada s = segregadas.obtenerSegregada(c.getIBAN());
+			
+			if(s != null) {
+				if(parameters.getSearchParameters().getProductNumber().equals("") && (String.valueOf(parameters.getSearchParameters().getStatus()).equals(""))) {
+					lista = segregadas.obtenerSegregada();
+				} else {
+					if(!parameters.getSearchParameters().getProductNumber().equals("")) {
+						if(parameters.getSearchParameters().getProductNumber().equals(s.getIBAN())) {
+							lista.add(s);
+						}
+						
+					} else if(s.isEstado() == Boolean.valueOf(parameters.getSearchParameters().getStatus())) {
+						lista.add(s);
+					}
+				}	
+			}
+		}
+		
 		for(Segregada s : lista) {
+			
 			i = indiv.obtenerIndiv(s.getCliente().getID());
 			e = empresas.obtenerEmpresa(s.getCliente().getID());
 			
